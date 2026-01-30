@@ -1,0 +1,252 @@
+/* ============================================================
+   EMPURRA SITE PARA BAIXO (MENU FIXO)
+   ============================================================ */
+
+body {
+  padding-top: 88px; /* altura do header fixo */
+}
+
+/* ============================================================
+   HEADER FIXO
+   ============================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  padding: 16px 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+
+.logo img {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+
+/* ============================================================
+   MENU DESKTOP
+   ============================================================ */
+
+.nav ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 28px;           /* MAIS RESPIRO */
+  }
+
+.nav a {
+  color: var(--branco);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   BUSCA
+   ============================================================ */
+
+.search-box input {
+  width: 400px;
+  padding: 12px 16px;
+  border-radius: 24px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--azul-medio);
+  box-shadow: 0 0 0 2px rgba(1, 161, 219, 0.15);
+}
+
+/* ============================================================
+   BOTÃO HAMBÚRGUER
+   ============================================================ */
+
+.menu-toggle {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1100;
+
+  background-color: transparent; /*var(--azul-escuro);  MESMO AZUL DO HEADER */
+  border: none;
+  border-radius: 2px; /* 🔽 menos arredondado */
+
+  padding: 2px 2px; /* 🔽 MENOR FUNDO */
+  font-size: 1.5rem; /* 🔽 risquinhos um pouco menores */
+  color: #808080; /* risquinhos brancos */
+  cursor: pointer;
+
+  display: none; /* escondido no desktop */
+}
+
+/* ============================================================
+   MOBILE (MENU FLUTUANTE)
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+   .header {
+    position: relative; /* 🔓 solta o header no mobile */
+  }
+
+  body {
+    padding-top: 0; /* remove espaço extra */
+  }
+  /* mostra botão */
+  .menu-toggle {
+    display: block;
+  }
+.menu-toggle {
+    display: block;
+    position: fixed;     /* 🔒 flutuante */
+    top: 16px;
+    left: 16px;
+    z-index: 1100;
+}
+  /* esconde menu desktop */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding-top: 88px;
+    transition: left 0.3s ease;
+    z-index: 1002;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+  }
+
+  /* menu aberto */
+  .nav.active {
+    left: 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .nav a {
+    color: #222;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .nav a:hover {
+    color: var(--azul-escuro);
+  }
+
+  /* busca ocupa largura total */
+  .search-box input {
+    width: 100%;
+  }
+}
+
+
+
+
+/* ============================================================
+   MENU DESKTOP — "+ MAIS" (VERSÃO ESTÁVEL E PROFISSIONAL)
+   ============================================================ */
+
+@media (min-width: 1024px) {
+
+  /* menu principal em linha */
+  .nav > ul {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  /* separador | apenas entre itens principais */
+  .nav > ul > li:not(.menu-mais):not(:last-child)::after {
+    content: "|";
+    margin-left: 12px;
+    color: rgba(255,255,255,0.6);
+    pointer-events: none; /* 🔑 impede bug de hover */
+  }
+
+  /* item + Mais */
+  .menu-mais {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-mais > span {
+    color: var(--branco);
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap;
+    pointer-events: auto;
+  }
+
+  /* SUBMENU */
+  .submenu-mais {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+
+    display: none;
+    flex-direction: column;
+
+    background: #ffffff;
+    min-width: 220px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    z-index: 3000;
+
+    /* micro suavização profissional */
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  /* abre SOMENTE no hover do + Mais */
+  .menu-mais:hover .submenu-mais {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* itens do submenu */
+  .submenu-mais li {
+    list-style: none;
+  }
+
+  .submenu-mais a {
+    color: #222;
+    font-size: 0.9rem;
+    padding: 6px 0;
+    text-decoration: none;
+    display: block;
+  }
+
+  .submenu-mais a:hover {
+    color: var(--azul-escuro);
+  }
+}
