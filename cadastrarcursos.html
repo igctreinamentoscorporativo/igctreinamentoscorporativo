@@ -137,33 +137,26 @@ button:disabled {
 
 
 #loadingBox {
-  min-height: 300px;
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #020617, #0f172a);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
+  z-index: 9999;
   text-align: center;
 }
 
 #loadingBox h1 {
-  font-size: 24px;
+  font-size: 26px;
   letter-spacing: 1px;
 }
 
 #loadingBox p {
   font-size: 14px;
   opacity: 0.7;
-}
-
-/* animação simples */
-@keyframes pulse {
-  0% { opacity: .4; }
-  50% { opacity: 1; }
-  100% { opacity: .4; }
-}
-
-#loadingBox p {
   animation: pulse 1.4s infinite;
 }
 
@@ -179,7 +172,6 @@ button:disabled {
 
 <script src="/js/igc-config.js"></script>
 
-<div class="container">
 
  <!-- 📋 SISTEMA --> 
 <!-- 🔐 LOGIN -->
@@ -194,14 +186,16 @@ button:disabled {
   <button class="btn-login" onclick="login()">Entrar</button>
 
   <p id="loginErro" style="color:#f87171; margin-top:10px;"></p>
-</div>
+</div>  
 
 <!-- ⏳ LOADING -->
 <div id="loadingBox" class="hidden">
   <h1>IGC Treinamentos</h1>
   <p>Carregando sistema...</p>
 </div>
-
+  
+  
+<div class="container">
   
 <div id="appBox" class="hidden">  
   <h1>Cadastro de Cursos</h1>
@@ -325,23 +319,23 @@ async function login() {
   SENHA = senha;
   PERFIL = res.perfil;
 
-  // esconde login
-document.getElementById("loginBox").classList.add("hidden");
+  // some login
+  document.getElementById("loginBox").classList.add("hidden");
 
-// mostra loading
-document.getElementById("loadingBox").classList.remove("hidden");
+  // mostra loading
+  document.getElementById("loadingBox").classList.remove("hidden");
 
-// carrega dados em paralelo
-carregarCursos();
+  // carrega dados
+  await carregarCursos();
 
-// após 2 segundos, mostra o sistema
-setTimeout(() => {
-  document.getElementById("loadingBox").classList.add("hidden");
-  document.getElementById("appBox").classList.remove("hidden");
-  bloquear(true);
-}, 2000);
-  
+  // simula carregamento padrão do sistema
+  setTimeout(() => {
+    document.getElementById("loadingBox").classList.add("hidden");
+    document.getElementById("appBox").classList.remove("hidden");
+    bloquear(true);
+  }, 1800);
 }
+
 
 
   
