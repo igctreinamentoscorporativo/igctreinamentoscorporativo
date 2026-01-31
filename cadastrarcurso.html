@@ -195,19 +195,21 @@ button:disabled {
   <div class="field">
     <label>Filtrar por curso</label>
     <input
-      id="filtroCurso"
-      placeholder="Digite parte do nome do curso"
-      oninput="aplicarFiltro()"
-    >
+  id="filtroCurso"
+  class="no-lock"
+  placeholder="Digite parte do nome do curso"
+  oninput="aplicarFiltro()"
+>
   </div>
 
   <div class="field">
     <label>Filtrar por turma</label>
     <input
-      id="filtroTurma"
-      placeholder="Ex: TURMA A, MANHÃ, NOITE"
-      oninput="aplicarFiltro()"
-    >
+  id="filtroTurma"
+  class="no-lock"
+  placeholder="Ex: TURMA A, MANHÃ, NOITE"
+  oninput="aplicarFiltro()"
+>
   </div>
 </div>
 
@@ -454,8 +456,12 @@ function aplicarFiltro() {
 function bloquear(b) {
   document.querySelectorAll(
     "#appBox input, #appBox textarea, #appBox select"
-  ).forEach(el => el.disabled = b);
+  ).forEach(el => {
+    if (el.classList.contains("no-lock")) return;
+    el.disabled = b;
+  });
 }
+
 
 
 function prev() {
