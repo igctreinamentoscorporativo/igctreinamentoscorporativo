@@ -245,69 +245,68 @@ button:disabled {
   
 
   <!-- FORM -->
-  <input type="hidden" id="cursoId">
-  <div class="form-grid">
+<input type="hidden" id="cursoId">
 
-  
+<div class="form-grid">
+
   <div class="field">
-  <label>Nome do curso</label>
-  <input id="nome" disabled class="uppercase">
-</div>
-
- <div class="field">
-   <label>Turma</label> 
-  <input id="turma" disabled class="uppercase">
-</div>
-
-<div class="field span-2">
-  <label>Carga horária</label>
-  <input
-    id="carga"
-    disabled
-    inputmode="numeric"
-    pattern="[0-9]*"
-    oninput="somenteNumeros(this)"
-  >
-</div>
-
-<div class="field span-2">
-  <label>Status</label>
-  <select id="ativo" disabled>
-    <option value="TRUE">Ativo</option>
-    <option value="FALSE">Inativo</option>
-  </select>
+    <label>Nome do curso</label>
+    <input id="nome" disabled class="uppercase">
   </div>
-</div>
-</div>
+
+  <div class="field">
+    <label>Turma</label>
+    <input id="turma" disabled class="uppercase">
+  </div>
+
+  <div class="field span-2">
+    <label>Carga horária</label>
+    <input
+      id="carga"
+      disabled
+      inputmode="numeric"
+      pattern="[0-9]*"
+      oninput="somenteNumeros(this)"
+    >
+  </div>
+
+  <div class="field span-2">
+    <label>Status</label>
+    <select id="ativo" disabled>
+      <option value="TRUE">Ativo</option>
+      <option value="FALSE">Inativo</option>
+    </select>
+  </div>
 
   <div class="field span-2">
     <label>Local</label>
-  <input id="local" disabled class="uppercase">
-</div>
-
+    <input id="local" disabled class="uppercase">
+  </div>
 
   <div class="field span-2">
     <label>Data</label>
-  <input id="data" disabled class="uppercase">
-</div>
+    <input id="data" disabled class="uppercase">
+  </div>
 
-<div class="field span-2">
-  <label>Observações</label>
-  <textarea id="obs" disabled class="uppercase"></textarea>
-</div>
+  <div class="field span-2">
+    <label>Observações</label>
+    <textarea id="obs" disabled class="uppercase"></textarea>
+  </div>
 
-<div class="field">
-  <label>ID do Modelo de Certificado</label>
-  <input id="modelo" disabled>
-  <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
-</div>
+  <div class="field">
+    <label>ID do Modelo de Certificado</label>
+    <input id="modelo" disabled>
+    <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
+  </div>
 
-<div class="field">
-  <label>URL de Verificação do Certificado</label>
-  <input id="urlVerificacao" disabled>
-  <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
-</div>
-</div>
+  <div class="field">
+    <label>URL de Verificação do Certificado</label>
+    <input id="urlVerificacao" disabled>
+    <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
+  </div>
+
+</div> <!-- FECHA .form-grid -->
+
 
 
  <!-- NAVEGAÇÃO -->
