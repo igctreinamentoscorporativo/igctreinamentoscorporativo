@@ -136,37 +136,23 @@ button:disabled {
 
 
 
+#loadingBox,
+#appBox {
+  display: none;
+}
+
 #loadingBox {
   position: fixed;
   inset: 0;
   background: linear-gradient(180deg, #020617, #0f172a);
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 12px;
   z-index: 9999;
   text-align: center;
-  display: none; /* 👈 ESSENCIAL */
 }
 
-#loadingBox.show {
-  display: flex;
-}
-
-#loadingBox h1 {
-  font-size: 26px;
-  letter-spacing: 1px;
-}
-
-#loadingBox p {
-  font-size: 14px;
-  opacity: 0.7;
-  animation: pulse 1.4s infinite;
-}
-
-
-
-
-    
+   
   </style>
 </head>
 
@@ -187,16 +173,16 @@ button:disabled {
   <p id="loginErro" style="color:#f87171; margin-top:10px;"></p>
 </div>
 
-<!-- ⏳ LOADING FULLSCREEN -->
+<!-- ⏳ LOADING (FULLSCREEN) -->
 <div id="loadingBox">
-  <h1>IGC Treinamentos</h1>
+  <h1>IGC Treinamentos Corporativo</h1>
   <p>Carregando sistema...</p>
 </div>
 
 <!-- 📋 SISTEMA -->
-<div id="appBox" class="container hidden">  
+<div id="appBox" class="container">
   <h1>Cadastro de Cursos</h1>
-
+  
   
 
   <!-- FORM -->
@@ -289,13 +275,11 @@ let modo = "view";
 
 
 async function login() {
-  const senha = document.getElementById("senhaLogin").value.trim();
-  const erro = document.getElementById("loginErro");
-
-  erro.innerText = "";
+  const senha = senhaLogin.value.trim();
+  loginErro.innerText = "";
 
   if (!senha) {
-    erro.innerText = "Informe a senha.";
+    loginErro.innerText = "Informe a senha.";
     return;
   }
 
@@ -303,12 +287,12 @@ async function login() {
     method: "POST",
     body: JSON.stringify({
       acao: "loginCursos",
-      senha: senha
+      senha
     })
   }).then(r => r.json());
 
   if (!res.ok || res.perfil !== "ADMIN") {
-    erro.innerText = "Acesso não autorizado.";
+    loginErro.innerText = "Acesso não autorizado.";
     return;
   }
 
@@ -317,21 +301,22 @@ async function login() {
   PERFIL = res.perfil;
 
   // some login
-  document.getElementById("loginBox").classList.add("hidden");
+  loginBox.style.display = "none";
 
   // mostra loading
-  document.getElementById("loadingBox").classList.remove("hidden");
+  loadingBox.style.display = "flex";
 
   // carrega dados
   await carregarCursos();
 
-  // simula carregamento padrão do sistema
+  // delay padrão do sistema
   setTimeout(() => {
-    document.getElementById("loadingBox").classList.add("hidden");
-    document.getElementById("appBox").classList.remove("hidden");
+    loadingBox.style.display = "none";
+    appBox.style.display = "block";
     bloquear(true);
-  }, 1800);
+  }, 1500);
 }
+
 
 
 
