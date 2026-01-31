@@ -6,182 +6,89 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * { box-sizing: border-box; }
 
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #020617, #0f172a);
+      color: #e5e7eb;
+    }
 
-    
-* {
-  box-sizing: border-box;
-}
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      background: #020617;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
 
-body {
-  margin: 0;
-  padding: 16px;
-  font-family: Arial, Helvetica, sans-serif;
-  background: linear-gradient(180deg, #020617, #0f172a);
-  color: #e5e7eb;
-}
+    h1 {
+      margin: 0 0 20px 0;
+      font-size: 22px;
+    }
 
-/* ===============================
-   CARD PRINCIPAL
-================================ */
-.container {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 24px;
-  background: #020617;              /* 🔥 CARD DE VOLTA */
-  border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.4);
-}
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-/* ===============================
-   TÍTULOS
-================================ */
-h1 {
-  margin: 0 0 16px 0;
-  font-size: 22px;
-}
+    .nav button {
+      width: auto;
+      padding: 8px 14px;
+    }
 
-/* ===============================
-   CAMPOS
-================================ */
-input,
-textarea,
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 6px;
-  border: none;
-  font-size: 14px;
-}
+    .counter {
+      font-size: 14px;
+      opacity: .8;
+    }
 
-input,
-textarea {
-  background: #020617;
-  color: #e5e7eb;
-  border: 1px solid #334155;
-}
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+    }
 
-textarea {
-  resize: vertical;
-  min-height: 80px;
-}
+    input, textarea, select {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #334155;
+    }
 
-/* ===============================
-   BOTÕES
-================================ */
-button {
-  background: #2563eb;
-  color: #fff;
-  cursor: pointer;
-  margin-top: 16px;
-  height: 40px;
-  border-radius: 6px;
-}
+    textarea { min-height: 80px; resize: vertical; }
 
-button.danger {
-  background: #dc2626;
-}
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
 
-/* ===============================
-   GRID FORM
-================================ */
-.row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
 
-/* ===============================
-   TABELA
-================================ */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 32px;
-}
+    .actions button {
+      height: 40px;
+    }
 
-th, td {
-  padding: 12px;
-  border-bottom: 1px solid #334155;
-  text-align: left;
-  vertical-align: top;
-  font-size: 14px;
-}
+    .danger { background: #dc2626; }
+    .secondary { background: #334155; }
 
-th {
-  background: #020617;
-  font-weight: bold;
-}
+    .hidden { display: none; }
 
-/* ===============================
-   AÇÕES
-================================ */
-.actions {
-  display: flex;
-  gap: 8px;
-}
-
-.actions button {
-  min-width: 80px;
-  height: 34px;
-  font-size: 12px;
-  padding: 0;
-}
-
-/* ===============================
-   UTIL
-================================ */
-.hidden {
-  display: none;
-}
-
-/* ===============================
-   📱 MOBILE
-================================ */
-@media (max-width: 768px) {
-
-  body {
-    padding: 12px;
-  }
-
-  .container {
-    margin: 0 auto;
-    padding: 16px;
-  }
-
-  h1 {
-    font-size: 18px;
-  }
-
-  .row {
-    grid-template-columns: 1fr;
-  }
-
-  /* 🔥 CONTÉM A TABELA */
-  table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  th, td {
-    font-size: 12px;
-    padding: 8px;
-  }
-
-  .actions {
-    flex-direction: column;
-  }
-
-  .actions button {
-    width: 100%;
-  }
-}
-
-
-
-    
+    @media (max-width: 768px) {
+      .row { grid-template-columns: 1fr; }
+      .actions { flex-direction: column; }
+    }
   </style>
 </head>
 
@@ -191,184 +98,104 @@ th {
 
 <div class="container">
 
-  <!-- 🔐 LOGIN -->
-  <div id="loginBox">
-    <h1>Acesso restrito</h1>
-    <input type="password" id="senha" placeholder="Digite a senha">
-    <button onclick="login()">Entrar</button>
-    <p id="loginErro" style="color:#f87171"></p>
+  <h1>Cadastro de Cursos</h1>
+
+  <!-- NAVEGAÇÃO -->
+  <div class="nav">
+    <button onclick="prev()">◀</button>
+    <div class="counter" id="contador">0 de 0</div>
+    <button onclick="next()">▶</button>
   </div>
 
-  <!-- 📋 SISTEMA -->
-  <div id="appBox" class="hidden">
+  <!-- FORM -->
+  <input type="hidden" id="cursoId">
 
-    <h1>Cadastro de Cursos</h1>
+  <input id="nome" placeholder="Nome do curso" disabled>
+  <input id="turma" placeholder="Turma" disabled>
 
-    <!-- FORM -->
-    <div>
-      <input type="hidden" id="cursoId">
+  <div class="row">
+    <input id="carga" placeholder="Carga horária" disabled>
+    <select id="ativo" disabled>
+      <option value="TRUE">Ativo</option>
+      <option value="FALSE">Inativo</option>
+    </select>
+  </div>
 
-      <input id="nome" placeholder="Nome do curso">
+  <input id="local" placeholder="Local do curso" disabled>
+  <input id="data" placeholder="Data / Horário" disabled>
 
-      <div class="row">
-        <input id="turma" placeholder="Turma">
-        <input id="carga" placeholder="Carga horária">
-      </div>
+  <textarea id="obs" placeholder="Observações" disabled></textarea>
 
-      <input id="local" placeholder="Local do curso">
-      <input id="data" placeholder="Data / Horário">
+  <input id="modelo" placeholder="ID Modelo Certificado" disabled>
+  <input id="planilha" placeholder="ID da Planilha Google" disabled>
 
-      <textarea id="obs" placeholder="Observações"></textarea>
-
-      <button onclick="salvar()">Salvar curso</button>
-    </div>
-
-    <!-- LISTA -->
-    <table>
-      <thead>
-        <tr>
-          <th>Curso</th>
-          <th>Turma</th>
-          <th>Carga</th>
-          <th>Local</th>
-          <th>Data</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody id="listaCursos"></tbody>
-    </table>
-
+  <!-- AÇÕES -->
+  <div class="actions">
+    <button class="secondary" onclick="novo()">Novo</button>
+    <button onclick="editar()">Editar</button>
+    <button onclick="salvar()">Salvar</button>
+    <button class="danger" onclick="excluir()">Excluir</button>
   </div>
 
 </div>
 
 <script>
-const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
-let SENHA = "";
+let cursos = [];
+let index = 0;
+let modo = "view";
 
-/* ===============================
-   LOGIN
-================================ */
-async function login() {
-  const senha = document.getElementById("senha").value.trim();
-  if (!senha) return;
+function preencher(c) {
+  cursoId.value = c.id || "";
+  nome.value = c.nome || "";
+  turma.value = c.turma || "";
+  carga.value = c.carga || "";
+  local.value = c.local || "";
+  data.value = c.data || "";
+  obs.value = c.obs || "";
+  ativo.value = c.ativo ? "TRUE" : "FALSE";
+  modelo.value = c.modelo || "";
+  planilha.value = c.planilha || "";
 
-  const res = await fetch(API, {
-    method: "POST",
-    body: JSON.stringify({
-      acao: "loginCursos",
-      senha: senha
-    })
-  }).then(r => r.json());
-
-  if (!res.ok || res.perfil !== "ADMIN") {
-    document.getElementById("loginErro").innerText =
-      "Acesso não autorizado.";
-    return;
-  }
-
-  SENHA = senha;
-  document.getElementById("loginBox").classList.add("hidden");
-  document.getElementById("appBox").classList.remove("hidden");
-
-  carregarCursos();
+  contador.innerText = `${index + 1} de ${cursos.length}`;
 }
 
-/* ===============================
-   LISTAR
-================================ */
-async function carregarCursos() {
-  const cursos = await fetch(API + "?acao=listarCursos")
-    .then(r => r.json());
-
-  const tbody = document.getElementById("listaCursos");
-  tbody.innerHTML = "";
-
-  cursos.forEach(c => {
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-      <td>${c.nome}</td>
-      <td>${c.turma || ""}</td>
-      <td>${c.carga}</td>
-      <td>${c.local}</td>
-      <td>${c.data}</td>
-      <td class="actions">
-        <button onclick='editar(${JSON.stringify(c)})'>Editar</button>
-        <button class="danger" onclick="excluir('${c.id}')">Excluir</button>
-      </td>
-    `;
-
-    tbody.appendChild(tr);
-  });
+function bloquear(b) {
+  document.querySelectorAll("input, textarea, select")
+    .forEach(el => el.disabled = b);
 }
 
-/* ===============================
-   SALVAR
-================================ */
-async function salvar() {
-  const curso = {
-    id: document.getElementById("cursoId").value,
-    nome: document.getElementById("nome").value,
-    turma: document.getElementById("turma").value,
-    carga: document.getElementById("carga").value,
-    local: document.getElementById("local").value,
-    data: document.getElementById("data").value,
-    obs: document.getElementById("obs").value
-  };
-
-  await fetch(API, {
-    method: "POST",
-    body: JSON.stringify({
-      acao: "salvarCurso",
-      senha: SENHA,
-      curso: curso
-    })
-  });
-
-  limpar();
-  carregarCursos();
+function prev() {
+  if (index > 0) index--;
+  preencher(cursos[index]);
 }
 
-/* ===============================
-   EDITAR
-================================ */
-function editar(c) {
-  document.getElementById("cursoId").value = c.id;
-  document.getElementById("nome").value = c.nome;
-  document.getElementById("turma").value = c.turma || "";
-  document.getElementById("carga").value = c.carga;
-  document.getElementById("local").value = c.local;
-  document.getElementById("data").value = c.data;
-  document.getElementById("obs").value = c.obs || "";
+function next() {
+  if (index < cursos.length - 1) index++;
+  preencher(cursos[index]);
 }
 
-/* ===============================
-   EXCLUIR
-================================ */
-async function excluir(id) {
-  if (!confirm("Excluir este curso?")) return;
-
-  await fetch(API, {
-    method: "POST",
-    body: JSON.stringify({
-      acao: "excluirCurso",
-      senha: SENHA,
-      id: id
-    })
-  });
-
-  carregarCursos();
-}
-
-/* ===============================
-   RESET FORM
-================================ */
-function limpar() {
-  document.getElementById("cursoId").value = "";
+function novo() {
+  modo = "novo";
+  bloquear(false);
   document.querySelectorAll("input, textarea").forEach(e => e.value = "");
+}
+
+function editar() {
+  modo = "editar";
+  bloquear(false);
+}
+
+function salvar() {
+  // backend entra depois
+  bloquear(true);
+}
+
+function excluir() {
+  if (!confirm("Excluir este curso?")) return;
+  // backend entra depois
 }
 </script>
 
 </body>
 </html>
+
