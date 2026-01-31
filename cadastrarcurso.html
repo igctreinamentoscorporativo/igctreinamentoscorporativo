@@ -259,25 +259,23 @@ button:disabled {
   <input id="turma" disabled class="uppercase">
 </div>
 
-<div class="row">
-  <div class="field">
-    <label>Carga horária</label>
-    <input 
-  id="carga"
-  disabled
-  inputmode="numeric"
-  pattern="[0-9]*"
-  oninput="somenteNumeros(this)"
-  onblur="formatarHoras(this)"
->
-  </div>
+<div class="field span-2">
+  <label>Carga horária</label>
+  <input
+    id="carga"
+    disabled
+    inputmode="numeric"
+    pattern="[0-9]*"
+    oninput="somenteNumeros(this)"
+  >
+</div>
 
-  <div class="field">
-    <label>Status</label>
-    <select id="ativo" disabled>
-      <option value="TRUE">Ativo</option>
-      <option value="FALSE">Inativo</option>
-    </select>
+<div class="field span-2">
+  <label>Status</label>
+  <select id="ativo" disabled>
+    <option value="TRUE">Ativo</option>
+    <option value="FALSE">Inativo</option>
+  </select>
   </div>
 </div>
 
