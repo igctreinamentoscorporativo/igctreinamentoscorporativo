@@ -189,6 +189,29 @@ button:disabled {
 <div id="appBox" class="container">
   <h1>Cadastro de Cursos</h1>
   
+
+<!-- 🔍 FILTRO DE CURSOS -->
+<div class="row" style="margin-bottom:20px;">
+  <div class="field">
+    <label>Filtrar por curso</label>
+    <input
+      id="filtroCurso"
+      placeholder="Digite parte do nome do curso"
+      oninput="aplicarFiltro()"
+    >
+  </div>
+
+  <div class="field">
+    <label>Filtrar por turma</label>
+    <input
+      id="filtroTurma"
+      placeholder="Ex: TURMA A, MANHÃ, NOITE"
+      oninput="aplicarFiltro()"
+    >
+  </div>
+</div>
+
+
   
 
   <!-- FORM -->
@@ -288,7 +311,7 @@ let PERFIL = "";
 let cursos = [];
 let index = 0;
 let modo = "view";
-
+let cursosOriginais = [];
 
 
 async function login() {
@@ -339,8 +362,10 @@ async function login() {
 
   
 async function carregarCursos(idManter = null) {
-  cursos = await fetch(API + "?acao=listarCursos")
+  cursosOriginais = await fetch(API + "?acao=listarCursos")
     .then(r => r.json());
+
+  cursos = [...cursosOriginais];
 
   if (!cursos.length) {
     contador.innerText = "0 de 0";
@@ -396,6 +421,36 @@ function preencher(c) {
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
 
+
+
+function aplicarFiltro() {
+  const textoCurso = filtroCurso.value.trim().toUpperCase();
+  const textoTurma = filtroTurma.value.trim().toUpperCase();
+
+  cursos = cursosOriginais.filter(c => {
+    const nomeMatch =
+      !textoCurso || (c.nome || "").toUpperCase().includes(textoCurso);
+
+    const turmaMatch =
+      !textoTurma || (c.turma || "").toUpperCase().includes(textoTurma);
+
+    return nomeMatch && turmaMatch;
+  });
+
+  if (!cursos.length) {
+    contador.innerText = "0 de 0";
+    return;
+  }
+
+  index = 0;
+  preencher(cursos[index]);
+}
+
+
+
+
+
+  
 function bloquear(b) {
   document.querySelectorAll(
     "#appBox input, #appBox textarea, #appBox select"
