@@ -131,6 +131,46 @@ button:disabled {
 .uppercase {
   text-transform: uppercase;
 }
+
+
+
+
+
+#loadingBox {
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+#loadingBox h1 {
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+#loadingBox p {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* animação simples */
+@keyframes pulse {
+  0% { opacity: .4; }
+  50% { opacity: 1; }
+  100% { opacity: .4; }
+}
+
+#loadingBox p {
+  animation: pulse 1.4s infinite;
+}
+
+
+
+
+
     
   </style>
 </head>
@@ -156,6 +196,13 @@ button:disabled {
   <p id="loginErro" style="color:#f87171; margin-top:10px;"></p>
 </div>
 
+<!-- ⏳ LOADING -->
+<div id="loadingBox" class="hidden">
+  <h1>IGC Treinamentos</h1>
+  <p>Carregando sistema...</p>
+</div>
+
+  
 <div id="appBox" class="hidden">  
   <h1>Cadastro de Cursos</h1>
 
@@ -278,10 +325,21 @@ async function login() {
   SENHA = senha;
   PERFIL = res.perfil;
 
-  document.getElementById("loginBox").classList.add("hidden");
+  // esconde login
+document.getElementById("loginBox").classList.add("hidden");
+
+// mostra loading
+document.getElementById("loadingBox").classList.remove("hidden");
+
+// carrega dados em paralelo
+carregarCursos();
+
+// após 2 segundos, mostra o sistema
+setTimeout(() => {
+  document.getElementById("loadingBox").classList.add("hidden");
   document.getElementById("appBox").classList.remove("hidden");
-  carregarCursos();
   bloquear(true);
+}, 2000);
   
 }
 
