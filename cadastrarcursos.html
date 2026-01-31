@@ -140,13 +140,16 @@ button:disabled {
   position: fixed;
   inset: 0;
   background: linear-gradient(180deg, #020617, #0f172a);
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
   z-index: 9999;
   text-align: center;
+  display: none; /* 👈 ESSENCIAL */
+}
+
+#loadingBox.show {
+  display: flex;
 }
 
 #loadingBox h1 {
@@ -163,7 +166,6 @@ button:disabled {
 
 
 
-
     
   </style>
 </head>
@@ -172,10 +174,8 @@ button:disabled {
 
 <script src="/js/igc-config.js"></script>
 
-
- <!-- 📋 SISTEMA --> 
 <!-- 🔐 LOGIN -->
-<div id="loginBox">
+<div id="loginBox" class="container">
   <h1>Acesso restrito</h1>
 
   <div class="field">
@@ -184,20 +184,17 @@ button:disabled {
   </div>
 
   <button class="btn-login" onclick="login()">Entrar</button>
-
   <p id="loginErro" style="color:#f87171; margin-top:10px;"></p>
-</div>  
+</div>
 
-<!-- ⏳ LOADING -->
-<div id="loadingBox" class="hidden">
+<!-- ⏳ LOADING FULLSCREEN -->
+<div id="loadingBox">
   <h1>IGC Treinamentos</h1>
   <p>Carregando sistema...</p>
 </div>
-  
-  
-<div class="container">
-  
-<div id="appBox" class="hidden">  
+
+<!-- 📋 SISTEMA -->
+<div id="appBox" class="container hidden">  
   <h1>Cadastro de Cursos</h1>
 
   
