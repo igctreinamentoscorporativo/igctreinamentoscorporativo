@@ -23,7 +23,7 @@ body {
 }
 
     .container {
-      max-width: min(1200px, 95vw);
+      max-width: 1200px;
       margin: 0 auto;
       padding: 24px;
       background: #020617;
@@ -158,7 +158,35 @@ button:disabled {
   text-align: center;
 }
 
-   
+
+/* =========================
+   LAYOUT DESKTOP OTIMIZADO
+   ========================= */
+@media (min-width: 1200px) {
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+  }
+
+  /* Campos que ocupam linha inteira */
+  .span-2 {
+    grid-column: span 2;
+  }
+
+  /* Reduz espaçamento vertical */
+  .field {
+    margin-top: 8px;
+  }
+
+  textarea {
+    min-height: 60px;
+  }
+}
+
+
+    
   </style>
 </head>
 
@@ -218,14 +246,16 @@ button:disabled {
 
   <!-- FORM -->
   <input type="hidden" id="cursoId">
+  <div class="form-grid">
 
-  <div class="field">
+  
+  <div class="field span-2">
   <label>Nome do curso</label>
   <input id="nome" disabled class="uppercase">
 </div>
 
 <div class="field">
-  <label>Turma</label>
+  <div class="field span-2">
   <input id="turma" disabled class="uppercase">
 </div>
 
@@ -252,32 +282,32 @@ button:disabled {
 </div>
 
 <div class="field">
-  <label>Local do curso</label>
+  <div class="field span-2">
   <input id="local" disabled class="uppercase">
 </div>
 
 <div class="field">
-  <label>Data / Horário</label>
+  <div class="field span-2">
   <input id="data" disabled class="uppercase">
 </div>
 
-<div class="field">
+<div class="field span-2">
   <label>Observações</label>
   <textarea id="obs" disabled class="uppercase"></textarea>
 </div>
 
-<div class="field">
+<div class="field span-2">
   <label>ID do Modelo de Certificado</label>
   <input id="modelo" disabled>
   <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
 </div>
 
-<div class="field">
+<div class="field span-2">
   <label>URL de Verificação do Certificado</label>
   <input id="urlVerificacao" disabled>
   <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
 </div>
-
+</div>
 
 
  <!-- NAVEGAÇÃO -->
