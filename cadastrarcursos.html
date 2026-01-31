@@ -97,6 +97,27 @@
   margin-bottom: 10px;
 }
 
+.btn-novo    { background: #16a34a; }
+.btn-editar  { background: #eab308; color: #000; }
+.btn-salvar  { background: #2563eb; }
+.btn-login   { background: #2563eb; }
+
+button {
+  transition: transform .1s ease, box-shadow .1s ease, opacity .1s ease;
+}
+
+button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  opacity: 0.9;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+ 
+
     .danger { background: #dc2626; }
     .secondary { background: #334155; }
 
@@ -106,6 +127,11 @@
       .row { grid-template-columns: 1fr; }
       .actions { flex-direction: column; }
     }
+
+.uppercase {
+  text-transform: uppercase;
+}
+    
   </style>
 </head>
 
@@ -125,7 +151,7 @@
     <input type="password" id="senhaLogin">
   </div>
 
-  <button onclick="login()">Entrar</button>
+  <button class="btn-login" onclick="login()">Entrar</button>
 
   <p id="loginErro" style="color:#f87171; margin-top:10px;"></p>
 </div>
@@ -140,18 +166,18 @@
 
   <div class="field">
   <label>Nome do curso</label>
-  <input id="nome" disabled>
+  <input id="nome" disabled class="uppercase">
 </div>
 
 <div class="field">
   <label>Turma</label>
-  <input id="turma" disabled>
+  <input id="turma" disabled class="uppercase">
 </div>
 
 <div class="row">
   <div class="field">
     <label>Carga horária</label>
-    <input id="carga" disabled>
+    <input id="carga" disabled class="uppercase">
   </div>
 
   <div class="field">
@@ -165,17 +191,17 @@
 
 <div class="field">
   <label>Local do curso</label>
-  <input id="local" disabled>
+  <input id="local" disabled class="uppercase">
 </div>
 
 <div class="field">
   <label>Data / Horário</label>
-  <input id="data" disabled>
+  <input id="data" disabled class="uppercase">
 </div>
 
 <div class="field">
   <label>Observações</label>
-  <textarea id="obs" disabled></textarea>
+  <textarea id="obs" disabled class="uppercase"></textarea>
 </div>
 
 <div class="field">
@@ -199,9 +225,9 @@
   
   <!-- AÇÕES -->
   <div class="actions">
-    <button class="secondary" onclick="novo()">Novo</button>
-    <button onclick="editar()">Editar</button>
-    <button onclick="salvar()">Salvar</button>
+    <button class="btn-novo" onclick="novo()">Novo</button>
+    <button class="btn-editar" onclick="editar()">Editar</button>
+    <button class="btn-salvar" onclick="salvar()">Salvar</button>
     <button class="danger" onclick="excluir()">Excluir</button>
   </div>
 
@@ -254,8 +280,9 @@ async function login() {
 
   document.getElementById("loginBox").classList.add("hidden");
   document.getElementById("appBox").classList.remove("hidden");
-
   carregarCursos();
+  bloquear(true);
+  
 }
 
 
@@ -271,11 +298,25 @@ async function carregarCursos() {
 
   index = 0;
   preencher(cursos[index]);
+
+
+controlarBotoes({
+  novo: true,
+  editar: true,
+  salvar: false,
+  excluir: true
+});
+  
 }
 
 
 
-
+function controlarBotoes({ novo, editar, salvar, excluir }) {
+  document.querySelector(".btn-novo").disabled   = !novo;
+  document.querySelector(".btn-editar").disabled = !editar;
+  document.querySelector(".btn-salvar").disabled = !salvar;
+  document.querySelector(".danger").disabled     = !excluir;
+}
 
   
   
@@ -304,12 +345,31 @@ function bloquear(b) {
 function prev() {
   if (index > 0) index--;
   preencher(cursos[index]);
+
+  bloquear(true);
+
+  controlarBotoes({
+    novo: true,
+    editar: true,
+    salvar: false,
+    excluir: true
+  });
 }
 
 function next() {
   if (index < cursos.length - 1) index++;
   preencher(cursos[index]);
+
+  bloquear(true);
+
+  controlarBotoes({
+    novo: true,
+    editar: true,
+    salvar: false,
+    excluir: true
+  });
 }
+
 
 function novo() {
   modo = "novo";
@@ -324,8 +384,20 @@ function novo() {
   });
 
   ativo.value = "TRUE";
+
+controlarBotoes({
+    novo: false,
+    editar: false,
+    salvar: true,
+    excluir: false
+  });
+  
 }
 
+
+
+
+  
 function editar() {
   if (!cursoId.value) return;
 
@@ -333,14 +405,30 @@ function editar() {
 
   document.querySelectorAll(
     "#appBox input, #appBox textarea, #appBox select"
-  ).forEach(el => {
-    el.disabled = false;
+  ).forEach(el => el.disabled = false);
+
+  controlarBotoes({
+    novo: false,
+    editar: false,
+    salvar: true,
+    excluir: false
   });
 }
 
 
-async function salvar() {
+function forcarCaixaAlta() {
+  document.querySelectorAll(".uppercase").forEach(el => {
+    el.value = el.value.toUpperCase();
+  });
+}
 
+
+  
+
+async function salvar() {
+  
+  forcarCaixaAlta();
+  
   const curso = {
     id: cursoId.value || null,
     nome: nome.value,
@@ -365,6 +453,15 @@ async function salvar() {
 
   bloquear(true);
   carregarCursos();
+
+
+  controlarBotoes({
+  novo: true,
+  editar: true,
+  salvar: false,
+  excluir: true
+});
+  
 }
 
 async function excluir() {
