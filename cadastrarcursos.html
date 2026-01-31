@@ -207,7 +207,14 @@ button:disabled {
 <div class="row">
   <div class="field">
     <label>Carga horária</label>
-    <input id="carga" disabled class="uppercase">
+    <input 
+  id="carga"
+  disabled
+  inputmode="numeric"
+  pattern="[0-9]*"
+  oninput="somenteNumeros(this)"
+  onblur="formatarHoras(this)"
+>
   </div>
 
   <div class="field">
@@ -370,7 +377,9 @@ function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
   turma.value = c.turma || "";
-  carga.value = c.carga || "";
+  carga.value = c.carga
+  ? c.carga.toString().replace(/\D/g, "")
+  : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
@@ -500,11 +509,14 @@ async function salvar() {
 
   forcarCaixaAlta();
 
+  const cargaNumerica = carga.value.replace(/\D/g, "");
+  const cargaFormatada = cargaNumerica ? `${cargaNumerica} HORAS` : "";
+  
   const curso = {
     id: cursoId.value || null,
     nome: nome.value,
     turma: turma.value,
-    carga: carga.value,
+    carga: cargaFormatada,
     local: local.value,
     data: data.value,
     obs: obs.value,
@@ -545,6 +557,12 @@ async function excluir() {
   carregarCursos();
 }
 
+
+function somenteNumeros(el) {
+  el.value = el.value.replace(/\D/g, "");
+}
+
+  
 </script>
 
 </body>
