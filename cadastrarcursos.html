@@ -257,6 +257,7 @@ button:disabled {
   <div class="actions">
     <button class="btn-novo" onclick="novo()">Novo</button>
     <button class="btn-editar" onclick="editar()">Editar</button>
+    <button class="secondary" onclick="duplicar()">Duplicar</button>
     <button class="btn-salvar" onclick="salvar()">Salvar</button>
     <button class="danger" onclick="excluir()">Excluir</button>
   </div>
@@ -327,7 +328,7 @@ async function login() {
 
 
   
-async function carregarCursos() {
+async function carregarCursos(idManter = null) {
   cursos = await fetch(API + "?acao=listarCursos")
     .then(r => r.json());
 
@@ -336,18 +337,23 @@ async function carregarCursos() {
     return;
   }
 
-  index = 0;
+  if (idManter) {
+    const idx = cursos.findIndex(c => c.id === idManter);
+    index = idx >= 0 ? idx : 0;
+  } else {
+    index = Math.min(index, cursos.length - 1);
+  }
+
   preencher(cursos[index]);
 
-
-controlarBotoes({
-  novo: true,
-  editar: true,
-  salvar: false,
-  excluir: true
-});
-  
+  controlarBotoes({
+    novo: true,
+    editar: true,
+    salvar: false,
+    excluir: true
+  });
 }
+
 
 
 
@@ -463,12 +469,37 @@ function forcarCaixaAlta() {
 }
 
 
+
+
+ function duplicar() {
+  if (!cursoId.value) return;
+
+  modo = "novo";
+
+  // limpa ID → força criação de novo registro
+  cursoId.value = "";
+
+  // habilita edição
+  document.querySelectorAll(
+    "#appBox input, #appBox textarea, #appBox select"
+  ).forEach(el => el.disabled = false);
+
+  controlarBotoes({
+    novo: false,
+    editar: false,
+    salvar: true,
+    excluir: false
+  });
+}
+ 
+
+  
   
 
 async function salvar() {
-  
+
   forcarCaixaAlta();
-  
+
   const curso = {
     id: cursoId.value || null,
     nome: nome.value,
@@ -482,27 +513,21 @@ async function salvar() {
     urlVerificacao: urlVerificacao.value
   };
 
+  const idAtual = curso.id;
+
   await fetch(API, {
     method: "POST",
     body: JSON.stringify({
       acao: "salvarCurso",
       senha: SENHA,
-      curso: curso
+      curso
     })
-  }).then(r => r.json());
+  });
 
   bloquear(true);
-  carregarCursos();
-
-
-  controlarBotoes({
-  novo: true,
-  editar: true,
-  salvar: false,
-  excluir: true
-});
-  
+  await carregarCursos(idAtual);
 }
+
 
 async function excluir() {
   if (!cursoId.value) return;
