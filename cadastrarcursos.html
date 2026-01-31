@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Cursos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #020617;
+      border-radius: 8px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 22px;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 4px;
+      border: none;
+      font-size: 14px;
+    }
+
+    input, textarea {
+      background: #020617;
+      color: #e5e7eb;
+      border: 1px solid #334155;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    button.danger {
+      background: #dc2626;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #334155;
+      padding: 10px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    th {
+      background: #020617;
+    }
+
+    .actions button {
+      width: auto;
+      margin-right: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<script src="/js/igc-config.js"></script>
+
+<div class="container">
+
+  <!-- 🔐 LOGIN -->
+  <div id="loginBox">
+    <h1>Acesso restrito</h1>
+    <input type="password" id="senha" placeholder="Digite a senha">
+    <button onclick="login()">Entrar</button>
+    <p id="loginErro" style="color:#f87171"></p>
+  </div>
+
+  <!-- 📋 SISTEMA -->
+  <div id="appBox" class="hidden">
+
+    <h1>Cadastro de Cursos</h1>
+
+    <!-- FORM -->
+    <div>
+      <input type="hidden" id="cursoId">
+
+      <input id="nome" placeholder="Nome do curso">
+
+      <div class="row">
+        <input id="turma" placeholder="Turma">
+        <input id="carga" placeholder="Carga horária">
+      </div>
+
+      <input id="local" placeholder="Local do curso">
+      <input id="data" placeholder="Data / Horário">
+
+      <textarea id="obs" placeholder="Observações"></textarea>
+
+      <button onclick="salvar()">Salvar curso</button>
+    </div>
+
+    <!-- LISTA -->
+    <table>
+      <thead>
+        <tr>
+          <th>Curso</th>
+          <th>Turma</th>
+          <th>Carga</th>
+          <th>Local</th>
+          <th>Data</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="listaCursos"></tbody>
+    </table>
+
+  </div>
+
+</div>
+
+<script>
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+let SENHA = "";
+
+/* ===============================
+   LOGIN
+================================ */
+async function login() {
+  const senha = document.getElementById("senha").value.trim();
+  if (!senha) return;
+
+  const res = await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "loginCursos",
+      senha: senha
+    })
+  }).then(r => r.json());
+
+  if (!res.ok || res.perfil !== "ADMIN") {
+    document.getElementById("loginErro").innerText =
+      "Acesso não autorizado.";
+    return;
+  }
+
+  SENHA = senha;
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("appBox").classList.remove("hidden");
+
+  carregarCursos();
+}
+
+/* ===============================
+   LISTAR
+================================ */
+async function carregarCursos() {
+  const cursos = await fetch(API + "?acao=listarCursos")
+    .then(r => r.json());
+
+  const tbody = document.getElementById("listaCursos");
+  tbody.innerHTML = "";
+
+  cursos.forEach(c => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${c.nome}</td>
+      <td>${c.turma || ""}</td>
+      <td>${c.carga}</td>
+      <td>${c.local}</td>
+      <td>${c.data}</td>
+      <td class="actions">
+        <button onclick='editar(${JSON.stringify(c)})'>Editar</button>
+        <button class="danger" onclick="excluir('${c.id}')">Excluir</button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  });
+}
+
+/* ===============================
+   SALVAR
+================================ */
+async function salvar() {
+  const curso = {
+    id: document.getElementById("cursoId").value,
+    nome: document.getElementById("nome").value,
+    turma: document.getElementById("turma").value,
+    carga: document.getElementById("carga").value,
+    local: document.getElementById("local").value,
+    data: document.getElementById("data").value,
+    obs: document.getElementById("obs").value
+  };
+
+  await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "salvarCurso",
+      senha: SENHA,
+      curso: curso
+    })
+  });
+
+  limpar();
+  carregarCursos();
+}
+
+/* ===============================
+   EDITAR
+================================ */
+function editar(c) {
+  document.getElementById("cursoId").value = c.id;
+  document.getElementById("nome").value = c.nome;
+  document.getElementById("turma").value = c.turma || "";
+  document.getElementById("carga").value = c.carga;
+  document.getElementById("local").value = c.local;
+  document.getElementById("data").value = c.data;
+  document.getElementById("obs").value = c.obs || "";
+}
+
+/* ===============================
+   EXCLUIR
+================================ */
+async function excluir(id) {
+  if (!confirm("Excluir este curso?")) return;
+
+  await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "excluirCurso",
+      senha: SENHA,
+      id: id
+    })
+  });
+
+  carregarCursos();
+}
+
+/* ===============================
+   RESET FORM
+================================ */
+function limpar() {
+  document.getElementById("cursoId").value = "";
+  document.querySelectorAll("input, textarea").forEach(e => e.value = "");
+}
+</script>
+
+</body>
+</html>
