@@ -115,6 +115,22 @@
 
 <div class="container">
 
+ <!-- 📋 SISTEMA --> 
+<!-- 🔐 LOGIN -->
+<div id="loginBox">
+  <h1>Acesso restrito</h1>
+
+  <div class="field">
+    <label>Senha de acesso</label>
+    <input type="password" id="senhaLogin">
+  </div>
+
+  <button onclick="login()">Entrar</button>
+
+  <p id="loginErro" style="color:#f87171; margin-top:10px;"></p>
+</div>
+
+<div id="appBox" class="hidden">  
   <h1>Cadastro de Cursos</h1>
 
   
@@ -190,12 +206,79 @@
   </div>
 
 </div>
+</div>
 
+
+  
+  
+  
 <script>
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+let SENHA = "";
+let PERFIL = "";
+
 let cursos = [];
 let index = 0;
 let modo = "view";
 
+
+
+async function login() {
+  const senha = document.getElementById("senhaLogin").value.trim();
+  const erro = document.getElementById("loginErro");
+
+  erro.innerText = "";
+
+  if (!senha) {
+    erro.innerText = "Informe a senha.";
+    return;
+  }
+
+  const res = await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "loginCursos",
+      senha: senha
+    })
+  }).then(r => r.json());
+
+  if (!res.ok || res.perfil !== "ADMIN") {
+    erro.innerText = "Acesso não autorizado.";
+    return;
+  }
+
+  // ✅ LOGIN OK
+  SENHA = senha;
+  PERFIL = res.perfil;
+
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("appBox").classList.remove("hidden");
+
+  carregarCursos();
+}
+
+
+  
+async function carregarCursos() {
+  cursos = await fetch(API + "?acao=listarCursos")
+    .then(r => r.json());
+
+  if (!cursos.length) {
+    contador.innerText = "0 de 0";
+    return;
+  }
+
+  index = 0;
+  preencher(cursos[index]);
+}
+
+
+
+
+
+  
+  
 function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
@@ -206,15 +289,17 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
   modelo.value = c.modelo || "";
-  planilha.value = c.planilha || "";
+  urlVerificacao.value = c.urlVerificacao || "";
 
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
 
 function bloquear(b) {
-  document.querySelectorAll("input, textarea, select")
-    .forEach(el => el.disabled = b);
+  document.querySelectorAll(
+    "#appBox input, #appBox textarea, #appBox select"
+  ).forEach(el => el.disabled = b);
 }
+
 
 function prev() {
   if (index > 0) index--;
@@ -228,24 +313,76 @@ function next() {
 
 function novo() {
   modo = "novo";
-  bloquear(false);
-  document.querySelectorAll("input, textarea").forEach(e => e.value = "");
+
+  cursoId.value = "";
+
+  document.querySelectorAll(
+    "#appBox input, #appBox textarea, #appBox select"
+  ).forEach(el => {
+    el.disabled = false;
+    el.value = "";
+  });
+
+  ativo.value = "TRUE";
 }
 
 function editar() {
+  if (!cursoId.value) return;
+
   modo = "editar";
-  bloquear(false);
+
+  document.querySelectorAll(
+    "#appBox input, #appBox textarea, #appBox select"
+  ).forEach(el => {
+    el.disabled = false;
+  });
 }
 
-function salvar() {
-  // backend entra depois
+
+async function salvar() {
+
+  const curso = {
+    id: cursoId.value || null,
+    nome: nome.value,
+    turma: turma.value,
+    carga: carga.value,
+    local: local.value,
+    data: data.value,
+    obs: obs.value,
+    ativo: ativo.value === "TRUE",
+    modelo: modelo.value,
+    urlVerificacao: urlVerificacao.value
+  };
+
+  await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "salvarCurso",
+      senha: SENHA,
+      curso: curso
+    })
+  }).then(r => r.json());
+
   bloquear(true);
+  carregarCursos();
 }
 
-function excluir() {
+async function excluir() {
+  if (!cursoId.value) return;
   if (!confirm("Excluir este curso?")) return;
-  // backend entra depois
+
+  await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "excluirCurso",
+      senha: SENHA,
+      id: cursoId.value
+    })
+  });
+
+  carregarCursos();
 }
+
 </script>
 
 </body>
