@@ -80,6 +80,23 @@
       height: 40px;
     }
 
+
+    .field {
+  margin-top: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+  opacity: 0.85;
+}
+
+.bottom-nav {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
     .danger { background: #dc2626; }
     .secondary { background: #334155; }
 
@@ -100,35 +117,70 @@
 
   <h1>Cadastro de Cursos</h1>
 
-  <!-- NAVEGAÇÃO -->
-  <div class="nav">
-    <button onclick="prev()">◀</button>
-    <div class="counter" id="contador">0 de 0</div>
-    <button onclick="next()">▶</button>
-  </div>
+  
 
   <!-- FORM -->
   <input type="hidden" id="cursoId">
 
-  <input id="nome" placeholder="Nome do curso" disabled>
-  <input id="turma" placeholder="Turma" disabled>
+  <div class="field">
+  <label>Nome do curso</label>
+  <input id="nome" disabled>
+</div>
 
-  <div class="row">
-    <input id="carga" placeholder="Carga horária" disabled>
+<div class="field">
+  <label>Turma</label>
+  <input id="turma" disabled>
+</div>
+
+<div class="row">
+  <div class="field">
+    <label>Carga horária</label>
+    <input id="carga" disabled>
+  </div>
+
+  <div class="field">
+    <label>Status</label>
     <select id="ativo" disabled>
       <option value="TRUE">Ativo</option>
       <option value="FALSE">Inativo</option>
     </select>
   </div>
+</div>
 
-  <input id="local" placeholder="Local do curso" disabled>
-  <input id="data" placeholder="Data / Horário" disabled>
+<div class="field">
+  <label>Local do curso</label>
+  <input id="local" disabled>
+</div>
 
-  <textarea id="obs" placeholder="Observações" disabled></textarea>
+<div class="field">
+  <label>Data / Horário</label>
+  <input id="data" disabled>
+</div>
 
-  <input id="modelo" placeholder="ID Modelo Certificado" disabled>
-  <input id="planilha" placeholder="ID da Planilha Google" disabled>
+<div class="field">
+  <label>Observações</label>
+  <textarea id="obs" disabled></textarea>
+</div>
 
+<div class="field">
+  <label>ID do Modelo de Certificado</label>
+  <input id="modelo" disabled>
+</div>
+
+<div class="field">
+  <label>URL de Verificação do Certificado</label>
+  <input id="urlVerificacao" disabled>
+</div>
+
+
+ <!-- NAVEGAÇÃO -->
+  <div class="nav">
+    <button onclick="prev()">◀</button>
+    <div class="counter" id="contador">0 de 0</div>
+    <button onclick="next()">▶</button>
+  </div> 
+
+  
   <!-- AÇÕES -->
   <div class="actions">
     <button class="secondary" onclick="novo()">Novo</button>
