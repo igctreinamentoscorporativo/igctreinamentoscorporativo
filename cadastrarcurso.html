@@ -23,7 +23,7 @@ body {
 }
 
     .container {
-      max-width: 1600px;
+      max-width: min(1600px, 95vw);
       margin: 0 auto;
       padding: 24px;
       background: #020617;
@@ -298,13 +298,13 @@ button:disabled {
   <textarea id="obs" disabled class="uppercase"></textarea>
 </div>
 
-<div class="field span-2">
+<div class="field">
   <label>ID do Modelo de Certificado</label>
   <input id="modelo" disabled>
   <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
 </div>
 
-<div class="field span-2">
+<div class="field">
   <label>URL de Verificação do Certificado</label>
   <input id="urlVerificacao" disabled>
   <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
