@@ -7,19 +7,19 @@
 
   <style>
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-    }
+  margin: 0;
+  padding: 16px; /* 👈 ESSENCIAL para mobile */
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+}
 
     .container {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #020617;
-      border-radius: 8px;
-    }
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
 
     h1 {
       margin-top: 0;
@@ -52,6 +52,18 @@
       background: #dc2626;
     }
 
+
+.actions button {
+  min-width: 72px;       /* 👈 MESMO TAMANHO */
+  height: 32px;
+  margin-right: 6px;
+  padding: 0 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  text-align: center;
+}
+    
+    
     table {
       width: 100%;
       border-collapse: collapse;
@@ -81,10 +93,56 @@
     }
 
     .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px; /* mais respiro */
+  margin-top: 8px;
+}
+
+
+    
+/* ===============================
+   📱 RESPONSIVO - MOBILE
+================================ */
+@media (max-width: 768px) {
+
+  .container {
+    margin: 16px auto;
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  .row {
+    grid-template-columns: 1fr; /* 👈 QUEBRA COLUNA */
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px 6px;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .actions button {
+    width: 100%; /* 👈 BOTÕES GRANDES NO MOBILE */
+    margin-right: 0;
+  }
+}
+    
+    
+
+
+    
   </style>
 </head>
 
