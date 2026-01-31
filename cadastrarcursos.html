@@ -6,108 +6,147 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body {
-  margin: 0;
-  padding: 16px; /* 👈 ESSENCIAL para mobile */
-  font-family: Arial, Helvetica, sans-serif;
-  background: #0f172a;
-  color: #e5e7eb;
-}
 
-    .container {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 24px;
+
+    
+* {
   box-sizing: border-box;
 }
 
-    h1 {
-      margin-top: 0;
-      font-size: 22px;
-    }
-
-    input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 4px;
-      border: none;
-      font-size: 14px;
-    }
-
-    input, textarea {
-      background: #020617;
-      color: #e5e7eb;
-      border: 1px solid #334155;
-    }
-
-    button {
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-      margin-top: 12px;
-    }
-
-    button.danger {
-      background: #dc2626;
-    }
-
-
-.actions button {
-  min-width: 72px;       /* 👈 MESMO TAMANHO */
-  height: 32px;
-  margin-right: 6px;
-  padding: 0 10px;
-  font-size: 12px;
-  border-radius: 4px;
-  text-align: center;
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(180deg, #020617, #0f172a);
+  color: #e5e7eb;
 }
-    
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
 
-    th, td {
-      border-bottom: 1px solid #334155;
-      padding: 10px;
-      text-align: left;
-      font-size: 14px;
-    }
+/* ===============================
+   CARD PRINCIPAL
+================================ */
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #020617;              /* 🔥 CARD DE VOLTA */
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.4);
+}
 
-    th {
-      background: #020617;
-    }
+/* ===============================
+   TÍTULOS
+================================ */
+h1 {
+  margin: 0 0 16px 0;
+  font-size: 22px;
+}
 
-    .actions button {
-      width: auto;
-      margin-right: 6px;
-      padding: 6px 10px;
-      font-size: 12px;
-    }
+/* ===============================
+   CAMPOS
+================================ */
+input,
+textarea,
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+}
 
-    .hidden {
-      display: none;
-    }
+input,
+textarea {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+}
 
-    .row {
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ===============================
+   BOTÕES
+================================ */
+button {
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 16px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+button.danger {
+  background: #dc2626;
+}
+
+/* ===============================
+   GRID FORM
+================================ */
+.row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px; /* mais respiro */
-  margin-top: 8px;
+  gap: 16px;
 }
 
-
-    
 /* ===============================
-   📱 RESPONSIVO - MOBILE
+   TABELA
+================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #334155;
+  text-align: left;
+  vertical-align: top;
+  font-size: 14px;
+}
+
+th {
+  background: #020617;
+  font-weight: bold;
+}
+
+/* ===============================
+   AÇÕES
+================================ */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  min-width: 80px;
+  height: 34px;
+  font-size: 12px;
+  padding: 0;
+}
+
+/* ===============================
+   UTIL
+================================ */
+.hidden {
+  display: none;
+}
+
+/* ===============================
+   📱 MOBILE
 ================================ */
 @media (max-width: 768px) {
 
+  body {
+    padding: 12px;
+  }
+
   .container {
-    margin: 16px auto;
+    margin: 0 auto;
     padding: 16px;
   }
 
@@ -116,30 +155,30 @@
   }
 
   .row {
-    grid-template-columns: 1fr; /* 👈 QUEBRA COLUNA */
+    grid-template-columns: 1fr;
   }
 
+  /* 🔥 CONTÉM A TABELA */
   table {
-    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   th, td {
-    padding: 8px 6px;
+    font-size: 12px;
+    padding: 8px;
   }
 
   .actions {
-    display: flex;
     flex-direction: column;
-    gap: 6px;
   }
 
   .actions button {
-    width: 100%; /* 👈 BOTÕES GRANDES NO MOBILE */
-    margin-right: 0;
+    width: 100%;
   }
 }
-    
-    
+
 
 
     
