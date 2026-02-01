@@ -477,27 +477,27 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // MODELO
-if (c.modelo) {
-  const optExiste = [...modelo.options]
-    .some(o => o.value === c.modelo);
+  // ===== MODELO DE CERTIFICADO =====
+  modelo.innerHTML = "";
 
-  if (!optExiste) {
+  if (c.modelo) {
     const m = modelosCertificado.find(x => x.id === c.modelo);
+
     if (m) {
       const opt = document.createElement("option");
       opt.value = m.id;
       opt.textContent = m.nome;
       opt.dataset.url = m.url;
+      opt.selected = true; // 🔥 ESSENCIAL
       modelo.appendChild(opt);
+    } else {
+      modelo.innerHTML = `<option value="">Modelo não encontrado</option>`;
     }
+  } else {
+    modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
   }
 
-  modelo.value = c.modelo;
-}
-
-
-  // URL (input readonly)
+  // ===== URL =====
   urlVerificacao.value = c.urlVerificacao || "";
 
   atualizarPreviewModelo();
@@ -505,7 +505,6 @@ if (c.modelo) {
 
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
-
 
 
 
