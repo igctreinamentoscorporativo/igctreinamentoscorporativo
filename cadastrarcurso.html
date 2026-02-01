@@ -158,11 +158,6 @@ button:disabled {
   text-align: center;
 }
 
-select.locked {
-  pointer-events: none;
-  opacity: 0.7;
-}
-    
 
 /* =========================
    LAYOUT DESKTOP OTIMIZADO
@@ -191,35 +186,6 @@ select.locked {
 }
 
 
-
-
-
-/* 🔥 CORREÇÃO DEFINITIVA DO SELECT */
-select {
-  color: #e5e7eb;
-}
-
-select option {
-  background-color: #020617;
-  color: #e5e7eb;
-}
-
-/* item selecionado (Chrome / Edge / Android) */
-select option:checked {
-  background-color: #1e293b !important;
-  color: #ffffff !important;
-}
-
-/* quando o select está focado */
-select:focus {
-  outline: none;
-  border-color: #38bdf8;
-}
-
-
-
-
-    
     
   </style>
 </head>
@@ -328,22 +294,26 @@ select:focus {
   </div>
 
 
+<div class="field">
+  <label>Modelo de Certificado</label>
+  <select id="modeloSelect" disabled>
+    <option value="">Selecione o modelo</option>
+  </select>
+</div>
 
-
- 
 
   
   <div class="field">
-  <label>Modelo de Certificado</label>
-  <select id="modelo"></select>
-  <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
-</div>
+    <label>ID do Modelo de Certificado</label>
+    <input id="modelo" disabled>
+    <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
+  </div>
 
-<div class="field">
-  <label>URL de Verificação do Certificado</label>
-  <input id="urlVerificacao" readonly>
-  <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
-</div>
+  <div class="field">
+    <label>URL de Verificação do Certificado</label>
+    <input id="urlVerificacao" disabled>
+    <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
+  </div>
 
 </div> <!-- FECHA .form-grid -->
 
@@ -384,6 +354,8 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
+let modelosCertificado = [];
+  
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -421,10 +393,6 @@ async function login() {
   // carrega dados
   await carregarCursos();
   await carregarModelosCertificado();
-
-  if (cursos.length) {
-  preencher(cursos[index]);
-}
 
   // delay padrão do sistema
   setTimeout(() => {
@@ -478,28 +446,23 @@ async function carregarCursos(idManter = null) {
 
 
 
-
-let modelosCertificado = [];
-
 async function carregarModelosCertificado() {
   modelosCertificado = await fetch(
     API + "?acao=listarModelosCertificado"
   ).then(r => r.json());
 
-  modelo.innerHTML = `<option value="">Selecione o ID do modelo</option>`;
+  modeloSelect.innerHTML =
+    `<option value="">Selecione o modelo</option>`;
 
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
-    opt.value = m.MODELO_CERTIFICADO_ID;     // 🔥 VALUE = ID REAL
-    opt.textContent = m.MODELO_CERTIFICADO_ID; // 🔥 TEXTO = ID
+    opt.value = m.NOME_MODELO_CERTIFICADO;   // 👈 VISUAL
+    opt.textContent = m.NOME_MODELO_CERTIFICADO;
+    opt.dataset.id = m.MODELO_CERTIFICADO_ID; // 👈 ID REAL
     opt.dataset.url = m.URL_QRCODE_VERIFICACAO || "";
-    modelo.appendChild(opt);
+    modeloSelect.appendChild(opt);
   });
 }
-
-
-
-
 
 
   
@@ -518,18 +481,20 @@ function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
   turma.value = c.turma || "";
-  carga.value = c.carga ? c.carga.replace(/\D/g, "") : "";
+  carga.value = c.carga ? c.carga.toString().replace(/\D/g, "") : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // 🔥 AQUI ESTÁ A CHAVE DO BUG RESOLVIDO
   modelo.value = c.modelo || "";
-
   urlVerificacao.value = c.urlVerificacao || "";
 
-  modelo.disabled = true;
+  // 🔍 seleciona o NOME correto no select
+  const opt = [...modeloSelect.options].find(
+    o => o.dataset.id === c.modelo
+  );
+  modeloSelect.value = opt ? opt.value : "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -570,7 +535,7 @@ function aplicarFiltro() {
   
 function bloquear(b) {
   document.querySelectorAll(
-   "#appBox input, #appBox textarea"
+    "#appBox input, #appBox textarea, #appBox select"
   ).forEach(el => {
     if (el.classList.contains("no-lock")) return;
     el.disabled = b;
@@ -611,24 +576,29 @@ function next() {
 function novo() {
   modo = "novo";
 
+  cursoId.value = "";
+
   document.querySelectorAll(
-    "#appBox input, #appBox textarea, #appBox select"
-  ).forEach(el => {
-    el.value = "";
-    el.disabled = false;
-    el.classList.remove("locked");
-  });
+  "#appBox input, #appBox textarea, #appBox select"
+).forEach(el => {
+  el.disabled = false;
+  el.value = "";
+});
+
+// 🔹 PREDEFINIDOS (AJUSTE SE QUISER)
+urlVerificacao.value = "https://igctreinamentoscorporativo.github.io/igctreinamentoscorporativo/validarcertificado";
+atualizarPreviewVerificacao();
 
   ativo.value = "TRUE";
 
-  controlarBotoes({
+controlarBotoes({
     novo: false,
     editar: false,
     salvar: true,
     excluir: false
   });
+  
 }
-
 
 
 
@@ -641,10 +611,7 @@ function editar() {
 
   document.querySelectorAll(
     "#appBox input, #appBox textarea, #appBox select"
-  ).forEach(el => {
-    el.disabled = false;
-    el.classList.remove("locked");
-  });
+  ).forEach(el => el.disabled = false);
 
   controlarBotoes({
     novo: false,
@@ -653,7 +620,6 @@ function editar() {
     excluir: false
   });
 }
-
 
 
 function forcarCaixaAlta() {
@@ -698,28 +664,25 @@ async function salvar() {
   const cargaFormatada = cargaNumerica ? `${cargaNumerica} HORAS` : "";
 
 
-if (!modelo.value) {
-  alert("⚠️ Selecione o ID do modelo de certificado.");
+if (!modelo.value || modelo.value.trim().length < 20) {
+  alert("⚠️ ID do modelo de certificado inválido.");
   return;
 }
 
 
   
- const curso = {
-  id: cursoId.value || null,
-  nome: nome.value,
-  turma: turma.value,
-  carga: cargaFormatada,
-  local: local.value,
-  data: data.value,
-  obs: obs.value,
-  ativo: ativo.value === "TRUE",
-
-  // 🔥 SEMPRE CORRETO
-  modelo: modeloIdReal.value,
-  urlVerificacao: urlVerificacao.value
-};
-
+  const curso = {
+    id: cursoId.value || null,
+    nome: nome.value,
+    turma: turma.value,
+    carga: cargaFormatada,
+    local: local.value,
+    data: data.value,
+    obs: obs.value,
+    ativo: ativo.value === "TRUE",
+    modelo: modelo.value,
+    urlVerificacao: urlVerificacao.value
+  };
 
   const idAtual = curso.id;
 
@@ -791,16 +754,17 @@ function atualizarPreviewVerificacao() {
 }
 
   
-modelo.addEventListener("change", () => {
-  const opt = modelo.selectedOptions[0];
+modeloSelect.addEventListener("change", () => {
+  const opt = modeloSelect.selectedOptions[0];
   if (!opt) return;
 
+  // 🔥 PREENCHE AUTOMATICAMENTE
+  modelo.value = opt.dataset.id || "";
   urlVerificacao.value = opt.dataset.url || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 });
-
 
   
   
