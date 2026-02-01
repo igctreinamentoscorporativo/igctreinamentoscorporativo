@@ -381,14 +381,15 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
-  await carregarCursos();
-
+ 
 try {
   await carregarModelosCertificado();
 } catch (e) {
   console.warn("Modelos de certificado não carregados", e);
 }
 
+await carregarCursos();
+  
   // delay padrão do sistema
   setTimeout(() => {
     loadingBox.style.display = "none";
@@ -507,8 +508,24 @@ function preencher(c) {
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
-  modelo.value = c.modelo || "";
-  sincronizarCertificado();
+ 
+  if (c.modelo) {
+  const existe = modelosCertificado.some(
+    m => m.MODELO_CERTIFICADO_ID === c.modelo
+  );
+
+  if (existe) {
+    modelo.value = c.modelo;
+    sincronizarCertificado();
+  } else {
+    modelo.value = "";
+    urlVerificacao.innerHTML = `<option value="">Modelo não encontrado</option>`;
+  }
+} else {
+  modelo.value = "";
+  urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
+}
+
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -598,11 +615,9 @@ function novo() {
   el.value = "";
 });
 
-// 🔹 PREDEFINIDOS (AJUSTE SE QUISER)
-urlVerificacao.value = "https://igctreinamentoscorporativo.github.io/igctreinamentoscorporativo/validarcertificado";
-atualizarPreviewVerificacao();
-
-  ativo.value = "TRUE";
+modelo.value = "";
+urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
+ativo.value = "TRUE";
 
 controlarBotoes({
     novo: false,
