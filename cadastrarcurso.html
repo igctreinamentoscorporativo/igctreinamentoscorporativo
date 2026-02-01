@@ -385,6 +385,7 @@ async function login() {
 
   // carrega dados
   await carregarCursos();
+  await carregarModelosCertificado();
 
   // delay padrão do sistema
   setTimeout(() => {
@@ -527,7 +528,7 @@ function aplicarFiltro() {
   
 function bloquear(b) {
   document.querySelectorAll(
-    "#appBox input, #appBox textarea, #appBox select"
+   "#appBox input, #appBox textarea"
   ).forEach(el => {
     if (el.classList.contains("no-lock")) return;
     el.disabled = b;
