@@ -300,13 +300,13 @@ button:disabled {
 
   <div class="field">
   <label>Modelo de Certificado</label>
-  <select id="modelo" disabled></select>
+  <select id="modelo"></select>
   <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
 </div>
 
-  <div class="field">
+<div class="field">
   <label>URL de Verificação do Certificado</label>
-  <input id="urlVerificacao" readonly disabled>
+  <input id="urlVerificacao" readonly>
   <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
 </div>
 
@@ -446,17 +446,15 @@ async function carregarModelosCertificado() {
   ).then(r => r.json());
 
   modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
-  urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
 
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
-    opt.value = m.id;          // 👈 ID TÉCNICO
-    opt.textContent = m.nome; // 👈 NOME VISUAL
-    opt.dataset.url = m.url;  // 👈 URL OCULTA
+    opt.value = m.id;          // ID técnico (vai para a planilha)
+    opt.textContent = m.nome; // Texto visível
+    opt.dataset.url = m.url;  // URL vinculada
     modelo.appendChild(opt);
   });
 }
-
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
   document.querySelector(".btn-novo").disabled   = !novo;
@@ -477,28 +475,12 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // ===== MODELO DE CERTIFICADO =====
-  modelo.innerHTML = "";
+  // seleciona modelo pelo ID gravado
+  modelo.value = c.modelo || "";
 
-  if (c.modelo) {
-    const m = modelosCertificado.find(x => x.id === c.modelo);
-
-    if (m) {
-      const opt = document.createElement("option");
-      opt.value = m.id;
-      opt.textContent = m.nome;
-      opt.dataset.url = m.url;
-      opt.selected = true; // 🔥 ESSENCIAL
-      modelo.appendChild(opt);
-    } else {
-      modelo.innerHTML = `<option value="">Modelo não encontrado</option>`;
-    }
-  } else {
-    modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
-  }
-
-  // ===== URL =====
-  urlVerificacao.value = c.urlVerificacao || "";
+  // se existir modelo selecionado, força URL correta
+  const opt = modelo.selectedOptions[0];
+  urlVerificacao.value = opt?.dataset.url || c.urlVerificacao || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -676,17 +658,17 @@ if (!modelo.value || modelo.value.trim().length < 20) {
 
   
   const curso = {
-    id: cursoId.value || null,
-    nome: nome.value,
-    turma: turma.value,
-    carga: cargaFormatada,
-    local: local.value,
-    data: data.value,
-    obs: obs.value,
-    ativo: ativo.value === "TRUE",
-    modelo: modelo.value,
-    urlVerificacao: urlVerificacao.value
-  };
+  id: cursoId.value || null,
+  nome: nome.value,
+  turma: turma.value,
+  carga: cargaFormatada,
+  local: local.value,
+  data: data.value,
+  obs: obs.value,
+  ativo: ativo.value === "TRUE",
+  modelo: modelo.value,              // 👈 ID DO MODELO
+  urlVerificacao: urlVerificacao.value
+};
 
   const idAtual = curso.id;
 
@@ -760,17 +742,15 @@ function atualizarPreviewVerificacao() {
   
 // 🔄 Quando o usuário escolhe um modelo, atualiza a URL automaticamente
 modelo.addEventListener("change", () => {
-  const opt = modelo.selectedOptions?.[0];
+  const opt = modelo.selectedOptions[0];
   if (!opt) return;
 
-  const url = opt.dataset.url || "";
-
-  urlVerificacao.value = url;
+  // preenche URL automaticamente
+  urlVerificacao.value = opt.dataset.url || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 });
-
 
   
   
