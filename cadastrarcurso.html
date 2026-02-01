@@ -294,16 +294,16 @@ button:disabled {
   </div>
 
   <div class="field">
-    <label>ID do Modelo de Certificado</label>
-    <input id="modelo" disabled>
-    <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
-  </div>
+  <label>Modelo de Certificado</label>
+  <select id="modelo" disabled onchange="sincronizarCertificado()"></select>
+  <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
+</div>
 
-  <div class="field">
-    <label>URL de Verificação do Certificado</label>
-    <input id="urlVerificacao" disabled>
-    <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
-  </div>
+<div class="field">
+  <label>URL de Verificação do Certificado</label>
+  <select id="urlVerificacao" disabled></select>
+  <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
+ </div>
 
 </div> <!-- FECHA .form-grid -->
 
@@ -344,7 +344,9 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
+let modelosCertificado = [];  
 
+  
 async function login() {
   const senha = senhaLogin.value.trim();
   loginErro.innerText = "";
@@ -380,6 +382,7 @@ async function login() {
 
   // carrega dados
   await carregarCursos();
+  await carregarModelosCertificado();
 
   // delay padrão do sistema
   setTimeout(() => {
@@ -433,6 +436,51 @@ async function carregarCursos(idManter = null) {
 
 
 
+async function carregarModelosCertificado() {
+  modelosCertificado = await fetch(API + "?acao=listarModelosCertificado")
+    .then(r => r.json());
+
+  const selectModelo = document.getElementById("modelo");
+  const selectUrl = document.getElementById("urlVerificacao");
+
+  selectModelo.innerHTML = `<option value="">Selecione o modelo</option>`;
+  selectUrl.innerHTML = `<option value="">Selecione a URL</option>`;
+
+  modelosCertificado.forEach(m => {
+    const optModelo = document.createElement("option");
+    optModelo.value = m.MODELO_CERTIFICADO_ID;
+    optModelo.textContent = m.NOME_MODELO_CERTIFICADO;
+
+    selectModelo.appendChild(optModelo);
+  });
+}
+
+
+
+
+function sincronizarCertificado() {
+  const modeloId = modelo.value;
+  const registro = modelosCertificado.find(
+    m => m.MODELO_CERTIFICADO_ID === modeloId
+  );
+
+  if (!registro) return;
+
+  urlVerificacao.innerHTML = "";
+  const opt = document.createElement("option");
+  opt.value = registro.URL_QRCODE_VERIFICACAO;
+  opt.textContent = registro.URL_QRCODE_VERIFICACAO;
+  opt.selected = true;
+
+  urlVerificacao.appendChild(opt);
+
+  atualizarPreviewModelo();
+  atualizarPreviewVerificacao();
+}
+
+
+  
+
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
   document.querySelector(".btn-novo").disabled   = !novo;
@@ -455,7 +503,7 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
   modelo.value = c.modelo || "";
-  urlVerificacao.value = c.urlVerificacao || "";
+  sincronizarCertificado();
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -624,8 +672,8 @@ async function salvar() {
   const cargaFormatada = cargaNumerica ? `${cargaNumerica} HORAS` : "";
 
 
-if (!modelo.value || modelo.value.trim().length < 20) {
-  alert("⚠️ ID do modelo de certificado inválido.");
+if (!modelo.value) {
+  alert("⚠️ Selecione um modelo de certificado.");
   return;
 }
 
