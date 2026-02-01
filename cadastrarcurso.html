@@ -416,6 +416,10 @@ async function login() {
   await carregarCursos();
   await carregarModelosCertificado();
 
+  if (cursos.length) {
+  preencher(cursos[index]);
+}
+
   // delay padrão do sistema
   setTimeout(() => {
     loadingBox.style.display = "none";
@@ -513,10 +517,40 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  modelo.value = c.modelo || "";
-  urlVerificacao.value = c.urlVerificacao || "";
+  // ============================
+  // 🔥 MODELO DE CERTIFICADO (ANTI-BUG)
+  // ============================
+  modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
 
-  modelo.classList.add("locked"); // trava visual
+  modelosCertificado.forEach(m => {
+    const opt = document.createElement("option");
+    opt.value = m.MODELO_CERTIFICADO_ID;
+    opt.textContent = m.NOME_MODELO_CERTIFICADO;
+    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;
+    modelo.appendChild(opt);
+  });
+
+  // 👉 se o curso tem modelo salvo
+  if (c.modelo) {
+    let opt = [...modelo.options].find(o => o.value === c.modelo);
+
+    // 🚨 se NÃO EXISTE NA LISTA → cria na hora
+    if (!opt) {
+      opt = document.createElement("option");
+      opt.value = c.modelo;
+      opt.textContent = "⚠️ Modelo não encontrado (ID salvo)";
+      opt.dataset.url = c.urlVerificacao || "";
+      modelo.appendChild(opt);
+    }
+
+    modelo.value = c.modelo;
+    urlVerificacao.value = opt.dataset.url || "";
+  } else {
+    modelo.value = "";
+    urlVerificacao.value = "";
+  }
+
+  modelo.disabled = true; // bloqueado em modo visualização
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -628,7 +662,10 @@ function editar() {
 
   document.querySelectorAll(
     "#appBox input, #appBox textarea, #appBox select"
-  ).forEach(el => el.disabled = false);
+  ).forEach(el => {
+    el.disabled = false;
+    el.classList.remove("locked");
+  });
 
   controlarBotoes({
     novo: false,
@@ -637,6 +674,7 @@ function editar() {
     excluir: false
   });
 }
+
 
 
 function forcarCaixaAlta() {
