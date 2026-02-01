@@ -301,7 +301,7 @@ button:disabled {
 
   <div class="field">
   <label>URL de Verificação do Certificado</label>
-  <select id="urlVerificacao" disabled></select>
+  <input id="urlVerificacao" readonly disabled>
   <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
 </div>
 
@@ -472,23 +472,18 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // MODELO
+  // MODELO (select)
   modelo.value = c.modelo || "";
 
-  // URL
-  urlVerificacao.innerHTML = "";
-  if (c.urlVerificacao) {
-    const o = document.createElement("option");
-    o.value = c.urlVerificacao;
-    o.textContent = c.urlVerificacao;
-    o.selected = true;
-    urlVerificacao.appendChild(o);
-  }
+  // URL (input readonly)
+  urlVerificacao.value = c.urlVerificacao || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
+
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
+
 
 
 
