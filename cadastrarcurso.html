@@ -343,7 +343,7 @@ let cursos = [];
 let index = 0;
 let modo = "view";
 let cursosOriginais = [];
-
+let PERMISSOES = [];
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -362,14 +362,15 @@ async function login() {
     })
   }).then(r => r.json());
 
-  if (!res.ok || res.perfil !== "ADMIN") {
-    loginErro.innerText = "Acesso não autorizado.";
-    return;
-  }
+  if (!res.ok) {
+  loginErro.innerText = "Acesso não autorizado.";
+  return;
+}
 
   // ✅ LOGIN OK
   SENHA = senha;
   PERFIL = res.perfil;
+  PERMISSOES = res.permissoes || [];
 
   // some login
   loginBox.style.display = "none";
@@ -385,12 +386,22 @@ async function login() {
     loadingBox.style.display = "none";
     appBox.style.display = "block";
     bloquear(true);
-  }, 1500);
+
+
+    // 🔐 CONTROLE DE PERMISSÃO (AQUI É O LUGAR CERTO)
+  const podeGerenciarCurso = PERMISSOES.includes("GERENCIAR_CURSO");
+
+  if (!podeGerenciarCurso) {
+    document.querySelector(".btn-novo").style.display   = "none";
+    document.querySelector(".btn-editar").style.display = "none";
+    document.querySelector(".btn-salvar").style.display = "none";
+    document.querySelector(".danger").style.display     = "none";
+  }
+
+
+}, 1500);
+
 }
-
-
-
-
   
 async function carregarCursos(idManter = null) {
   cursosOriginais = await fetch(API + "?acao=listarCursos")
