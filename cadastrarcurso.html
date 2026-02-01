@@ -158,31 +158,11 @@ button:disabled {
   text-align: center;
 }
 
-button:disabled {
-  opacity: 0.4;
-}
-
-input:disabled,
-textarea:disabled {
-  opacity: 0.6;
-}
-
-/* ⛔ NÃO aplicar opacity em select */
-select:disabled {
-  opacity: 1;
-}
-
-select {
-  color: #e5e7eb;        /* TEXTO VISÍVEL */
-  background: #020617;
+select.locked {
+  pointer-events: none;
+  opacity: 0.7;
 }
     
-
- select:disabled {
-  color: #e5e7eb !important;
-  -webkit-text-fill-color: #e5e7eb;
-  opacity: 1;
-}   
 
 /* =========================
    LAYOUT DESKTOP OTIMIZADO
@@ -210,10 +190,7 @@ select {
   }
 }
 
-select option {
-  background-color: #ffffff;
-  color: #000000;
-}
+
     
   </style>
 </head>
@@ -372,9 +349,7 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
-let modelosCertificado = [];
 
-  
 async function login() {
   const senha = senhaLogin.value.trim();
   loginErro.innerText = "";
@@ -409,7 +384,6 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
-  await carregarModelosCertificado();
   await carregarCursos();
 
   // delay padrão do sistema
@@ -463,6 +437,10 @@ async function carregarCursos(idManter = null) {
 }
 
 
+
+
+let modelosCertificado = [];
+
 async function carregarModelosCertificado() {
   modelosCertificado = await fetch(
     API + "?acao=listarModelosCertificado"
@@ -472,30 +450,27 @@ async function carregarModelosCertificado() {
 
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
-
-    // 🔥 FALLBACK AUTOMÁTICO
-    const id =
-      m.MODELO_CERTIFICADO_ID ||
-      m.id ||
-      "";
-
-    const nome =
-      m.MODELO_CERTIFICADO_NOME ||
-      m.nome ||
-      "Modelo sem nome";
-
-    const url =
-      m.URL_QRCODE_VERIFICACAO ||
-      m.url ||
-      "";
-
-    opt.value = id;
-    opt.textContent = nome;
-    opt.dataset.url = url;
-
+    opt.value = m.MODELO_CERTIFICADO_ID;              // 👈 valor salvo
+    opt.textContent = m.NOME_MODELO_CERTIFICADO;      // 👈 texto exibido
+    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;       // 👈 apoio
     modelo.appendChild(opt);
   });
 }
+
+
+
+
+
+  
+
+
+function controlarBotoes({ novo, editar, salvar, excluir }) {
+  document.querySelector(".btn-novo").disabled   = !novo;
+  document.querySelector(".btn-editar").disabled = !editar;
+  document.querySelector(".btn-salvar").disabled = !salvar;
+  document.querySelector(".danger").disabled     = !excluir;
+}
+
   
   
 function preencher(c) {
@@ -508,11 +483,10 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // MODELO
   modelo.value = c.modelo || "";
-
-  // URL
   urlVerificacao.value = c.urlVerificacao || "";
+
+  modelo.classList.add("locked"); // trava visual
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -594,29 +568,24 @@ function next() {
 function novo() {
   modo = "novo";
 
-  cursoId.value = "";
-
   document.querySelectorAll(
-  "#appBox input, #appBox textarea, #appBox select"
-).forEach(el => {
-  el.disabled = false;
-  el.value = "";
-});
-
-// 🔹 PREDEFINIDOS (AJUSTE SE QUISER)
-urlVerificacao.value = "https://igctreinamentoscorporativo.github.io/igctreinamentoscorporativo/validarcertificado";
-atualizarPreviewVerificacao();
+    "#appBox input, #appBox textarea, #appBox select"
+  ).forEach(el => {
+    el.value = "";
+    el.disabled = false;
+    el.classList.remove("locked");
+  });
 
   ativo.value = "TRUE";
 
-controlarBotoes({
+  controlarBotoes({
     novo: false,
     editar: false,
     salvar: true,
     excluir: false
   });
-  
 }
+
 
 
 
@@ -690,17 +659,17 @@ if (!modelo.value || modelo.value.trim().length < 20) {
 
   
   const curso = {
-  id: cursoId.value || null,
-  nome: nome.value,
-  turma: turma.value,
-  carga: cargaFormatada,
-  local: local.value,
-  data: data.value,
-  obs: obs.value,
-  ativo: ativo.value === "TRUE",
-  modelo: modelo.value,              // 👈 ID DO MODELO
-  urlVerificacao: urlVerificacao.value
-};
+    id: cursoId.value || null,
+    nome: nome.value,
+    turma: turma.value,
+    carga: cargaFormatada,
+    local: local.value,
+    data: data.value,
+    obs: obs.value,
+    ativo: ativo.value === "TRUE",
+    modelo: modelo.value,
+    urlVerificacao: urlVerificacao.value
+  };
 
   const idAtual = curso.id;
 
@@ -772,7 +741,6 @@ function atualizarPreviewVerificacao() {
 }
 
   
-// 🔄 Quando o usuário escolhe um modelo, atualiza a URL automaticamente
 modelo.addEventListener("change", () => {
   const opt = modelo.selectedOptions[0];
   if (!opt) return;
@@ -782,6 +750,7 @@ modelo.addEventListener("change", () => {
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 });
+
   
   
 </script>
