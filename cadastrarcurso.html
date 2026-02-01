@@ -158,6 +158,26 @@ button:disabled {
   text-align: center;
 }
 
+button:disabled {
+  opacity: 0.4;
+}
+
+input:disabled,
+textarea:disabled {
+  opacity: 0.6;
+}
+
+/* ⛔ NÃO aplicar opacity em select */
+select:disabled {
+  opacity: 1;
+}
+
+select {
+  color: #e5e7eb;        /* TEXTO VISÍVEL */
+  background: #020617;
+}
+    
+
  select:disabled {
   color: #e5e7eb !important;
   -webkit-text-fill-color: #e5e7eb;
