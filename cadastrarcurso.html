@@ -472,20 +472,14 @@ async function carregarModelosCertificado() {
 
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
-    opt.value = m.id;          // ID técnico (vai para a planilha)
-    opt.textContent = m.nome; // Texto visível
-    opt.dataset.url = m.url;  // URL vinculada
+
+    opt.value = m.MODELO_CERTIFICADO_ID;           // ✅ ID
+    opt.textContent = m.MODELO_CERTIFICADO_NOME;  // ✅ TEXTO VISÍVEL
+    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;   // ✅ URL
+
     modelo.appendChild(opt);
   });
 }
-
-function controlarBotoes({ novo, editar, salvar, excluir }) {
-  document.querySelector(".btn-novo").disabled   = !novo;
-  document.querySelector(".btn-editar").disabled = !editar;
-  document.querySelector(".btn-salvar").disabled = !salvar;
-  document.querySelector(".danger").disabled     = !excluir;
-}
-
   
   
 function preencher(c) {
@@ -498,12 +492,11 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // seleciona modelo pelo ID gravado
+  // MODELO
   modelo.value = c.modelo || "";
 
-  // se existir modelo selecionado, força URL correta
-  const opt = modelo.selectedOptions[0];
-  urlVerificacao.value = opt?.dataset.url || c.urlVerificacao || "";
+  // URL
+  urlVerificacao.value = c.urlVerificacao || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -768,13 +761,11 @@ modelo.addEventListener("change", () => {
   const opt = modelo.selectedOptions[0];
   if (!opt) return;
 
-  // preenche URL automaticamente
   urlVerificacao.value = opt.dataset.url || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 });
-
   
   
 </script>
