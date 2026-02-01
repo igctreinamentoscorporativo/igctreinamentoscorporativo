@@ -502,36 +502,61 @@ function preencher(c) {
   nome.value = c.nome || "";
   turma.value = c.turma || "";
   carga.value = c.carga
-  ? c.carga.toString().replace(/\D/g, "")
-  : "";
+    ? c.carga.toString().replace(/\D/g, "")
+    : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
- 
-  if (c.modelo) {
-  const existe = modelosCertificado.some(
-    m => m.MODELO_CERTIFICADO_ID === c.modelo
+
+  // ===============================
+  // 🔹 MODELO + URL (LÓGICA ROBUSTA)
+  // ===============================
+
+  const modeloCurso = (c.modelo || "").toString().trim();
+
+  const registro = modelosCertificado.find(
+    m => (m.MODELO_CERTIFICADO_ID || "").toString().trim() === modeloCurso
   );
 
-  if (existe) {
-    modelo.value = c.modelo;
-    sincronizarCertificado();
-  } else {
-    modelo.value = "";
-    urlVerificacao.innerHTML = `<option value="">Modelo não encontrado</option>`;
-  }
-} else {
+  // limpa sempre antes de preencher
   modelo.value = "";
   urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
-}
 
+  if (registro) {
+    // ✅ MODELO EXISTE NA TABELA
+    modelo.value = registro.MODELO_CERTIFICADO_ID;
 
+    urlVerificacao.innerHTML = "";
+    const opt = document.createElement("option");
+    opt.value = registro.URL_QRCODE_VERIFICACAO;
+    opt.textContent = registro.URL_QRCODE_VERIFICACAO;
+    opt.selected = true;
+    urlVerificacao.appendChild(opt);
+
+  } else if (c.urlVerificacao) {
+    // ⚠ MODELO NÃO EXISTE, MAS CURSO TEM URL SALVA
+    urlVerificacao.innerHTML = "";
+    const opt = document.createElement("option");
+    opt.value = c.urlVerificacao;
+    opt.textContent = c.urlVerificacao;
+    opt.selected = true;
+    urlVerificacao.appendChild(opt);
+  } else if (modeloCurso) {
+    // ❌ MODELO NÃO ENCONTRADO
+    urlVerificacao.innerHTML =
+      `<option value="">⚠ Modelo não encontrado</option>`;
+  }
+
+  // ===============================
+  // 🔹 PREVIEWS
+  // ===============================
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
-  
+
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
+
 
 
 
