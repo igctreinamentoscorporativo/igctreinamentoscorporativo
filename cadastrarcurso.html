@@ -294,16 +294,16 @@ button:disabled {
   </div>
 
   <div class="field">
-    <label>ID do Modelo de Certificado</label>
-    <input id="modelo" disabled>
-    <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
-  </div>
+  <label>Modelo de Certificado</label>
+  <select id="modelo" disabled></select>
+  <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
+</div>
 
   <div class="field">
-    <label>URL de Verificação do Certificado</label>
-    <input id="urlVerificacao" disabled>
-    <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
-  </div>
+  <label>URL de Verificação do Certificado</label>
+  <select id="urlVerificacao" disabled></select>
+  <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
+</div>
 
 </div> <!-- FECHA .form-grid -->
 
@@ -344,7 +344,9 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
+let modelosCertificado = [];
 
+  
 async function login() {
   const senha = senhaLogin.value.trim();
   loginErro.innerText = "";
@@ -379,6 +381,7 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
+  await carregarModelosCertificado();
   await carregarCursos();
 
   // delay padrão do sistema
@@ -432,6 +435,22 @@ async function carregarCursos(idManter = null) {
 }
 
 
+async function carregarModelosCertificado() {
+  modelosCertificado = await fetch(
+    API + "?acao=listarModelosCertificado"
+  ).then(r => r.json());
+
+  modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
+  urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
+
+  modelosCertificado.forEach(m => {
+    const opt = document.createElement("option");
+    opt.value = m.id;          // 👈 ID TÉCNICO
+    opt.textContent = m.nome; // 👈 NOME VISUAL
+    opt.dataset.url = m.url;  // 👈 URL OCULTA
+    modelo.appendChild(opt);
+  });
+}
 
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
@@ -447,21 +466,30 @@ function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
   turma.value = c.turma || "";
-  carga.value = c.carga
-  ? c.carga.toString().replace(/\D/g, "")
-  : "";
+  carga.value = c.carga ? c.carga.replace(/\D/g, "") : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
+
+  // MODELO
   modelo.value = c.modelo || "";
-  urlVerificacao.value = c.urlVerificacao || "";
+
+  // URL
+  urlVerificacao.innerHTML = "";
+  if (c.urlVerificacao) {
+    const o = document.createElement("option");
+    o.value = c.urlVerificacao;
+    o.textContent = c.urlVerificacao;
+    o.selected = true;
+    urlVerificacao.appendChild(o);
+  }
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
-  
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
+
 
 
 
@@ -714,8 +742,24 @@ function atualizarPreviewVerificacao() {
 }
 
   
-modelo.addEventListener("input", atualizarPreviewModelo);
-urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
+// 🔄 Quando o usuário escolhe um modelo, atualiza a URL automaticamente
+modelo.addEventListener("change", () => {
+  const opt = modelo.selectedOptions[0];
+  if (!opt || !opt.dataset.url) return;
+
+  urlVerificacao.innerHTML = "";
+
+  const o = document.createElement("option");
+  o.value = opt.dataset.url;
+  o.textContent = opt.dataset.url;
+  o.selected = true;
+
+  urlVerificacao.appendChild(o);
+
+  atualizarPreviewModelo();
+  atualizarPreviewVerificacao();
+});
+
   
   
 </script>
