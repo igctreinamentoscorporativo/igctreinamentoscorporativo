@@ -391,8 +391,8 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
+    await carregarModelosCertificado();
   await carregarCursos();
-  await carregarModelosCertificado();
 
   // delay padrão do sistema
   setTimeout(() => {
@@ -490,10 +490,11 @@ function preencher(c) {
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
 
-  // 🔍 seleciona o NOME correto no select
+  // 🔥 AQUI FUNCIONA PORQUE OS MODELOS JÁ EXISTEM
   const opt = [...modeloSelect.options].find(
     o => o.dataset.id === c.modelo
   );
+
   modeloSelect.value = opt ? opt.value : "";
 
   atualizarPreviewModelo();
@@ -501,6 +502,7 @@ function preencher(c) {
 
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
+
 
 
 
