@@ -330,10 +330,7 @@ select:focus {
 
 
 
-<select id="modeloSelect"></select>
-<input type="hidden" id="modeloIdReal">
-
-  
+ 
 
   
   <div class="field">
@@ -489,15 +486,14 @@ async function carregarModelosCertificado() {
     API + "?acao=listarModelosCertificado"
   ).then(r => r.json());
 
-  modeloSelect.innerHTML = `<option value="">Selecione o modelo</option>`;
+  modelo.innerHTML = `<option value="">Selecione o ID do modelo</option>`;
 
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
-    opt.value = m.NOME_MODELO_CERTIFICADO; // 👈 visual
-    opt.textContent = m.NOME_MODELO_CERTIFICADO;
-    opt.dataset.id = m.MODELO_CERTIFICADO_ID; // 👈 ID REAL
-    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;
-    modeloSelect.appendChild(opt);
+    opt.value = m.MODELO_CERTIFICADO_ID;     // 🔥 VALUE = ID REAL
+    opt.textContent = m.MODELO_CERTIFICADO_ID; // 🔥 TEXTO = ID
+    opt.dataset.url = m.URL_QRCODE_VERIFICACAO || "";
+    modelo.appendChild(opt);
   });
 }
 
@@ -528,18 +524,17 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // 🔥 AQUI ESTÁ A MUDANÇA
-  modeloIdReal.value = c.modelo || "";
-
-  const opt = [...modeloSelect.options].find(
-    o => o.dataset.id === c.modelo
-  );
-
-  modeloSelect.value = opt ? opt.value : "";
+  // 🔥 AQUI ESTÁ A CHAVE DO BUG RESOLVIDO
+  modelo.value = c.modelo || "";
 
   urlVerificacao.value = c.urlVerificacao || "";
 
-  modeloSelect.disabled = true;
+  modelo.disabled = true;
+
+  atualizarPreviewModelo();
+  atualizarPreviewVerificacao();
+
+  contador.innerText = `${index + 1} de ${cursos.length}`;
 }
 
 
@@ -796,16 +791,16 @@ function atualizarPreviewVerificacao() {
 }
 
   
-modeloSelect.addEventListener("change", () => {
-  const opt = modeloSelect.selectedOptions[0];
+modelo.addEventListener("change", () => {
+  const opt = modelo.selectedOptions[0];
   if (!opt) return;
 
-  modeloIdReal.value = opt.dataset.id || "";
   urlVerificacao.value = opt.dataset.url || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 });
+
 
   
   
