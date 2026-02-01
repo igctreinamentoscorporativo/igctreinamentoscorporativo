@@ -473,9 +473,25 @@ async function carregarModelosCertificado() {
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
 
-    opt.value = m.MODELO_CERTIFICADO_ID;           // ✅ ID
-    opt.textContent = m.MODELO_CERTIFICADO_NOME;  // ✅ TEXTO VISÍVEL
-    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;   // ✅ URL
+    // 🔥 FALLBACK AUTOMÁTICO
+    const id =
+      m.MODELO_CERTIFICADO_ID ||
+      m.id ||
+      "";
+
+    const nome =
+      m.MODELO_CERTIFICADO_NOME ||
+      m.nome ||
+      "Modelo sem nome";
+
+    const url =
+      m.URL_QRCODE_VERIFICACAO ||
+      m.url ||
+      "";
+
+    opt.value = id;
+    opt.textContent = nome;
+    opt.dataset.url = url;
 
     modelo.appendChild(opt);
   });
