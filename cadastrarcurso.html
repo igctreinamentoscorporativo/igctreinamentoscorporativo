@@ -490,12 +490,19 @@ function preencher(c) {
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
 
-  // 🔥 AQUI FUNCIONA PORQUE OS MODELOS JÁ EXISTEM
+  // 🔥 LIMPA SELEÇÃO ANTERIOR
+  [...modeloSelect.options].forEach(o => o.selected = false);
+
+  // 🔥 SELECIONA EXPLICITAMENTE O OPTION CORRETO
   const opt = [...modeloSelect.options].find(
     o => o.dataset.id === c.modelo
   );
 
-  modeloSelect.value = opt ? opt.value : "";
+  if (opt) {
+    opt.selected = true;   // 👈 ISSO RESOLVE O BUG VISUAL
+  } else {
+    modeloSelect.value = "";
+  }
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
