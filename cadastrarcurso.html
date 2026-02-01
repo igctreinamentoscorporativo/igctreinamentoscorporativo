@@ -472,8 +472,25 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // MODELO (select)
-  modelo.value = c.modelo || "";
+  // MODELO
+if (c.modelo) {
+  const optExiste = [...modelo.options]
+    .some(o => o.value === c.modelo);
+
+  if (!optExiste) {
+    const m = modelosCertificado.find(x => x.id === c.modelo);
+    if (m) {
+      const opt = document.createElement("option");
+      opt.value = m.id;
+      opt.textContent = m.nome;
+      opt.dataset.url = m.url;
+      modelo.appendChild(opt);
+    }
+  }
+
+  modelo.value = c.modelo;
+}
+
 
   // URL (input readonly)
   urlVerificacao.value = c.urlVerificacao || "";
@@ -739,21 +756,17 @@ function atualizarPreviewVerificacao() {
   
 // 🔄 Quando o usuário escolhe um modelo, atualiza a URL automaticamente
 modelo.addEventListener("change", () => {
-  const opt = modelo.selectedOptions[0];
-  if (!opt || !opt.dataset.url) return;
+  const opt = modelo.selectedOptions?.[0];
+  if (!opt) return;
 
-  urlVerificacao.innerHTML = "";
+  const url = opt.dataset.url || "";
 
-  const o = document.createElement("option");
-  o.value = opt.dataset.url;
-  o.textContent = opt.dataset.url;
-  o.selected = true;
-
-  urlVerificacao.appendChild(o);
+  urlVerificacao.value = url;
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 });
+
 
   
   
