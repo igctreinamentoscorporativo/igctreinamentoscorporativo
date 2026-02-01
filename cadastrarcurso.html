@@ -295,7 +295,7 @@ button:disabled {
 
   <div class="field">
   <label>Modelo de Certificado</label>
-  <select id="modelo" disabled onchange="sincronizarCertificado()"></select>
+  <select id="modelo" disabled onchange="onChangeModelo()()"></select>
   <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
 </div>
 
@@ -304,6 +304,9 @@ button:disabled {
   <select id="urlVerificacao" disabled></select>
   <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
  </div>
+
+ <input type="hidden" id="modeloReal">
+ <input type="hidden" id="urlVerificacaoReal">  
 
 </div> <!-- FECHA .form-grid -->
 
@@ -463,21 +466,23 @@ async function carregarModelosCertificado() {
 
 
 
-
-function sincronizarCertificado() {
+function onChangeModelo() {
   const modeloId = modelo.value;
+  modeloReal.value = modeloId;
+
   const registro = modelosCertificado.find(
     m => m.MODELO_CERTIFICADO_ID === modeloId
   );
 
   if (!registro) return;
 
+  urlVerificacaoReal.value = registro.URL_QRCODE_VERIFICACAO;
+
   urlVerificacao.innerHTML = "";
   const opt = document.createElement("option");
   opt.value = registro.URL_QRCODE_VERIFICACAO;
   opt.textContent = registro.URL_QRCODE_VERIFICACAO;
   opt.selected = true;
-
   urlVerificacao.appendChild(opt);
 
   atualizarPreviewModelo();
@@ -486,6 +491,7 @@ function sincronizarCertificado() {
 
 
   
+ 
 
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
@@ -501,61 +507,49 @@ function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
   turma.value = c.turma || "";
-  carga.value = c.carga
-    ? c.carga.toString().replace(/\D/g, "")
-    : "";
+  carga.value = c.carga ? c.carga.replace(/\D/g, "") : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // ===============================
-  // 🔹 MODELO + URL (LÓGICA ROBUSTA)
-  // ===============================
+  // fonte da verdade
+  modeloReal.value = (c.modelo || "").toString().trim();
+  urlVerificacaoReal.value = (c.urlVerificacao || "").toString().trim();
 
-  const modeloCurso = (c.modelo || "").toString().trim();
-
-  const registro = modelosCertificado.find(
-    m => (m.MODELO_CERTIFICADO_ID || "").toString().trim() === modeloCurso
-  );
-
-  // limpa sempre antes de preencher
+  // UI
   modelo.value = "";
   urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
 
+  const registro = modelosCertificado.find(
+    m => m.MODELO_CERTIFICADO_ID.trim() === modeloReal.value
+  );
+
   if (registro) {
-    // ✅ MODELO EXISTE NA TABELA
     modelo.value = registro.MODELO_CERTIFICADO_ID;
 
-    urlVerificacao.innerHTML = "";
     const opt = document.createElement("option");
     opt.value = registro.URL_QRCODE_VERIFICACAO;
     opt.textContent = registro.URL_QRCODE_VERIFICACAO;
     opt.selected = true;
-    urlVerificacao.appendChild(opt);
 
-  } else if (c.urlVerificacao) {
-    // ⚠ MODELO NÃO EXISTE, MAS CURSO TEM URL SALVA
     urlVerificacao.innerHTML = "";
+    urlVerificacao.appendChild(opt);
+  } else if (urlVerificacaoReal.value) {
     const opt = document.createElement("option");
-    opt.value = c.urlVerificacao;
-    opt.textContent = c.urlVerificacao;
+    opt.value = urlVerificacaoReal.value;
+    opt.textContent = urlVerificacaoReal.value;
     opt.selected = true;
     urlVerificacao.appendChild(opt);
-  } else if (modeloCurso) {
-    // ❌ MODELO NÃO ENCONTRADO
-    urlVerificacao.innerHTML =
-      `<option value="">⚠ Modelo não encontrado</option>`;
   }
 
-  // ===============================
-  // 🔹 PREVIEWS
-  // ===============================
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
 
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
+
+
 
 
 
@@ -655,6 +649,8 @@ controlarBotoes({
 
 
 
+  
+
 
   
 function editar() {
@@ -717,7 +713,7 @@ async function salvar() {
   const cargaFormatada = cargaNumerica ? `${cargaNumerica} HORAS` : "";
 
 
-if (!modelo.value) {
+if (!modeloReal.value) {
   alert("⚠️ Selecione um modelo de certificado.");
   return;
 }
@@ -725,16 +721,16 @@ if (!modelo.value) {
 
   
   const curso = {
-    id: cursoId.value || null,
-    nome: nome.value,
-    turma: turma.value,
-    carga: cargaFormatada,
-    local: local.value,
-    data: data.value,
-    obs: obs.value,
-    ativo: ativo.value === "TRUE",
-    modelo: modelo.value,
-    urlVerificacao: urlVerificacao.value
+  id: cursoId.value || null,
+  nome: nome.value,
+  turma: turma.value,
+  carga: cargaFormatada,
+  local: local.value,
+  data: data.value,
+  obs: obs.value,
+  ativo: ativo.value === "TRUE",
+  modelo: modeloReal.value,
+  urlVerificacao: urlVerificacaoReal.value
   };
 
   const idAtual = curso.id;
@@ -778,7 +774,7 @@ function somenteNumeros(el) {
 
 
   function atualizarPreviewModelo() {
-  const id = modelo.value.trim();
+  const id = modeloReal.value.trim();
   const box = document.getElementById("previewModelo");
 
   if (id.length > 20) {
@@ -793,7 +789,7 @@ function somenteNumeros(el) {
 }
 
 function atualizarPreviewVerificacao() {
-  const url = urlVerificacao.value.trim();
+  const url = urlVerificacaoReal.value.trim();
   const box = document.getElementById("previewVerificacao");
 
   if (url.startsWith("http")) {
