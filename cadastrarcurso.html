@@ -327,6 +327,15 @@ select:focus {
     <textarea id="obs" disabled class="uppercase"></textarea>
   </div>
 
+
+
+
+<select id="modeloSelect"></select>
+<input type="hidden" id="modeloIdReal">
+
+  
+
+  
   <div class="field">
   <label>Modelo de Certificado</label>
   <select id="modelo"></select>
@@ -480,16 +489,18 @@ async function carregarModelosCertificado() {
     API + "?acao=listarModelosCertificado"
   ).then(r => r.json());
 
-  modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
+  modeloSelect.innerHTML = `<option value="">Selecione o modelo</option>`;
 
   modelosCertificado.forEach(m => {
     const opt = document.createElement("option");
-    opt.value = m.MODELO_CERTIFICADO_ID;              // 👈 valor salvo
-    opt.textContent = m.NOME_MODELO_CERTIFICADO;      // 👈 texto exibido
-    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;       // 👈 apoio
-    modelo.appendChild(opt);
+    opt.value = m.NOME_MODELO_CERTIFICADO; // 👈 visual
+    opt.textContent = m.NOME_MODELO_CERTIFICADO;
+    opt.dataset.id = m.MODELO_CERTIFICADO_ID; // 👈 ID REAL
+    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;
+    modeloSelect.appendChild(opt);
   });
 }
+
 
 
 
@@ -517,45 +528,18 @@ function preencher(c) {
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
 
-  // ============================
-  // 🔥 MODELO DE CERTIFICADO (ANTI-BUG)
-  // ============================
-  modelo.innerHTML = `<option value="">Selecione o modelo</option>`;
+  // 🔥 AQUI ESTÁ A MUDANÇA
+  modeloIdReal.value = c.modelo || "";
 
-  modelosCertificado.forEach(m => {
-    const opt = document.createElement("option");
-    opt.value = m.MODELO_CERTIFICADO_ID;
-    opt.textContent = m.NOME_MODELO_CERTIFICADO;
-    opt.dataset.url = m.URL_QRCODE_VERIFICACAO;
-    modelo.appendChild(opt);
-  });
+  const opt = [...modeloSelect.options].find(
+    o => o.dataset.id === c.modelo
+  );
 
-  // 👉 se o curso tem modelo salvo
-  if (c.modelo) {
-    let opt = [...modelo.options].find(o => o.value === c.modelo);
+  modeloSelect.value = opt ? opt.value : "";
 
-    // 🚨 se NÃO EXISTE NA LISTA → cria na hora
-    if (!opt) {
-      opt = document.createElement("option");
-      opt.value = c.modelo;
-      opt.textContent = "⚠️ Modelo não encontrado (ID salvo)";
-      opt.dataset.url = c.urlVerificacao || "";
-      modelo.appendChild(opt);
-    }
+  urlVerificacao.value = c.urlVerificacao || "";
 
-    modelo.value = c.modelo;
-    urlVerificacao.value = opt.dataset.url || "";
-  } else {
-    modelo.value = "";
-    urlVerificacao.value = "";
-  }
-
-  modelo.disabled = true; // bloqueado em modo visualização
-
-  atualizarPreviewModelo();
-  atualizarPreviewVerificacao();
-
-  contador.innerText = `${index + 1} de ${cursos.length}`;
+  modeloSelect.disabled = true;
 }
 
 
@@ -726,18 +710,21 @@ if (!modelo.value || modelo.value.trim().length < 20) {
 
 
   
-  const curso = {
-    id: cursoId.value || null,
-    nome: nome.value,
-    turma: turma.value,
-    carga: cargaFormatada,
-    local: local.value,
-    data: data.value,
-    obs: obs.value,
-    ativo: ativo.value === "TRUE",
-    modelo: modelo.value,
-    urlVerificacao: urlVerificacao.value
-  };
+ const curso = {
+  id: cursoId.value || null,
+  nome: nome.value,
+  turma: turma.value,
+  carga: cargaFormatada,
+  local: local.value,
+  data: data.value,
+  obs: obs.value,
+  ativo: ativo.value === "TRUE",
+
+  // 🔥 SEMPRE CORRETO
+  modelo: modeloIdReal.value,
+  urlVerificacao: urlVerificacao.value
+};
+
 
   const idAtual = curso.id;
 
@@ -809,10 +796,11 @@ function atualizarPreviewVerificacao() {
 }
 
   
-modelo.addEventListener("change", () => {
-  const opt = modelo.selectedOptions[0];
+modeloSelect.addEventListener("change", () => {
+  const opt = modeloSelect.selectedOptions[0];
   if (!opt) return;
 
+  modeloIdReal.value = opt.dataset.id || "";
   urlVerificacao.value = opt.dataset.url || "";
 
   atualizarPreviewModelo();
