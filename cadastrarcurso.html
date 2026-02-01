@@ -294,19 +294,16 @@ button:disabled {
   </div>
 
   <div class="field">
-  <label>Modelo de Certificado</label>
-  <select id="modelo" disabled onchange="onChangeModelo()()"></select>
-  <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
-</div>
+    <label>ID do Modelo de Certificado</label>
+    <input id="modelo" disabled>
+    <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
+  </div>
 
-<div class="field">
-  <label>URL de Verificação do Certificado</label>
-  <select id="urlVerificacao" disabled></select>
-  <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
- </div>
-
- <input type="hidden" id="modeloReal">
- <input type="hidden" id="urlVerificacaoReal">  
+  <div class="field">
+    <label>URL de Verificação do Certificado</label>
+    <input id="urlVerificacao" disabled>
+    <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
+  </div>
 
 </div> <!-- FECHA .form-grid -->
 
@@ -347,9 +344,7 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
-let modelosCertificado = [];  
 
-  
 async function login() {
   const senha = senhaLogin.value.trim();
   loginErro.innerText = "";
@@ -384,15 +379,8 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
- 
-try {
-  await carregarModelosCertificado();
-} catch (e) {
-  console.warn("Modelos de certificado não carregados", e);
-}
+  await carregarCursos();
 
-await carregarCursos();
-  
   // delay padrão do sistema
   setTimeout(() => {
     loadingBox.style.display = "none";
@@ -445,54 +433,6 @@ async function carregarCursos(idManter = null) {
 
 
 
-async function carregarModelosCertificado() {
-  modelosCertificado = await fetch(API + "?acao=listarModelosCertificado")
-    .then(r => r.json());
-
-  const selectModelo = document.getElementById("modelo");
-  const selectUrl = document.getElementById("urlVerificacao");
-
-  selectModelo.innerHTML = `<option value="">Selecione o modelo</option>`;
-  selectUrl.innerHTML = `<option value="">Selecione a URL</option>`;
-
-  modelosCertificado.forEach(m => {
-    const optModelo = document.createElement("option");
-    optModelo.value = m.MODELO_CERTIFICADO_ID;
-    optModelo.textContent = m.NOME_MODELO_CERTIFICADO;
-
-    selectModelo.appendChild(optModelo);
-  });
-}
-
-
-
-function onChangeModelo() {
-  const modeloId = modelo.value;
-  modeloReal.value = modeloId;
-
-  const registro = modelosCertificado.find(
-    m => m.MODELO_CERTIFICADO_ID === modeloId
-  );
-
-  if (!registro) return;
-
-  urlVerificacaoReal.value = registro.URL_QRCODE_VERIFICACAO;
-
-  urlVerificacao.innerHTML = "";
-  const opt = document.createElement("option");
-  opt.value = registro.URL_QRCODE_VERIFICACAO;
-  opt.textContent = registro.URL_QRCODE_VERIFICACAO;
-  opt.selected = true;
-  urlVerificacao.appendChild(opt);
-
-  atualizarPreviewModelo();
-  atualizarPreviewVerificacao();
-}
-
-
-  
- 
-
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
   document.querySelector(".btn-novo").disabled   = !novo;
@@ -507,50 +447,21 @@ function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
   turma.value = c.turma || "";
-  carga.value = c.carga ? c.carga.replace(/\D/g, "") : "";
+  carga.value = c.carga
+  ? c.carga.toString().replace(/\D/g, "")
+  : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
-
-  // fonte da verdade
-  modeloReal.value = (c.modelo || "").toString().trim();
-  urlVerificacaoReal.value = (c.urlVerificacao || "").toString().trim();
-
-  // UI
-  modelo.value = "";
-  urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
-
-  const registro = modelosCertificado.find(
-    m => m.MODELO_CERTIFICADO_ID.trim() === modeloReal.value
-  );
-
-  if (registro) {
-    modelo.value = registro.MODELO_CERTIFICADO_ID;
-
-    const opt = document.createElement("option");
-    opt.value = registro.URL_QRCODE_VERIFICACAO;
-    opt.textContent = registro.URL_QRCODE_VERIFICACAO;
-    opt.selected = true;
-
-    urlVerificacao.innerHTML = "";
-    urlVerificacao.appendChild(opt);
-  } else if (urlVerificacaoReal.value) {
-    const opt = document.createElement("option");
-    opt.value = urlVerificacaoReal.value;
-    opt.textContent = urlVerificacaoReal.value;
-    opt.selected = true;
-    urlVerificacao.appendChild(opt);
-  }
+  modelo.value = c.modelo || "";
+  urlVerificacao.value = c.urlVerificacao || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
-
+  
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
-
-
-
 
 
 
@@ -634,9 +545,11 @@ function novo() {
   el.value = "";
 });
 
-modelo.value = "";
-urlVerificacao.innerHTML = `<option value="">Selecione a URL</option>`;
-ativo.value = "TRUE";
+// 🔹 PREDEFINIDOS (AJUSTE SE QUISER)
+urlVerificacao.value = "https://igctreinamentoscorporativo.github.io/igctreinamentoscorporativo/validarcertificado";
+atualizarPreviewVerificacao();
+
+  ativo.value = "TRUE";
 
 controlarBotoes({
     novo: false,
@@ -648,8 +561,6 @@ controlarBotoes({
 }
 
 
-
-  
 
 
   
@@ -713,24 +624,24 @@ async function salvar() {
   const cargaFormatada = cargaNumerica ? `${cargaNumerica} HORAS` : "";
 
 
-if (!modeloReal.value) {
-  alert("⚠️ Selecione um modelo de certificado.");
+if (!modelo.value || modelo.value.trim().length < 20) {
+  alert("⚠️ ID do modelo de certificado inválido.");
   return;
 }
 
 
   
   const curso = {
-  id: cursoId.value || null,
-  nome: nome.value,
-  turma: turma.value,
-  carga: cargaFormatada,
-  local: local.value,
-  data: data.value,
-  obs: obs.value,
-  ativo: ativo.value === "TRUE",
-  modelo: modeloReal.value,
-  urlVerificacao: urlVerificacaoReal.value
+    id: cursoId.value || null,
+    nome: nome.value,
+    turma: turma.value,
+    carga: cargaFormatada,
+    local: local.value,
+    data: data.value,
+    obs: obs.value,
+    ativo: ativo.value === "TRUE",
+    modelo: modelo.value,
+    urlVerificacao: urlVerificacao.value
   };
 
   const idAtual = curso.id;
@@ -774,7 +685,7 @@ function somenteNumeros(el) {
 
 
   function atualizarPreviewModelo() {
-  const id = modeloReal.value.trim();
+  const id = modelo.value.trim();
   const box = document.getElementById("previewModelo");
 
   if (id.length > 20) {
@@ -789,7 +700,7 @@ function somenteNumeros(el) {
 }
 
 function atualizarPreviewVerificacao() {
-  const url = urlVerificacaoReal.value.trim();
+  const url = urlVerificacao.value.trim();
   const box = document.getElementById("previewVerificacao");
 
   if (url.startsWith("http")) {
@@ -811,4 +722,3 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
 
 </body>
 </html>
-
