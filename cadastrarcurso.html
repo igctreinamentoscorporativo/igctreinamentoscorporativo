@@ -382,7 +382,12 @@ async function login() {
 
   // carrega dados
   await carregarCursos();
+
+try {
   await carregarModelosCertificado();
+} catch (e) {
+  console.warn("Modelos de certificado não carregados", e);
+}
 
   // delay padrão do sistema
   setTimeout(() => {
