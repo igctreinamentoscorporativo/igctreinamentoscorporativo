@@ -296,7 +296,7 @@ button:disabled {
 
 <div class="field">
   <label>Modelo de Certificado</label>
-  <select id="modeloSelect" disabled>
+  <select id="modeloSelect">
     <option value="">Selecione o modelo</option>
   </select>
 </div>
@@ -547,9 +547,15 @@ function bloquear(b) {
     "#appBox input, #appBox textarea, #appBox select"
   ).forEach(el => {
     if (el.classList.contains("no-lock")) return;
-    el.disabled = b;
+
+    if (el.id === "modeloSelect") {
+      el.classList.toggle("select-lock", b);
+    } else {
+      el.disabled = b;
+    }
   });
 }
+
 
 
 
