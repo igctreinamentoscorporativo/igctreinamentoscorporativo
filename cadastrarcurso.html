@@ -698,8 +698,8 @@ async function salvar() {
   const cargaFormatada = cargaNumerica ? `${cargaNumerica} HORAS` : "";
 
 
-if (!modelo.value || modelo.value.trim().length < 20) {
-  alert("⚠️ ID do modelo de certificado inválido.");
+if (!modelo.value) {
+  alert("⚠️ Selecione o ID do modelo de certificado.");
   return;
 }
 
