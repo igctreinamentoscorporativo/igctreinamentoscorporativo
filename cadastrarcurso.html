@@ -188,59 +188,113 @@ button:disabled {
 
 
 /* =========================
-   MODAL OVERLAY (REAL)
+   MODAL PROFISSIONAL
    ========================= */
 #modalModelos {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 23, 0.85); /* fundo escuro */
+  background: rgba(2, 6, 23, 0.88);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10000;
 }
 
-/* quando escondido */
 #modalModelos.hidden {
   display: none;
 }
 
-/* caixa do modal */
 #modalModelos .modal-box {
-  width: min(1100px, 95vw);
+  width: min(1200px, 96vw);
   max-height: 85vh;
   background: #020617;
-  border-radius: 12px;
-  padding: 20px;
-  overflow: auto;
-  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+  border-radius: 14px;
+  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 40px 100px rgba(0,0,0,.7);
+}
+
+/* header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
 }
 
 /* tabela */
-#modalModelos table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 12px;
+.modal-content {
+  overflow: auto;
+  border-top: 1px solid #1e293b;
+  border-bottom: 1px solid #1e293b;
 }
 
-#modalModelos th,
-#modalModelos td {
-  padding: 10px;
-  border-bottom: 1px solid #334155;
+#tabelaModelos {
+  width: 100%;
+  border-collapse: collapse;
   font-size: 13px;
 }
 
-#modalModelos th {
+#tabelaModelos th,
+#tabelaModelos td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #1e293b;
   text-align: left;
-  opacity: 0.8;
+  vertical-align: middle;
 }
 
-#modalModelos td {
-  vertical-align: top;
+#tabelaModelos th {
+  font-weight: bold;
+  color: #cbd5f5;
+  background: #020617;
+  position: sticky;
+  top: 0;
 }
 
-#modalModelos .acoes button {
-  margin-bottom: 6px;
+#tabelaModelos td {
+  color: #e5e7eb;
+}
+
+/* ações lado a lado */
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+/* botões */
+.btn-id {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-url {
+  background: #16a34a;
+  color: #fff;
+}
+
+.btn-id,
+.btn-url {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-id:hover { background: #1d4ed8; }
+.btn-url:hover { background: #15803d; }
+
+/* footer */
+.modal-footer {
+  margin-top: 14px;
+  text-align: right;
 }
 
     
@@ -394,15 +448,23 @@ button:disabled {
 
 <div id="modalModelos" class="hidden" onclick="fecharModal()">
   <div class="modal-box" onclick="event.stopPropagation()">
-    <h2>Modelos de Certificado</h2>
 
-    <table id="tabelaModelos"></table>
+    <div class="modal-header">
+      <h2>Modelos de Certificado</h2>
+      <button class="secondary" onclick="fecharModal()">✕</button>
+    </div>
 
-    <div style="margin-top:16px; text-align:right;">
+    <div class="modal-content">
+      <table id="tabelaModelos"></table>
+    </div>
+
+    <div class="modal-footer">
       <button onclick="fecharModal()">Fechar</button>
     </div>
+
   </div>
 </div>
+
   
   
   
@@ -792,46 +854,43 @@ async function abrirModalModelos() {
     .then(r => r.json());
 
   const tabela = document.getElementById("tabelaModelos");
+
   tabela.innerHTML = `
-    <tr>
-      <th>Nome</th>
-      <th>ID</th>
-      <th>URL</th>
-      <th>Ações</th>
-    </tr>
+    <thead>
+      <tr>
+        <th style="width:30%">Nome</th>
+        <th style="width:30%">ID</th>
+        <th style="width:30%">URL</th>
+        <th style="width:10%">Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
   `;
+
+  const tbody = tabela.querySelector("tbody");
 
   dados.forEach(m => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${m.nome}</td>
-      <td>${m.modeloId}</td>
-      <td>${m.url || ""}</td>
+      <td style="word-break:break-all">${m.modeloId}</td>
+      <td style="word-break:break-all">${m.url || ""}</td>
       <td>
-        <button onclick="copiarModelo('${m.modeloId}')">Copiar ID</button>
-        <button onclick="copiarURL('${m.url || ""}')">Copiar URL</button>
+        <div class="acoes">
+          <button class="btn-id" onclick="copiarModelo('${m.modeloId}')">
+            Copiar ID
+          </button>
+          <button class="btn-url" onclick="copiarURL('${m.url || ""}')">
+            Copiar URL
+          </button>
+        </div>
       </td>
     `;
-    tabela.appendChild(tr);
+    tbody.appendChild(tr);
   });
 
   modalModelos.classList.remove("hidden");
 }
-
-function copiarModelo(id) {
-  modelo.value = id;
-  atualizarPreviewModelo();
-}
-
-function copiarURL(url) {
-  urlVerificacao.value = url;
-  atualizarPreviewVerificacao();
-}
-
-function fecharModal() {
-  modalModelos.classList.add("hidden");
-}
-
 
 
 
