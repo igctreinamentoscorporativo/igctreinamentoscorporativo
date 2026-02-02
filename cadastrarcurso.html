@@ -605,6 +605,7 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
+let modeloSelecionadoAtivo = null; 
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -1038,8 +1039,13 @@ async function abrirModalModelos() {
 function selecionarModelo(id) {
   modelo.value = id;
   atualizarPreviewModelo();
+
+  modeloSelecionadoAtivo = id; // 🔒 trava o foco
+
+  atualizarBloqueioDeLinhas();
   mostrarToast("Modelo selecionado");
 }
+
 
   
 
@@ -1069,8 +1075,16 @@ function removerQRCode() {
 
   
 function fecharModal() {
+  modeloSelecionadoAtivo = null;
+
+  document.querySelectorAll(".modelo-card").forEach(card => {
+    card.style.opacity = "1";
+    card.querySelectorAll("button").forEach(btn => btn.disabled = false);
+  });
+
   modalOverlay.classList.remove("aberto");
 }
+
 
 function copiarModelo(id) {
   modelo.value = id;
@@ -1120,6 +1134,27 @@ function atualizarStatusQRCodeNoModal() {
 
 
 
+function atualizarBloqueioDeLinhas() {
+  document.querySelectorAll(".modelo-card").forEach(card => {
+    const btnSelecionar = card.querySelector(".btn-id");
+    const btnInserir   = card.querySelector(".btn-url");
+    const btnRemover   = card.querySelector(".btn-remover");
+
+    const idModelo = btnSelecionar?.getAttribute("onclick") || "";
+
+    const estaAtiva = idModelo.includes(modeloSelecionadoAtivo);
+
+    if (!estaAtiva) {
+      if (btnSelecionar) btnSelecionar.disabled = true;
+      if (btnInserir) btnInserir.disabled = true;
+      if (btnRemover) btnRemover.disabled = true;
+
+      card.style.opacity = "0.45";
+    } else {
+      card.style.opacity = "1";
+    }
+  });
+}
 
 
 
