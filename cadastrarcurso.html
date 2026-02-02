@@ -469,6 +469,24 @@ button:disabled {
 }
 
 
+/* container do preview */
+.preview-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+}
+
+/* melhora visual do box */
+.preview-box {
+  width: 200px;
+  height: 120px;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #020617;
+  box-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
 
     
   </style>
@@ -995,12 +1013,14 @@ function somenteNumeros(el) {
 
   if (id.length > 20) {
     box.innerHTML = `
-      <div class="preview-box">
-        <iframe 
-          src="https://docs.google.com/presentation/d/${id}/preview"
-          loading="lazy">
-        </iframe>
-      </div>
+      <div class="preview-wrapper">
+    <div class="preview-box">
+      <iframe 
+        src="https://docs.google.com/presentation/d/${id}/preview"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
     `;
   } else {
     box.innerHTML = "";
@@ -1013,12 +1033,14 @@ function atualizarPreviewVerificacao() {
 
   if (url.startsWith("http")) {
     box.innerHTML = `
-      <div class="preview-box">
-        <iframe 
-          src="${url}"
-          loading="lazy">
-        </iframe>
-      </div>
+      <div class="preview-wrapper">
+    <div class="preview-box">
+      <iframe 
+        src="${url}"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
     `;
   } else {
     box.innerHTML = "";
