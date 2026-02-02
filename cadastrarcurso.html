@@ -1018,7 +1018,7 @@ async function abrirModalModelos() {
 
         <button class="btn-remover"
           ${!temQRCode ? "disabled" : ""}
-          onclick="confirmarRemocaoQRCode()">
+          onclick="removerQRCode()"
           Remover QR Code
         </button>
       </div>
@@ -1094,14 +1094,6 @@ function mostrarToast(msg) {
     toast.style.display = "none";
   }, 2500);
 }
-
-
-
-function confirmarRemocaoQRCode() {
-  if (!confirm("Remover o QR Code deste certificado?")) return;
-  removerQRCode();
-}
-
 
 
 
