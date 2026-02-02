@@ -979,63 +979,38 @@ function atualizarPreviewVerificacao() {
 }
 
 
-async function abrirModalModelos() {
-  const dados = await fetch(API + "?acao=listarModelosCertificado")
-    .then(r => r.json());
+function atualizarModalModelos() {
+  const temQRCode =
+    !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
 
-  const lista = document.getElementById("listaModelos");
-  lista.innerHTML = "";
-  lista.className = "lista-modelos";
+  document.querySelectorAll(".modelo-card").forEach(card => {
+    const btnSelecionar = card.querySelector(".btn-id");
+    const btnInserir   = card.querySelector(".btn-url");
+    const btnRemover   = card.querySelector(".btn-remover");
+    const status       = card.querySelector(".status-qrcode");
 
-  const temQRCode = !!urlVerificacao.value;
+    const ativa = card.dataset.modeloId === modeloSelecionadoAtivo;
 
-  const statusTexto = temQRCode
-    ? "✔ QR Code inserido"
-    : "🔴 QR Code removido";
+    // 🔵 Selecionar Modelo → sempre ativo
+    btnSelecionar.disabled = false;
+    btnSelecionar.style.opacity = "1";
 
-  dados.forEach(m => {
-    const temURL = !!m.url;
-    const div = document.createElement("div");
+    // 🔒 QR Code → só linha ativa
+    btnInserir.disabled = !ativa || temQRCode;
+    btnRemover.disabled = !ativa || !temQRCode;
 
-    // 🔒 VISUAL SEMPRE VERDE
-    div.className = "modelo-card com-qr";
+    // 🟢 Status
+    if (status) {
+      status.innerText = temQRCode
+        ? "✔ QR Code inserido"
+        : "🔴 QR Code removido";
+    }
 
-    div.innerHTML = `
-      <div class="status-qrcode">${statusTexto}</div>
-
-      <div class="modelo-nome">${m.nome}</div>
-
-      <div class="modelo-acoes">
-        <button class="btn-id"
-          onclick="selecionarModelo('${m.modeloId}')">
-          Selecionar Modelo
-        </button>
-
-        <button class="btn-url"
-          ${temQRCode || !temURL ? "disabled" : ""}
-          onclick="selecionarURL('${m.url || ""}')">
-          Inserir QR Code
-        </button>
-
-        <button class="btn-remover"
-  ${!temQRCode ? "disabled" : ""}
-  onclick="removerQRCode()">
-  Remover QR Code
-</button>
-    `;
-
-    lista.appendChild(div);
+    // 🎨 Visual
+    card.style.opacity = ativa ? "1" : "0.45";
   });
-
-  modalOverlay.classList.add("aberto");
-
-if (modelo.value) {
-  modeloSelecionadoAtivo = modelo.value;
 }
 
-atualizarModalModelos();
-
- }
 
 
 
@@ -1125,38 +1100,98 @@ function mostrarToast(msg) {
 
 
 
-function atualizarModalModelos() {
+async function abrirModalModelos() {
+  const dados = await fetch(API + "?acao=listarModelosCertificado")
+    .then(r => r.json());
+
+  const lista = document.getElementById("listaModelos");
+  lista.innerHTML = "";
+  lista.className = "lista-modelos";
+
+  // estado atual do curso
   const temQRCode =
     !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
 
-  document.querySelectorAll(".modelo-card").forEach(card => {
-    const btnSelecionar = card.querySelector(".btn-id");
-    const btnInserir   = card.querySelector(".btn-url");
-    const btnRemover   = card.querySelector(".btn-remover");
-    const status       = card.querySelector(".status-qrcode");
+  dados.forEach(m => {
+    const temURL = !!m.url;
+    const div = document.createElement("div");
 
-    const idLinha = btnSelecionar.getAttribute("onclick");
-    const ativa = idLinha.includes(modeloSelecionadoAtivo);
+    // 🔑 identidade fixa da linha
+    div.className = "modelo-card com-qr";
+    div.dataset.modeloId = m.modeloId;
 
-    // 🔵 Selecionar Modelo → SEMPRE LIVRE
-    btnSelecionar.disabled = false;
-    btnSelecionar.style.opacity = "1";
+    div.innerHTML = `
+      <div class="status-qrcode">
+        ${temQRCode ? "✔ QR Code inserido" : "🔴 QR Code removido"}
+      </div>
 
-    // 🔒 QR Code → SOMENTE LINHA ATIVA
-    btnInserir.disabled = !ativa || temQRCode;
-    btnRemover.disabled = !ativa || !temQRCode;
+      <div class="modelo-nome">${m.nome}</div>
 
-    // 🟢 Status visual
-    if (status) {
-      status.innerText = temQRCode
-        ? "✔ QR Code inserido"
-        : "🔴 QR Code removido";
-    }
+      <div class="modelo-acoes">
+        <button class="btn-id">
+          Selecionar Modelo
+        </button>
 
-    // 🎨 Opacidade
-    card.style.opacity = ativa ? "1" : "0.45";
+        <button class="btn-url">
+          Inserir QR Code
+        </button>
+
+        <button class="btn-remover">
+          Remover QR Code
+        </button>
+      </div>
+    `;
+
+    // === REFERÊNCIAS DOS BOTÕES ===
+    const btnSelecionar = div.querySelector(".btn-id");
+    const btnInserir   = div.querySelector(".btn-url");
+    const btnRemover   = div.querySelector(".btn-remover");
+
+    // === EVENTOS ===
+    btnSelecionar.onclick = () => {
+      modeloSelecionadoAtivo = m.modeloId;
+      modelo.value = m.modeloId;
+
+      atualizarPreviewModelo();
+      atualizarModalModelos();
+
+      mostrarToast("Modelo selecionado");
+    };
+
+    btnInserir.onclick = () => {
+      if (!temURL) return;
+
+      modeloSelecionadoAtivo = m.modeloId;
+      urlVerificacao.value = m.url;
+
+      atualizarPreviewVerificacao();
+      atualizarModalModelos();
+
+      mostrarToast("QR Code inserido");
+    };
+
+    btnRemover.onclick = () => {
+      modeloSelecionadoAtivo = m.modeloId;
+      urlVerificacao.value = "";
+
+      atualizarPreviewVerificacao();
+      atualizarModalModelos();
+
+      mostrarToast("QR Code removido");
+    };
+
+    lista.appendChild(div);
   });
+
+  // se já havia modelo selecionado antes de abrir
+  if (modelo.value) {
+    modeloSelecionadoAtivo = modelo.value;
+  }
+
+  atualizarModalModelos();
+  modalOverlay.classList.add("aberto");
 }
+
 
 
 
