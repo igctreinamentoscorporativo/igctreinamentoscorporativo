@@ -440,7 +440,14 @@ button:disabled {
   <label>ID do Modelo de Certificado</label>
   <div style="display:flex; gap:8px;">
     <input id="modelo" disabled>
-    <button type="button" onclick="abrirModalModelos()">Ver ID/URL</button>
+    <button
+  id="btnVerModelo"
+  type="button"
+  onclick="abrirModalModelos()"
+  disabled
+>
+  Selecione o ID E URL
+</button>
   </div>
   <div id="previewModelo"></div>
 </div>
@@ -647,7 +654,11 @@ function bloquear(b) {
     if (el.classList.contains("no-lock")) return;
     el.disabled = b;
   });
+
+  // 🔒 botão do modal segue o modo
+  document.getElementById("btnVerModelo").disabled = b;
 }
+
 
 
 
@@ -704,7 +715,7 @@ controlarBotoes({
     salvar: true,
     excluir: false
   });
-  
+ document.getElementById("btnVerModelo").disabled = false; 
 }
 
 
@@ -726,6 +737,8 @@ function editar() {
     salvar: true,
     excluir: false
   });
+
+  document.getElementById("btnVerModelo").disabled = false;
 }
 
 
