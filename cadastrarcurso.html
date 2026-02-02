@@ -788,21 +788,19 @@ modeloSelect.addEventListener("change", () => {
   atualizarPreviewVerificacao();
 });
 
-verificacaoAtiva.addEventListener("change", async () => {
+verificacaoAtiva.addEventListener("change", () => {
+
+  const opt = modeloSelect.selectedOptions[0];
 
   if (verificacaoAtiva.value === "ATIVO") {
-
-    const res = await fetch(API + "?acao=obterUrlVerificacao")
-      .then(r => r.json());
-
-    urlVerificacao.value = res.url || "";
-
+    urlVerificacao.value = opt?.dataset.url || "";
   } else {
     urlVerificacao.value = "";
   }
 
   atualizarPreviewVerificacao();
 });
+
   
   
 </script>
