@@ -1037,7 +1037,7 @@ function atualizarEstadoQRCodeUI() {
   const temQRCode = !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
 
   document.querySelectorAll(".modelo-card").forEach(card => {
-    card.classList.toggle("com-qr", temQRCode);
+    
 
     const status = card.querySelector(".status-qrcode");
     if (status) {
@@ -1059,9 +1059,7 @@ function atualizarEstadoQRCodeUI() {
 function selecionarModelo(id) {
   modelo.value = id;
   atualizarPreviewModelo();
-
   mostrarToast("Modelo selecionado");
-  atualizarEstadoQRCodeUI();
 }
 
   
