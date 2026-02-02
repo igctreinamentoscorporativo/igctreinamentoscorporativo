@@ -724,8 +724,8 @@ async function login() {
 }
   
 async function carregarCursos(idManter = null) {
-  cursosOriginais = await fetch(API + "?acao=listarCursos")
-    .then(r => r.json());
+ cursosOriginais = await fetch(API + "?acao=listarCursosAdmin")
+  .then(r => r.json());
 
   cursos = [...cursosOriginais];
 
@@ -773,10 +773,9 @@ function preencher(c) {
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
-  ativo.value =
-  c.ativo === true || c.ativo === "TRUE"
-    ? "TRUE"
-    : "FALSE";
+  ativo.value = String(c.ativo).toUpperCase() === "TRUE"
+  ? "TRUE"
+  : "FALSE";
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
 
