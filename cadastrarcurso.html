@@ -435,7 +435,9 @@ button:disabled {
   margin-bottom: 8px;
 }
 
-    
+.hidden-input {
+  display: none;
+}    
     
   </style>
 </head>
@@ -546,14 +548,14 @@ button:disabled {
   <div class="field">
   <label>ID do Modelo de Certificado</label>
   <div style="display:flex; gap:8px;">
-    <input id="modelo" disabled>
+    <input id="modelo" disabled class="hidden-input">
     <button
   id="btnVerModelo"
   type="button"
   onclick="abrirModalModelos()"
   disabled
 >
-  Selecione o ID E URL
+  Selecione o Modelo do Certificado / QRcode
 </button>
   </div>
   <div id="previewModelo"></div>
@@ -562,7 +564,7 @@ button:disabled {
 
   <div class="field">
     <label>URL de Verificação do Certificado</label>
-    <input id="urlVerificacao" disabled>
+    <input id="urlVerificacao" disabled class="hidden-input">
     <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
   </div>
 
