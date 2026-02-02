@@ -1060,13 +1060,19 @@ function selecionarModelo(id) {
 function selecionarURL(url) {
   if (!url) return;
 
+  // 🔒 garante que a linha clicada é a ativa
+  const card = event.target.closest(".modelo-card");
+  modeloSelecionadoAtivo = card.dataset.modeloId;
+
+  // grava URL vinda da planilha
   urlVerificacao.value = url;
   atualizarPreviewVerificacao();
 
+  // 🔄 recalcula modal inteiro
   atualizarModalModelos();
+
   mostrarToast("QR Code inserido");
 }
-
 
 
 
