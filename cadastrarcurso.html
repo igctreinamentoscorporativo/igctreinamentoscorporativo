@@ -401,6 +401,25 @@ button:disabled {
 
 
 
+.modal-header {
+  justify-content: center;
+  text-align: center;
+}
+
+.modal-header h2 {
+  width: 100%;
+  text-align: center;
+}
+
+/* botão remover QR */
+.btn-remover {
+  background: #dc2626;
+  color: #fff;
+}
+
+.btn-remover:hover {
+  background: #b91c1c;
+}
 
 
 
@@ -967,11 +986,15 @@ async function abrirModalModelos() {
 
       <div class="modelo-acoes">
         <button class="btn-id" onclick="selecionarModelo('${m.modeloId}')">
-          Inserir modelo
+          Selecionar Modelo
         </button>
 
         <button class="btn-url" onclick="selecionarURL('${m.url || ""}')">
-          Inserir URL
+          Inserir QR Code
+        </button>
+
+        <button class="btn-remover" onclick="removerQRCode()">
+          Remover QR Code
         </button>
       </div>
     `;
@@ -983,11 +1006,13 @@ async function abrirModalModelos() {
 }
 
 
+
 function selecionarModelo(id) {
   modelo.value = id;
   atualizarPreviewModelo();
   fecharModal();
 }
+
   
 
 function selecionarURL(url) {
@@ -997,6 +1022,10 @@ function selecionarURL(url) {
   fecharModal();
 }
 
+ function removerQRCode() {
+  urlVerificacao.value = "";
+  atualizarPreviewVerificacao();
+} 
 
   
 function fecharModal() {
@@ -1031,7 +1060,6 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
     <!-- CABEÇALHO -->
     <div class="modal-header">
       <h2>Selecione o modelo de certificado</h2>
-      <button class="modal-close" onclick="fecharModal()">×</button>
     </div>
 
     <!-- CONTEÚDO -->
@@ -1041,7 +1069,7 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
 
     <!-- RODAPÉ -->
     <div class="modal-footer">
-      <button class="btn-fechar" onclick="fecharModal()">Cancelar</button>
+      <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
     </div>
 
   </div>
