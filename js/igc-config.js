@@ -11,6 +11,7 @@ window.IGC_CONFIG = {
   }
 };
 
+
 // 🔹 Helper global (opcional, mas profissional)
 window.IGC = {
   app(name) {
