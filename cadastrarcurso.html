@@ -294,10 +294,14 @@ button:disabled {
   </div>
 
   <div class="field">
-    <label>ID do Modelo de Certificado</label>
+  <label>ID do Modelo de Certificado</label>
+  <div style="display:flex; gap:8px;">
     <input id="modelo" disabled>
-    <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
+    <button type="button" onclick="abrirModalModelos()">Ver ID/URL</button>
   </div>
+  <div id="previewModelo"></div>
+</div>
+
 
   <div class="field">
     <label>URL de Verificação do Certificado</label>
@@ -330,6 +334,13 @@ button:disabled {
 </div>
 
 
+<div id="modalModelos" class="hidden">
+  <div class="container">
+    <h2>Modelos de Certificado</h2>
+    <table id="tabelaModelos"></table>
+    <button onclick="fecharModal()">Fechar</button>
+  </div>
+</div>
   
   
   
@@ -713,6 +724,57 @@ function atualizarPreviewVerificacao() {
   }
 }
 
+
+async function abrirModalModelos() {
+  const dados = await fetch(API + "?acao=listarModelosCertificado")
+    .then(r => r.json());
+
+  const tabela = document.getElementById("tabelaModelos");
+  tabela.innerHTML = `
+    <tr>
+      <th>Nome</th>
+      <th>ID</th>
+      <th>URL</th>
+      <th>Ações</th>
+    </tr>
+  `;
+
+  dados.forEach(m => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${m.nome}</td>
+      <td>${m.modeloId}</td>
+      <td>${m.url || ""}</td>
+      <td>
+        <button onclick="copiarModelo('${m.modeloId}')">Copiar ID</button>
+        <button onclick="copiarURL('${m.url || ""}')">Copiar URL</button>
+      </td>
+    `;
+    tabela.appendChild(tr);
+  });
+
+  modalModelos.classList.remove("hidden");
+}
+
+function copiarModelo(id) {
+  modelo.value = id;
+  atualizarPreviewModelo();
+}
+
+function copiarURL(url) {
+  urlVerificacao.value = url;
+  atualizarPreviewVerificacao();
+}
+
+function fecharModal() {
+  modalModelos.classList.add("hidden");
+}
+
+
+
+
+
+  
   
 modelo.addEventListener("input", atualizarPreviewModelo);
 urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
