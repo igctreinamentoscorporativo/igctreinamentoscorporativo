@@ -580,7 +580,7 @@ button:disabled {
   
   <!-- AÇÕES -->
   <div class="actions">
-    <button class="btn-" onclick="()"></button>
+    <button class="btn-" onclick="()">Novo</button>
     <button class="btn-editar" onclick="editar()">Editar</button>
     <button class="secondary" onclick="duplicar()">Duplicar</button>
     <button class="btn-salvar" onclick="salvar()">Salvar</button>
@@ -653,7 +653,7 @@ async function login() {
   const podeGerenciarCurso = PERMISSOES.includes("GERENCIAR_CURSO");
 
   if (!podeGerenciarCurso) {
-    document.querySelector(".btn-").style.display   = "none";
+    document.querySelector(".btn-novo").style.display   = "none";
     document.querySelector(".btn-editar").style.display = "none";
     document.querySelector(".btn-salvar").style.display = "none";
     document.querySelector(".danger").style.display     = "none";
@@ -695,8 +695,8 @@ async function carregarCursos(idManter = null) {
 
 
 
-function controlarBotoes({ , editar, salvar, excluir }) {
-  document.querySelector(".btn-").disabled   = !;
+function controlarBotoes({ novo, editar, salvar, excluir }) {
+  document.querySelector(".btn-novo").disabled   = !novo;
   document.querySelector(".btn-editar").disabled = !editar;
   document.querySelector(".btn-salvar").disabled = !salvar;
   document.querySelector(".danger").disabled     = !excluir;
@@ -798,7 +798,7 @@ function next() {
 }
 
 
-function () {
+function novo () {
   modo = "novo";
 
   cursoId.value = "";
