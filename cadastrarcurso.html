@@ -194,11 +194,16 @@ button:disabled {
   position: fixed;
   inset: 0;
   background: rgba(2, 6, 23, 0.85);
-  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 99999;
+
+  display: none; /* 🔒 FECHADO POR PADRÃO */
 }
+
+.modal-overlay.aberto {
+  display: flex;
+}    
 
 .modal-box {
   width: min(900px, 95vw);
@@ -905,23 +910,20 @@ async function abrirModalModelos() {
       <td>${m.url || ""}</td>
       <td>
         <div class="acoes">
-          <button class="btn-id" onclick="copiarModelo('${m.modeloId}')">
-            Copiar ID
-          </button>
-          <button class="btn-url" onclick="copiarURL('${m.url || ""}')">
-            Copiar URL
-          </button>
+          <button class="btn-id" onclick="copiarModelo('${m.modeloId}')">Copiar ID</button>
+          <button class="btn-url" onclick="copiarURL('${m.url || ""}')">Copiar URL</button>
         </div>
       </td>
     `;
     tbody.appendChild(tr);
   });
 
-  modalOverlay.classList.remove("hidden");
+  modalOverlay.classList.add("aberto");
 }
 
+
 function fecharModal() {
-  modalOverlay.classList.add("hidden");
+  modalOverlay.classList.remove("aberto");
 }
 
 function copiarModelo(id) {
@@ -937,7 +939,6 @@ function copiarURL(url) {
 
 
   
-  
 modelo.addEventListener("input", atualizarPreviewModelo);
 urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
   
@@ -947,7 +948,7 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
 
 
 <!-- 🔳 MODAL OVERLAY -->
-<div id="modalOverlay" class="modal-overlay hidden">
+<div id="modalOverlay" class="modal-overlay">
   <div class="modal-box">
 
     <!-- CABEÇALHO -->
