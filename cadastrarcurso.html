@@ -1028,7 +1028,14 @@ async function abrirModalModelos() {
   });
 
   modalOverlay.classList.add("aberto");
+
+if (modelo.value) {
+  modeloSelecionadoAtivo = modelo.value;
 }
+
+atualizarModalModelos();
+
+ }
 
 
 
@@ -1037,14 +1044,15 @@ async function abrirModalModelos() {
 
 
 function selecionarModelo(id) {
+  modeloSelecionadoAtivo = id;
   modelo.value = id;
+
   atualizarPreviewModelo();
+  atualizarModalModelos();
 
-  modeloSelecionadoAtivo = id; // 🔒 trava o foco
-
-  atualizarBloqueioDeLinhas();
   mostrarToast("Modelo selecionado");
 }
+
 
 
   
@@ -1055,7 +1063,7 @@ function selecionarURL(url) {
   urlVerificacao.value = url;
   atualizarPreviewVerificacao();
 
-  atualizarStatusQRCodeNoModal(); // 🔥 ESSENCIAL
+  atualizarModalModelos();
   mostrarToast("QR Code inserido");
 }
 
@@ -1067,9 +1075,10 @@ function removerQRCode() {
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
 
-  atualizarStatusQRCodeNoModal(); // 🔥 ESSENCIAL
+  atualizarModalModelos();
   mostrarToast("QR Code removido");
 }
+
 
 
 
@@ -1110,51 +1119,39 @@ function mostrarToast(msg) {
 
 
 
-
-function atualizarStatusQRCodeNoModal() {
+function atualizarModalModelos() {
   const temQRCode =
     !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
 
   document.querySelectorAll(".modelo-card").forEach(card => {
-    const status = card.querySelector(".status-qrcode");
-    const btnInserir = card.querySelector(".btn-url");
-    const btnRemover = card.querySelector(".btn-remover");
+    const btnSelecionar = card.querySelector(".btn-id");
+    const btnInserir   = card.querySelector(".btn-url");
+    const btnRemover   = card.querySelector(".btn-remover");
+    const status       = card.querySelector(".status-qrcode");
 
+    const idLinha = btnSelecionar.getAttribute("onclick");
+    const ativa = idLinha.includes(modeloSelecionadoAtivo);
+
+    // 🔵 Selecionar Modelo → SEMPRE LIVRE
+    btnSelecionar.disabled = false;
+    btnSelecionar.style.opacity = "1";
+
+    // 🔒 QR Code → SOMENTE LINHA ATIVA
+    btnInserir.disabled = !ativa || temQRCode;
+    btnRemover.disabled = !ativa || !temQRCode;
+
+    // 🟢 Status visual
     if (status) {
       status.innerText = temQRCode
         ? "✔ QR Code inserido"
         : "🔴 QR Code removido";
     }
 
-    // 🔒 regra clara de estados (nunca conflitam)
-    if (btnInserir) btnInserir.disabled = temQRCode;
-    if (btnRemover) btnRemover.disabled = !temQRCode;
+    // 🎨 Opacidade
+    card.style.opacity = ativa ? "1" : "0.45";
   });
 }
 
-
-
-function atualizarBloqueioDeLinhas() {
-  document.querySelectorAll(".modelo-card").forEach(card => {
-    const btnSelecionar = card.querySelector(".btn-id");
-    const btnInserir   = card.querySelector(".btn-url");
-    const btnRemover   = card.querySelector(".btn-remover");
-
-    const idModelo = btnSelecionar?.getAttribute("onclick") || "";
-
-    const estaAtiva = idModelo.includes(modeloSelecionadoAtivo);
-
-    if (!estaAtiva) {
-      if (btnSelecionar) btnSelecionar.disabled = true;
-      if (btnInserir) btnInserir.disabled = true;
-      if (btnRemover) btnRemover.disabled = true;
-
-      card.style.opacity = "0.45";
-    } else {
-      card.style.opacity = "1";
-    }
-  });
-}
 
 
 
