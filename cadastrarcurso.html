@@ -791,19 +791,15 @@ modeloSelect.addEventListener("change", () => {
 });
 
 
-verificacaoAtiva.addEventListener("change", () => {
+modeloSelect.addEventListener("change", () => {
+  const opt = modeloSelect.selectedOptions[0];
 
-  if (verificacaoAtiva.value === "ATIVO") {
-    // URL vem do MODELO SELECIONADO
-    const opt = modeloSelect.selectedOptions[0];
-    urlVerificacao.value = opt?.dataset.url || "";
-  } else {
-    // Desativado = vazio
-    urlVerificacao.value = "";
-  }
+  // ✔️ SOMENTE O ID DO MODELO
+  modelo.value = opt?.dataset.id || "";
 
-  atualizarPreviewVerificacao();
+  atualizarPreviewModelo();
 });
+
 
   
   
