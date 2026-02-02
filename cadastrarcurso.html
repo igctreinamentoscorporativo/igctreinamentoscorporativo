@@ -872,9 +872,9 @@ function novo () {
 
   ativo.value = "TRUE";
 
-  // ✅ LINHAS-CHAVE (não quebram nada)
-  modelo.value = "";
-  urlVerificacao.value = "";
+  // ✅ LIMPEZA FORÇADA DOS PREVIEWS (AQUI ESTÁ A CHAVE)
+  document.getElementById("previewModelo").innerHTML = "";
+  document.getElementById("previewVerificacao").innerHTML = "";
 
 controlarBotoes({
     novo: false,
