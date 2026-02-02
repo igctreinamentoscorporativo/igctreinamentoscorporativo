@@ -1033,27 +1033,7 @@ async function abrirModalModelos() {
 
 
 
-function atualizarEstadoQRCodeUI() {
-  const temQRCode = !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
-
-  document.querySelectorAll(".modelo-card").forEach(card => {
-    
-
-    const status = card.querySelector(".status-qrcode");
-    if (status) {
-      status.style.display = temQRCode ? "block" : "none";
-    }
-
-    const btnRemover = card.querySelector(".btn-remover");
-    if (btnRemover) {
-      btnRemover.disabled = !temQRCode;
-    }
-  });
-}
-
-
-
-  
+ 
 
 
 function selecionarModelo(id) {
@@ -1070,19 +1050,20 @@ function selecionarURL(url) {
   urlVerificacao.value = url;
   atualizarPreviewVerificacao();
 
+  atualizarStatusQRCodeNoModal(); // 🔥 ESSENCIAL
   mostrarToast("QR Code inserido");
-  atualizarStatusQRCodeNoModal(); // ✅
 }
 
 
 
+
   
- function removerQRCode() {
+function removerQRCode() {
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
 
+  atualizarStatusQRCodeNoModal(); // 🔥 ESSENCIAL
   mostrarToast("QR Code removido");
-  atualizarStatusQRCodeNoModal(); // ✅
 }
 
 
@@ -1126,25 +1107,26 @@ function confirmarRemocaoQRCode() {
 
 
 function atualizarStatusQRCodeNoModal() {
-  const temQRCode = !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
-
-  const statusTexto = temQRCode
-    ? "✔ QR Code inserido"
-    : "🔴 QR Code removido";
+  const temQRCode =
+    !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
 
   document.querySelectorAll(".modelo-card").forEach(card => {
-    // texto
     const status = card.querySelector(".status-qrcode");
-    if (status) status.innerText = statusTexto;
-
-    // botões
     const btnInserir = card.querySelector(".btn-url");
     const btnRemover = card.querySelector(".btn-remover");
 
+    if (status) {
+      status.innerText = temQRCode
+        ? "✔ QR Code inserido"
+        : "🔴 QR Code removido";
+    }
+
+    // 🔒 regra clara de estados (nunca conflitam)
     if (btnInserir) btnInserir.disabled = temQRCode;
     if (btnRemover) btnRemover.disabled = !temQRCode;
   });
 }
+
 
 
 
