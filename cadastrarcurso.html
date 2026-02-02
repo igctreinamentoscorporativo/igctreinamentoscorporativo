@@ -186,6 +186,64 @@ button:disabled {
 }
 
 
+
+/* =========================
+   MODAL OVERLAY (REAL)
+   ========================= */
+#modalModelos {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.85); /* fundo escuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+/* quando escondido */
+#modalModelos.hidden {
+  display: none;
+}
+
+/* caixa do modal */
+#modalModelos .modal-box {
+  width: min(1100px, 95vw);
+  max-height: 85vh;
+  background: #020617;
+  border-radius: 12px;
+  padding: 20px;
+  overflow: auto;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+
+/* tabela */
+#modalModelos table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+#modalModelos th,
+#modalModelos td {
+  padding: 10px;
+  border-bottom: 1px solid #334155;
+  font-size: 13px;
+}
+
+#modalModelos th {
+  text-align: left;
+  opacity: 0.8;
+}
+
+#modalModelos td {
+  vertical-align: top;
+}
+
+#modalModelos .acoes button {
+  margin-bottom: 6px;
+}
+
+    
     
   </style>
 </head>
@@ -334,11 +392,15 @@ button:disabled {
 </div>
 
 
-<div id="modalModelos" class="hidden">
-  <div class="container">
+<div id="modalModelos" class="hidden" onclick="fecharModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
     <h2>Modelos de Certificado</h2>
+
     <table id="tabelaModelos"></table>
-    <button onclick="fecharModal()">Fechar</button>
+
+    <div style="margin-top:16px; text-align:right;">
+      <button onclick="fecharModal()">Fechar</button>
+    </div>
   </div>
 </div>
   
