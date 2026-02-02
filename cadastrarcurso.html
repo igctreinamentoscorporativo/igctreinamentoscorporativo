@@ -999,7 +999,6 @@ async function abrirModalModelos() {
 
     // 🔒 VISUAL SEMPRE VERDE
     div.className = "modelo-card com-qr";
-    div.dataset.modeloId = m.modeloId;
 
     div.innerHTML = `
       <div class="status-qrcode">${statusTexto}</div>
@@ -1028,20 +1027,7 @@ async function abrirModalModelos() {
     lista.appendChild(div);
   });
 
-  
-
   modalOverlay.classList.add("aberto");
-
-
-  // se já existir modelo selecionado antes de abrir
-if (modelo.value) {
-  modeloSelecionadoAtivo = modelo.value;
-}
-
-atualizarBloqueioDeLinhas();
-atualizarStatusQRCodeNoModal();
-
-  
 }
 
 
@@ -1049,20 +1035,16 @@ atualizarStatusQRCodeNoModal();
 
  
 
-function selecionarModelo(id) {
-  modeloSelecionadoAtivo = id;
-  modelo.value = id;
 
+function selecionarModelo(id) {
+  modelo.value = id;
   atualizarPreviewModelo();
 
-  // 🔥 ESSENCIAL: reavaliar QR ao trocar de linha
-  atualizarStatusQRCodeNoModal();
-  atualizarBloqueioDeLinhas();
+  modeloSelecionadoAtivo = id; // 🔒 trava o foco
 
+  atualizarBloqueioDeLinhas();
   mostrarToast("Modelo selecionado");
 }
-
-
 
 
   
@@ -1085,9 +1067,7 @@ function removerQRCode() {
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
 
-  atualizarStatusQRCodeNoModal();
-  atualizarBloqueioDeLinhas(); // 🔥 FALTAVA ISSO
-
+  atualizarStatusQRCodeNoModal(); // 🔥 ESSENCIAL
   mostrarToast("QR Code removido");
 }
 
@@ -1136,52 +1116,45 @@ function atualizarStatusQRCodeNoModal() {
     !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
 
   document.querySelectorAll(".modelo-card").forEach(card => {
-    const cardId = card.dataset.modeloId;
-    const ativa = cardId === modeloSelecionadoAtivo;
-
     const status = card.querySelector(".status-qrcode");
     const btnInserir = card.querySelector(".btn-url");
     const btnRemover = card.querySelector(".btn-remover");
 
-    // 🔹 texto sempre reflete o estado real do curso
-    status.innerText = temQRCode
-      ? "✔ QR Code inserido"
-      : "🔴 QR Code removido";
-
-    // 🔒 fora da linha ativa, tudo bloqueado
-    if (!ativa) {
-      btnInserir.disabled = true;
-      btnRemover.disabled = true;
-      return;
+    if (status) {
+      status.innerText = temQRCode
+        ? "✔ QR Code inserido"
+        : "🔴 QR Code removido";
     }
 
-    // ✅ linha ativa controla o QR
-    btnInserir.disabled = temQRCode;
-    btnRemover.disabled = !temQRCode;
+    // 🔒 regra clara de estados (nunca conflitam)
+    if (btnInserir) btnInserir.disabled = temQRCode;
+    if (btnRemover) btnRemover.disabled = !temQRCode;
   });
 }
-
-
 
 
 
 function atualizarBloqueioDeLinhas() {
   document.querySelectorAll(".modelo-card").forEach(card => {
-    const ativa = card.dataset.modeloId === modeloSelecionadoAtivo;
+    const btnSelecionar = card.querySelector(".btn-id");
+    const btnInserir   = card.querySelector(".btn-url");
+    const btnRemover   = card.querySelector(".btn-remover");
 
-    const btnInserir = card.querySelector(".btn-url");
-    const btnRemover = card.querySelector(".btn-remover");
+    const idModelo = btnSelecionar?.getAttribute("onclick") || "";
 
-    // 🔒 QR Code só na linha ativa
-    if (btnInserir) btnInserir.disabled = !ativa;
-    if (btnRemover) btnRemover.disabled = !ativa;
+    const estaAtiva = idModelo.includes(modeloSelecionadoAtivo);
 
-    // 🎨 visual apenas informativo
-    card.style.opacity = ativa ? "1" : "0.45";
+    if (!estaAtiva) {
+      if (btnSelecionar) btnSelecionar.disabled = true;
+      if (btnInserir) btnInserir.disabled = true;
+      if (btnRemover) btnRemover.disabled = true;
+
+      card.style.opacity = "0.45";
+    } else {
+      card.style.opacity = "1";
+    }
   });
 }
-
-
 
 
 
