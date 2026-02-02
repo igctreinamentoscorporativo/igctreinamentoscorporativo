@@ -1033,6 +1033,28 @@ async function abrirModalModelos() {
 
 
 
+function atualizarEstadoQRCodeUI() {
+  const temQRCode = !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
+
+  document.querySelectorAll(".modelo-card").forEach(card => {
+    card.classList.toggle("com-qr", temQRCode);
+
+    const status = card.querySelector(".status-qrcode");
+    if (status) {
+      status.style.display = temQRCode ? "block" : "none";
+    }
+
+    const btnRemover = card.querySelector(".btn-remover");
+    if (btnRemover) {
+      btnRemover.disabled = !temQRCode;
+    }
+  });
+}
+
+
+
+  
+
 
 function selecionarModelo(id) {
   modelo.value = id;
@@ -1057,12 +1079,20 @@ function selecionarURL(url) {
 
   
  function removerQRCode() {
+  // limpa o campo real
   urlVerificacao.value = "";
+
+  // atualiza preview no formulário
   atualizarPreviewVerificacao();
 
+  // feedback
   mostrarToast("QR Code removido");
+
+  // 🔁 atualiza o modal aberto (status + botões)
   atualizarEstadoQRCodeUI();
+  abrirModalModelos();
 }
+
   
 function fecharModal() {
   modalOverlay.classList.remove("aberto");
