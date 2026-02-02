@@ -1071,24 +1071,20 @@ function selecionarURL(url) {
   atualizarPreviewVerificacao();
 
   mostrarToast("QR Code inserido");
-  atualizarEstadoQRCodeUI();
+  atualizarStatusQRCodeNoModal(); // ✅
 }
+
 
 
   
  function removerQRCode() {
-  // limpa campo do formulário
   urlVerificacao.value = "";
-
-  // força limpeza visual
   atualizarPreviewVerificacao();
 
-  // feedback
   mostrarToast("QR Code removido");
-
-  // 🔁 re-render do modal com estado atualizado
-  abrirModalModelos();
+  atualizarStatusQRCodeNoModal(); // ✅
 }
+
 
 
   
@@ -1124,6 +1120,36 @@ function confirmarRemocaoQRCode() {
   if (!confirm("Remover o QR Code deste certificado?")) return;
   removerQRCode();
 }
+
+
+
+
+
+function atualizarStatusQRCodeNoModal() {
+  const temQRCode = !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
+
+  const statusTexto = temQRCode
+    ? "✔ QR Code inserido"
+    : "🔴 QR Code removido";
+
+  document.querySelectorAll(".modelo-card").forEach(card => {
+    // texto
+    const status = card.querySelector(".status-qrcode");
+    if (status) status.innerText = statusTexto;
+
+    // botões
+    const btnInserir = card.querySelector(".btn-url");
+    const btnRemover = card.querySelector(".btn-remover");
+
+    if (btnInserir) btnInserir.disabled = temQRCode;
+    if (btnRemover) btnRemover.disabled = !temQRCode;
+  });
+}
+
+
+
+
+
 
 
   
