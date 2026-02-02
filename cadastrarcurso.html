@@ -486,8 +486,8 @@ button:disabled {
 @media (min-width: 1200px) {
   .bloco-certificado {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 260px auto;
+    gap: 20px;
     align-items: start;
   }
 
@@ -497,11 +497,18 @@ button:disabled {
   }
 
   .cert-acao button {
-    height: auto;            /* 🔑 remove gigantismo */
-    padding: 12px 14px;
-    margin-top: 0;
-    font-weight: 500;
-    white-space: normal;
+    padding: 10px 14px;
+    font-size: 13px;
+    opacity: 0.85;
+
+ .cert-acao button:hover {
+    opacity: 1;
+  }
+    
+  .cert-previews {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
   }
 }
 
@@ -622,34 +629,33 @@ button:disabled {
   <div class="field span-2">
   <label></label>
 
-  <div class="bloco-certificado">
+ <div class="bloco-certificado">
 
-    <!-- COLUNA 1: BOTÃO -->
-    <div class="cert-col cert-acao">
-      <input id="modelo" disabled class="hidden-input">
-      <button
-        id="btnVerModelo"
-        type="button"
-        onclick="abrirModalModelos()"
-        disabled>
-        Selecione o Modelo do Certificado / QRcode
-      </button>
-    </div>
+  <!-- AÇÃO -->
+  <div class="cert-col cert-acao">
+    <button id="btnVerModelo"
+      type="button"
+      onclick="abrirModalModelos()"
+      disabled>
+      Selecionar modelo do certificado
+    </button>
+  </div>
 
-    <!-- COLUNA 2: PREVIEW CERTIFICADO -->
-    <div class="cert-col">
+  <!-- RESULTADO -->
+  <div class="cert-col cert-previews">
+    <div>
       <label class="preview-label">Modelo</label>
       <div id="previewModelo"></div>
     </div>
 
-    <!-- COLUNA 3: PREVIEW URL -->
-    <div class="cert-col">
+    <div>
       <label class="preview-label">Verificação</label>
       <div id="previewVerificacao"></div>
     </div>
-
   </div>
+
 </div>
+
 
   
     <div class="field">
