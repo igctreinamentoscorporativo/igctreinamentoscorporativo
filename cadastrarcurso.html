@@ -497,6 +497,11 @@ function preencher(c) {
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
 
+  // 🔑 SINCRONIZA O SELECT
+verificacaoAtiva.value = c.urlVerificacao
+  ? "ATIVO"
+  : "INATIVO";
+
   // 🔥 LIMPA SELEÇÃO ANTERIOR
   [...modeloSelect.options].forEach(o => o.selected = false);
 
@@ -780,21 +785,20 @@ modeloSelect.addEventListener("change", () => {
   const opt = modeloSelect.selectedOptions[0];
   if (!opt) return;
 
-  // 🔥 PREENCHE AUTOMATICAMENTE
   modelo.value = opt.dataset.id || "";
-  urlVerificacao.value = opt.dataset.url || "";
 
   atualizarPreviewModelo();
-  atualizarPreviewVerificacao();
 });
+
 
 verificacaoAtiva.addEventListener("change", () => {
 
-  const opt = modeloSelect.selectedOptions[0];
-
   if (verificacaoAtiva.value === "ATIVO") {
+    // URL vem do MODELO SELECIONADO
+    const opt = modeloSelect.selectedOptions[0];
     urlVerificacao.value = opt?.dataset.url || "";
   } else {
+    // Desativado = vazio
     urlVerificacao.value = "";
   }
 
