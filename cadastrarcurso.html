@@ -1037,23 +1037,32 @@ async function abrirModalModelos() {
 function selecionarModelo(id) {
   modelo.value = id;
   atualizarPreviewModelo();
-  fecharModal();
+
+  mostrarToast("Modelo selecionado");
+  atualizarEstadoQRCodeUI();
 }
 
   
 
 function selecionarURL(url) {
   if (!url) return;
+
   urlVerificacao.value = url;
   atualizarPreviewVerificacao();
-  fecharModal();
+
+  mostrarToast("QR Code inserido");
+  atualizarEstadoQRCodeUI();
 }
 
+
+  
  function removerQRCode() {
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
-} 
 
+  mostrarToast("QR Code removido");
+  atualizarEstadoQRCodeUI();
+}
   
 function fecharModal() {
   modalOverlay.classList.remove("aberto");
