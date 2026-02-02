@@ -1040,11 +1040,12 @@ function selecionarModelo(id) {
   modelo.value = id;
   atualizarPreviewModelo();
 
-  modeloSelecionadoAtivo = id; // 🔒 trava o foco
+  modeloSelecionadoAtivo = id;
 
   atualizarBloqueioDeLinhas();
   mostrarToast("Modelo selecionado");
 }
+
 
 
   
@@ -1140,21 +1141,21 @@ function atualizarBloqueioDeLinhas() {
     const btnInserir   = card.querySelector(".btn-url");
     const btnRemover   = card.querySelector(".btn-remover");
 
-    const idModelo = btnSelecionar?.getAttribute("onclick") || "";
+    const onclick = btnSelecionar?.getAttribute("onclick") || "";
+    const estaAtiva = onclick.includes(modeloSelecionadoAtivo);
 
-    const estaAtiva = idModelo.includes(modeloSelecionadoAtivo);
+    // 🔓 Selecionar modelo SEMPRE liberado
+    if (btnSelecionar) btnSelecionar.disabled = false;
 
-    if (!estaAtiva) {
-      if (btnSelecionar) btnSelecionar.disabled = true;
-      if (btnInserir) btnInserir.disabled = true;
-      if (btnRemover) btnRemover.disabled = true;
+    // 🔒 QR Code só na linha ativa
+    if (btnInserir) btnInserir.disabled = !estaAtiva;
+    if (btnRemover) btnRemover.disabled = !estaAtiva;
 
-      card.style.opacity = "0.45";
-    } else {
-      card.style.opacity = "1";
-    }
+    // visual
+    card.style.opacity = estaAtiva ? "1" : "0.45";
   });
 }
+
 
 
 
