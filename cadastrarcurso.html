@@ -773,7 +773,10 @@ function preencher(c) {
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
-  ativo.value = c.ativo ? "TRUE" : "FALSE";
+  ativo.value =
+  c.ativo === true || c.ativo === "TRUE"
+    ? "TRUE"
+    : "FALSE";
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
 
