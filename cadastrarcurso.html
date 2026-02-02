@@ -580,7 +580,7 @@ button:disabled {
   
   <!-- AÇÕES -->
   <div class="actions">
-    <button class="btn-novo" onclick="novo()">Novo</button>
+    <button class="btn-" onclick="()"></button>
     <button class="btn-editar" onclick="editar()">Editar</button>
     <button class="secondary" onclick="duplicar()">Duplicar</button>
     <button class="btn-salvar" onclick="salvar()">Salvar</button>
@@ -653,7 +653,7 @@ async function login() {
   const podeGerenciarCurso = PERMISSOES.includes("GERENCIAR_CURSO");
 
   if (!podeGerenciarCurso) {
-    document.querySelector(".btn-novo").style.display   = "none";
+    document.querySelector(".btn-").style.display   = "none";
     document.querySelector(".btn-editar").style.display = "none";
     document.querySelector(".btn-salvar").style.display = "none";
     document.querySelector(".danger").style.display     = "none";
@@ -685,7 +685,7 @@ async function carregarCursos(idManter = null) {
   preencher(cursos[index]);
 
   controlarBotoes({
-    novo: true,
+    : true,
     editar: true,
     salvar: false,
     excluir: true
@@ -695,8 +695,8 @@ async function carregarCursos(idManter = null) {
 
 
 
-function controlarBotoes({ novo, editar, salvar, excluir }) {
-  document.querySelector(".btn-novo").disabled   = !novo;
+function controlarBotoes({ , editar, salvar, excluir }) {
+  document.querySelector(".btn-").disabled   = !;
   document.querySelector(".btn-editar").disabled = !editar;
   document.querySelector(".btn-salvar").disabled = !salvar;
   document.querySelector(".danger").disabled     = !excluir;
@@ -776,7 +776,7 @@ function prev() {
   bloquear(true);
 
   controlarBotoes({
-    novo: true,
+    : true,
     editar: true,
     salvar: false,
     excluir: true
@@ -790,7 +790,7 @@ function next() {
   bloquear(true);
 
   controlarBotoes({
-    novo: true,
+    : true,
     editar: true,
     salvar: false,
     excluir: true
@@ -798,7 +798,7 @@ function next() {
 }
 
 
-function novo() {
+function () {
   modo = "novo";
 
   cursoId.value = "";
@@ -810,9 +810,6 @@ function novo() {
   el.value = "";
 });
 
-// 🔹 PREDEFINIDOS (AJUSTE SE QUISER)
-urlVerificacao.value = "https://igctreinamentoscorporativo.github.io/igctreinamentoscorporativo/validarcertificado";
-atualizarPreviewVerificacao();
 
   ativo.value = "TRUE";
 
@@ -1079,19 +1076,19 @@ function selecionarURL(url) {
 
   
  function removerQRCode() {
-  // limpa o campo real
+  // limpa campo do formulário
   urlVerificacao.value = "";
 
-  // atualiza preview no formulário
+  // força limpeza visual
   atualizarPreviewVerificacao();
 
   // feedback
   mostrarToast("QR Code removido");
 
-  // 🔁 atualiza o modal aberto (status + botões)
-  atualizarEstadoQRCodeUI();
+  // 🔁 re-render do modal com estado atualizado
   abrirModalModelos();
 }
+
 
   
 function fecharModal() {
