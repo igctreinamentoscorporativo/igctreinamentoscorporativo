@@ -422,6 +422,18 @@ button:disabled {
 }
 
 
+/* ===== STATUS QR CODE ===== */
+
+.modelo-card.com-qr {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 1px rgba(22,163,74,.4);
+}
+
+.status-qrcode {
+  font-size: 12px;
+  color: #16a34a;
+  margin-bottom: 8px;
+}
 
     
     
@@ -977,11 +989,17 @@ async function abrirModalModelos() {
   lista.innerHTML = "";
   lista.className = "lista-modelos";
 
+  const temQRCode = !!urlVerificacao.value;
+
   dados.forEach(m => {
+    const temURL = !!m.url;
     const div = document.createElement("div");
-    div.className = "modelo-card";
+
+    div.className = "modelo-card" + (temQRCode ? " com-qr" : "");
 
     div.innerHTML = `
+      ${temQRCode ? `<div class="status-qrcode">✔ QR Code já definido</div>` : ""}
+
       <div class="modelo-nome">${m.nome}</div>
 
       <div class="modelo-acoes">
@@ -989,11 +1007,19 @@ async function abrirModalModelos() {
           Selecionar Modelo
         </button>
 
-        <button class="btn-url" onclick="selecionarURL('${m.url || ""}')">
+        <button
+          class="btn-url"
+          ${!temURL ? "disabled" : ""}
+          onclick="selecionarURL('${m.url || ""}')"
+        >
           Inserir QR Code
         </button>
 
-        <button class="btn-remover" onclick="removerQRCode()">
+        <button
+          class="btn-remover"
+          ${!temQRCode ? "disabled" : ""}
+          onclick="confirmarRemocaoQRCode()"
+        >
           Remover QR Code
         </button>
       </div>
@@ -1004,6 +1030,7 @@ async function abrirModalModelos() {
 
   modalOverlay.classList.add("aberto");
 }
+
 
 
 
@@ -1044,6 +1071,22 @@ function copiarURL(url) {
 
 
 
+function mostrarToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.innerText = msg;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 2500);
+}
+
+
+
+
+
+  
+
   
 modelo.addEventListener("input", atualizarPreviewModelo);
 urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
@@ -1075,6 +1118,21 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
   </div>
 </div>
 
+<div id="toast" style="
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #020617;
+  color: #e5e7eb;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  display: none;
+  z-index: 100000;
+  font-size: 14px;
+">
+</div>
 
 
   
