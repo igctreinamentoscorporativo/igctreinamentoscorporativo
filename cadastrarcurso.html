@@ -981,7 +981,7 @@ function atualizarPreviewVerificacao() {
 
 function atualizarModalModelos() {
   const temQRCode =
-    !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
+    !!urlVerificacao.value && urlVerificacao.value.trim().startsWith("http");
 
   document.querySelectorAll(".modelo-card").forEach(card => {
     const btnSelecionar = card.querySelector(".btn-id");
@@ -991,15 +991,20 @@ function atualizarModalModelos() {
 
     const ativa = card.dataset.modeloId === modeloSelecionadoAtivo;
 
-    // 🔵 Selecionar Modelo → sempre ativo
+    // 🔵 Selecionar Modelo → SEMPRE ATIVO
     btnSelecionar.disabled = false;
     btnSelecionar.style.opacity = "1";
 
-    // 🔒 QR Code → só linha ativa
-    btnInserir.disabled = !ativa || temQRCode;
-    btnRemover.disabled = !ativa || !temQRCode;
+    // 🔒 QR Code → SOMENTE NA LINHA ATIVA
+    if (ativa) {
+      btnInserir.disabled = temQRCode;
+      btnRemover.disabled = !temQRCode;
+    } else {
+      btnInserir.disabled = true;
+      btnRemover.disabled = true;
+    }
 
-    // 🟢 Status
+    // 🟢 Status sempre reflete estado real
     if (status) {
       status.innerText = temQRCode
         ? "✔ QR Code inserido"
@@ -1010,6 +1015,7 @@ function atualizarModalModelos() {
     card.style.opacity = ativa ? "1" : "0.45";
   });
 }
+
 
 
 
@@ -1032,26 +1038,7 @@ function selecionarModelo(id) {
 
   
 
-function selecionarURL(url) {
-  if (!url) return;
-
-  // 🔒 garante que a linha clicada é a ativa
-  const card = event.target.closest(".modelo-card");
-  modeloSelecionadoAtivo = card.dataset.modeloId;
-
-  // grava URL vinda da planilha
-  urlVerificacao.value = url;
-  atualizarPreviewVerificacao();
-
-  // 🔄 recalcula modal inteiro
-  atualizarModalModelos();
-
-  mostrarToast("QR Code inserido");
-}
-
-
-
-  
+ 
 function removerQRCode() {
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
@@ -1121,9 +1108,7 @@ async function abrirModalModelos() {
     div.dataset.modeloId = m.modeloId;
 
     div.innerHTML = `
-      <div class="status-qrcode">
-        ${temQRCode ? "✔ QR Code inserido" : "🔴 QR Code removido"}
-      </div>
+      <div class="status-qrcode"></div>
 
       <div class="modelo-nome">${m.nome}</div>
 
