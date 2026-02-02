@@ -349,6 +349,61 @@ button:disabled {
   }
 }
 
+
+
+/* ===== MODAL MODELOS (UX) ===== */
+
+.modal-modelos {
+  max-width: 720px;
+}
+
+.lista-modelos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modelo-card {
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  padding: 14px;
+  background: #020617;
+}
+
+.modelo-nome {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.modelo-acoes {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.modelo-acoes button {
+  flex: 1;
+  padding: 10px;
+  font-size: 13px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .modelo-acoes {
+    flex-direction: column;
+  }
+
+  .modelo-acoes button {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
     
     
   </style>
@@ -899,29 +954,51 @@ async function abrirModalModelos() {
   const dados = await fetch(API + "?acao=listarModelosCertificado")
     .then(r => r.json());
 
-  const tbody = document.getElementById("tabelaModelos");
-  tbody.innerHTML = "";
+  const lista = document.getElementById("listaModelos");
+  lista.innerHTML = "";
+  lista.className = "lista-modelos";
 
   dados.forEach(m => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${m.nome}</td>
-      <td>${m.modeloId}</td>
-      <td>${m.url || ""}</td>
-      <td>
-        <div class="acoes">
-          <button class="btn-id" onclick="copiarModelo('${m.modeloId}')">Copiar ID</button>
-          <button class="btn-url" onclick="copiarURL('${m.url || ""}')">Copiar URL</button>
-        </div>
-      </td>
+    const div = document.createElement("div");
+    div.className = "modelo-card";
+
+    div.innerHTML = `
+      <div class="modelo-nome">${m.nome}</div>
+
+      <div class="modelo-acoes">
+        <button class="btn-id" onclick="selecionarModelo('${m.modeloId}')">
+          Inserir modelo
+        </button>
+
+        <button class="btn-url" onclick="selecionarURL('${m.url || ""}')">
+          Inserir URL
+        </button>
+      </div>
     `;
-    tbody.appendChild(tr);
+
+    lista.appendChild(div);
   });
 
   modalOverlay.classList.add("aberto");
 }
 
 
+function selecionarModelo(id) {
+  modelo.value = id;
+  atualizarPreviewModelo();
+  fecharModal();
+}
+  
+
+function selecionarURL(url) {
+  if (!url) return;
+  urlVerificacao.value = url;
+  atualizarPreviewVerificacao();
+  fecharModal();
+}
+
+
+  
 function fecharModal() {
   modalOverlay.classList.remove("aberto");
 }
@@ -949,35 +1026,27 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
 
 <!-- 🔳 MODAL OVERLAY -->
 <div id="modalOverlay" class="modal-overlay">
-  <div class="modal-box">
+  <div class="modal-box modal-modelos">
 
     <!-- CABEÇALHO -->
     <div class="modal-header">
-      <h2>Modelos de Certificado</h2>
-       </div>
+      <h2>Selecione o modelo de certificado</h2>
+      <button class="modal-close" onclick="fecharModal()">×</button>
+    </div>
 
     <!-- CONTEÚDO -->
-    <div class="modal-content">
-      <table class="modal-table">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>ID</th>
-            <th>URL</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="tabelaModelos"></tbody>
-      </table>
+    <div class="modal-content" id="listaModelos">
+      <!-- cards gerados via JS -->
     </div>
 
     <!-- RODAPÉ -->
     <div class="modal-footer">
-      <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
+      <button class="btn-fechar" onclick="fecharModal()">Cancelar</button>
     </div>
 
   </div>
 </div>
+
 
 
   
