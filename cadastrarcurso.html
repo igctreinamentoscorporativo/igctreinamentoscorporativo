@@ -988,35 +988,37 @@ async function abrirModalModelos() {
 
   const temQRCode = !!urlVerificacao.value;
 
+  const statusTexto = temQRCode
+    ? "✔ QR Code inserido"
+    : "🔴 QR Code removido";
+
   dados.forEach(m => {
     const temURL = !!m.url;
     const div = document.createElement("div");
 
-    div.className = "modelo-card" + (temQRCode ? " com-qr" : "");
+    // 🔒 VISUAL SEMPRE VERDE
+    div.className = "modelo-card com-qr";
 
     div.innerHTML = `
-      ${temQRCode ? `<div class="status-qrcode">✔ QR Code já definido</div>` : ""}
+      <div class="status-qrcode">${statusTexto}</div>
 
       <div class="modelo-nome">${m.nome}</div>
 
       <div class="modelo-acoes">
-        <button class="btn-id" onclick="selecionarModelo('${m.modeloId}')">
+        <button class="btn-id"
+          onclick="selecionarModelo('${m.modeloId}')">
           Selecionar Modelo
         </button>
 
-        <button
-          class="btn-url"
-          ${!temURL ? "disabled" : ""}
-          onclick="selecionarURL('${m.url || ""}')"
-        >
+        <button class="btn-url"
+          ${temQRCode || !temURL ? "disabled" : ""}
+          onclick="selecionarURL('${m.url || ""}')">
           Inserir QR Code
         </button>
 
-        <button
-          class="btn-remover"
+        <button class="btn-remover"
           ${!temQRCode ? "disabled" : ""}
-          onclick="confirmarRemocaoQRCode()"
-        >
+          onclick="confirmarRemocaoQRCode()">
           Remover QR Code
         </button>
       </div>
@@ -1027,6 +1029,7 @@ async function abrirModalModelos() {
 
   modalOverlay.classList.add("aberto");
 }
+
 
 
 
