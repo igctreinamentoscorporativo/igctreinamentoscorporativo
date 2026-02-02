@@ -1082,6 +1082,14 @@ function mostrarToast(msg) {
 
 
 async function abrirModalModelos() {
+
+
+  // 🔴 limpa URL sempre que o modal abre
+urlVerificacao.value = "";
+atualizarPreviewVerificacao();
+
+
+  
   const dados = await fetch(API + "?acao=listarModelosCertificado")
     .then(r => r.json());
 
@@ -1121,6 +1129,11 @@ async function abrirModalModelos() {
     btnSelecionar.onclick = () => {
       modeloSelecionadoAtivo = m.modeloId;
       modelo.value = m.modeloId;
+
+      // 🔴 LIMPA URL AO TROCAR MODELO
+      urlVerificacao.value = "";
+      atualizarPreviewVerificacao();
+      
       atualizarPreviewModelo();
       atualizarModalModelos();
       mostrarToast("Modelo selecionado");
