@@ -293,23 +293,6 @@ button:disabled {
     <textarea id="obs" disabled class="uppercase"></textarea>
   </div>
 
-
-<div class="field">
-  <label>Modelo de Certificado</label>
-  <select id="modeloSelect">
-    <option value="">Selecione o modelo</option>
-  </select>
-</div>
-
-<div class="field">
-  <label>Verificação do Certificado</label>
-  <select id="verificacaoAtiva">
-    <option value="">Selecione</option>
-    <option value="ATIVO">Ativado</option>
-    <option value="INATIVO">Desativado</option>
-  </select>
-</div>
-  
   <div class="field">
     <label>ID do Modelo de Certificado</label>
     <input id="modelo" disabled>
@@ -361,8 +344,6 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
-let modelosCertificado = [];
-  
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -398,7 +379,6 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
-    await carregarModelosCertificado();
   await carregarCursos();
 
   // delay padrão do sistema
@@ -453,27 +433,6 @@ async function carregarCursos(idManter = null) {
 
 
 
-async function carregarModelosCertificado() {
-  modelosCertificado = await fetch(
-    API + "?acao=listarModelosCertificado"
-  ).then(r => r.json());
-
-  modeloSelect.innerHTML =
-    `<option value="">Selecione o modelo</option>`;
-
-  modelosCertificado.forEach(m => {
-    const opt = document.createElement("option");
-    opt.value = m.NOME_MODELO_CERTIFICADO;   // 👈 VISUAL
-    opt.textContent = m.NOME_MODELO_CERTIFICADO;
-    opt.dataset.id = m.MODELO_CERTIFICADO_ID; // 👈 ID REAL
-    opt.dataset.url = m.URL_QRCODE_VERIFICACAO || "";
-    modeloSelect.appendChild(opt);
-  });
-}
-
-
-  
-
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
   document.querySelector(".btn-novo").disabled   = !novo;
@@ -488,41 +447,21 @@ function preencher(c) {
   cursoId.value = c.id || "";
   nome.value = c.nome || "";
   turma.value = c.turma || "";
-  carga.value = c.carga ? c.carga.toString().replace(/\D/g, "") : "";
+  carga.value = c.carga
+  ? c.carga.toString().replace(/\D/g, "")
+  : "";
   local.value = c.local || "";
   data.value = c.data || "";
   obs.value = c.obs || "";
   ativo.value = c.ativo ? "TRUE" : "FALSE";
-
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
 
-  // 🔑 SINCRONIZA O SELECT
-verificacaoAtiva.value = c.urlVerificacao
-  ? "ATIVO"
-  : "INATIVO";
-
-  // 🔥 LIMPA SELEÇÃO ANTERIOR
-  [...modeloSelect.options].forEach(o => o.selected = false);
-
-  // 🔥 SELECIONA EXPLICITAMENTE O OPTION CORRETO
-  const opt = [...modeloSelect.options].find(
-    o => o.dataset.id === c.modelo
-  );
-
-  if (opt) {
-    opt.selected = true;   // 👈 ISSO RESOLVE O BUG VISUAL
-  } else {
-    modeloSelect.value = "";
-  }
-
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
-
+  
   contador.innerText = `${index + 1} de ${cursos.length}`;
 }
-
-
 
 
 
@@ -559,15 +498,9 @@ function bloquear(b) {
     "#appBox input, #appBox textarea, #appBox select"
   ).forEach(el => {
     if (el.classList.contains("no-lock")) return;
-
-    if (el.id === "modeloSelect") {
-      el.classList.toggle("select-lock", b);
-    } else {
-      el.disabled = b;
-    }
+    el.disabled = b;
   });
 }
-
 
 
 
@@ -781,26 +714,8 @@ function atualizarPreviewVerificacao() {
 }
 
   
-modeloSelect.addEventListener("change", () => {
-  const opt = modeloSelect.selectedOptions[0];
-  if (!opt) return;
-
-  modelo.value = opt.dataset.id || "";
-
-  atualizarPreviewModelo();
-});
-
-
-modeloSelect.addEventListener("change", () => {
-  const opt = modeloSelect.selectedOptions[0];
-
-  // ✔️ SOMENTE O ID DO MODELO
-  modelo.value = opt?.dataset.id || "";
-
-  atualizarPreviewModelo();
-});
-
-
+modelo.addEventListener("input", atualizarPreviewModelo);
+urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
   
   
 </script>
