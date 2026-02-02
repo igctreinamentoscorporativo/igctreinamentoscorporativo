@@ -580,7 +580,7 @@ button:disabled {
   
   <!-- AÇÕES -->
   <div class="actions">
-    <button class="btn-" onclick="()">Novo</button>
+    <button class="btn-novo" onclick="()">Novo</button>
     <button class="btn-editar" onclick="editar()">Editar</button>
     <button class="secondary" onclick="duplicar()">Duplicar</button>
     <button class="btn-salvar" onclick="salvar()">Salvar</button>
@@ -685,7 +685,7 @@ async function carregarCursos(idManter = null) {
   preencher(cursos[index]);
 
   controlarBotoes({
-    : true,
+    novo: true,
     editar: true,
     salvar: false,
     excluir: true
@@ -776,7 +776,7 @@ function prev() {
   bloquear(true);
 
   controlarBotoes({
-    : true,
+    novo: true,
     editar: true,
     salvar: false,
     excluir: true
@@ -790,7 +790,7 @@ function next() {
   bloquear(true);
 
   controlarBotoes({
-    : true,
+    novo: true,
     editar: true,
     salvar: false,
     excluir: true
@@ -1119,6 +1119,10 @@ function mostrarToast(msg) {
 
 
 
+function confirmarRemocaoQRCode() {
+  if (!confirm("Remover o QR Code deste certificado?")) return;
+  removerQRCode();
+}
 
 
   
