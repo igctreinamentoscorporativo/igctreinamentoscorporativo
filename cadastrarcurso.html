@@ -1028,7 +1028,20 @@ async function abrirModalModelos() {
     lista.appendChild(div);
   });
 
+  
+
   modalOverlay.classList.add("aberto");
+
+
+  // se já existir modelo selecionado antes de abrir
+if (modelo.value) {
+  modeloSelecionadoAtivo = modelo.value;
+}
+
+atualizarBloqueioDeLinhas();
+atualizarStatusQRCodeNoModal();
+
+  
 }
 
 
@@ -1048,6 +1061,7 @@ function selecionarModelo(id) {
 
   mostrarToast("Modelo selecionado");
 }
+
 
 
 
@@ -1127,24 +1141,24 @@ function atualizarStatusQRCodeNoModal() {
     const btnInserir = card.querySelector(".btn-url");
     const btnRemover = card.querySelector(".btn-remover");
 
-    // status só muda visualmente, mas lógica depende da linha ativa
-    if (status) {
-      status.innerText = temQRCode
-        ? "✔ QR Code inserido"
-        : "🔴 QR Code removido";
-    }
+    // 🔹 texto sempre reflete o estado real do curso
+    status.innerText = temQRCode
+      ? "✔ QR Code inserido"
+      : "🔴 QR Code removido";
 
+    // 🔒 fora da linha ativa, tudo bloqueado
     if (!ativa) {
-      if (btnInserir) btnInserir.disabled = true;
-      if (btnRemover) btnRemover.disabled = true;
+      btnInserir.disabled = true;
+      btnRemover.disabled = true;
       return;
     }
 
-    // linha ativa
-    if (btnInserir) btnInserir.disabled = temQRCode;
-    if (btnRemover) btnRemover.disabled = !temQRCode;
+    // ✅ linha ativa controla o QR
+    btnInserir.disabled = temQRCode;
+    btnRemover.disabled = !temQRCode;
   });
 }
+
 
 
 
@@ -1159,17 +1173,19 @@ function atualizarBloqueioDeLinhas() {
 
     const ativa = cardId === modeloSelecionadoAtivo;
 
-    // 🔵 Selecionar Modelo SEMPRE ativo
-    if (btnSelecionar) btnSelecionar.disabled = false;
+    // 🔵 Selecionar Modelo: SEMPRE visível e ativo
+    btnSelecionar.disabled = false;
+    btnSelecionar.style.opacity = "1";
 
-    // 🔒 QR Code só na linha ativa
-    if (btnInserir) btnInserir.disabled = !ativa;
-    if (btnRemover) btnRemover.disabled = !ativa;
+    // 🔒 QR Code: só linha ativa
+    btnInserir.disabled = !ativa;
+    btnRemover.disabled = !ativa;
 
-    // 🎨 visual
-    card.style.opacity = ativa ? "1" : "0.45";
+    // 🎨 visual da linha
+    card.style.opacity = ativa ? "1" : "0.5";
   });
 }
+
 
 
 
