@@ -483,20 +483,28 @@ button:disabled {
   margin-bottom: 6px;
 }
 
-/* DESKTOP */
 @media (min-width: 1200px) {
   .bloco-certificado {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.2fr 1fr 1fr;
     gap: 16px;
     align-items: start;
   }
 
+  .cert-acao {
+    display: flex;
+    align-items: flex-start;
+  }
+
   .cert-acao button {
-    height: 110px;
-    font-weight: 600;
+    height: auto;            /* 🔑 remove gigantismo */
+    padding: 12px 14px;
+    margin-top: 0;
+    font-weight: 500;
+    white-space: normal;
   }
 }
+
     
 
     
