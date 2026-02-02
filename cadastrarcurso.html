@@ -1049,16 +1049,14 @@ atualizarStatusQRCodeNoModal();
 
  
 
-function selecionarURL(url) {
-  if (!url) return;
+function selecionarModelo(id) {
+  modeloSelecionadoAtivo = id;
+  modelo.value = id;
 
-  urlVerificacao.value = url;
-  atualizarPreviewVerificacao();
-
+  atualizarPreviewModelo();
   atualizarStatusQRCodeNoModal();
-  atualizarBloqueioDeLinhas(); // 🔥 FALTAVA ISSO
 
-  mostrarToast("QR Code inserido");
+  mostrarToast("Modelo selecionado");
 }
 
 
