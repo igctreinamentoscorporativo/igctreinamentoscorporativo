@@ -469,6 +469,35 @@ button:disabled {
 }
 
 
+/* ===== BLOCO CERTIFICADO (DESKTOP) ===== */
+.bloco-certificado {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* labels pequenos dos previews */
+.preview-label {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
+
+/* DESKTOP */
+@media (min-width: 1200px) {
+  .bloco-certificado {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  .cert-acao button {
+    height: 110px;
+    font-weight: 600;
+  }
+}
+    
 
     
   </style>
@@ -577,23 +606,42 @@ button:disabled {
     <textarea id="obs" disabled class="uppercase"></textarea>
   </div>
 
-  <div class="field">
+ 
+  
+  
+  
+  
+  <div class="field span-2">
   <label></label>
-  <div style="display:flex; gap:8px;">
-    <input id="modelo" disabled class="hidden-input">
-    
-    <button  id="btnVerModelo"  type="button"   onclick="abrirModalModelos()"   disabled>Selecione o Modelo do Certificado / QRcode</button>
-    </div>
-   
+
+  <div class="bloco-certificado">
+
+    <!-- COLUNA 1: BOTÃO -->
+    <div class="cert-col cert-acao">
+      <input id="modelo" disabled class="hidden-input">
+      <button
+        id="btnVerModelo"
+        type="button"
+        onclick="abrirModalModelos()"
+        disabled>
+        Selecione o Modelo do Certificado / QRcode
+      </button>
     </div>
 
+    <!-- COLUNA 2: PREVIEW CERTIFICADO -->
+    <div class="cert-col">
+      <label class="preview-label">Modelo</label>
+      <div id="previewModelo"></div>
+    </div>
 
-  <div class="field">
-  <label>Preview</label>  
-  <div id="previewModelo" style="margin-top:6px; font-size:13px;"></div>
-  <div id="previewVerificacao" style="margin-top:6px; font-size:13px;"></div>
-    
-  </div>  
+    <!-- COLUNA 3: PREVIEW URL -->
+    <div class="cert-col">
+      <label class="preview-label">Verificação</label>
+      <div id="previewVerificacao"></div>
+    </div>
+
+  </div>
+</div>
 
   
     <div class="field">
