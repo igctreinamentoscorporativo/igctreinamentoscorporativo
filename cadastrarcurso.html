@@ -1017,11 +1017,10 @@ async function abrirModalModelos() {
         </button>
 
         <button class="btn-remover"
-          ${!temQRCode ? "disabled" : ""}
-          onclick="removerQRCode()"
-          Remover QR Code
-        </button>
-      </div>
+  ${!temQRCode ? "disabled" : ""}
+  onclick="removerQRCode()">
+  Remover QR Code
+</button>
     `;
 
     lista.appendChild(div);
