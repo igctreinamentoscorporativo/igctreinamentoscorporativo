@@ -1049,17 +1049,16 @@ atualizarStatusQRCodeNoModal();
 
  
 
+function selecionarURL(url) {
+  if (!url) return;
 
-function selecionarModelo(id) {
-  modelo.value = id;
-  atualizarPreviewModelo();
+  urlVerificacao.value = url;
+  atualizarPreviewVerificacao();
 
-  modeloSelecionadoAtivo = id;
-
-  atualizarBloqueioDeLinhas();
   atualizarStatusQRCodeNoModal();
+  atualizarBloqueioDeLinhas(); // 🔥 FALTAVA ISSO
 
-  mostrarToast("Modelo selecionado");
+  mostrarToast("QR Code inserido");
 }
 
 
@@ -1085,7 +1084,9 @@ function removerQRCode() {
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
 
-  atualizarStatusQRCodeNoModal(); // 🔥 ESSENCIAL
+  atualizarStatusQRCodeNoModal();
+  atualizarBloqueioDeLinhas(); // 🔥 FALTAVA ISSO
+
   mostrarToast("QR Code removido");
 }
 
