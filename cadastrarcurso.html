@@ -1089,17 +1089,18 @@ async function abrirModalModelos() {
   lista.innerHTML = "";
   lista.className = "lista-modelos";
 
-  // estado atual do curso
-  const temQRCode =
-    !!urlVerificacao.value && urlVerificacao.value.startsWith("http");
-
   dados.forEach(m => {
     const temURL = !!m.url;
     const div = document.createElement("div");
 
-    // 🔑 identidade fixa da linha
     div.className = "modelo-card com-qr";
     div.dataset.modeloId = m.modeloId;
+
+    // estado inicial do QR POR LINHA
+    div.dataset.hasQr =
+      modelo.value === m.modeloId && urlVerificacao.value
+        ? "true"
+        : "false";
 
     div.innerHTML = `
       <div class="status-qrcode"></div>
@@ -1107,72 +1108,47 @@ async function abrirModalModelos() {
       <div class="modelo-nome">${m.nome}</div>
 
       <div class="modelo-acoes">
-        <button class="btn-id">
-          Selecionar Modelo
-        </button>
-
-        <button class="btn-url">
-          Inserir QR Code
-        </button>
-
-        <button class="btn-remover">
-          Remover QR Code
-        </button>
+        <button class="btn-id">Selecionar Modelo</button>
+        <button class="btn-url">Inserir QR Code</button>
+        <button class="btn-remover">Remover QR Code</button>
       </div>
     `;
 
-  div.dataset.hasQr =
-  urlVerificacao.value &&
-  modelo.value === m.modeloId
-    ? "true"
-    : "false";
-
-    
-    // === REFERÊNCIAS DOS BOTÕES ===
     const btnSelecionar = div.querySelector(".btn-id");
     const btnInserir   = div.querySelector(".btn-url");
     const btnRemover   = div.querySelector(".btn-remover");
 
-    // === EVENTOS ===
     btnSelecionar.onclick = () => {
       modeloSelecionadoAtivo = m.modeloId;
       modelo.value = m.modeloId;
-
       atualizarPreviewModelo();
       atualizarModalModelos();
-
       mostrarToast("Modelo selecionado");
     };
 
     btnInserir.onclick = () => {
-  if (!temURL) return;
-
-  modeloSelecionadoAtivo = m.modeloId;
-  urlVerificacao.value = m.url;
-
-  div.dataset.hasQr = "true";
-
-  atualizarPreviewVerificacao();
-  atualizarModalModelos();
-
-  mostrarToast("QR Code inserido");
-};
-
+      if (!temURL) return;
+      modeloSelecionadoAtivo = m.modeloId;
+      urlVerificacao.value = m.url;
+      div.dataset.hasQr = "true";
+      atualizarPreviewVerificacao();
+      atualizarModalModelos();
+      mostrarToast("QR Code inserido");
+    };
 
     btnRemover.onclick = () => {
-  modeloSelecionadoAtivo = m.modeloId;
-  urlVerificacao.value = "";
+      modeloSelecionadoAtivo = m.modeloId;
+      urlVerificacao.value = "";
+      div.dataset.hasQr = "false";
+      atualizarPreviewVerificacao();
+      atualizarModalModelos();
+      mostrarToast("QR Code removido");
+    };
 
-  div.dataset.hasQr = "false";
+    // ❗ ISSO ESTAVA FALTANDO
+    lista.appendChild(div);
+  });
 
-  atualizarPreviewVerificacao();
-  atualizarModalModelos();
-
-  mostrarToast("QR Code removido");
-};
-
-
-  // se já havia modelo selecionado antes de abrir
   if (modelo.value) {
     modeloSelecionadoAtivo = modelo.value;
   }
@@ -1180,6 +1156,7 @@ async function abrirModalModelos() {
   atualizarModalModelos();
   modalOverlay.classList.add("aberto");
 }
+
 
 
 
