@@ -207,13 +207,15 @@ button:disabled {
 
 .modal-box {
   width: min(900px, 95vw);
-  max-height: 85vh;
+  max-height: 90vh;
   background: #020617;
   border-radius: 14px;
   box-shadow: 0 30px 80px rgba(0,0,0,.6);
+
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+
+  overflow: hidden; /* 🔒 importantíssimo */
 }
 
 /* HEADER */
@@ -254,9 +256,12 @@ button:disabled {
 /* CONTENT */
 .modal-content {
   padding: 16px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* 🔥 essencial no iOS/Android */
-  max-height: calc(85vh - 120px); 
+
+  flex: 1;                 /* 🔥 ocupa o espaço disponível */
+  overflow-y: auto;        /* 🔥 scroll vertical */
+  min-height: 0;           /* 🔥 ESSENCIAL em flexbox */
+  
+  -webkit-overflow-scrolling: touch;
 }
 
     
@@ -497,6 +502,13 @@ body.modal-open {
   touch-action: none;
 } 
 
+    @media (max-width: 768px) {
+  .modal-overlay {
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+    }
     
   </style>
 </head>
