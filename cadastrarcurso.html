@@ -1041,6 +1041,10 @@ async function excluir() {
   if (!cursoId.value) return;
   if (!confirm("Excluir este curso?")) return;
 
+  
+  const btnExcluir = document.querySelector(".danger");
+  btnExcluir.textContent = "Excluindo...";  
+
   await fetch(API, {
     method: "POST",
     body: JSON.stringify({
@@ -1051,6 +1055,7 @@ async function excluir() {
   });
 
   carregarCursos();
+  btnExcluir.textContent = "Excluir";
 }
 
 
