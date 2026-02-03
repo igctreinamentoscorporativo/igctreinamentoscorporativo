@@ -254,9 +254,12 @@ button:disabled {
 /* CONTENT */
 .modal-content {
   padding: 16px;
-  overflow: auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* 🔥 essencial no iOS/Android */
+  max-height: calc(85vh - 120px); 
 }
 
+    
 /* TABLE */
 .modal-table {
   width: 100%;
@@ -487,6 +490,12 @@ button:disabled {
   background: #020617;
   box-shadow: 0 10px 25px rgba(0,0,0,.35);
 }
+
+/* 🔒 trava scroll do body quando modal aberto */
+body.modal-open {
+  overflow: hidden;
+  touch-action: none;
+} 
 
     
   </style>
@@ -1130,6 +1139,7 @@ function fecharModal() {
   });
 
   modalOverlay.classList.remove("aberto");
+  document.body.classList.remove("modal-open");
 }
 
 
@@ -1244,14 +1254,8 @@ atualizarPreviewVerificacao();
 
   atualizarModalModelos();
   modalOverlay.classList.add("aberto");
+  document.body.classList.add("modal-open");
 }
-
-
-
-
-
-
-
 
   
 
