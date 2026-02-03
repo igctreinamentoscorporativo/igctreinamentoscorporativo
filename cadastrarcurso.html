@@ -198,8 +198,10 @@ button:disabled {
 
   display: none;
 
-  /* 🔥 NÃO captura toque */
-  pointer-events: none;
+  overflow-y: auto;                 /* ✅ SCROLL AQUI */
+  -webkit-overflow-scrolling: touch;
+
+  padding: 20px 12px;               /* espaço p/ respirar */
 }
 
 .modal-overlay.aberto {
@@ -207,25 +209,16 @@ button:disabled {
 }
 
 .modal-box {
-  position: fixed;
-  top: 5vh;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  max-width: 720px;
 
-  width: 95vw;
-  height: 90vh;
+  margin: 0 auto 40px auto;          /* empurra p/ baixo */
 
   background: #020617;
   border-radius: 14px;
   box-shadow: 0 30px 80px rgba(0,0,0,.6);
 
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
-
-  /* 🔥 AGORA SIM recebe toque */
-  pointer-events: auto;
+  overflow: visible;                 /* ❗ NÃO rola */
 }
 
 /* HEADER */
@@ -265,15 +258,8 @@ button:disabled {
 
 /* CONTENT */
 .modal-content {
-  position: relative;
-
-  height: 100%;
   padding: 16px;
-
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-
-  touch-action: pan-y;
+  overflow: visible;
 }
     
 /* TABLE */
