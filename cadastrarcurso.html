@@ -968,10 +968,6 @@ function forcarCaixaAlta() {
 
 async function salvar() {
 
-  const btnSalvar = document.querySelector(".btn-salvar");
-  btnSalvar.disabled = true;
-  btnSalvar.textContent = "Salvando...";
-
   forcarCaixaAlta();
 
   const cargaNumerica = carga.value.replace(/\D/g, "");
@@ -1013,13 +1009,6 @@ if (!modelo.value || modelo.value.trim().length < 20) {
   await carregarCursos(idAtual);
 }
 
-
-
-  btnSalvar.disabled = true;
-  btnSalvar.textContent = "Salvar";
-
-  
-}
 
 
 
