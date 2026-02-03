@@ -683,6 +683,14 @@ let cursosOriginais = [];
 let PERMISSOES = [];
 let modeloSelecionadoAtivo = null; 
 
+
+
+let estadoModal = {
+  modeloId: null,   // modelo selecionado
+  urlQr: null       // QR ativo
+};
+  
+
 async function login() {
   const senha = senhaLogin.value.trim();
   loginErro.innerText = "";
@@ -1075,31 +1083,34 @@ function atualizarPreviewVerificacao() {
 
 function atualizarModalModelos() {
   document.querySelectorAll(".modelo-card").forEach(card => {
+    const modeloId = card.dataset.modeloId;
+
     const btnSelecionar = card.querySelector(".btn-id");
     const btnInserir   = card.querySelector(".btn-url");
     const btnRemover   = card.querySelector(".btn-remover");
     const status       = card.querySelector(".status-qrcode");
 
-    const ativa = card.dataset.modeloId === modeloSelecionadoAtivo;
+    const ativo = modeloId === estadoModal.modeloId;
 
-    // 🔹 Selecionar modelo SEMPRE ativo
+    // Selecionar modelo sempre ativo
     btnSelecionar.disabled = false;
 
-    // 🔒 Inserir / Remover só na linha ativa
-    btnInserir.disabled = !ativa;
-    btnRemover.disabled = !ativa;
+    // QR só no modelo ativo
+    btnInserir.disabled = !ativo;
+    btnRemover.disabled = !ativo;
 
-    // 🎨 feedback visual (UX)
-    card.style.opacity = ativa ? "1" : "0.45";
+    // Feedback visual
+    card.style.opacity = ativo ? "1" : "0.4";
 
-    // status visual
     if (status) {
-      status.innerText = ativa && urlVerificacao.value
-        ? "✔ QR Code inserido"
-        : "🔴 QR Code removido";
+      status.innerText =
+        ativo && estadoModal.urlQr
+          ? "✔ QR Code inserido"
+          : "🔴 QR Code removido";
     }
   });
 }
+
 
 
 
@@ -1138,12 +1149,12 @@ function removerQRCode() {
 
   
 function fecharModal() {
-  modeloSelecionadoAtivo = null;
+  estadoModal = { modeloId: null, urlQr: null };
 
-  document.querySelectorAll(".modelo-card").forEach(card => {
-    card.style.opacity = "1";
-    card.querySelectorAll("button").forEach(btn => btn.disabled = false);
-  });
+  modalOverlay.classList.remove("aberto");
+  document.body.style.overflow = "";
+}
+
 
   
 
@@ -1197,66 +1208,61 @@ atualizarPreviewVerificacao();
   lista.className = "lista-modelos";
 
   dados.forEach(m => {
-    const temURL = !!m.url;
-    const div = document.createElement("div");
+  const div = document.createElement("div");
+  div.className = "modelo-card";
+  div.dataset.modeloId = m.modeloId;
 
-    div.className = "modelo-card com-qr";
-    div.dataset.modeloId = m.modeloId;
+  div.innerHTML = `
+    <div class="status-qrcode"></div>
+    <div class="modelo-nome">${m.nome}</div>
+    <div class="modelo-acoes">
+      <button class="btn-id">Selecionar Modelo</button>
+      <button class="btn-url">Inserir QR Code</button>
+      <button class="btn-remover">Remover QR Code</button>
+    </div>
+  `;
 
-    // estado inicial do QR POR LINHA
-    div.dataset.hasQr =
-      modelo.value === m.modeloId && urlVerificacao.value
-        ? "true"
-        : "false";
+  const btnSelecionar = div.querySelector(".btn-id");
+  const btnInserir   = div.querySelector(".btn-url");
+  const btnRemover   = div.querySelector(".btn-remover");
 
-    div.innerHTML = `
-      <div class="status-qrcode"></div>
+  // 🔹 Selecionar modelo
+  btnSelecionar.onclick = () => {
+    estadoModal.modeloId = m.modeloId;
+    estadoModal.urlQr = null;
 
-      <div class="modelo-nome">${m.nome}</div>
+    modelo.value = m.modeloId;
+    urlVerificacao.value = "";
 
-      <div class="modelo-acoes">
-        <button class="btn-id">Selecionar Modelo</button>
-        <button class="btn-url">Inserir QR Code</button>
-        <button class="btn-remover">Remover QR Code</button>
-      </div>
-    `;
+    atualizarPreviewModelo();
+    atualizarPreviewVerificacao();
+    atualizarModalModelos();
+  };
 
-    const btnSelecionar = div.querySelector(".btn-id");
-    const btnInserir   = div.querySelector(".btn-url");
-    const btnRemover   = div.querySelector(".btn-remover");
+  // 🔹 Inserir QR
+  btnInserir.onclick = () => {
+    if (!estadoModal.modeloId || estadoModal.modeloId !== m.modeloId) return;
 
-    btnSelecionar.onclick = () => {
-  modeloSelecionadoAtivo = m.modeloId;
-  modelo.value = m.modeloId;
+    estadoModal.urlQr = m.url || "";
+    urlVerificacao.value = estadoModal.urlQr;
 
-  // ao trocar modelo, limpa QR
-  urlVerificacao.value = "";
-  atualizarPreviewModelo();
-  atualizarPreviewVerificacao();
+    atualizarPreviewVerificacao();
+    atualizarModalModelos();
+  };
 
-  atualizarModalModelos();
-  mostrarToast("Modelo selecionado");
-};
+  // 🔹 Remover QR
+  btnRemover.onclick = () => {
+    if (!estadoModal.modeloId || estadoModal.modeloId !== m.modeloId) return;
 
+    estadoModal.urlQr = null;
+    urlVerificacao.value = "";
 
-   btnInserir.onclick = () => {
-  modeloSelecionadoAtivo = m.modeloId;
-  urlVerificacao.value = m.url || "";
+    atualizarPreviewVerificacao();
+    atualizarModalModelos();
+  };
 
-  atualizarPreviewVerificacao();
-  atualizarModalModelos();
-  mostrarToast("QR Code inserido");
-};
-
-
-    btnRemover.onclick = () => {
-  modeloSelecionadoAtivo = m.modeloId;
-  urlVerificacao.value = "";
-
-  atualizarPreviewVerificacao();
-  atualizarModalModelos();
-  mostrarToast("QR Code removido");
-};
+  lista.appendChild(div);
+});
 
 
     // ❗ ISSO ESTAVA FALTANDO
