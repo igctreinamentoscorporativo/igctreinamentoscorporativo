@@ -516,13 +516,14 @@ body.modal-open {
 /* 🔓 card ativo */
 .modelo-card.ativo {
   opacity: 1;
-  pointer-events: auto;
+  box-shadow: 0 0 0 2px #2563eb;
 }
 
-/* ações escondidas por padrão */
-.modelo-acoes {
-  display: none;
+.modelo-card {
+  opacity: 0.5;
+  transition: opacity .2s, box-shadow .2s;
 }
+    
 
 /* ações só no card selecionado */
 .modelo-card.ativo .modelo-acoes {
@@ -1101,16 +1102,8 @@ function atualizarModalModelos() {
     const isAtivo = card.dataset.modeloId === modeloSelecionadoAtivo;
     const hasQr   = card.dataset.hasQr === "true";
 
-    // limpa estados visuais
-    card.classList.remove("ativo", "com-qr");
-
-    if (isAtivo) {
-      card.classList.add("ativo");
-    }
-
-    if (hasQr) {
-      card.classList.add("com-qr");
-    }
+    card.classList.toggle("ativo", isAtivo);
+    card.classList.toggle("com-qr", hasQr);
 
     const status = card.querySelector(".status-qrcode");
     if (status) {
@@ -1120,7 +1113,6 @@ function atualizarModalModelos() {
     }
   });
 }
-
 
 
 
@@ -1216,17 +1208,23 @@ atualizarPreviewVerificacao();
   lista.className = "lista-modelos";
 
   dados.forEach(m => {
-    const temURL = !!m.url;
-    const div = document.createElement("div");
+  const temURL = !!m.url;
+  const div = document.createElement("div");
 
-div.className = "modelo-card";   // ✅ AQUI
-div.dataset.modeloId = m.modeloId;
-    // estado inicial do QR POR LINHA
-    div.dataset.hasQr =
-      modelo.value === m.modeloId && urlVerificacao.value
-        ? "true"
-        : "false";
+  div.className = "modelo-card";
+  div.dataset.modeloId = m.modeloId;
 
+  // ✅ AQUI — clique no CARD seleciona o modelo
+  div.onclick = (e) => {
+    // evita disparar quando clicar nos botões
+    if (e.target.tagName === "BUTTON") return;
+
+    modeloSelecionadoAtivo = m.modeloId;
+    modelo.value = m.modeloId;
+
+    atualizarPreviewModelo();
+    atualizarModalModelos();
+  };
     div.innerHTML = `
       <div class="status-qrcode"></div>
 
@@ -1262,28 +1260,36 @@ div.dataset.modeloId = m.modeloId;
     
 
     btnInserir.onclick = () => {
+  if (modeloSelecionadoAtivo !== m.modeloId) {
+    alert("Selecione este modelo antes de inserir o QR Code.");
+    return;
+  }
+
   if (!temURL) return;
 
   document.querySelectorAll(".modelo-card").forEach(c => {
     c.dataset.hasQr = "false";
   });
 
-  urlVerificacao.value = m.url;
   div.dataset.hasQr = "true";
+  urlVerificacao.value = m.url;
 
   atualizarPreviewVerificacao();
   atualizarModalModelos();
 };
 
     btnRemover.onclick = () => {
+  if (modeloSelecionadoAtivo !== m.modeloId) {
+    alert("Selecione este modelo antes de remover o QR Code.");
+    return;
+  }
+
   div.dataset.hasQr = "false";
   urlVerificacao.value = "";
 
   atualizarPreviewVerificacao();
   atualizarModalModelos();
-
 };
-
     // ❗ ISSO ESTAVA FALTANDO
     lista.appendChild(div);
   });
