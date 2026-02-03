@@ -968,6 +968,8 @@ function forcarCaixaAlta() {
 
 async function salvar() {
 
+  
+
 
   // ✅ VALIDAÇÃO DE CAMPOS OBRIGATÓRIOS
 if (
@@ -981,6 +983,10 @@ if (
   alert("⚠️ Preencha todos os campos obrigatórios:\n\n• Nome\n• Turma\n• Carga horária\n• Status\n• Local\n• Data");
   return;
 }
+
+
+  const btnSalvar = document.querySelector(".btn-salvar");
+  btnSalvar.textContent = "Salvando...";  
   
 
   forcarCaixaAlta();
@@ -1022,6 +1028,7 @@ if (!modelo.value || modelo.value.trim().length < 20) {
 
   bloquear(true);
   await carregarCursos(idAtual);
+  btnSalvar.textContent = "Salvar";
 }
 
 
