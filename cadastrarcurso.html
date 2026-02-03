@@ -819,11 +819,19 @@ async function carregarCursos(idManter = null) {
 
 
 function controlarBotoes({ novo, editar, salvar, excluir }) {
+  const cursoAtual = cursos[index];
+
   document.querySelector(".btn-novo").disabled   = !novo;
-  document.querySelector(".btn-editar").disabled = !editar;
   document.querySelector(".btn-salvar").disabled = !salvar;
   document.querySelector(".danger").disabled     = !excluir;
+
+  // ⚠️ editar e duplicar dependem do status
+  const inativo = cursoAtual && String(cursoAtual.ativo).toUpperCase() !== "TRUE";
+
+  document.querySelector(".btn-editar").disabled   = inativo || !editar;
+  document.querySelector(".secondary").disabled    = inativo || !editar;
 }
+
 
   
   
