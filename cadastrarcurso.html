@@ -576,7 +576,7 @@ body.modal-open {
 
   <div class="field">
     <label>Turma</label>
-    <input id="turma" disabled class="uppercase">
+    <input id="turma" disabled class="uppercase" onblur="validarTurma()">
   </div>
 
   <div class="field">
@@ -777,6 +777,46 @@ function aplicarRestricaoInativo(curso) {
 
   
 
+
+// 🔒 REGRA DE NEGÓCIO IMPEDE GRAVAÇÃO DE TURMA COM NOME IGUAL
+
+
+
+function turmaJaExiste(nomeTurma, idAtual = null) {
+  const turmaNormalizada = nomeTurma.trim().toUpperCase();
+
+  return cursosOriginais.some(c => {
+    if (!c.turma) return false;
+
+    const mesmaTurma =
+      c.turma.trim().toUpperCase() === turmaNormalizada;
+
+    const mesmoRegistro =
+      idAtual && String(c.id) === String(idAtual);
+
+    return mesmaTurma && !mesmoRegistro;
+  });
+}
+
+function validarTurma() {
+  const valor = turma.value.trim();
+  if (!valor) return;
+
+  const idAtual = cursoId.value || null;
+
+  if (turmaJaExiste(valor, idAtual)) {
+    alert("⚠️ Já existe uma turma cadastrada com esse nome.\n\nUtilize um nome diferente.");
+    turma.value = "";
+    turma.focus();
+  }
+}
+
+
+
+
+
+  
+  
 
 
   
@@ -1062,6 +1102,13 @@ if (!modelo.value || modelo.value.trim().length < 20) {
   return;
 }
 
+
+
+// 🔒 VALIDAÇÃO DE TURMA ÚNICA
+if (turmaJaExiste(turma.value, cursoId.value || null)) {
+  alert("⚠️ Já existe uma turma cadastrada com esse nome.\n\nAltere o nome da turma para continuar.");
+  return;
+}
 
   
   const curso = {
