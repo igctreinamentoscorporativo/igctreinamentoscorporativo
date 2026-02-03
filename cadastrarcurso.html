@@ -743,6 +743,49 @@ async function login() {
 }, 1500);
 
 }
+
+
+
+
+
+
+
+
+
+
+
+// 🔒 REGRA DE NEGÓCIO CENTRALIZADA IMPEDE EDITAR REGISTROS INATIVOS
+
+function aplicarRestricaoInativo(curso) {
+  const btnEditar   = document.querySelector(".btn-editar");
+  const btnDuplicar = document.querySelector(".secondary");
+
+  const inativo = String(curso.ativo).toUpperCase() !== "TRUE";
+
+  btnEditar.disabled   = inativo;
+  btnDuplicar.disabled = inativo;
+
+  // (opcional UX profissional)
+  btnEditar.title   = inativo ? "Curso inativo não pode ser editado" : "";
+  btnDuplicar.title = inativo ? "Curso inativo não pode ser duplicado" : "";
+}
+
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
   
 async function carregarCursos(idManter = null) {
  cursosOriginais = await fetch(API + "?acao=listarCursosAdmin")
@@ -804,6 +847,17 @@ function preencher(c) {
   atualizarPreviewVerificacao();
   
   contador.innerText = `${index + 1} de ${cursos.length}`;
+
+
+
+
+
+// 🔒 REGRA DE NEGÓCIO CENTRALIZADA IMPEDE EDITAR REGISTROS INATIVOS
+  aplicarRestricaoInativo(c);
+
+
+
+  
 }
 
 
