@@ -681,7 +681,13 @@ let index = 0;
 let modo = "view";
 let cursosOriginais = [];
 let PERMISSOES = [];
-let modeloSelecionadoAtivo = null; 
+
+let estadoModelo = {
+  modeloSelecionado: null,
+  qrPorModelo: {} // { modeloId: url }
+};
+
+  
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -1075,34 +1081,27 @@ function atualizarPreviewVerificacao() {
 
 function atualizarModalModelos() {
   document.querySelectorAll(".modelo-card").forEach(card => {
-    const btnSelecionar = card.querySelector(".btn-id");
-    const btnInserir   = card.querySelector(".btn-url");
-    const btnRemover   = card.querySelector(".btn-remover");
-    const status       = card.querySelector(".status-qrcode");
+    const modeloId = card.dataset.modeloId;
 
-    const ativa = card.dataset.modeloId === modeloSelecionadoAtivo;
-    const hasQr = card.dataset.hasQr === "true";
+    const btnInserir = card.querySelector(".btn-url");
+    const btnRemover = card.querySelector(".btn-remover");
+    const status     = card.querySelector(".status-qrcode");
 
-    // selecionar modelo sempre ativo
-    btnSelecionar.disabled = false;
+    const isAtivo = estadoModelo.modeloSelecionado === modeloId;
+    const temQr   = !!estadoModelo.qrPorModelo[modeloId];
 
-    if (ativa) {
-      btnInserir.disabled = hasQr;
-      btnRemover.disabled = !hasQr;
-      card.style.opacity = "1";
-    } else {
-      btnInserir.disabled = true;
-      btnRemover.disabled = true;
-      card.style.opacity = "0.45";
-    }
+    card.style.opacity = isAtivo ? "1" : "0.45";
 
-    if (status) {
-      status.innerText = hasQr
-        ? "✔ QR Code inserido"
-        : "🔴 QR Code removido";
-    }
+    btnInserir.disabled = !isAtivo || temQr;
+    btnRemover.disabled = !isAtivo || !temQr;
+
+    status.innerText = temQr
+      ? "✔ QR Code inserido"
+      : "🔴 QR Code removido";
   });
 }
+
+
 
 
 
@@ -1184,13 +1183,19 @@ function mostrarToast(msg) {
 
 async function abrirModalModelos() {
 
+  /* ===============================
+     🔒 RESET E SINCRONIZA ESTADO
+     =============================== */
+  estadoModelo.qrPorModelo = {};
+  estadoModelo.modeloSelecionado = modelo.value || null;
 
-  // 🔴 limpa URL sempre que o modal abre
-urlVerificacao.value = "";
-atualizarPreviewVerificacao();
+  if (modelo.value && urlVerificacao.value) {
+    estadoModelo.qrPorModelo[modelo.value] = urlVerificacao.value;
+  }
 
-
-  
+  /* ===============================
+     📥 BUSCA MODELOS
+     =============================== */
   const dados = await fetch(API + "?acao=listarModelosCertificado")
     .then(r => r.json());
 
@@ -1198,22 +1203,20 @@ atualizarPreviewVerificacao();
   lista.innerHTML = "";
   lista.className = "lista-modelos";
 
+  /* ===============================
+     🧱 MONTA CADA CARD
+     =============================== */
   dados.forEach(m => {
-    const temURL = !!m.url;
+
+    const modeloId = m.modeloId;
+    const temURL   = !!m.url;
+
     const div = document.createElement("div");
-
-    div.className = "modelo-card com-qr";
-    div.dataset.modeloId = m.modeloId;
-
-    // estado inicial do QR POR LINHA
-    div.dataset.hasQr =
-      modelo.value === m.modeloId && urlVerificacao.value
-        ? "true"
-        : "false";
+    div.className = "modelo-card";
+    div.dataset.modeloId = modeloId;
 
     div.innerHTML = `
       <div class="status-qrcode"></div>
-
       <div class="modelo-nome">${m.nome}</div>
 
       <div class="modelo-acoes">
@@ -1227,51 +1230,63 @@ atualizarPreviewVerificacao();
     const btnInserir   = div.querySelector(".btn-url");
     const btnRemover   = div.querySelector(".btn-remover");
 
+    /* ===============================
+       🎯 SELECIONAR MODELO
+       (ÚNICA ação que muda modelo ativo)
+       =============================== */
     btnSelecionar.onclick = () => {
-      modeloSelecionadoAtivo = m.modeloId;
-      modelo.value = m.modeloId;
+      estadoModelo.modeloSelecionado = modeloId;
+      modelo.value = modeloId;
 
-      // 🔴 LIMPA URL AO TROCAR MODELO
+      // ao trocar modelo, QR do formulário é limpo
       urlVerificacao.value = "";
-      atualizarPreviewVerificacao();
-      
       atualizarPreviewModelo();
+      atualizarPreviewVerificacao();
+
       atualizarModalModelos();
       mostrarToast("Modelo selecionado");
     };
 
+    /* ===============================
+       ➕ INSERIR QR (isolado por card)
+       =============================== */
     btnInserir.onclick = () => {
       if (!temURL) return;
-      modeloSelecionadoAtivo = m.modeloId;
-      urlVerificacao.value = m.url;
-      div.dataset.hasQr = "true";
-      atualizarPreviewVerificacao();
+
+      estadoModelo.qrPorModelo[modeloId] = m.url;
+
+      // só reflete no formulário se for o modelo ativo
+      if (estadoModelo.modeloSelecionado === modeloId) {
+        urlVerificacao.value = m.url;
+        atualizarPreviewVerificacao();
+      }
+
       atualizarModalModelos();
       mostrarToast("QR Code inserido");
     };
 
+    /* ===============================
+       ➖ REMOVER QR (isolado por card)
+       =============================== */
     btnRemover.onclick = () => {
-      modeloSelecionadoAtivo = m.modeloId;
-      urlVerificacao.value = "";
-      div.dataset.hasQr = "false";
-      atualizarPreviewVerificacao();
+      delete estadoModelo.qrPorModelo[modeloId];
+
+      if (estadoModelo.modeloSelecionado === modeloId) {
+        urlVerificacao.value = "";
+        atualizarPreviewVerificacao();
+      }
+
       atualizarModalModelos();
       mostrarToast("QR Code removido");
     };
 
-    // ❗ ISSO ESTAVA FALTANDO
     lista.appendChild(div);
   });
 
-  if (modelo.value) {
-    modeloSelecionadoAtivo = modelo.value;
-  }
-
   atualizarModalModelos();
 
-
   modalOverlay.classList.add("aberto");
-document.body.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
 }
 
   
