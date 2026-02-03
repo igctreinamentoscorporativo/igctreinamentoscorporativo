@@ -194,28 +194,30 @@ button:disabled {
   position: fixed;
   inset: 0;
   background: rgba(2, 6, 23, 0.85);
-  align-items: center;
-  justify-content: center;
   z-index: 99999;
 
-  display: none; /* 🔒 FECHADO POR PADRÃO */
+  display: none;
+  overflow: hidden;
 }
 
 .modal-overlay.aberto {
-  display: flex;
-}    
+  display: block;
+}
 
 .modal-box {
+  position: relative;
+
   width: min(900px, 95vw);
-  max-height: 90vh;
+  height: 90vh;              /* 🔥 NÃO use max-height */
+  margin: 5vh auto;
+
   background: #020617;
   border-radius: 14px;
   box-shadow: 0 30px 80px rgba(0,0,0,.6);
 
   display: flex;
   flex-direction: column;
-
-  overflow: hidden; /* 🔒 importantíssimo */
+  overflow: hidden;
 }
 
 /* HEADER */
@@ -257,11 +259,12 @@ button:disabled {
 .modal-content {
   padding: 16px;
 
-  flex: 1;                 /* 🔥 ocupa o espaço disponível */
-  overflow-y: auto;        /* 🔥 scroll vertical */
-  min-height: 0;           /* 🔥 ESSENCIAL em flexbox */
-  
+  flex: 1;
+  overflow-y: scroll;        /* 🔥 scroll FORÇADO */
+  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+
+  touch-action: pan-y;       /* 🔥 ESSENCIAL */
 }
 
     
@@ -1150,8 +1153,11 @@ function fecharModal() {
     card.querySelectorAll("button").forEach(btn => btn.disabled = false);
   });
 
-  modalOverlay.classList.remove("aberto");
-  document.body.classList.remove("modal-open");
+  
+
+modalOverlay.classList.remove("aberto");
+document.body.style.overflow = "";
+  
 }
 
 
@@ -1265,8 +1271,10 @@ atualizarPreviewVerificacao();
   }
 
   atualizarModalModelos();
+
+
   modalOverlay.classList.add("aberto");
-  document.body.classList.add("modal-open");
+document.body.style.overflow = "hidden";
 }
 
   
