@@ -519,6 +519,16 @@ body.modal-open {
   pointer-events: auto;
 }
 
+/* ações escondidas por padrão */
+.modelo-acoes {
+  display: none;
+}
+
+/* ações só no card selecionado */
+.modelo-card.ativo .modelo-acoes {
+  display: flex;
+}
+    
     
   </style>
 </head>
@@ -1091,17 +1101,15 @@ function atualizarModalModelos() {
     const isAtivo = card.dataset.modeloId === modeloSelecionadoAtivo;
     const hasQr   = card.dataset.hasQr === "true";
 
-    // limpa estados
-    card.classList.remove("ativo", "bloqueado", "com-qr");
-
-    if (hasQr) {
-      card.classList.add("com-qr");
-    }
+    // limpa estados visuais
+    card.classList.remove("ativo", "com-qr");
 
     if (isAtivo) {
       card.classList.add("ativo");
-    } else {
-      card.classList.add("bloqueado");
+    }
+
+    if (hasQr) {
+      card.classList.add("com-qr");
     }
 
     const status = card.querySelector(".status-qrcode");
@@ -1240,7 +1248,7 @@ div.dataset.modeloId = m.modeloId;
   modeloSelecionadoAtivo = m.modeloId;
   modelo.value = m.modeloId;
 
-  // 🔴 sempre zera QR ao trocar modelo
+  // trocar modelo limpa QR
   document.querySelectorAll(".modelo-card").forEach(c => {
     c.dataset.hasQr = "false";
   });
@@ -1260,7 +1268,6 @@ div.dataset.modeloId = m.modeloId;
     c.dataset.hasQr = "false";
   });
 
-  modeloSelecionadoAtivo = m.modeloId;
   urlVerificacao.value = m.url;
   div.dataset.hasQr = "true";
 
@@ -1274,6 +1281,7 @@ div.dataset.modeloId = m.modeloId;
 
   atualizarPreviewVerificacao();
   atualizarModalModelos();
+
 };
 
     // ❗ ISSO ESTAVA FALTANDO
