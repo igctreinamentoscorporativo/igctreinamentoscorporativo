@@ -506,6 +506,19 @@ body.modal-open {
     padding-bottom: 12px;
   }
     }
+
+/* 🔒 card bloqueado */
+.modelo-card.bloqueado {
+  opacity: 0.35;
+  pointer-events: none; /* 🔥 mata QUALQUER interação */
+}
+
+/* 🔓 card ativo */
+.modelo-card.ativo {
+  opacity: 1;
+  pointer-events: auto;
+}
+
     
   </style>
 </head>
@@ -1075,37 +1088,27 @@ function atualizarPreviewVerificacao() {
 
 function atualizarModalModelos() {
   document.querySelectorAll(".modelo-card").forEach(card => {
-    const btnSelecionar = card.querySelector(".btn-id");
-    const btnInserir   = card.querySelector(".btn-url");
-    const btnRemover   = card.querySelector(".btn-remover");
-    const status       = card.querySelector(".status-qrcode");
-
     const isAtivo = card.dataset.modeloId === modeloSelecionadoAtivo;
     const hasQr   = card.dataset.hasQr === "true";
 
-    // 🔥 CONTROLE VISUAL REAL
+    // limpa estados
+    card.classList.remove("ativo", "bloqueado", "com-qr");
+
     if (hasQr) {
       card.classList.add("com-qr");
-    } else {
-      card.classList.remove("com-qr");
     }
 
+    if (isAtivo) {
+      card.classList.add("ativo");
+    } else {
+      card.classList.add("bloqueado");
+    }
+
+    const status = card.querySelector(".status-qrcode");
     if (status) {
       status.innerText = hasQr
         ? "✔ QR Code inserido"
         : "🔴 QR Code removido";
-    }
-
-    if (isAtivo) {
-      btnSelecionar.disabled = true;
-      btnInserir.disabled   = hasQr;
-      btnRemover.disabled   = !hasQr;
-      card.style.opacity    = "1";
-    } else {
-      btnSelecionar.disabled = false;
-      btnInserir.disabled   = true;
-      btnRemover.disabled   = true;
-      card.style.opacity    = "0.45";
     }
   });
 }
@@ -1234,28 +1237,25 @@ div.dataset.modeloId = m.modeloId;
 
     
     btnSelecionar.onclick = () => {
+  modeloSelecionadoAtivo = m.modeloId;
+  modelo.value = m.modeloId;
 
-  // 🔥 zera TODOS os QR
+  // 🔴 sempre zera QR ao trocar modelo
   document.querySelectorAll(".modelo-card").forEach(c => {
     c.dataset.hasQr = "false";
   });
 
-  modeloSelecionadoAtivo = m.modeloId;
-  modelo.value = m.modeloId;
-
   urlVerificacao.value = "";
-  atualizarPreviewVerificacao();
   atualizarPreviewModelo();
+  atualizarPreviewVerificacao();
 
   atualizarModalModelos();
 };
-
     
 
     btnInserir.onclick = () => {
   if (!temURL) return;
 
-  // 🔥 remove QR de todos
   document.querySelectorAll(".modelo-card").forEach(c => {
     c.dataset.hasQr = "false";
   });
@@ -1269,13 +1269,12 @@ div.dataset.modeloId = m.modeloId;
 };
 
     btnRemover.onclick = () => {
-      modeloSelecionadoAtivo = m.modeloId;
-      urlVerificacao.value = "";
-      div.dataset.hasQr = "false";
-      atualizarPreviewVerificacao();
-      atualizarModalModelos();
-      mostrarToast("QR Code removido");
-    };
+  div.dataset.hasQr = "false";
+  urlVerificacao.value = "";
+
+  atualizarPreviewVerificacao();
+  atualizarModalModelos();
+};
 
     // ❗ ISSO ESTAVA FALTANDO
     lista.appendChild(div);
