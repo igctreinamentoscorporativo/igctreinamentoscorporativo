@@ -1080,24 +1080,28 @@ function atualizarModalModelos() {
     const btnRemover   = card.querySelector(".btn-remover");
     const status       = card.querySelector(".status-qrcode");
 
-    const ativa = card.dataset.modeloId === modeloSelecionadoAtivo;
-const hasQr = card.dataset.hasQr === "true";
+    const isAtivo = card.dataset.modeloId === modeloSelecionadoAtivo;
+    const hasQr   = card.dataset.hasQr === "true";
 
-if (ativa) {
-  btnSelecionar.disabled = true;   // 🔒 evita re-seleção
-  btnInserir.disabled   = hasQr;   // se já tem QR, não insere
-  btnRemover.disabled   = !hasQr;
-  card.style.opacity    = "1";
-} else {
-  btnSelecionar.disabled = false;
-  btnInserir.disabled   = true;
-  btnRemover.disabled   = true;
-  card.style.opacity    = "0.4";
-}
+    // STATUS
     if (status) {
       status.innerText = hasQr
         ? "✔ QR Code inserido"
         : "🔴 QR Code removido";
+    }
+
+    if (isAtivo) {
+      // 🔒 card ativo
+      btnSelecionar.disabled = true;
+      btnInserir.disabled   = hasQr;
+      btnRemover.disabled   = !hasQr;
+      card.style.opacity    = "1";
+    } else {
+      // 🔒 todos os outros
+      btnSelecionar.disabled = false;
+      btnInserir.disabled   = true;
+      btnRemover.disabled   = true;
+      card.style.opacity    = "0.45";
     }
   });
 }
@@ -1225,9 +1229,10 @@ atualizarPreviewVerificacao();
     const btnInserir   = div.querySelector(".btn-url");
     const btnRemover   = div.querySelector(".btn-remover");
 
+    
     btnSelecionar.onclick = () => {
 
-  // 🔴 DESATIVA TODOS OS CARDS
+  // 🔥 zera TODOS os QR
   document.querySelectorAll(".modelo-card").forEach(c => {
     c.dataset.hasQr = "false";
   });
@@ -1237,29 +1242,27 @@ atualizarPreviewVerificacao();
 
   urlVerificacao.value = "";
   atualizarPreviewVerificacao();
-
   atualizarPreviewModelo();
+
   atualizarModalModelos();
-  mostrarToast("Modelo selecionado");
 };
+
+    
 
     btnInserir.onclick = () => {
   if (!temURL) return;
 
-  // 🔴 limpa QR de todos
+  // 🔥 remove QR de todos
   document.querySelectorAll(".modelo-card").forEach(c => {
     c.dataset.hasQr = "false";
   });
 
   modeloSelecionadoAtivo = m.modeloId;
   urlVerificacao.value = m.url;
-
-  // ✅ QR pertence SOMENTE a este card
   div.dataset.hasQr = "true";
 
   atualizarPreviewVerificacao();
   atualizarModalModelos();
-  mostrarToast("QR Code inserido");
 };
 
     btnRemover.onclick = () => {
