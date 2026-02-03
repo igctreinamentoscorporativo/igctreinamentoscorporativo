@@ -1083,7 +1083,13 @@ function atualizarModalModelos() {
     const isAtivo = card.dataset.modeloId === modeloSelecionadoAtivo;
     const hasQr   = card.dataset.hasQr === "true";
 
-    // STATUS
+    // 🔥 CONTROLE VISUAL REAL
+    if (hasQr) {
+      card.classList.add("com-qr");
+    } else {
+      card.classList.remove("com-qr");
+    }
+
     if (status) {
       status.innerText = hasQr
         ? "✔ QR Code inserido"
@@ -1091,13 +1097,11 @@ function atualizarModalModelos() {
     }
 
     if (isAtivo) {
-      // 🔒 card ativo
       btnSelecionar.disabled = true;
       btnInserir.disabled   = hasQr;
       btnRemover.disabled   = !hasQr;
       card.style.opacity    = "1";
     } else {
-      // 🔒 todos os outros
       btnSelecionar.disabled = false;
       btnInserir.disabled   = true;
       btnRemover.disabled   = true;
@@ -1204,9 +1208,8 @@ atualizarPreviewVerificacao();
     const temURL = !!m.url;
     const div = document.createElement("div");
 
-    div.className = "modelo-card com-qr";
-    div.dataset.modeloId = m.modeloId;
-
+div.className = "modelo-card";   // ✅ AQUI
+div.dataset.modeloId = m.modeloId;
     // estado inicial do QR POR LINHA
     div.dataset.hasQr =
       modelo.value === m.modeloId && urlVerificacao.value
