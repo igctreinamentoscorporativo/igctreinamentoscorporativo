@@ -968,6 +968,21 @@ function forcarCaixaAlta() {
 
 async function salvar() {
 
+
+  // ✅ VALIDAÇÃO DE CAMPOS OBRIGATÓRIOS
+if (
+  !nome.value.trim() ||
+  !turma.value.trim() ||
+  !carga.value.trim() ||
+  !ativo.value ||
+  !local.value.trim() ||
+  !data.value.trim()
+) {
+  alert("⚠️ Preencha todos os campos obrigatórios:\n\n• Nome\n• Turma\n• Carga horária\n• Status\n• Local\n• Data");
+  return;
+}
+  
+
   forcarCaixaAlta();
 
   const cargaNumerica = carga.value.replace(/\D/g, "");
