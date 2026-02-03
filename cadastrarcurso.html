@@ -506,6 +506,25 @@ body.modal-open {
     padding-bottom: 12px;
   }
     }
+
+
+/* cards não ativos */
+.modelo-card.inativo {
+  opacity: 0.35;
+}
+
+/* bloqueia interação TOTAL */
+.modelo-card.inativo * {
+  pointer-events: none;
+}
+
+/* mantém botão selecionar clicável */
+.modelo-card.inativo .btn-id {
+  pointer-events: auto;
+}
+
+
+
     
   </style>
 </head>
@@ -1084,23 +1103,11 @@ function atualizarPreviewVerificacao() {
 function atualizarModalModelos() {
   document.querySelectorAll(".modelo-card").forEach(card => {
     const modeloId = card.dataset.modeloId;
-
-    const btnSelecionar = card.querySelector(".btn-id");
-    const btnInserir   = card.querySelector(".btn-url");
-    const btnRemover   = card.querySelector(".btn-remover");
-    const status       = card.querySelector(".status-qrcode");
+    const status   = card.querySelector(".status-qrcode");
 
     const ativo = modeloId === estadoModal.modeloId;
 
-    // Selecionar modelo sempre ativo
-    btnSelecionar.disabled = false;
-
-    // QR só no modelo ativo
-    btnInserir.disabled = !ativo;
-    btnRemover.disabled = !ativo;
-
-    // Feedback visual
-    card.style.opacity = ativo ? "1" : "0.4";
+    card.classList.toggle("inativo", !ativo);
 
     if (status) {
       status.innerText =
@@ -1110,6 +1117,7 @@ function atualizarModalModelos() {
     }
   });
 }
+
 
 
 
