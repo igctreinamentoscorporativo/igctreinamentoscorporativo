@@ -1107,6 +1107,7 @@ if (!modelo.value || modelo.value.trim().length < 20) {
 // 🔒 VALIDAÇÃO DE TURMA ÚNICA
 if (turmaJaExiste(turma.value, cursoId.value || null)) {
   alert("⚠️ Já existe uma turma cadastrada com esse nome.\n\nAltere o nome da turma para continuar.");
+  btnSalvar.textContent = "Salvar";
   return;
 }
 
