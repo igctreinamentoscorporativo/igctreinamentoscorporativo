@@ -2,7 +2,7 @@
 
 window.IGC_CONFIG = {
   APPS_SCRIPT_BASE:
-    "https://script.google.com/macros/s/AKfycbxsKkZqgnIW_dT7EVX4JaTf3qclcdMzBkmiUQKZARZOwteOR57xelZjvsVNpD7F5OAM3g/exec",
+    "https://script.google.com/macros/s/AKfycbz98BFy1OQ1xYFG64fQCVNpdSaXyVBev_-pj8m2SB9d9Qlvwva-Fthh1olob69aWo6GOQ/exec",
 
   APPS: {
     ADMIN: "admin",
