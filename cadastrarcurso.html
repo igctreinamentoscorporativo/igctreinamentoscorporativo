@@ -737,6 +737,7 @@ async function login() {
 
   // carrega dados
   await carregarCursos();
+  await carregarApostilas();
 
   // delay padrão do sistema
   setTimeout(() => {
@@ -1021,6 +1022,8 @@ function next() {
 function novo () {
   modo = "novo";
 
+  await carregarApostilas();
+  
   cursoId.value = "";
 
   document.querySelectorAll(
@@ -1158,7 +1161,7 @@ if (turmaJaExiste(turma.value, cursoId.value || null)) {
     obs: obs.value,
     ativo: ativo.value === "TRUE",
     modelo: modelo.value,
-    urlVerificacao: urlVerificacao.value
+    urlVerificacao: urlVerificacao.value,
     apostilaId: document.getElementById("apostilaId").value || ""
   };
 
