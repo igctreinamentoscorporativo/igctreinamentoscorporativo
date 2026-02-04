@@ -613,15 +613,31 @@ body.modal-open {
     <textarea id="obs" disabled class="uppercase"></textarea>
   </div>
 
-  <div class="field span-2">
+  <div class="field">
   <label></label>
   <div style="display:flex; gap:8px;">
     <input id="modelo" disabled class="hidden-input">
     
     <button  id="btnVerModelo"  type="button"   onclick="abrirModalModelos()"   disabled>Selecione Modelo Certificado & se QRcode</button>
     </div>
-   
     </div>
+
+
+
+  
+  <div class="field">
+  <label>Selecionar Apostila do Curso</label>
+
+  <select id="apostilaSelect" disabled onchange="selecionarApostila()">
+    <option value="">— Nenhuma apostila —</option>
+  </select>
+
+  <!-- guarda SOMENTE o ID do Drive -->
+  <input type="hidden" id="apostilaId">
+</div>
+
+    
+   
 
 
   <div class="field">
