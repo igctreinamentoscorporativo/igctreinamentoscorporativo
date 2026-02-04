@@ -762,10 +762,27 @@ async function login() {
 
 
 
+async function carregarApostilas() {
+  const res = await fetch(API + "?acao=listarApostilas")
+    .then(r => r.json());
+
+  const select = document.getElementById("apostilaSelect");
+  select.innerHTML = `<option value="">— Nenhuma apostila —</option>`;
+
+  res.forEach(a => {
+    const opt = document.createElement("option");
+    opt.value = a.pdfId;         // ID DO DRIVE
+    opt.textContent = a.nome;   // NOME VISÍVEL
+    select.appendChild(opt);
+  });
+}
 
 
 
-
+function selecionarApostila() {
+  const select = document.getElementById("apostilaSelect");
+  document.getElementById("apostilaId").value = select.value || "";
+}
 
 
 
@@ -906,6 +923,8 @@ function preencher(c) {
   : "FALSE";
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
+  apostilaId.value = c.apostilaId || "";
+  apostilaSelect.value = c.apostilaId || "";
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -964,6 +983,7 @@ function bloquear(b) {
 
   // 🔒 botão do modal segue o modo
   document.getElementById("btnVerModelo").disabled = b;
+  document.getElementById("apostilaSelect").disabled = b;
 }
 
 
@@ -1139,6 +1159,7 @@ if (turmaJaExiste(turma.value, cursoId.value || null)) {
     ativo: ativo.value === "TRUE",
     modelo: modelo.value,
     urlVerificacao: urlVerificacao.value
+    apostilaId: document.getElementById("apostilaId").value || ""
   };
 
   const idAtual = curso.id;
