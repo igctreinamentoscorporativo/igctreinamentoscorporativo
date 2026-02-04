@@ -613,6 +613,64 @@ body.modal-open {
     <textarea id="obs" disabled class="uppercase"></textarea>
   </div>
 
+
+
+
+
+
+<div class="field">
+  <label>Apostila 1 (principal)</label>
+  <select id="apostila1" disabled>
+    <option value="">— Nenhuma —</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>Apostila 2 (opcional)</label>
+  <select id="apostila2" disabled>
+    <option value="">— Nenhuma —</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>Apostila 3 (opcional)</label>
+  <select id="apostila3" disabled>
+    <option value="">— Nenhuma —</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>Apostila 4 (opcional)</label>
+  <select id="apostila4" disabled>
+    <option value="">— Nenhuma —</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>Apostila 5 (opcional)</label>
+  <select id="apostila5" disabled>
+    <option value="">— Nenhuma —</option>
+  </select>
+</div>
+
+<div class="field">
+  <label>Apostila 6 (opcional)</label>
+  <select id="apostila6" disabled>
+    <option value="">— Nenhuma —</option>
+  </select>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
   <div class="field">
   <label></label>
   <div style="display:flex; gap:8px;">
@@ -622,19 +680,7 @@ body.modal-open {
     </div>
     </div>
 
-
-
-  
-  <div class="field">
-  <label>Selecionar Apostila do Curso</label>
-
-  <select id="apostilaSelect" disabled onchange="selecionarApostila()">
-    <option value="">— Nenhuma apostila —</option>
-  </select>
-
-  <!-- guarda SOMENTE o ID do Drive -->
-  <input type="hidden" id="apostilaId">
-</div>
+ 
 
     
    
@@ -736,8 +782,9 @@ async function login() {
   loadingBox.style.display = "flex";
 
   // carrega dados
-  await carregarCursos();
   await carregarApostilas();
+  await carregarCursos();
+  
 
   // delay padrão do sistema
   setTimeout(() => {
@@ -767,23 +814,22 @@ async function carregarApostilas() {
   const res = await fetch(API + "?acao=listarApostilas")
     .then(r => r.json());
 
-  const select = document.getElementById("apostilaSelect");
-  select.innerHTML = `<option value="">— Nenhuma apostila —</option>`;
+  for (let i = 1; i <= 6; i++) {
+    const select = document.getElementById(`apostila${i}`);
 
-  res.forEach(a => {
-    const opt = document.createElement("option");
-    opt.value = a.pdfId;         // ID DO DRIVE
-    opt.textContent = a.nome;   // NOME VISÍVEL
-    select.appendChild(opt);
-  });
+    select.innerHTML = `<option value="">— Nenhuma —</option>`;
+
+    res.forEach(a => {
+      const opt = document.createElement("option");
+      opt.value = a.pdfId;      // 🔑 ID REAL
+      opt.textContent = a.nome; // 👁️ VISUAL
+      select.appendChild(opt);
+    });
+  }
 }
 
 
 
-function selecionarApostila() {
-  const select = document.getElementById("apostilaSelect");
-  document.getElementById("apostilaId").value = select.value || "";
-}
 
 
 
@@ -924,8 +970,18 @@ function preencher(c) {
   : "FALSE";
   modelo.value = c.modelo || "";
   urlVerificacao.value = c.urlVerificacao || "";
-  apostilaId.value = c.apostilaId || "";
-  apostilaSelect.value = c.apostilaId || "";
+  apostila1.value = c.apostilas?.[0] || "";
+  apostila2.value = c.apostilas?.[1] || "";
+  apostila3.value = c.apostilas?.[2] || "";
+  apostila4.value = c.apostilas?.[3] || "";
+  apostila5.value = c.apostilas?.[4] || "";
+  apostila6.value = c.apostilas?.[5] || "";
+  
+
+
+
+
+  
 
   atualizarPreviewModelo();
   atualizarPreviewVerificacao();
@@ -1152,18 +1208,25 @@ if (turmaJaExiste(turma.value, cursoId.value || null)) {
 
   
   const curso = {
-    id: cursoId.value || null,
-    nome: nome.value,
-    turma: turma.value,
-    carga: cargaFormatada,
-    local: local.value,
-    data: data.value,
-    obs: obs.value,
-    ativo: ativo.value === "TRUE",
-    modelo: modelo.value,
-    urlVerificacao: urlVerificacao.value,
-    apostilaId: document.getElementById("apostilaId").value || ""
-  };
+  id: cursoId.value || null,
+  nome: nome.value,
+  turma: turma.value,
+  carga: cargaFormatada,
+  local: local.value,
+  data: data.value,
+  obs: obs.value,
+  ativo: ativo.value === "TRUE",
+  modelo: modelo.value,
+  urlVerificacao: urlVerificacao.value,
+
+  apostilaId1: apostila1.value || "",
+  apostilaId2: apostila2.value || "",
+  apostilaId3: apostila3.value || "",
+  apostilaId4: apostila4.value || "",
+  apostilaId5: apostila5.value || "",
+  apostilaId6: apostila6.value || ""
+};
+
 
   const idAtual = curso.id;
 
