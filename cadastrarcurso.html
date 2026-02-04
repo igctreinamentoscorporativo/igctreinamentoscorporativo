@@ -826,6 +826,17 @@ async function carregarApostilas() {
       select.appendChild(opt);
     });
   }
+
+// 🔗 liga regra de sequência
+  for (let i = 1; i <= 6; i++) {
+    document
+      .getElementById(`apostila${i}`)
+      .addEventListener("change", controlarSequenciaApostilas);
+  }
+
+  controlarSequenciaApostilas(); // estado inicial
+
+  
 }
 
 
@@ -953,6 +964,34 @@ function controlarBotoes({ novo, editar, salvar, excluir }) {
 }
 
 
+
+
+function controlarSequenciaApostilas() {
+  for (let i = 1; i <= 6; i++) {
+    const atual = document.getElementById(`apostila${i}`);
+    const anterior = document.getElementById(`apostila${i - 1}`);
+
+    if (i === 1) {
+      atual.disabled = false;
+      continue;
+    }
+
+    if (!anterior.value) {
+      atual.value = "";
+      atual.disabled = true;
+    } else {
+      atual.disabled = false;
+    }
+  }
+}
+
+
+
+
+
+
+
+  
   
   
 function preencher(c) {
@@ -994,7 +1033,7 @@ function preencher(c) {
 
 // 🔒 REGRA DE NEGÓCIO CENTRALIZADA IMPEDE EDITAR REGISTROS INATIVOS
   aplicarRestricaoInativo(c);
-
+  controlarSequenciaApostilas();
 
 
   
@@ -1103,6 +1142,10 @@ controlarBotoes({
     excluir: false
   });
  document.getElementById("btnVerModelo").disabled = false; 
+
+// 🔐 aplica regra de sequência das apostilas
+controlarSequenciaApostilas();
+  
 }
 
 
@@ -1126,6 +1169,10 @@ function editar() {
   });
 
   document.getElementById("btnVerModelo").disabled = false;
+
+// 🔐 reaplica regra de sequência
+controlarSequenciaApostilas();
+  
 }
 
 
@@ -1181,6 +1228,12 @@ if (
   return;
 }
 
+
+if (!apostila1.value) {
+  alert("⚠️ A Apostila 1 (principal) é obrigatória.");
+  return;
+}  
+  
 
   const btnSalvar = document.querySelector(".btn-salvar");
   btnSalvar.textContent = "Salvando...";  
@@ -1450,6 +1503,15 @@ async function abrirModalModelos() {
   
 modelo.addEventListener("input", atualizarPreviewModelo);
 urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
+
+
+
+
+
+
+
+
+
   
   
 </script>
