@@ -32,23 +32,23 @@
 <script>
   const iframe = document.getElementById("adminFrame");
 
-  // define a URL do Apps Script
   iframe.src =
     `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
 
-  // ⚠️ senha que JÁ FOI validada no site
-  const SENHA_LOGADA_NO_SITE = localStorage.getItem("IGC_SENHA");
-
   iframe.onload = () => {
-    if (!SENHA_LOGADA_NO_SITE) return;
+    const senha = localStorage.getItem("IGC_SENHA");
+    if (!senha) return;
+
+    // 🔥 PEGA O ORIGIN REAL DO IFRAME
+    const targetOrigin = new URL(iframe.src).origin;
 
     iframe.contentWindow.postMessage(
-  {
-    tipo: "AUTO_LOGIN",
-    senha: SENHA_LOGADA_NO_SITE
-  },
-  "https://script.googleusercontent.com"
-);
+      {
+        tipo: "AUTO_LOGIN",
+        senha
+      },
+      targetOrigin
+    );
   };
 </script>
 
