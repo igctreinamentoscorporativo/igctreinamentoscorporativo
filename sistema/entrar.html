@@ -82,9 +82,10 @@ html, body {
 /* ================= SHELL ================= */
 #appBox {
   display: none;
-  min-height: 100vh;
+  height: 100vh;            /* 🔑 chave */
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* HEADER */
@@ -183,7 +184,7 @@ html, body {
 /* ================= IFRAME ================= */
 .content {
   flex: 1;
-  position: relative;
+  height: calc(100vh - 56px); /* 56px = altura do header */
 }
 
 #moduloFrame {
@@ -373,6 +374,7 @@ function login() {
   setTimeout(() => {
     loadingBox.style.display = "none";
     appBox.style.display = "flex";
+    document.body.style.overflow = "hidden"; // 🔒 trava scroll do body
   }, 1200);
 }
 
