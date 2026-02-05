@@ -1235,10 +1235,7 @@ if (!apostila1.value) {
 }  
   
 
-  const btnSalvar = document.querySelector(".btn-salvar");
-  btnSalvar.textContent = "Salvando...";  
   
-
   forcarCaixaAlta();
 
   const cargaNumerica = carga.value.replace(/\D/g, "");
@@ -1259,6 +1256,9 @@ if (turmaJaExiste(turma.value, cursoId.value || null)) {
   return;
 }
 
+
+ const btnSalvar = document.querySelector(".btn-salvar");
+ btnSalvar.textContent = "Salvando...";  
   
   const curso = {
   id: cursoId.value || null,
