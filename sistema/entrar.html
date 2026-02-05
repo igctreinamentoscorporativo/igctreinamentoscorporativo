@@ -321,24 +321,71 @@ html, body {
   <a onclick="abrirModulo('/sistema/indicacaoporemail.html')">Indicar por e-mail</a>
 </div>
 
+<script src="/js/igc-config.js"></script>
+
+
 <script>
-function login() {
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+let SENHA = "";
+let PERFIL = "";
+let PERMISSOES = [];
+
+async function login() {
   const senha = senhaLogin.value.trim();
+  loginErro.innerText = "";
+
   if (!senha) {
     loginErro.innerText = "Informe a senha.";
     return;
   }
 
-  loginBox.style.display = "none";
-  loadingBox.style.display = "flex";
+  try {
+    const res = await fetch(API, {
+      method: "POST",
+      body: JSON.stringify({
+        acao: "loginCursos",
+        senha
+      })
+    }).then(r => r.json());
 
-  setTimeout(() => {
-    loadingBox.style.display = "none";
-    appBox.style.display = "flex";
-    document.body.style.overflow = "hidden";
-  }, 1200);
+    if (!res.ok) {
+      loginErro.innerText = "Senha inválida.";
+      return;
+    }
+
+    // 🔐 opcional: controle por permissão
+    if (!res.permissoes || !res.permissoes.length) {
+      loginErro.innerText = "Usuário sem permissões.";
+      return;
+    }
+
+    // ✅ LOGIN OK
+    SENHA = senha;
+    PERFIL = res.perfil || "";
+    PERMISSOES = res.permissoes || [];
+
+    // some login
+    loginBox.style.display = "none";
+
+    // loading
+    loadingBox.style.display = "flex";
+
+    setTimeout(() => {
+      loadingBox.style.display = "none";
+      appBox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }, 1200);
+
+  } catch (err) {
+    console.error(err);
+    loginErro.innerText = "Erro ao validar acesso.";
+  }
 }
 
+  
+
+ 
 function abrirModulo(url) {
   home.style.display = "none";
   moduloFrame.style.display = "block";
