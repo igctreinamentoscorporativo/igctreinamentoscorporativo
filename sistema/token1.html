@@ -175,26 +175,25 @@ button:active {
   
 <script>
 
-
 const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
-let SENHA = "";
-let PERFIL = "";
-let PERMISSOES = [];
-
-
 async function login() {
-  const senha = senhaLogin.value.trim();
-  loginErro.innerText = "";
+  const senhaInput = document.getElementById("senha");
+  const loginBox   = document.getElementById("login");
+  const loadingBox = document.getElementById("loading");
+  const appBox     = document.getElementById("app");
+
+  const senha = senhaInput.value.trim();
 
   if (!senha) {
-    loginErro.innerText = "Informe a senha.";
+    alert("Informe a senha.");
     return;
   }
 
   try {
     const res = await fetch(API, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         acao: "loginCursos",
         senha
@@ -202,41 +201,44 @@ async function login() {
     }).then(r => r.json());
 
     if (!res.ok) {
-      loginErro.innerText = "Senha inválida.";
+      alert("Senha inválida.");
       return;
     }
 
-    // 🔐 opcional: controle por permissão
-    if (!res.permissoes || !res.permissoes.length) {
-      loginErro.innerText = "Usuário sem permissões.";
+    // 🔎 pega vendedor SEM quebrar nada
+    const vendedor =
+      res.perfil ||
+      res.responsavel ||
+      res.vendedor ||
+      "";
+
+    if (!vendedor) {
+      alert("Erro: usuário sem identificação");
       return;
     }
 
-    // ✅ LOGIN OK
-    SENHA = senha;
-    PERFIL = res.perfil || "";
-    PERMISSOES = res.permissoes || [];
+    // 🔐 salva senha (como você já fazia)
+    localStorage.setItem("IGC_SENHA", senha);
 
-    // ✅ SALVA A SENHA (AQUI É O ÚNICO LUGAR CERTO)
-  localStorage.setItem("IGC_SENHA", senha);
+    // UI
+    loginBox.classList.add("hidden");
+    loadingBox.classList.remove("hidden");
 
-    // some login
-    loginBox.style.display = "none";
-
-    // loading
-    loadingBox.style.display = "flex";
+    document.getElementById("idPlanilha").value = vendedor;
+    document.getElementById("nomeVendedor").textContent = vendedor;
+    document.getElementById("idPlanilha").readOnly = true;
 
     setTimeout(() => {
-      loadingBox.style.display = "none";
-      appBox.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    }, 1200);
+      loadingBox.classList.add("hidden");
+      appBox.classList.remove("hidden");
+    }, 800);
 
-  } catch (err) {
-    console.error(err);
-    loginErro.innerText = "Erro ao validar acesso.";
+  } catch (e) {
+    console.error(e);
+    alert("Erro ao validar acesso.");
   }
 }
+
 
 
 
