@@ -30,38 +30,43 @@
 </iframe>
 
 
-  <script>
+ <script>
   const iframe = document.getElementById("adminFrame");
 
   iframe.src =
     `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
 
   const SENHA_LOGADA_NO_SITE = localStorage.getItem("IGC_SENHA");
-  if (!SENHA_LOGADA_NO_SITE) return;
 
-  let tentativas = 0;
-  const MAX = 10;
+  // 👇 NÃO usa return fora de função
+  if (SENHA_LOGADA_NO_SITE) {
 
-  const timer = setInterval(() => {
-    try {
-      iframe.contentWindow.postMessage(
-        {
-          tipo: "AUTO_LOGIN",
-          senha: SENHA_LOGADA_NO_SITE
-        },
-        "*"
-      );
+    let tentativas = 0;
+    const MAX = 10;
 
-      tentativas++;
+    const timer = setInterval(() => {
+      try {
+        iframe.contentWindow.postMessage(
+          {
+            tipo: "AUTO_LOGIN",
+            senha: SENHA_LOGADA_NO_SITE
+          },
+          "*"
+        );
 
-      if (tentativas >= MAX) {
-        clearInterval(timer);
+        tentativas++;
+
+        if (tentativas >= MAX) {
+          clearInterval(timer);
+        }
+      } catch (e) {
+        // iframe ainda não pronto
       }
-    } catch (e) {
-      // iframe ainda não pronto — ignora
-    }
-  }, 500);
+    }, 500);
+
+  }
 </script>
+
 
 
 
