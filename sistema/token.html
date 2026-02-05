@@ -29,13 +29,36 @@
   allowfullscreen>
 </iframe>
 
+<script src="/js/igc-config.js"></script>
+
+<iframe
+  id="adminFrame"
+  allowfullscreen>
+</iframe>
+
 <script>
-document.getElementById("adminFrame").src =
-  `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
+  const iframe = document.getElementById("adminFrame");
 
-  
+  // define a URL do Apps Script
+  iframe.src =
+    `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
 
+  // ⚠️ senha que JÁ FOI validada no site
+  const SENHA_LOGADA_NO_SITE = localStorage.getItem("IGC_SENHA");
+
+  iframe.onload = () => {
+    if (!SENHA_LOGADA_NO_SITE) return;
+
+    iframe.contentWindow.postMessage(
+      {
+        tipo: "AUTO_LOGIN",
+        senha: SENHA_LOGADA_NO_SITE
+      },
+      "*" // depois podemos restringir domínio
+    );
+  };
 </script>
+
 
 </body>
 </html>
