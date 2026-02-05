@@ -11,5 +11,5 @@
     if (typeof login === "function") {
       login();
     }
-  }, 300);
+  }, 100);
 })();
