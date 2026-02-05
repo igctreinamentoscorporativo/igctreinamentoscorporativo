@@ -488,6 +488,7 @@ if (
     document.getElementById("mCarga").innerText = CARGA_HORARIA || "-";
     document.getElementById("mLocal").innerText = LOCAL_CURSO || "-";
     document.getElementById("mData").innerText = DATA_HORARIO_CURSO || "-";
+    document.getElementById("mNomeIntro").innerText = nomeEl.value.split(" ")[0];
 
     document.getElementById("modal").style.display = "flex";
   }
@@ -514,15 +515,17 @@ function fecharModal() {
 <div class="modal" id="modal">
   <div class="modal-content">
     <h3>🎉 Parabéns por esta escolha!</h3>
-    <p><b>InsnomeEl.value.toUpperCas,<br>
-    Em até 5 min. você vai receber do IGC Treinamentos Corporativo:<br>
-    E-mail de Inscrição Confirmada | Instruções Importantes!!!<br>
-    Não chegou? Verifique sua caixa de span!<br>
-    Nos vemos logo...<br>
-    Até breve!  
-    </p>
+    <p>
+  <b>Olá <span id="mNomeIntro"></span>,</b><br><br>
+  Em até 5 minutos você vai receber do IGC Treinamentos Corporativo:<br>
+  📩 <b>E-mail de Inscrição Confirmada</b> com instruções importantes.<br>
+  Não chegou? Verifique sua caixa de spam!<br><br>
+  Nos vemos logo…<br>
+  Até breve!
+  </p>
     <hr>
     <p><b>Participante:</b> <span id="mNome"></span></p>
+    <p><b>E-mail:</b> <span id="mEmail"></span></p>
     <p><b>Curso:</b> <span id="mCurso"></span></p>
     <p><b>Turma:</b> <span id="mTurma"></span></p>
     <p><b>Carga horária:</b> <span id="mCarga"></span></p>
