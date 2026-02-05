@@ -413,22 +413,7 @@ async function login() {
 
 
 
-function autoLoginIGC() {
-  const senhaSalva = localStorage.getItem("IGC_SENHA");
-  if (!senhaSalva) return;
 
-  const campoSenha = document.getElementById("senhaLogin");
-  if (!campoSenha) return;
-
-  campoSenha.value = senhaSalva;
-
-  // pequena espera pra garantir DOM pronto
-  setTimeout(() => {
-    if (typeof login === "function") {
-      login();
-    }
-  }, 300);
-}
 
 
   
