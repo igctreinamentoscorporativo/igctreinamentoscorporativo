@@ -32,6 +32,9 @@
 <script>
 document.getElementById("adminFrame").src =
   `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
+
+  document.addEventListener("DOMContentLoaded", autoLoginIGC);
+
 </script>
 
 </body>
