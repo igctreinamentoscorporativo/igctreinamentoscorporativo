@@ -354,6 +354,8 @@ const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 let SENHA = "";
 let PERFIL = "";
 let PERMISSOES = [];
+// 🔐 SALVA A SENHA NO NAVEGADOR
+localStorage.setItem("IGC_SENHA", senha);  
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -406,6 +408,28 @@ async function login() {
     loginErro.innerText = "Erro ao validar acesso.";
   }
 }
+
+
+
+
+
+function autoLoginIGC() {
+  const senhaSalva = localStorage.getItem("IGC_SENHA");
+  if (!senhaSalva) return;
+
+  const campoSenha = document.getElementById("senhaLogin");
+  if (!campoSenha) return;
+
+  campoSenha.value = senhaSalva;
+
+  // pequena espera pra garantir DOM pronto
+  setTimeout(() => {
+    if (typeof login === "function") {
+      login();
+    }
+  }, 300);
+}
+
 
   
 
