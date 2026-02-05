@@ -38,31 +38,27 @@
 
   const SENHA_LOGADA_NO_SITE = localStorage.getItem("IGC_SENHA");
 
-  // 👇 NÃO usa return fora de função
-  if (SENHA_LOGADA_NO_SITE) {
+if (SENHA_LOGADA_NO_SITE) {
+  let tentativas = 0;
+  const MAX = 10;
 
-    let tentativas = 0;
-    const MAX = 10;
+  const timer = setInterval(() => {
+    try {
+      iframe.contentWindow.postMessage(
+        {
+          tipo: "AUTO_LOGIN",
+          senha: SENHA_LOGADA_NO_SITE
+        },
+        "*"
+      );
 
-    const timer = setInterval(() => {
-      try {
-        iframe.contentWindow.postMessage(
-          {
-            tipo: "AUTO_LOGIN",
-            senha: SENHA_LOGADA_NO_SITE
-          },
-          "*"
-        );
+      tentativas++;
+      if (tentativas >= MAX) clearInterval(timer);
 
-        tentativas++;
-
-        if (tentativas >= MAX) {
-          clearInterval(timer);
-        }
-      } catch (e) {
-        // iframe ainda não pronto
-      }
-    }, 500);
+    } catch (e) {
+      // iframe ainda não pronto
+    }
+  }, 500);
 
   }
 </script>
