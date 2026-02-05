@@ -354,8 +354,7 @@ const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 let SENHA = "";
 let PERFIL = "";
 let PERMISSOES = [];
-// 🔐 SALVA A SENHA NO NAVEGADOR
-localStorage.setItem("IGC_SENHA", senha);  
+
 
 async function login() {
   const senha = senhaLogin.value.trim();
@@ -390,6 +389,9 @@ async function login() {
     SENHA = senha;
     PERFIL = res.perfil || "";
     PERMISSOES = res.permissoes || [];
+
+    // ✅ SALVA A SENHA (AQUI É O ÚNICO LUGAR CERTO)
+  localStorage.setItem("IGC_SENHA", senha);
 
     // some login
     loginBox.style.display = "none";
