@@ -490,6 +490,7 @@ btnConfirmar.style.cursor = "not-allowed";
 .then(res => {
   if (res.sucesso) {
     document.getElementById("mNome").innerText = nomeEl.value;
+    document.getElementById("mEmail").innerText = emailEl.value.toLowerCase();
     document.getElementById("mCurso").innerText = NOME_CURSO;
     document.getElementById("mTurma").innerText = TURMA || "-";
     document.getElementById("mCarga").innerText = CARGA_HORARIA || "-";
