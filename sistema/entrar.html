@@ -91,7 +91,6 @@ html, body {
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 32px;
   background: #020617;
   border-bottom: 1px solid #1e293b;
@@ -181,18 +180,17 @@ html, body {
   text-decoration: none;
 }
 
-/* MAIN */
-.main {
+/* ================= IFRAME ================= */
+.content {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  position: relative;
 }
 
-.main h1 {
-  font-size: 26px;
-  opacity: .9;
+#moduloFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #020617;
 }
 
 /* ================= MAPA LINKS MODAL ================= */
@@ -249,8 +247,6 @@ html, body {
 
 <body>
 
-<script src="/js/igc-config.js"></script>
-
 <!-- LOGIN -->
 <div id="loginBox">
   <div class="login-card">
@@ -276,36 +272,36 @@ html, body {
       <div class="menu-item">
         <span>Tokens</span>
         <div class="dropdown">
-          <a href="/sistema/token.html">Gerar link de inscrição</a>
+          <a onclick="abrirModulo('/sistema/token.html')">Gerar link de inscrição</a>
         </div>
       </div>
 
       <div class="menu-item">
         <span>Cadastrar</span>
         <div class="dropdown">
-          <a href="/sistema/cadastrarcurso.html">Cadastrar curso</a>
+          <a onclick="abrirModulo('/sistema/cadastrarcurso.html')">Cadastrar curso</a>
         </div>
       </div>
 
       <div class="menu-item">
         <span>Certificados</span>
         <div class="dropdown">
-          <a href="/sistema/certificado.html">Emitir certificado</a>
-          <a href="/sistema/validarcertificado.html">Validar certificado</a>
+          <a onclick="abrirModulo('/sistema/certificado.html')">Emitir certificado</a>
+          <a onclick="abrirModulo('/sistema/validarcertificado.html')">Validar certificado</a>
         </div>
       </div>
 
       <div class="menu-item">
         <span>Comunicação</span>
         <div class="dropdown">
-          <a href="/sistema/indicacaoporemail.html">Indicar por e-mail</a>
+          <a onclick="abrirModulo('/sistema/indicacaoporemail.html')">Indicar por e-mail</a>
         </div>
       </div>
 
       <div class="menu-item">
         <span>Ajuda</span>
         <div class="dropdown">
-          <a href="#" onclick="abrirMapa()">Mapa de links</a>
+          <a onclick="abrirMapa()">Mapa de links</a>
         </div>
       </div>
     </div>
@@ -313,19 +309,20 @@ html, body {
     <div class="hamburger" onclick="toggleMobile()">☰</div>
   </div>
 
-  <div class="main">
-    <h1>IGC Treinamentos Corporativo</h1>
+  <!-- CONTEÚDO -->
+  <div class="content">
+    <iframe id="moduloFrame"></iframe>
   </div>
 </div>
 
 <!-- MOBILE MENU -->
 <div id="mobileMenu">
-  <a href="/sistema/token.html">Gerar link de inscrição</a>
-  <a href="/sistema/cadastrarcurso.html">Cadastrar curso</a>
-  <a href="/sistema/certificado.html">Emitir certificado</a>
-  <a href="/sistema/validarcertificado.html">Validar certificado</a>
-  <a href="/sistema/indicacaoporemail.html">Indicar por e-mail</a>
-  <a href="#" onclick="abrirMapa()">Mapa de links</a>
+  <a onclick="abrirModulo('/sistema/token.html')">Gerar link de inscrição</a>
+  <a onclick="abrirModulo('/sistema/cadastrarcurso.html')">Cadastrar curso</a>
+  <a onclick="abrirModulo('/sistema/certificado.html')">Emitir certificado</a>
+  <a onclick="abrirModulo('/sistema/validarcertificado.html')">Validar certificado</a>
+  <a onclick="abrirModulo('/sistema/indicacaoporemail.html')">Indicar por e-mail</a>
+  <a onclick="abrirMapa()">Mapa de links</a>
 </div>
 
 <!-- MAPA DE LINKS -->
@@ -335,37 +332,27 @@ html, body {
 
     <div class="mapa-item">
       <strong>Gerar link de inscrição</strong>
-      <a href="https://igrctreinamentoscorporativo.com.br/sistema/token.html" target="_blank">
-        https://igrctreinamentoscorporativo.com.br/sistema/token.html
-      </a>
+      https://igrctreinamentoscorporativo.com.br/sistema/token.html
     </div>
 
     <div class="mapa-item">
       <strong>Cadastrar curso</strong>
-      <a href="https://igrctreinamentoscorporativo.com.br/sistema/cadastrarcurso.html" target="_blank">
-        https://igrctreinamentoscorporativo.com.br/sistema/cadastrarcurso.html
-      </a>
+      https://igrctreinamentoscorporativo.com.br/sistema/cadastrarcurso.html
     </div>
 
     <div class="mapa-item">
       <strong>Emitir certificado</strong>
-      <a href="https://igrctreinamentoscorporativo.com.br/sistema/certificado.html" target="_blank">
-        https://igrctreinamentoscorporativo.com.br/sistema/certificado.html
-      </a>
+      https://igrctreinamentoscorporativo.com.br/sistema/certificado.html
     </div>
 
     <div class="mapa-item">
       <strong>Validar certificado</strong>
-      <a href="https://igrctreinamentoscorporativo.com.br/sistema/validarcertificado.html" target="_blank">
-        https://igrctreinamentoscorporativo.com.br/sistema/validarcertificado.html
-      </a>
+      https://igrctreinamentoscorporativo.com.br/sistema/validarcertificado.html
     </div>
 
     <div class="mapa-item">
       <strong>Indicar por e-mail</strong>
-      <a href="https://igrctreinamentoscorporativo.com.br/sistema/indicacaoporemail.html" target="_blank">
-        https://igrctreinamentoscorporativo.com.br/sistema/indicacaoporemail.html
-      </a>
+      https://igrctreinamentoscorporativo.com.br/sistema/indicacaoporemail.html
     </div>
 
     <button onclick="fecharMapa()">Fechar</button>
@@ -387,6 +374,11 @@ function login() {
     loadingBox.style.display = "none";
     appBox.style.display = "flex";
   }, 1200);
+}
+
+function abrirModulo(url) {
+  document.getElementById("moduloFrame").src = url;
+  mobileMenu.style.display = "none";
 }
 
 function toggleMobile() {
