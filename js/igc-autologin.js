@@ -1,6 +1,4 @@
-
-// js/igc-autologin.js
-(function tentarAutoLogin() {
+(function autoLoginIGC() {
   const senhaSalva = localStorage.getItem("IGC_SENHA");
   if (!senhaSalva) return;
 
@@ -9,11 +7,9 @@
 
   campoSenha.value = senhaSalva;
 
-  // espera a função login existir
-  if (typeof login === "function") {
-    login();
-  } else {
-    // tenta novamente em 300ms
-    setTimeout(tentarAutoLogin, 300);
-  }
+  setTimeout(() => {
+    if (typeof login === "function") {
+      login();
+    }
+  }, 300);
 })();
