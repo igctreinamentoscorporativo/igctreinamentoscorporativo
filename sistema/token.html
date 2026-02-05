@@ -29,28 +29,41 @@
   allowfullscreen>
 </iframe>
 
-<script>
+
+  <script>
   const iframe = document.getElementById("adminFrame");
 
   iframe.src =
     `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
 
-  iframe.onload = () => {
-    const senha = localStorage.getItem("IGC_SENHA");
-    if (!senha) return;
+  const SENHA_LOGADA_NO_SITE = localStorage.getItem("IGC_SENHA");
+  if (!SENHA_LOGADA_NO_SITE) return;
 
-    // 🔥 PEGA O ORIGIN REAL DO IFRAME
-    const targetOrigin = new URL(iframe.src).origin;
+  let tentativas = 0;
+  const MAX = 10;
 
-    iframe.contentWindow.postMessage(
-      {
-        tipo: "AUTO_LOGIN",
-        senha
-      },
-      targetOrigin
-    );
-  };
+  const timer = setInterval(() => {
+    try {
+      iframe.contentWindow.postMessage(
+        {
+          tipo: "AUTO_LOGIN",
+          senha: SENHA_LOGADA_NO_SITE
+        },
+        "*"
+      );
+
+      tentativas++;
+
+      if (tentativas >= MAX) {
+        clearInterval(timer);
+      }
+    } catch (e) {
+      // iframe ainda não pronto — ignora
+    }
+  }, 500);
 </script>
+
+
 
 
 </body>
