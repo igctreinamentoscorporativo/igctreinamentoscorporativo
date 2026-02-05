@@ -1510,9 +1510,23 @@ urlVerificacao.addEventListener("input", atualizarPreviewVerificacao);
   
 </script>
 
-<script src="/js/igc-autologin.js"></script>
 
 
+<script>
+window.addEventListener("load", () => {
+  const senhaSalva = localStorage.getItem("IGC_SENHA");
+  if (!senhaSalva) return;
+
+  const campoSenha = document.getElementById("senhaLogin");
+  if (!campoSenha) return;
+
+  campoSenha.value = senhaSalva;
+
+  setTimeout(() => {
+    login();
+  }, 500);
+});
+</script>
 
   
 
