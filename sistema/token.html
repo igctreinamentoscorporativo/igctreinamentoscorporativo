@@ -29,43 +29,13 @@
   allowfullscreen>
 </iframe>
 
+<script>
+document.getElementById("adminFrame").src =
+  `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
 
- <script>
-  const iframe = document.getElementById("adminFrame");
+  
 
-  iframe.src =
-    `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
-
-  const SENHA_LOGADA_NO_SITE = localStorage.getItem("IGC_SENHA");
-
-if (SENHA_LOGADA_NO_SITE) {
-  let tentativas = 0;
-  const MAX = 10;
-
-  const timer = setInterval(() => {
-    try {
-      iframe.contentWindow.postMessage(
-        {
-          tipo: "AUTO_LOGIN",
-          senha: SENHA_LOGADA_NO_SITE
-        },
-        "*"
-      );
-
-      tentativas++;
-      if (tentativas >= MAX) clearInterval(timer);
-
-    } catch (e) {
-      // iframe ainda não pronto
-    }
-  }, 500);
-
-  }
 </script>
-
-
-
-
 
 </body>
 </html>
