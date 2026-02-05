@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gestor de Tokens</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
+  margin: 0;
+  padding: 16px;
+}
+
+.card {
+  max-width: 920px;
+  margin: 24px auto;
+  background: #020617;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+h2 { margin: 0 0 16px; }
+
+input, select, button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #020617;
+  color: #e5e7eb;
+}
+
+button {
+  background: #2563eb;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 720px) {
+  .row { grid-template-columns: 1fr; }
+}
+
+.hidden { display: none; }
+
+.links {
+  background: #020617;
+  border: 1px dashed #334155;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  word-break: break-all;
+}
+</style>
+</head>
+
+<body>
+
+<script src="/js/igc-config.js"></script>
+
+<!-- 🔐 LOGIN -->
+<div class="card" id="login">
+  <h2>Login</h2>
+  <input type="password" id="senha" placeholder="Senha" />
+  <button onclick="login()">Entrar</button>
+</div>
+
+<!-- ⏳ LOADING -->
+<div class="card hidden" id="loading">
+  <h2>Validando acesso…</h2>
+  <p>Aguarde.</p>
+</div>
+
+<!-- 📦 APP -->
+<div class="card hidden" id="app">
+  <h2>Gerar Tokens</h2>
+
+  <div id="boasVindas" style="margin-bottom:16px;">
+    Olá, <strong><span id="nomeVendedor"></span></strong>
+  </div>
+
+  <div class="row">
+    <select id="curso"></select>
+    <select id="turma"></select>
+  </div>
+
+  <div id="info" class="links hidden"></div>
+
+  <input id="idPlanilha" class="hidden" />
+  <button onclick="gerar()">Gerar</button>
+
+  <div id="resultado" class="links hidden"></div>
+</div>
+
+<script>
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+let SENHA = "";
+let cursos = [];
+
+/* 🔐 LOGIN */
+async function login() {
+  const senha = document.getElementById("senha").value.trim();
+  if (!senha) return alert("Informe a senha");
+
+  login.classList.add("hidden");
+  loading.classList.remove("hidden");
+
+  const res = await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "loginToken",
+      senha
+    })
+  }).then(r => r.json());
+
+  if (!res.ok) {
+    alert(res.erro || "Acesso negado");
+    loading.classList.add("hidden");
+    login.classList.remove("hidden");
+    return;
+  }
+
+  
+  nomeVendedor.textContent = res.vendedor;
+  idPlanilha.value = res.vendedor;
+
+  await carregarCursos();
+
+  loading.classList.add("hidden");
+  app.classList.remove("hidden");
+}
+
+/* 📚 CURSOS */
+async function carregarCursos() {
+  cursos = await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "listarCursosToken",
+      senha: SENHA
+    })
+  }).then(r => r.json());
+
+  curso.innerHTML = `<option value="">Selecione o curso</option>`;
+  turma.innerHTML = `<option value="">Selecione a turma</option>`;
+
+  [...new Set(cursos.filter(c => c.ativo).map(c => c.nome))]
+    .forEach(n => {
+      const o = document.createElement("option");
+      o.value = n;
+      o.textContent = n;
+      curso.appendChild(o);
+    });
+}
+
+curso.onchange = () => {
+  turma.innerHTML = `<option value="">Selecione a turma</option>`;
+  info.classList.add("hidden");
+
+  cursos
+    .filter(c => c.nome === curso.value && c.ativo)
+    .forEach(c => {
+      const o = document.createElement("option");
+      o.value = c.turma;
+      o.textContent = c.turma;
+      turma.appendChild(o);
+    });
+};
+
+turma.onchange = () => {
+  const c = cursos.find(x => x.nome === curso.value && x.turma === turma.value);
+  if (!c) return;
+
+  info.classList.remove("hidden");
+  info.innerHTML = `
+    <strong>Curso:</strong> ${c.nome}<br>
+    <strong>Turma:</strong> ${c.turma}<br>
+    <strong>Local:</strong> ${c.local}<br>
+    <strong>Data:</strong> ${c.data}<br>
+    <strong>Obs:</strong> ${c.obs || "-"}
+  `;
+};
+
+/* 🔗 GERAR TOKEN */
+async function gerar() {
+  const c = cursos.find(x => x.nome === curso.value && x.turma === turma.value);
+  if (!c) return alert("Selecione curso e turma");
+
+  const res = await fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      acao: "gerarTokens",
+      senha: SENHA,
+      payload: {
+        curso: c,
+        turma: c.turma,
+        quantidade: 1,
+        idPlanilha: idPlanilha.value
+      }
+    })
+  }).then(r => r.json());
+
+  resultado.classList.remove("hidden");
+  resultado.innerHTML = res.map(l => `<div>${l}</div>`).join("");
+}
+</script>
+
+<script src="/js/igc-autologin.js"></script>
+
+</body>
+</html>
