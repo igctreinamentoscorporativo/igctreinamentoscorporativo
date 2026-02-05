@@ -172,9 +172,9 @@ button:active {
 
 <script>
 
-const API_URL = "https://script.google.com/macros/s/AKfycbxxxx/exec";
+// const API_URL = "https://script.google.com/macros/s/AKfycbxxxx/exec";
 
-
+<script src="/js/igc-config.js"></script>
   
 function copiar(texto) {
   const t = document.createElement('textarea');
@@ -211,8 +211,19 @@ function login() {
     document.getElementById('login').classList.add('hidden');
     document.getElementById('loading').classList.remove('hidden');
 
-    document.getElementById('idPlanilha').value = resp.responsavel;
-    document.getElementById('nomeVendedor').textContent = resp.responsavel;
+    const vendedor =
+  resp.perfil ||
+  resp.responsavel ||
+  resp.vendedor ||
+  "";
+
+if (!vendedor) {
+  alert("Erro: usuário sem identificação");
+  return;
+}
+
+document.getElementById('idPlanilha').value = vendedor;
+document.getElementById('nomeVendedor').textContent = vendedor;
 
     document.getElementById('idPlanilha').readOnly = true;
 
