@@ -30,11 +30,13 @@
 </iframe>
 
 <script>
-const senha = localStorage.getItem("IGC_SENHA");
-
 document.getElementById("adminFrame").src =
-  `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}&autoLogin=1&senha=${encodeURIComponent(senha)}`;
+  `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS.ADMIN}`;
+
+  
+
 </script>
+
 
 </body>
 </html>
