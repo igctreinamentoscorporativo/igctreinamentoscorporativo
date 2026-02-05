@@ -43,12 +43,12 @@
     if (!SENHA_LOGADA_NO_SITE) return;
 
     iframe.contentWindow.postMessage(
-      {
-        tipo: "AUTO_LOGIN",
-        senha: SENHA_LOGADA_NO_SITE
-      },
-      "*" // depois podemos restringir domínio
-    );
+  {
+    tipo: "AUTO_LOGIN",
+    senha: SENHA_LOGADA_NO_SITE
+  },
+  "https://script.googleusercontent.com"
+);
   };
 </script>
 
