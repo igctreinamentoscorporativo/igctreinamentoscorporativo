@@ -6,8 +6,9 @@
 <title>Gestor de Tokens</title>
 
 <style>
-/* === CSS ORIGINAL (INALTERADO) === */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -16,6 +17,7 @@ body {
   margin: 0;
   padding: 16px;
 }
+
 
 .card {
   max-width: 920px;
@@ -26,7 +28,9 @@ body {
   width: 100%;
 }
 
-h2 { margin: 0 0 16px; }
+h2 {
+  margin: 0 0 16px;
+}
 
 input, select, button {
   width: 100%;
@@ -37,13 +41,22 @@ input, select, button {
   color: #e5e7eb;
 }
 
+/* Botão com efeito */
 button {
   background: #2563eb;
   border: none;
   font-weight: 700;
   cursor: pointer;
+  transition: transform .1s ease, box-shadow .1s ease, opacity .2s ease;
 }
 
+button:active {
+  transform: scale(0.97);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.4);
+  opacity: .9;
+}
+
+/* Grid correto */
 .row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -51,11 +64,16 @@ button {
   margin-bottom: 14px;
 }
 
+/* Mobile */
 @media (max-width: 720px) {
-  .row { grid-template-columns: 1fr; }
+  .row {
+    grid-template-columns: 1fr;
+  }
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 .links {
   background: #020617;
@@ -64,186 +82,291 @@ button {
   border-radius: 10px;
   word-break: break-all;
   margin-bottom: 14px;
-  line-height: 1.6;
 }
 
-.oculto { display: none; }
+/* Espaço entre botão Gerar e resultado */
+#resultado {
+  margin-top: 14px;
+}
+
+/* Espaçamento vertical entre campos e botões dentro dos cards */
+.card > input,
+.card > button {
+  margin-top: 12px;
+}
+
+/* 🔒 OCULTAR CAMPOS OPERACIONAIS
+   Para reativar no futuro, remova a classe "oculto" do HTML */
+.oculto {
+  display: none;
+}
+
+
+.links {
+  line-height: 1.6; /* 👈 espaço entre linhas */
+}
+
 </style>
 </head>
-
 <body>
-
 <div class="card" id="login">
-  <h2>Login</h2>
-  <input type="password" id="senha" placeholder="Senha" />
-  <button onclick="login()">Entrar</button>
+<h2>Login</h2>
+<input type="password" id="senha" placeholder="Senha" />
+<button onclick="login()">Entrar</button>
 </div>
+
 
 <div class="card hidden" id="loading">
   <h2>Validando acesso…</h2>
   <p>Carregando dados do sistema, aguarde.</p>
 </div>
 
+
+
 <div class="card hidden" id="app">
-  <h2>Gerar Tokens</h2>
+<h2>Gerar Tokens</h2>
 
-  <div id="boasVindas">
-    Olá, seja bem-vindo(a), <strong><span id="nomeVendedor"></span></strong>
+
+
+<!-- 👋 Mensagem de boas-vindas ao vendedor -->
+<div id="boasVindas" style="margin-bottom:16px;">
+  <div style="font-size:16px;font-weight:600;">
+    Olá, seja bem-vindo(a), <span id="nomeVendedor"></span>
   </div>
 
-  <div class="row">
-    <select id="curso"></select>
-    <select id="turma"></select>
+  <div style="font-size:15px;color:#94a3b8;margin-top:6px;line-height:1.4;">
+    Selecione o curso e a turma para a qual o aluno está se inscrevendo.
+    Antes de gerar o link, confira atentamente os dados do treinamento
+    (turma, local, data e observações) para garantir que o link seja gerado corretamente.
   </div>
-
-  <div id="info" class="links hidden"></div>
-
-  <div class="row oculto">
-    <input id="quantidade" type="number" value="1" min="1" />
-    <input id="idPlanilha" />
-  </div>
-
-  <button id="btnGerar" onclick="gerar()">Gerar</button>
-  <div id="resultado" class="links hidden"></div>
 </div>
 
-<script>
-/* ===============================
-   CONFIGURAÇÃO
-================================ */
-const API_URL = "https://script.google.com/macros/s/AKfycby7f6jBAOzk2h7I6tV67fq-_NVQjQ96Hr_CeK6mu0_Nw3OfJGNOv8NAxP0_HZLA_fycLQ/exec";
 
-/* ===============================
-   UTIL
-================================ */
+
+
+
+
+
+
+
+<div class="row">
+  <select id="curso"></select>
+  <select id="turma"></select>
+</div>
+
+<div id="info" class="links hidden"></div>
+
+
+<!-- 🔒 CAMPOS OCULTOS (quantidade fixa = 1 | vendedor automático)
+     Para liberar no futuro, basta remover a classe "oculto" -->
+<div class="row oculto">
+  <input id="quantidade" type="number" value="1" min="1" />
+  <input id="idPlanilha" placeholder="Vendedor responsável (obrigatório)" />
+</div>
+
+
+<button id="btnGerar" onclick="gerar()">Gerar</button>
+<div id="resultado" class="links hidden"></div>
+</div>
+
+
+<script>
+
+const API_URL = "https://script.google.com/macros/s/AKfycbxxxx/exec";
+
+
+  
 function copiar(texto) {
-  const t = document.createElement("textarea");
+  const t = document.createElement('textarea');
   t.value = texto;
   document.body.appendChild(t);
   t.select();
-  document.execCommand("copy");
+  document.execCommand('copy');
   document.body.removeChild(t);
 }
 
-/* ===============================
-   LOGIN
-================================ */
-async function login() {
-  const senha = document.getElementById("senha").value;
 
-  const res = await fetch(API_URL, {
+
+
+
+function login() {
+  const senha = document.getElementById('senha').value;
+
+  fetch(API_URL, {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       acao: "loginCursos",
       senha
     })
-  }).then(r => r.json());
+  })
+  .then(r => r.json())
+  .then(resp => {
 
-  if (!res.ok) {
-    alert("Acesso não autorizado");
-    return;
-  }
+    if (!resp.ok) {
+      alert("Acesso não autorizado");
+      return;
+    }
 
-  document.getElementById("login").classList.add("hidden");
-  document.getElementById("loading").classList.remove("hidden");
+    document.getElementById('login').classList.add('hidden');
+    document.getElementById('loading').classList.remove('hidden');
 
-  document.getElementById("idPlanilha").value = "";
-  document.getElementById("nomeVendedor").textContent = "";
+    document.getElementById('idPlanilha').value = resp.responsavel;
+    document.getElementById('nomeVendedor').textContent = resp.responsavel;
 
-  await carregarCursos();
+    document.getElementById('idPlanilha').readOnly = true;
 
-  document.getElementById("loading").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
+    carregarCursos(() => {
+      document.getElementById('loading').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+    });
 
-  window.SENHA_ATUAL = senha;
+  })
+  .catch(() => alert("Erro de conexão"));
 }
 
-/* ===============================
-   CURSOS
-================================ */
+
+
+
+
+
+
 let cursos = [];
 
-async function carregarCursos() {
-  const res = await fetch(`${API_URL}?acao=listarCursos`);
-  cursos = await res.json();
+function carregarCursos(callback) {
+  fetch(API_URL + "?acao=listarCursos")
+    .then(r => r.json())
+    .then(list => {
 
-  const sel = document.getElementById("curso");
-  sel.innerHTML = `<option value="">Selecione o curso</option>`;
+      cursos = list;
 
-  [...new Set(cursos.filter(c => c.ativo).map(c => c.nome))]
-    .forEach(nome => {
-      sel.innerHTML += `<option value="${nome}">${nome}</option>`;
+      const selCurso = document.getElementById('curso');
+      selCurso.innerHTML = '<option value="">Selecione o curso</option>';
+
+      [...new Set(list.filter(c => c.ativo === true).map(c => c.nome))]
+        .forEach(nome => {
+          const o = document.createElement('option');
+          o.value = nome;
+          o.textContent = nome;
+          selCurso.appendChild(o);
+        });
+
+      if (callback) callback();
     });
 }
 
-document.getElementById("curso").addEventListener("change", e => {
-  const nome = e.target.value;
-  const sel = document.getElementById("turma");
-  sel.innerHTML = `<option value="">Selecione a turma</option>`;
+
+
+
+
+document.getElementById('curso').addEventListener('change', e=>{
+  const nomeCurso = e.target.value;
+  const selTurma = document.getElementById('turma');
+
+  selTurma.innerHTML = '<option value="">Selecione a turma</option>';
+  document.getElementById('info').classList.add('hidden');
 
   cursos
-    .filter(c => c.nome === nome && c.ativo)
-    .forEach(c => {
-      sel.innerHTML += `<option value="${c.turma}">${c.turma}</option>`;
-    });
+  .filter(c => c.nome === nomeCurso && c.ativo === true)
+  .forEach(c=>{
+    const o = document.createElement('option');
+    o.value = c.turma;
+    o.textContent = c.turma;
+    selTurma.appendChild(o);
+  });
 });
 
-document.getElementById("turma").addEventListener("change", () => {
-  const nome = curso.value;
-  const turma = document.getElementById("turma").value;
-  const c = cursos.find(x => x.nome === nome && x.turma === turma);
+
+document.getElementById('turma').addEventListener('change', ()=>{
+  const nomeCurso = document.getElementById('curso').value;
+  const turma = document.getElementById('turma').value;
+
+  const c = cursos.find(x => x.nome === nomeCurso && x.turma === turma);
   if (!c) return;
 
-  const box = document.getElementById("info");
-  box.classList.remove("hidden");
+  const box = document.getElementById('info');
+  box.classList.remove('hidden');
   box.innerHTML = `
+    <strong>Confirme os dados:</strong><br>
     <strong>Curso:</strong> ${c.nome}<br>
     <strong>Turma:</strong> ${c.turma}<br>
     <strong>Local:</strong> ${c.local}<br>
-    <strong>Data:</strong> ${c.data}
+    <strong>Data:</strong> ${c.data}<br>
+    <strong>Observação:</strong> ${c.obs || '-'}
   `;
 });
 
-/* ===============================
-   GERAR TOKENS
-================================ */
-async function gerar() {
-  const btn = document.getElementById("btnGerar");
-  const nomeCurso = curso.value;
-  const turma = document.getElementById("turma").value;
+
+
+
+
+
+
+function gerar() {
+  const btn = document.getElementById('btnGerar');
+
+  const nomeCurso = document.getElementById('curso').value;
+  const turma = document.getElementById('turma').value;
 
   if (!nomeCurso || !turma) {
-    alert("Selecione curso e turma");
+    alert('Selecione o curso e a turma');
+    return;
+  }
+
+  const vendedor = document.getElementById('idPlanilha').value.trim();
+  if (!vendedor) {
+    alert('Informe o vendedor');
     return;
   }
 
   btn.disabled = true;
+  btn.textContent = 'Gerando link...';
 
-  const payload = {
-    acao: "gerarTokens",
-    senha: window.SENHA_ATUAL,
-    payload: {
-      curso: cursos.find(c => c.nome === nomeCurso && c.turma === turma),
-      turma,
-      quantidade: 1,
-      idPlanilha: document.getElementById("idPlanilha").value
-    }
-  };
+  const curso = cursos.find(c => c.nome === nomeCurso && c.turma === turma);
 
-  const res = await fetch(API_URL, {
+  fetch(API_URL, {
     method: "POST",
-    body: JSON.stringify(payload)
-  }).then(r => r.json());
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      acao: "gerarTokens",
+      senha: document.getElementById('senha').value,
+      payload: {
+        curso,
+        turma,
+        quantidade: 1,
+        idPlanilha: vendedor
+      }
+    })
+  })
+  .then(r => r.json())
+  .then(resp => {
 
-  const box = document.getElementById("resultado");
-  box.classList.remove("hidden");
-  box.innerHTML = res.links.map(l => `<div>${l}</div>`).join("");
+    if (!resp.ok) {
+      alert("Erro ao gerar token");
+      return;
+    }
 
-  copiar(res.links.join("\n"));
+    const box = document.getElementById('resultado');
+    box.classList.remove('hidden');
+    box.innerHTML = resp.links.map(l => `<div>${l}</div>`).join('');
 
-  btn.disabled = false;
+    copiar(resp.links.join('\n'));
+    alert('✅ Link copiado');
+
+    btn.disabled = false;
+    btn.textContent = 'Gerar';
+  })
+  .catch(() => {
+    alert('Erro de conexão');
+    btn.disabled = false;
+    btn.textContent = 'Gerar';
+  });
 }
+
+
+
 </script>
+
 
 </body>
 </html>
