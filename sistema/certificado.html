@@ -81,7 +81,7 @@
   const msg = document.getElementById("mensagem");
 
   // 1️⃣ Carrega turmas liberadas
-  fetch(`${API_BASE}&acao=listarTurmasLiberadas`)
+  fetch(`${API}&acao=listarTurmasLiberadas`)
     .then(r => r.json())
     .then(turmas => {
 
@@ -120,7 +120,7 @@
 
     msg.textContent = "Verificando liberação...";
 
-    fetch(`${API_BASE}&acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`)
+    fetch(`${API}&acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`)
       .then(r => r.json())
       .then(res => {
 
