@@ -14,6 +14,7 @@
       height: 100vh;
       margin: 0;
     }
+
     .box {
       background: #fff;
       padding: 40px;
@@ -22,52 +23,67 @@
       border-radius: 8px;
       box-shadow: 0 10px 30px rgba(0,0,0,.1);
     }
+
     h1 {
       color: #1f3c88;
     }
+
     p {
       color: #555;
+      margin-top: 16px;
+      font-size: 15px;
     }
+
     .expired {
       color: #b00020;
       font-weight: bold;
     }
   </style>
 
-  <script>
-    // 🔴 CONFIGURAÇÃO ÚNICA (MUDA SÓ AQUI)
-    const DATA_EXPIRACAO = new Date("2050-01-24T23:59:00");
-    const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
-
-    const agora = new Date();
-
-    if (agora < DATA_EXPIRACAO) {
-      // Redireciona após 3 segundos
-      setTimeout(() => {
-        window.location.href = LINK_FORM;
-      }, 3000);
-    }
-  </script>
+  <!-- 🔗 CONFIG GLOBAL DO SITE -->
+  <script src="/js/igc-config.js"></script>
 </head>
 
 <body>
+
   <div class="box">
     <h1>Emissão de Certificado</h1>
-
-    <script>
-      if (agora < DATA_EXPIRACAO) {
-        document.write(`
-          <p>Você será redirecionado automaticamente para o formulário de emissão em 3 segundos...</p>
-          <p>Se não for redirecionado, <a href="${LINK_FORM}">clique aqui</a>.</p>
-        `);
-      } else {
-        document.write(`
-          <p class="expired">O prazo para emissão de certificados foi encerrado.</p>
-          <p>Para mais informações, entre em contato pelo site williambrioli.com.br.</p>
-        `);
-      }
-    </script>
+    <p id="mensagem">Verificando liberação...</p>
   </div>
+
+  <script>
+    // 🔧 ENDPOINT DINÂMICO (PADRÃO DO SEU SITE)
+    const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+    // 🔗 FORMULÁRIO FIXO (como hoje)
+    const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
+
+    fetch(`${API}?acao=verificarLiberacaoCertificado`)
+      .then(r => r.json())
+      .then(res => {
+
+        if (res.liberado) {
+
+          document.getElementById("mensagem").innerHTML =
+            "Liberação confirmada. Redirecionando para o formulário...";
+
+          setTimeout(() => {
+            window.location.href = LINK_FORM;
+          }, 2500);
+
+        } else {
+
+          document.getElementById("mensagem").innerHTML =
+            `<span class="expired">${res.mensagem}</span>`;
+
+        }
+
+      })
+      .catch(() => {
+        document.getElementById("mensagem").innerHTML =
+          "<span class='expired'>Erro ao verificar liberação. Tente novamente mais tarde.</span>";
+      });
+  </script>
+
 </body>
 </html>
-
