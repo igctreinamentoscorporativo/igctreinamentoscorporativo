@@ -43,16 +43,19 @@
   <p id="mensagem">Verificando liberação...</p>
 </div>
 
-<!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
+<script>
+  <!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
 <script src="/js/igc-config.js"></script>
 
 <script>
   // ✅ API DINÂMICA — PADRÃO DO SEU SITE
   const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
+
+  // 🔗 FORMULÁRIO DE EMISSÃO
   const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
 
-  fetch(`${API}?acao=verificarLiberacaoCertificados`)
+  fetch(`${API_URL}&acao=verificarLiberacaoCertificados`)
     .then(r => r.json())
     .then(res => {
 
@@ -66,13 +69,13 @@
 
       } else {
         document.getElementById("mensagem").innerHTML =
-          `<span class="error">${res.mensagem}</span>`;
+          `<span class="error">${res.mensagem || "Emissão de certificados indisponível no momento."}</span>`;
       }
 
     })
     .catch(() => {
       document.getElementById("mensagem").innerHTML =
-        "<span class='error'>Erro ao verificar liberação.</span>";
+        "<span class='error'>Erro ao verificar liberação. Tente novamente.</span>";
     });
 </script>
 
