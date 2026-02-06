@@ -18,6 +18,7 @@
       background: #fff;
       padding: 40px;
       max-width: 520px;
+      width: 100%;
       text-align: center;
       border-radius: 8px;
       box-shadow: 0 10px 30px rgba(0,0,0,.1);
@@ -25,9 +26,25 @@
     h1 {
       color: #1f3c88;
     }
-    p {
-      color: #555;
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 15px;
+    }
+    button {
+      background: #1f3c88;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    .msg {
       margin-top: 20px;
+      color: #555;
     }
     .error {
       color: #b00020;
@@ -40,11 +57,17 @@
 
 <div class="box">
   <h1>Emissão de Certificado</h1>
-  <p id="mensagem">Verificando liberação...</p>
+
+  <select id="turmaSelect">
+    <option value="">Carregando turmas...</option>
+  </select>
+
+  <button onclick="verificar()">Continuar</button>
+
+  <div id="mensagem" class="msg"></div>
 </div>
 
-<script>
-  <!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
+<!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
 <script src="/js/igc-config.js"></script>
 
 <script>
@@ -52,31 +75,73 @@
   const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
 
-  // 🔗 FORMULÁRIO DE EMISSÃO
   const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
 
-  fetch(`${API_URL}&acao=verificarLiberacaoCertificados`)
+  const select = document.getElementById("turmaSelect");
+  const msg = document.getElementById("mensagem");
+
+  // 1️⃣ Carrega turmas liberadas
+  fetch(`${API_BASE}&acao=listarTurmasLiberadas`)
     .then(r => r.json())
-    .then(res => {
+    .then(turmas => {
 
-      if (res.liberado) {
-        document.getElementById("mensagem").innerText =
-          "Liberação confirmada. Redirecionando...";
+      select.innerHTML = "";
 
-        setTimeout(() => {
-          window.location.href = LINK_FORM;
-        }, 2500);
-
-      } else {
-        document.getElementById("mensagem").innerHTML =
-          `<span class="error">${res.mensagem || "Emissão de certificados indisponível no momento."}</span>`;
+      if (!turmas.length) {
+        select.innerHTML =
+          `<option value="">Nenhuma turma com emissão liberada</option>`;
+        return;
       }
 
+      select.innerHTML =
+        `<option value="">Selecione sua turma</option>`;
+
+      turmas.forEach(turma => {
+        const opt = document.createElement("option");
+        opt.value = turma;
+        opt.textContent = turma;
+        select.appendChild(opt);
+      });
     })
     .catch(() => {
-      document.getElementById("mensagem").innerHTML =
-        "<span class='error'>Erro ao verificar liberação. Tente novamente.</span>";
+      select.innerHTML =
+        `<option value="">Erro ao carregar turmas</option>`;
     });
+
+  // 2️⃣ Verifica turma escolhida
+  function verificar() {
+    const turma = select.value;
+
+    if (!turma) {
+      msg.innerHTML =
+        "<span class='error'>Selecione uma turma.</span>";
+      return;
+    }
+
+    msg.textContent = "Verificando liberação...";
+
+    fetch(`${API_BASE}&acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`)
+      .then(r => r.json())
+      .then(res => {
+
+        if (res.liberado) {
+          msg.textContent =
+            "Liberação confirmada. Redirecionando...";
+
+          setTimeout(() => {
+            window.location.href = LINK_FORM;
+          }, 2000);
+
+        } else {
+          msg.innerHTML =
+            `<span class="error">${res.mensagem}</span>`;
+        }
+      })
+      .catch(() => {
+        msg.innerHTML =
+          "<span class='error'>Erro ao verificar liberação.</span>";
+      });
+  }
 </script>
 
 </body>
