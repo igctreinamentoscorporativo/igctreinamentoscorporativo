@@ -50,8 +50,17 @@ const categorias = [
     nome: "Nossa História",
     nomeMenu: "Nossa História",
     mostrarNoMenu: true
+  },
+
+ /* 🔽 ACESSO AO SISTEMA */
+  {
+    id: "sistema",
+    nome: "https://www.igctreinamentoscorporativo.com.br/sistema/entrar",
+    nomeMenu: "Logar Sistema",
+    mostrarNoMenu: true
   }
-  
+
+   
 ];
 
 /* ============================================================
