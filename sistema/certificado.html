@@ -81,7 +81,7 @@
   const msg = document.getElementById("mensagem");
 
   // 1️⃣ Carrega turmas liberadas
-  fetch(IGC.api('?acao=listarTurmasLiberadas'))
+  fetch(IGC.api('&acao=listarTurmasLiberadas'))
     .then(r => r.json())
     .then(turmas => {
 
@@ -121,10 +121,9 @@
     msg.textContent = "Verificando liberação...";
 
     fetch(
-  IGC.api(
-    `?acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`
+  IGC.api(`&acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`)
   )
-)
+
       .then(r => r.json())
       .then(res => {
 
