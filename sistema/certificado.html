@@ -14,7 +14,6 @@
       height: 100vh;
       margin: 0;
     }
-
     .box {
       background: #fff;
       padding: 40px;
@@ -23,67 +22,59 @@
       border-radius: 8px;
       box-shadow: 0 10px 30px rgba(0,0,0,.1);
     }
-
     h1 {
       color: #1f3c88;
     }
-
     p {
       color: #555;
-      margin-top: 16px;
-      font-size: 15px;
+      margin-top: 20px;
     }
-
-    .expired {
+    .error {
       color: #b00020;
       font-weight: bold;
     }
   </style>
-
-  <!-- 🔗 CONFIG GLOBAL DO SITE -->
-  <script src="/js/igc-config.js"></script>
 </head>
 
 <body>
 
-  <div class="box">
-    <h1>Emissão de Certificado</h1>
-    <p id="mensagem">Verificando liberação...</p>
-  </div>
+<div class="box">
+  <h1>Emissão de Certificado</h1>
+  <p id="mensagem">Verificando liberação...</p>
+</div>
 
-  <script>
-    // 🔧 ENDPOINT DINÂMICO (PADRÃO DO SEU SITE)
-    const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+<!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
+<script src="/js/igc-config.js"></script>
 
-    // 🔗 FORMULÁRIO FIXO (como hoje)
-    const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
+<script>
+  // ✅ API DINÂMICA — PADRÃO DO SEU SITE
+  const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
-    fetch(`${API}?acao=verificarLiberacaoCertificado`)
-      .then(r => r.json())
-      .then(res => {
+  const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
 
-        if (res.liberado) {
+  fetch(`${API}?acao=verificarLiberacaoCertificados`)
+    .then(r => r.json())
+    .then(res => {
 
-          document.getElementById("mensagem").innerHTML =
-            "Liberação confirmada. Redirecionando para o formulário...";
+      if (res.liberado) {
+        document.getElementById("mensagem").innerText =
+          "Liberação confirmada. Redirecionando...";
 
-          setTimeout(() => {
-            window.location.href = LINK_FORM;
-          }, 2500);
+        setTimeout(() => {
+          window.location.href = LINK_FORM;
+        }, 2500);
 
-        } else {
-
-          document.getElementById("mensagem").innerHTML =
-            `<span class="expired">${res.mensagem}</span>`;
-
-        }
-
-      })
-      .catch(() => {
+      } else {
         document.getElementById("mensagem").innerHTML =
-          "<span class='expired'>Erro ao verificar liberação. Tente novamente mais tarde.</span>";
-      });
-  </script>
+          `<span class="error">${res.mensagem}</span>`;
+      }
+
+    })
+    .catch(() => {
+      document.getElementById("mensagem").innerHTML =
+        "<span class='error'>Erro ao verificar liberação.</span>";
+    });
+</script>
 
 </body>
 </html>
