@@ -2,7 +2,7 @@
 window.IGC_CONFIG = {
   // 🔹 BASE PRINCIPAL (HTML / navegação / apps)
   APPS_SCRIPT_BASE:
-    "https://script.google.com/macros/s/AKfycby_tzjD861JrnI52rVmlswnT4iOxsWJ1Ez1aPj9TjxbqTqvV7LdKpz__0Om9QLeJMa8SA/exec",
+    "https://script.google.com/macros/s/AKfycbxD_5TTpwPuhT6yHO3tBgpjD69Ce3mk__4FOIi7_IZPxTGHGZHeKovmfEsF9vr8yO0Idw/exec",
 
   // 🔹 BASE EXCLUSIVA PARA FETCH / JSON (CORS OK)
   APPS_SCRIPT_API:
