@@ -27,13 +27,13 @@ const categorias = [
     id: "oratoria",
     nome: "Treinamentos em Oratória",
     nomeMenu: "Treinamento em Oratória",
-    mostrarNoMenu: true
+    mostrarNoMenu: false
   },
   {
     id: "workshopepalestas",
     nome: "Worshop e Palestra",
     nomeMenu: "Worshop e Palestra",
-    mostrarNoMenu: true
+    mostrarNoMenu: false
   },
 
 /* 🔽 BLOCO INSTITUCIONAL (ÂNCORA) */
@@ -63,12 +63,12 @@ const categorias = [
 const produtos = [
   {
     id: "1",
-    nome: "Treinamento em PNL Básico",
+    nome: "Formação em PNL - Programação Neurolinguística - Alta Performance",
     categoria: "pnl",
-    preco: 798.00,
-    imagem: "assets/img/imgteste.png",
+    preco: 997.00,
+    imagem: "assets/img/PNLCURITIBA03.jpeg",
     videos: [
-      "assets/videos/5htp.mp4"
+      "assets/videos/PNLIMERSAO.mp4"
     ],
     descricao: {
       resumo: `
@@ -107,7 +107,7 @@ const produtos = [
 },
    
     destaque: true,
-    mostrarlancamento: false,
+    mostrarlancamento: true,
     mostrarVideo: true,
     textoParcelamento: ""
     },
@@ -162,7 +162,7 @@ configuracoes: {
   mostrarResumo: false
 },
       
-    destaque: true,
+    destaque: false,
     mostrarlancamento: false,
     mostrarVideo: false,
     textoParcelamento: ""
@@ -335,7 +335,7 @@ configuracoes: {
 },
 
    
-    destaque: true,
+    destaque: false,
     mostrarlancamento: false,
     mostrarVideo: false,
     textoParcelamento: ""
