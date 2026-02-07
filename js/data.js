@@ -221,7 +221,7 @@ const produtos = [
  configuracoes: {
   mostrarNome: true,
   mostrarPreco: false,
-  mostrarResumo: true
+  mostrarResumo: false
 },
    
     destaque: true,
