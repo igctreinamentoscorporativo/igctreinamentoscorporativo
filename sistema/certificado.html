@@ -85,7 +85,7 @@
   // =====================================================
   // 1️⃣ CARREGA TURMAS LIBERADAS
   // =====================================================
-  fetch(`${API_FIXA}&acao=listarTurmasLiberadasAgora`)
+  fetch(`${API_FIXA}?acao=listarTurmasLiberadasAgora`)
     .then(res => {
       if (!res.ok) throw new Error("Erro HTTP");
       return res.json();
@@ -132,9 +132,7 @@
 
     msg.textContent = "Verificando liberação...";
 
-    fetch(
-      `${API_FIXA}&acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`
-    )
+    fetch(`${API_FIXA}?acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`)
       .then(res => {
         if (!res.ok) throw new Error("Erro HTTP");
         return res.json();
