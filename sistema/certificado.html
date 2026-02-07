@@ -70,10 +70,15 @@
 <!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
 <script src="/js/igc-config.js"></script>
 
-<script>
-  // ✅ API DINÂMICA — PADRÃO DO SEU SITE
-  const API = window.IGC.api();
 
+  // ✅ API DINÂMICA — PADRÃO DO SEU SITE
+  //const API = window.IGC.api();
+
+<script>
+  // 🔒 API FIXA (SEM IGC, SEM CONFIG, SEM CORS CONFUSO)
+  const API_FIXA =
+    "https://script.google.com/macros/s/AKfycbxN8gBrgbNAOS1s_nRfm-pIKgo7g3fhWgfYm6VwRV1PDVFlS507uWt9nKowZ4MYoKKXWw/exec";
+  
 
   const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
 
