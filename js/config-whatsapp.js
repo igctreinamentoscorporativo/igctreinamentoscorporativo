@@ -26,10 +26,10 @@
   const CONFIG = {
     // Número do WhatsApp sem símbolos.
     // Usado para montar o link automaticamente.
-    whatsappNumber: "5518991221171",
+    whatsappNumber: "5518988092571",
 
     // Número bonitinho, como aparece na interface para o usuário.
-    phoneDisplay: "(18) 99122-1171",
+    phoneDisplay: "(18) 98809-2571",
 
     // Conjunto de mensagens pré-definidas.
     messages: {
