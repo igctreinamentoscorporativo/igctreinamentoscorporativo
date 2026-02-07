@@ -21,7 +21,11 @@ window.IGC = {
     return `${window.IGC_CONFIG.APPS_SCRIPT_BASE}?app=${window.IGC_CONFIG.APPS[name]}`;
   },
 
-  api(params = "") {
-    return `${window.IGC_CONFIG.APPS_SCRIPT_API}${params}`;
+  api(params = {}) {
+    const url = new URL(window.IGC_CONFIG.APPS_SCRIPT_API);
+    Object.entries(params).forEach(([k, v]) => {
+      url.searchParams.append(k, v);
+    });
+    return url.toString();
   }
 };
