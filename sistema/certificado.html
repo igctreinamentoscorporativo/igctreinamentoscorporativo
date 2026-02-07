@@ -81,7 +81,7 @@
   const msg = document.getElementById("mensagem");
 
   // 1️⃣ Carrega turmas liberadas
-  fetch(IGC.api({ acao: 'listarTurmasLiberadas' }))
+  fetch(IGC.api({ acao: 'listarTurmasLiberadasAgora' }))
     .then(r => r.json())
     .then(turmas => {
 
