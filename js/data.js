@@ -63,7 +63,7 @@ const categorias = [
 const produtos = [
   {
     id: "1",
-    nome: "Formação em PNL - Programação Neurolinguística - Alta Performance",
+    nome: "Formação em PNL - Programação Neurolinguística - Alta Performance - Ed. CURITIBA-PR",
     categoria: "pnl",
     preco: 997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
