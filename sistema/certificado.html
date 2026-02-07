@@ -25,6 +25,7 @@
     }
     h1 {
       color: #1f3c88;
+      margin-bottom: 20px;
     }
     select, button {
       width: 100%;
@@ -62,37 +63,39 @@
     <option value="">Carregando turmas...</option>
   </select>
 
-  <button onclick="verificar()">Continuar</button>
+  <button id="btnContinuar">Continuar</button>
 
   <div id="mensagem" class="msg"></div>
 </div>
 
-<!-- 🔹 CONFIG GLOBAL DO SEU SITE (JÁ EXISTE NO SEU PROJETO) -->
-<script src="/js/igc-config.js"></script>
-
-
-  // ✅ API DINÂMICA — PADRÃO DO SEU SITE
-  //const API = window.IGC.api();
-
 <script>
-  // 🔒 API FIXA (SEM IGC, SEM CONFIG, SEM CORS CONFUSO)
+  // =====================================================
+  // 🔒 API FIXA — A MESMA QUE VOCÊ TESTOU NO NAVEGADOR
+  // =====================================================
   const API_FIXA =
-    "https://script.google.com/macros/s/AKfycbxN8gBrgbNAOS1s_nRfm-pIKgo7g3fhWgfYm6VwRV1PDVFlS507uWt9nKowZ4MYoKKXWw/exec";
-  
+    "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLidnGyAqK5Zt0if_b9P79pMCB-0poBpIHA7ZN3sDRKpnJ-4KcGwwT1XpGL8i13VKdx6j2ynzoZZ3dQ0KsW7eQPeFriiMPorty9shW8OJqM6LpUYGvPYeHkRy7T8lHSof4DGZdzJw11c_6oP1EbA6cGK5Ng3EkaWegzujyyNXhRsCJGv1OPm9BDT4prLPgtje30Fa2noYZPJ_1QxaadyJP33jtaM3e2aeDQe32rc3IvHaDUKZEotpt7Lz27nZUNkQ2yJo07UdXkyE7ZxnmHihB4LCW4phMweRQeDpb_I1mttlBtnyCeFDgeS_LpgDS_prAssixAnFu855SXIoZg&lib=ML1zOo_OUUflxdLMuXK8vDNaDE_gWchIX";
 
-  const LINK_FORM = "https://forms.gle/uFqMArur9rYbtWvC9";
+  const LINK_FORM =
+    "https://forms.gle/uFqMArur9rYbtWvC9";
 
   const select = document.getElementById("turmaSelect");
   const msg = document.getElementById("mensagem");
+  const btn = document.getElementById("btnContinuar");
 
-  // 1️⃣ Carrega turmas liberadas
-  fetch(IGC.api({ acao: 'listarTurmasLiberadasAgora' }))
-    .then(r => r.json())
+  // =====================================================
+  // 1️⃣ CARREGA TURMAS LIBERADAS
+  // =====================================================
+  fetch(`${API_FIXA}&acao=listarTurmasLiberadasAgora`)
+    .then(res => {
+      if (!res.ok) throw new Error("Erro HTTP");
+      return res.json();
+    })
     .then(turmas => {
+      console.log("Turmas recebidas:", turmas);
 
       select.innerHTML = "";
 
-      if (!turmas.length) {
+      if (!Array.isArray(turmas) || turmas.length === 0) {
         select.innerHTML =
           `<option value="">Nenhuma turma com emissão liberada</option>`;
         return;
@@ -108,13 +111,17 @@
         select.appendChild(opt);
       });
     })
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
       select.innerHTML =
         `<option value="">Erro ao carregar turmas</option>`;
     });
 
-  // 2️⃣ Verifica turma escolhida
-  function verificar() {
+  // =====================================================
+  // 2️⃣ VERIFICA TURMA SELECIONADA
+  // =====================================================
+  btn.addEventListener("click", () => {
+
     const turma = select.value;
 
     if (!turma) {
@@ -126,33 +133,34 @@
     msg.textContent = "Verificando liberação...";
 
     fetch(
-  IGC.api({
-    acao: 'verificarTurmaLiberada',
-    turma
-  })
-)
-
-      .then(r => r.json())
+      `${API_FIXA}&acao=verificarTurmaLiberada&turma=${encodeURIComponent(turma)}`
+    )
       .then(res => {
+        if (!res.ok) throw new Error("Erro HTTP");
+        return res.json();
+      })
+      .then(res => {
+        console.log("Resultado:", res);
 
-        if (res.liberado) {
+        if (res.liberado === true) {
           msg.textContent =
             "Liberação confirmada. Redirecionando...";
 
           setTimeout(() => {
             window.location.href = LINK_FORM;
-          }, 2000);
+          }, 1500);
 
         } else {
           msg.innerHTML =
-            `<span class="error">${res.mensagem}</span>`;
+            `<span class="error">${res.mensagem || "Turma não liberada."}</span>`;
         }
       })
-      .catch(() => {
+      .catch(err => {
+        console.error(err);
         msg.innerHTML =
           "<span class='error'>Erro ao verificar liberação.</span>";
       });
-  }
+  });
 </script>
 
 </body>
