@@ -56,6 +56,9 @@ function renderProdutos(listaProdutos) {
   produtosContainer.innerHTML = "";
 
   categorias.forEach(cat => {
+
+      if (cat.visivel === false) return; // 👈 AQUI
+     
     const produtosDaCategoria = listaProdutos.filter(p => p.categoria === cat.id);
     if (produtosDaCategoria.length === 0) return;
 
