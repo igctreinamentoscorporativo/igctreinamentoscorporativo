@@ -622,12 +622,12 @@ body.modal-open {
 
 <div class="field">
   <label>Início da emissão do certificado</label>
-  <input type="datetime-local" id="emissaoInicio" disabled>
+  <input type="datetime-local" id="emissaoInicio" disabled required>
 </div>
 
 <div class="field">
   <label>Fim da emissão do certificado</label>
-  <input type="datetime-local" id="emissaoFim" disabled>
+  <input type="datetime-local" id="emissaoFim" disabled required>
 </div>
   
 
@@ -1261,12 +1261,15 @@ if (
 }
 
 
-// ⏱️ VALIDAÇÃO DA JANELA DE EMISSÃO
-if (emissaoInicio.value && emissaoFim.value) {
-  if (new Date(emissaoFim.value) <= new Date(emissaoInicio.value)) {
-    alert("⚠️ O fim da emissão deve ser maior que o início.");
-    return;
-  }
+// ⏱️ VALIDAÇÃO OBRIGATÓRIA DA JANELA DE EMISSÃO
+if (!emissaoInicio.value || !emissaoFim.value) {
+  alert("⚠️ Informe a data e o horário de início e fim da emissão do certificado.");
+  return;
+}
+
+if (new Date(emissaoFim.value) <= new Date(emissaoInicio.value)) {
+  alert("⚠️ O fim da emissão deve ser maior que o início.");
+  return;
 }
   
 
