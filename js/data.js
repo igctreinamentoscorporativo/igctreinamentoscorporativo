@@ -21,19 +21,22 @@ const categorias = [
     id: "pnl",
     nome: "Treinamentos em PNL",
     nomeMenu: " Formação em PNL",
-    mostrarNoMenu: true
+    mostrarNoMenu: true,
+    visivel: true
   },
   {
     id: "oratoria",
     nome: "Treinamentos em Oratória",
     nomeMenu: "Treinamento em Oratória",
-    mostrarNoMenu: false
+    mostrarNoMenu: false,
+    visivel: false 
   },
   {
     id: "workshopepalestas",
     nome: "Worshop e Palestra",
     nomeMenu: "Worshop e Palestra",
-    mostrarNoMenu: false
+    mostrarNoMenu: false,
+    visivel: false
   },
 
 /* 🔽 BLOCO INSTITUCIONAL (ÂNCORA) */
