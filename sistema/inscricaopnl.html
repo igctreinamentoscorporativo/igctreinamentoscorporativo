@@ -455,20 +455,36 @@ btnConfirmar.disabled = true;
 btnConfirmar.style.opacity = "0.7";
 btnConfirmar.style.cursor = "not-allowed";
 
-  fetch(ENDPOINT, {
+/* ✅ AQUI É A CORREÇÃO */
+const cidadeFinal =
+  cidadeEl.value === "OUTRA"
+    ? cidadeOutraEl.value.toUpperCase()
+    : cidadeEl.value.toUpperCase();
+
+const estadoFinal =
+  estadoEl.value === "OUTRO"
+    ? estadoOutroEl.value.toUpperCase()
+    : estadoEl.value;
+
+/* 🔽 AGORA SIM O FETCH */
+fetch(ENDPOINT, {
   method: "POST",
   body: new URLSearchParams({
     tipo: "PRE",
+
     nome: nomeEl.value.toUpperCase(),
     cpf: cpfEl.value.replace(/\D/g,''),
     email: emailEl.value.toLowerCase(),
     telefone: telefoneEl.value,
+
     cidade: cidadeFinal,
     estado: estadoFinal,
+
     nomeCurso: cursoEl.value,
     turma: ""
   })
 })
+
 
 
 .then(r => r.json())
