@@ -455,7 +455,7 @@ btnConfirmar.style.cursor = "not-allowed";
 
   fetch(ENDPOINT, {
   method: "POST",
-  body: JSON.stringify({
+  body: new URLSearchParams({
     tipo: "PRE",
 
     nome: nomeEl.value.toUpperCase(),
