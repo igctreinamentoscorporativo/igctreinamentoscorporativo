@@ -457,25 +457,14 @@ btnConfirmar.style.cursor = "not-allowed";
 
   fetch(ENDPOINT, {
   method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
+  body: new URLSearchParams({
     tipo: "PRE",
-
     nome: nomeEl.value.toUpperCase(),
     cpf: cpfEl.value.replace(/\D/g,''),
     email: emailEl.value.toLowerCase(),
     telefone: telefoneEl.value,
-
-    cidade: cidadeEl.value === "OUTRA"
-      ? cidadeOutraEl.value.toUpperCase()
-      : cidadeEl.value.toUpperCase(),
-
-    estado: estadoEl.value === "OUTRO"
-      ? estadoOutroEl.value.toUpperCase()
-      : estadoEl.value,
-
+    cidade: cidadeFinal,
+    estado: estadoFinal,
     nomeCurso: cursoEl.value,
     turma: ""
   })
