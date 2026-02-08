@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pré-inscrição</title>
+<title>Inscrição</title>
 
 <style>
 * { box-sizing: border-box; }
-
 body {
   font-family: Arial, sans-serif;
   background: #f4f6f8;
@@ -18,12 +17,18 @@ body {
 }
 
 .card {
+  display: block;
   background: #fff;
   padding: 25px;
   max-width: 420px;
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+.loader {
+  font-size: 18px;
+  color: #1f3c88;
 }
 
 input, select, button {
@@ -43,148 +48,545 @@ button {
   color: #fff;
   border: none;
   font-weight: bold;
-  cursor: pointer;
 }
 
-button:disabled {
-  opacity: .6;
-  cursor: not-allowed;
+button,
+.btn {
+  transition: 
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    opacity 0.2s ease;
 }
+
+button:active,
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(0,0,0,.2) inset;
+  opacity: 0.85;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 100%;
+  animation: fadeIn .25s ease;
+}
+
+.modal-content h3 {
+  margin-bottom: 15px;
+  color: #1f3c88;
+}
+
+.modal-content p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+  
 </style>
 </head>
 
 <body>
 
+
+
 <div class="card" id="formCard">
+  <h2 id="titulo">Formulário de Inscrição</h2>
 
-  <h2>Pré-inscrição</h2>
-  <p style="font-size:14px; margin-bottom:15px;">
-    Preencha seus dados para reservar sua vaga.
-    A confirmação ocorre após o pagamento.
-  </p>
 
-  <input id="nome" placeholder="Seu nome completo">
-  <input id="cpf" placeholder="CPF (somente números)">
-  <input id="email" placeholder="Seu melhor e-mail">
-  <input id="telefone" placeholder="Telefone / WhatsApp">
-
-  <input id="curso" placeholder="Curso de interesse">
-  <input id="turma" placeholder="Turma (se houver)">
-
-  <select id="pais">
-    <option value="">País</option>
-    <option value="BR">Brasil</option>
-    <option value="JP">Japão</option>
-    <option value="PY">Paraguai</option>
+  <select id="curso">
+  <option value="">Selecione o curso</option>
   </select>
+ 
+  <input id="nome" placeholder="Seu Nome Completo">
+  <input id="cpf" placeholder="CPF (somente números)">
+  <input id="email" placeholder="Seu Melhor E-mail">
+  <input id="telefone" placeholder="Telefone/WhatsApp">
+  
 
-  <input id="estado" placeholder="Estado / Região">
-  <input id="cidade" placeholder="Cidade">
 
-  <button id="btnConfirmar" onclick="finalizar()">
-    CONFIRMAR PRÉ-INSCRIÇÃO
-  </button>
+<select id="pais">
+  <option value="">País</option>
+  <option value="BR">Brasil</option>
+  <option value="JP">Japão</option>
+  <option value="PY">Paraguai</option>
+</select>
 
+
+  
+<select id="estado" disabled>
+  <option value="">Estado / Região</option>
+</select>
+
+<input
+  id="estadoOutro"
+  placeholder="Digite o estado / região"
+  style="display:none">
+
+
+<select id="cidade" disabled>
+  <option value="">Cidade</option>
+</select>
+
+<input
+  id="cidadeOutra"
+  placeholder="Digite a cidade"
+  style="display:none"
+>
+
+<button id="btnConfirmar" onclick="finalizar()">CONFIRMAR INSCRIÇÃO</button>
 </div>
 
-<script src="/js/igc-config.js"></script>
+<script src="/js/localidades.js"></script>
 
+<script src="/js/igc-config.js"></script>  
+  
 <script>
+
+const LINK_PAGAMENTO = "https://www.mercadopago.com.br/SEU_LINK_AQUI";
+  
 const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+
+
+
+/* ===========================
+   🔽 CARREGA CURSOS ATIVOS
+   =========================== */
+fetch(`${ENDPOINT}?acao=listarCursos`)
+  .then(r => r.json())
+  .then(cursos => {
+    const select = document.getElementById("curso");
+
+    cursos.forEach(c => {
+      const opt = document.createElement("option");
+      opt.value = c.nome;        // 🔑 exatamente igual à planilha
+      opt.textContent = c.nome;  // texto visível
+      select.appendChild(opt);
+    });
+  });
+  
+
+  
+
+
+  
+
+// ===== VALIDAÇÕES =====
 
 const nomeEl = document.getElementById("nome");
 const cpfEl = document.getElementById("cpf");
 const emailEl = document.getElementById("email");
 const telefoneEl = document.getElementById("telefone");
-const cursoEl = document.getElementById("curso");
-const turmaEl = document.getElementById("turma");
 const paisEl = document.getElementById("pais");
 const estadoEl = document.getElementById("estado");
 const cidadeEl = document.getElementById("cidade");
-const btnConfirmar = document.getElementById("btnConfirmar");
+const cidadeOutraEl = document.getElementById("cidadeOutra");
+const estadoOutroEl = document.getElementById("estadoOutro");
+const btnConfirmar = document.getElementById("btnConfirmar");  
 
-cpfEl.oninput = e =>
-  e.target.value = e.target.value.replace(/\D/g,'').slice(0,11);
 
-telefoneEl.oninput = e =>
-  e.target.value = e.target.value.replace(/\D/g,'');
+  
 
-emailEl.oninput = e =>
+nomeEl.oninput = e => e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+cidadeEl.oninput = e => e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+telefoneEl.oninput = e => e.target.value = e.target.value.replace(/\D/g,'');
+cpfEl.oninput = e => {
+  e.target.value = e.target.value.replace(/\D/g, '').slice(0, 11);
+};
+
+  estadoOutroEl.oninput = e => {e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+};
+  
+cidadeOutraEl.oninput = e => {e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+};
+  
+
+cpfEl.onblur = () => cpfEl.classList.toggle("erro", !validarCPF(cpfEl.value));
+emailEl.oninput = e => {
   e.target.value = e.target.value.toLowerCase();
+};
 
+emailEl.onblur = () => {
+  emailEl.classList.toggle(
+    "erro",
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)
+  );
+};
+
+function validarCPF(cpf) {
+  cpf = cpf.replace(/\D/g,'');
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+  let soma = 0, resto;
+  for (let i=1;i<=9;i++) soma += parseInt(cpf[i-1])*(11-i);
+  resto = (soma*10)%11;
+  if (resto===10) resto=0;
+  if (resto!=cpf[9]) return false;
+  soma=0;
+  for (let i=1;i<=10;i++) soma += parseInt(cpf[i-1])*(12-i);
+  resto = (soma*10)%11;
+  if (resto===10) resto=0;
+  return resto==cpf[10];
+}
+
+
+
+ paisEl.onchange = () => {
+
+  // 🔹 define o rótulo correto conforme o país
+  estadoEl.innerHTML =
+    paisEl.value === "JP"
+      ? `<option value="">Prefeitura</option>`
+      : paisEl.value === "PY"
+      ? `<option value="">Departamento</option>`
+      : `<option value="">Estado</option>`;
+
+
+// 🔹 rótulo da CIDADE conforme o país
+cidadeEl.placeholder =
+  paisEl.value === "JP"
+    ? "市 (Cidade)"
+    : paisEl.value === "PY"
+    ? "Ciudad"
+    : "Cidade";
+   
+
+  estadoEl.disabled = true;
+  cidadeEl.value = "";
+  cidadeEl.disabled = true;
+
+  const lista = ESTADOS[paisEl.value];
+
+  if (!lista) return;
+
+  lista.forEach(([valor, nome]) => {
+    const opt = document.createElement("option");
+    opt.value = valor;
+    opt.textContent = nome;
+    estadoEl.appendChild(opt);
+  
+  });
+
+    const optOutroEstado = document.createElement("option");
+    optOutroEstado.value = "OUTRO";
+    optOutroEstado.textContent = "OUTRO";
+    estadoEl.appendChild(optOutroEstado);
+
+   
+  estadoEl.disabled = false;
+};
+
+
+
+
+  
+ 
+estadoEl.onchange = () => {
+  // reset estado outro
+  estadoOutroEl.style.display = "none";
+  estadoOutroEl.value = "";
+
+  // reset cidade (SEM FORÇAR OUTRA)
+  cidadeEl.innerHTML = `<option value="">Cidade</option>`;
+  cidadeEl.disabled = true;
+  cidadeOutraEl.style.display = "none";
+  cidadeOutraEl.value = "";
+
+  if (!estadoEl.value) return;
+
+  // 🟡 ESTADO = OUTRO → só abre o campo de estado
+  if (estadoEl.value === "OUTRO") {
+    estadoOutroEl.style.display = "block";
+    estadoOutroEl.focus();
+
+    // cidade fica disponível, mas neutra
+    cidadeEl.disabled = false;
+
+    const optOutra = document.createElement("option");
+    optOutra.value = "OUTRA";
+    optOutra.textContent = "OUTRA";
+    cidadeEl.appendChild(optOutra);
+
+    return;
+  }
+
+  // 🟢 ESTADO NORMAL → carrega cidades
+  const listaCidades = CIDADES[paisEl.value]?.[estadoEl.value];
+
+  if (listaCidades) {
+    listaCidades.forEach(cidade => {
+      const opt = document.createElement("option");
+      opt.value = cidade;
+      opt.textContent = cidade;
+      cidadeEl.appendChild(opt);
+    });
+  }
+
+  // adiciona OUTRA como opção
+  const optOutra = document.createElement("option");
+  optOutra.value = "OUTRA";
+  optOutra.textContent = "OUTRA";
+  cidadeEl.appendChild(optOutra);
+
+  cidadeEl.disabled = false;
+};
+
+
+cidadeEl.onchange = () => {
+  if (cidadeEl.value === "OUTRA") {
+    cidadeOutraEl.style.display = "block";
+    cidadeOutraEl.focus();
+  } else {
+    cidadeOutraEl.style.display = "none";
+    cidadeOutraEl.value = "";
+  }
+};
+
+
+   
 function finalizar() {
 
-  if (!nomeEl.value.trim()) return alert("Informe o nome.");
-  if (!emailEl.value.trim()) return alert("Informe o e-mail.");
-  if (!telefoneEl.value.trim()) return alert("Informe o telefone.");
-  if (!cursoEl.value.trim()) return alert("Informe o curso.");
 
-  btnConfirmar.disabled = true;
-  btnConfirmar.innerText = "Registrando pré-inscrição...";
+// 🔴 VALIDA NOME (OBRIGATÓRIO)
+  
+ if (!nomeEl.value.trim()) {
+  alert("⚠️ Informe o nome do participante.");
+  nomeEl.classList.add("erro");
+  nomeEl.focus();
+  return;
+} else {
+  nomeEl.classList.remove("erro");
+}
+  
+  
+  
+  
+  // 🔴 VALIDA EMAIL (OBRIGATÓRIO)
+if (!emailEl.value.trim()) {
+  alert("⚠️ Informe o e-mail.");
+  emailEl.classList.add("erro");
+  emailEl.focus();
+  return;
+}
+
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+  alert("⚠️ Informe um e-mail válido.");
+  emailEl.classList.add("erro");
+  emailEl.focus();
+  return;
+} else {
+  emailEl.classList.remove("erro");
+}
+  
+  
+    
+  
+  // 🔴 VALIDA TELEFONE (OBRIGATÓRIO)
+if (!telefoneEl.value.trim()) {
+  alert("⚠️ Informe o telefone / WhatsApp.");
+  telefoneEl.classList.add("erro");
+  telefoneEl.focus();
+  return;
+}
+
+// mínimo 10 dígitos (DDD + número)
+if (telefoneEl.value.length < 10) {
+  alert("⚠️ Informe um telefone válido com DDD.");
+  telefoneEl.classList.add("erro");
+  telefoneEl.focus();
+  return;
+} else {
+  telefoneEl.classList.remove("erro");
+} 
+
+
+  
+  
+// 🔴 VALIDA PAÍS
+if (!paisEl.value) {
+  alert("⚠️ Selecione o país.");
+  paisEl.focus();
+  return;
+}
+
+// 🔴 VALIDA ESTADO / PREFEITURA / DEPARTAMENTO
+if (
+  !estadoEl.value ||
+  (estadoEl.value === "OUTRO" && !estadoOutroEl.value.trim())
+) {
+  alert("⚠️ Informe o estado / região.");
+  estadoEl.focus();
+  return;
+}
+
+// 🔴 VALIDA CIDADE
+if (
+  !cidadeEl.value ||
+  (cidadeEl.value === "OUTRA" && !cidadeOutraEl.value.trim())
+) {
+  alert("⚠️ Informe a cidade.");
+  cidadeEl.classList.add("erro");
+  cidadeEl.focus();
+  return;
+} else {
+  cidadeEl.classList.remove("erro");
+}
+
+
+
+  
+  if (document.querySelector(".erro")) {
+    alert("⚠️ Corrija os campos destacados.");
+    return;
+  }
+
+  // 🔒 INÍCIO DO SALVAMENTO
+btnConfirmar.innerText = "Registrando no sistema...";
+btnConfirmar.disabled = true;
+btnConfirmar.style.opacity = "0.7";
+btnConfirmar.style.cursor = "not-allowed";
 
   fetch(ENDPOINT, {
-    method: "POST",
-    body: JSON.stringify({
+  method: "POST",
+  body: JSON.stringify({
+    tipo: "PRE",
 
-      // 🔑 BIFURCAÇÃO DO SISTEMA
-      tipo: "PRE",
+    nome: nomeEl.value.toUpperCase(),
+    cpf: cpfEl.value.replace(/\D/g,''),
+    email: emailEl.value.toLowerCase(),
+    telefone: telefoneEl.value,
 
-      nome: nomeEl.value.toUpperCase(),
-      cpf: cpfEl.value,
-      email: emailEl.value,
-      telefone: telefoneEl.value,
+    cidade: cidadeEl.value === "OUTRA"
+      ? cidadeOutraEl.value.toUpperCase()
+      : cidadeEl.value.toUpperCase(),
 
-      nomeCurso: cursoEl.value.toUpperCase(),
-      turma: turmaEl.value.toUpperCase(),
+    estado: estadoEl.value === "OUTRO"
+      ? estadoOutroEl.value.toUpperCase()
+      : estadoEl.value,
 
-      pais: paisEl.value,
-      estado: estadoEl.value.toUpperCase(),
-      cidade: cidadeEl.value.toUpperCase()
-    })
+    nomeCurso: document.getElementById("curso").value,
+    turma: ""
   })
-  .then(r => r.json())
-  .then(res => {
+})
 
-    if (!res.sucesso) {
-      alert("Erro ao registrar a pré-inscrição.");
-      btnConfirmar.disabled = false;
-      btnConfirmar.innerText = "CONFIRMAR PRÉ-INSCRIÇÃO";
-      return;
-    }
+.then(r => r.json())
+.then(res => {
+  if (!res.sucesso) {
+    alert("Erro ao registrar a pré-inscrição.");
+    btnConfirmar.disabled = false;
+    btnConfirmar.innerText = "CONFIRMAR INSCRIÇÃO";
+    return;
+  }
 
-    document.body.innerHTML = `
+  document.body.innerHTML = `
+    <div style="
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    ">
       <div style="
-        background:#f4f6f8;
-        min-height:100vh;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:20px;
-        text-align:center;
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 460px;
+        width: 100%;
+        box-shadow: 0 8px 20px rgba(0,0,0,.1);
       ">
-        <div style="
-          background:#fff;
-          padding:30px;
-          border-radius:12px;
-          max-width:420px;
-          box-shadow:0 8px 20px rgba(0,0,0,.1);
-        ">
-          <h2 style="color:#1f3c88;">📝 Pré-inscrição recebida!</h2>
-          <p style="margin-top:15px;">
-            Seus dados foram registrados com sucesso.<br><br>
-            Para confirmar sua vaga, finalize o pagamento conforme
-            instruções combinadas.
-          </p>
-          <p style="margin-top:20px;">
-            Após a confirmação do pagamento,
-            você receberá todas as informações por e-mail.
-          </p>
-        </div>
-      </div>
-    `;
-  });
-}
-</script>
 
-</body>
+        <h2 style="color:#1f3c88; text-align:center;">
+          📝 Pré-inscrição registrada com sucesso!
+        </h2>
+
+        <p style="margin-top:15px; font-size:15px; text-align:center;">
+          Sua pré-inscrição foi recebida corretamente.<br><br>
+          <b>Atenção:</b> o acesso aos materiais, apostilas,
+          voucher de participação e certificado ocorre
+          <b>somente após a confirmação do pagamento</b>.
+        </p>
+
+        <hr style="margin:20px 0;">
+
+        <h3 style="color:#1f3c88;">Dados da sua inscrição</h3>
+
+        <p><b>Participante:</b> ${nomeEl.value}</p>
+        <p><b>E-mail:</b> ${emailEl.value.toLowerCase()}</p>
+        <p><b>Curso:</b> ${document.getElementById("curso").value}</p>
+        <p><b>Turma:</b> -</p>
+        <p><b>Carga horária:</b> -</p>
+        <p><b>Local:</b> -</p>
+        <p><b>Dia(s):</b> -</p>
+
+        <p style="margin-top:15px; font-size:14px;">
+          Caso tenha preenchido algum dado incorretamente,
+          entre em contato imediato com a equipe IGC.
+        </p>
+
+        <hr style="margin:20px 0;">
+
+        <p style="font-size:15px; text-align:center;">
+          👉 Para confirmar sua vaga,
+          clique no botão abaixo e realize o pagamento:
+        </p>
+
+        <a href="${LINK_PAGAMENTO}" target="_blank"
+           style="
+             display:block;
+             margin-top:15px;
+             padding:14px;
+             background:#2f55d4;
+             color:#fff;
+             text-decoration:none;
+             border-radius:10px;
+             font-weight:bold;
+             text-align:center;
+           ">
+          REALIZAR PAGAMENTO
+        </a>
+
+        <p style="margin-top:20px; font-size:14px; text-align:center;">
+          Após o pagamento, envie o comprovante
+          ao consultor responsável pelo seu atendimento.<br><br>
+
+          Assim que o pagamento for confirmado,
+          você receberá de
+          <b>igctreinamentoscorporativo@gmail.com</b>:<br><br>
+
+          • E-mail de inscrição confirmada<br>
+          • Voucher de participação<br>
+          • Apostilas e materiais completos em PDF<br><br>
+
+          <b>Importante:</b> verifique sua caixa de spam.<br><br>
+          Nos vemos em breve! 🙌
+        </p>
+
+      </div>
+    </div>
+  `;
+});
+
+
+  
+</script>
+ </body>
 </html>
