@@ -141,6 +141,10 @@ const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 /* ===========================
    🔽 CARREGA CURSOS ATIVOS
    =========================== */
+
+let CURSOS_MAPA = {};
+
+  
 window.onload = () => {
 
   fetch(`${ENDPOINT}?acao=listarCursos`)
@@ -152,10 +156,15 @@ window.onload = () => {
       cursos
   .filter(c => c.ativo === true)
   .forEach(curso => {
+
+    // 🔑 GUARDA O CURSO COMPLETO EM MEMÓRIA
+    CURSOS_MAPA[curso.nome] = curso;
+
     const opt = document.createElement("option");
     opt.value = curso.nome;
     opt.textContent = curso.nome;
     select.appendChild(opt);
+
   });
 
     })
@@ -496,6 +505,8 @@ fetch(ENDPOINT, {
     return;
   }
 
+  const cursoSelecionado = CURSOS_MAPA[cursoEl.value] || {};
+  
   document.body.innerHTML = `
     <div style="
       font-family: Arial, sans-serif;
@@ -533,10 +544,10 @@ fetch(ENDPOINT, {
         <p><b>Participante:</b> ${nomeEl.value}</p>
         <p><b>E-mail:</b> ${emailEl.value.toLowerCase()}</p>
         <p><b>Curso:</b> ${document.getElementById("curso").value}</p>
-        <p><b>Turma:</b> -</p>
-        <p><b>Carga horária:</b> -</p>
-        <p><b>Local:</b> -</p>
-        <p><b>Dia(s):</b> -</p>
+        <p><b>Turma:</b> ${cursoSelecionado.turma || "-"}</p>
+        <p><b>Carga horária:</b> ${cursoSelecionado.carga || "-"}</p>
+        <p><b>Local:</b> ${cursoSelecionado.local || "-"}</p>
+        <p><b>Dia(s):</b> ${cursoSelecionado.data || "-"}</p>
 
         <p style="margin-top:15px; font-size:14px;">
           Caso tenha preenchido algum dado incorretamente,
