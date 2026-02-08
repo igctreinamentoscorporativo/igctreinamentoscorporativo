@@ -620,6 +620,20 @@ body.modal-open {
 
 
 
+<div class="field">
+  <label>Início da emissão do certificado</label>
+  <input type="datetime-local" id="emissaoInicio" disabled>
+</div>
+
+<div class="field">
+  <label>Fim da emissão do certificado</label>
+  <input type="datetime-local" id="emissaoFim" disabled>
+</div>
+  
+
+  
+
+
 
 <div class="field">
   <label>Apostila 1 (principal)</label>
@@ -1018,11 +1032,14 @@ function preencher(c) {
   apostila4.value = c.apostilas?.[3] || "";
   apostila5.value = c.apostilas?.[4] || "";
   apostila6.value = c.apostilas?.[5] || "";
+  emissaoInicio.value = c.emissaoInicio
+  ? formatarParaDatetimeLocal(c.emissaoInicio)
+  : "";
+
+emissaoFim.value = c.emissaoFim
+  ? formatarParaDatetimeLocal(c.emissaoFim)
+  : "";
   
-
-
-
-
   
 
   atualizarPreviewModelo();
@@ -1033,16 +1050,28 @@ function preencher(c) {
 
 
 
-
 // 🔒 REGRA DE NEGÓCIO CENTRALIZADA IMPEDE EDITAR REGISTROS INATIVOS
   aplicarRestricaoInativo(c);
   controlarSequenciaApostilas();
 
-
-  
+ 
 }
 
 
+
+  
+
+function formatarParaDatetimeLocal(valor) {
+  const d = new Date(valor);
+  const pad = n => String(n).padStart(2, "0");
+
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+
+
+
+  
 
 function aplicarFiltro() {
   const textoCurso = filtroCurso.value.trim().toUpperCase();
@@ -1232,6 +1261,16 @@ if (
 }
 
 
+// ⏱️ VALIDAÇÃO DA JANELA DE EMISSÃO
+if (emissaoInicio.value && emissaoFim.value) {
+  if (new Date(emissaoFim.value) <= new Date(emissaoInicio.value)) {
+    alert("⚠️ O fim da emissão deve ser maior que o início.");
+    return;
+  }
+}
+  
+
+
 if (!apostila1.value) {
   alert("⚠️ A Apostila 1 (principal) é obrigatória.");
   return;
@@ -1280,7 +1319,9 @@ if (turmaJaExiste(turma.value, cursoId.value || null)) {
   apostilaId3: apostila3.value || "",
   apostilaId4: apostila4.value || "",
   apostilaId5: apostila5.value || "",
-  apostilaId6: apostila6.value || ""
+  apostilaId6: apostila6.value || "",
+  emissaoInicio: emissaoInicio.value || "",
+  emissaoFim: emissaoFim.value || ""
 };
 
 
