@@ -149,12 +149,14 @@ window.onload = () => {
 
       const select = document.getElementById("curso");
 
-      cursos.forEach(nomeCurso => {
-        const opt = document.createElement("option");
-        opt.value = nomeCurso;
-        opt.textContent = nomeCurso;
-        select.appendChild(opt);
-      });
+      cursos
+  .filter(c => c.ativo === true)
+  .forEach(curso => {
+    const opt = document.createElement("option");
+    opt.value = curso.nome;
+    opt.textContent = curso.nome;
+    select.appendChild(opt);
+  });
 
     })
     .catch(() => {
@@ -455,7 +457,10 @@ btnConfirmar.style.cursor = "not-allowed";
 
   fetch(ENDPOINT, {
   method: "POST",
-  body: new URLSearchParams({
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
     tipo: "PRE",
 
     nome: nomeEl.value.toUpperCase(),
@@ -471,10 +476,11 @@ btnConfirmar.style.cursor = "not-allowed";
       ? estadoOutroEl.value.toUpperCase()
       : estadoEl.value,
 
-    nomeCurso: document.getElementById("curso").value,
+    nomeCurso: cursoEl.value,
     turma: ""
   })
 })
+
 
 .then(r => r.json())
 .then(res => {
