@@ -750,10 +750,6 @@ body.modal-open {
   
   
 <script>
-const senhaLogin = document.getElementById("senhaLogin");
-const loginErro  = document.getElementById("loginErro");
-
-  
 const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
 let SENHA = "";
@@ -770,12 +766,6 @@ let PERMISSOES = [];
   
 
 async function login() {
-
-
-  
-  console.log("LOGIN DISPARADO");
-
-  
   const senha = senhaLogin.value.trim();
   loginErro.innerText = "";
 
@@ -784,18 +774,6 @@ async function login() {
     return;
   }
 
-
-
-  
-
-console.log("VAI FAZER FETCH", API);
-
-
-
-
-  
-
-  
   const res = await fetch(API, {
     method: "POST",
     body: JSON.stringify({
@@ -804,23 +782,7 @@ console.log("VAI FAZER FETCH", API);
     })
   }).then(r => r.json());
 
-
-
-
-  
-console.log("RES LOGIN CURSOS →", res);
-console.log("TIPO permissoes →", typeof res.permissoes, res.permissoes);
-
-
-
-
-  
-  
-  const permissoes = Array.isArray(res.permissoes)
-  ? res.permissoes
-  : [];
-
-if (!res.ok || !permissoes.includes("GERENCIAR_CURSO")) {
+  if (!res.ok || !res.permissoes.includes("GERENCIAR_CURSO")) {
   loginErro.innerText = "Acesso não autorizado.";
   return;
 }
