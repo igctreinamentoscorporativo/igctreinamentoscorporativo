@@ -782,6 +782,18 @@ async function login() {
     })
   }).then(r => r.json());
 
+
+
+
+  
+console.log("RES LOGIN CURSOS →", res);
+console.log("TIPO permissoes →", typeof res.permissoes, res.permissoes);
+
+
+
+
+  
+  
   const permissoes = Array.isArray(res.permissoes)
   ? res.permissoes
   : [];
