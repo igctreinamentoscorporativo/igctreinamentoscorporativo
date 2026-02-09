@@ -496,11 +496,10 @@ fetch(ENDPOINT, {
     token: cursoSelecionado.token || ""
   })
 })
+.then(r => r.text())
+.then(txt => {
+  const res = JSON.parse(txt);
 
-
-
-.then(r => r.json())
-.then(res => {
   if (!res.sucesso) {
     alert("Erro ao registrar a pré-inscrição.");
     btnConfirmar.disabled = false;
