@@ -465,7 +465,7 @@ btnConfirmar.style.cursor = "not-allowed";
   fetch(ENDPOINT, {
   method: "POST",
   body: JSON.stringify({
-    origem: "TOKEN_HTML", // 👈 ESSENCIAL
+    token: TOKEN,
     nome: nomeEl.value.toUpperCase(),
     cpf: cpfEl.value.replace(/\D/g,''),
     email: emailEl.value.toLowerCase(),
