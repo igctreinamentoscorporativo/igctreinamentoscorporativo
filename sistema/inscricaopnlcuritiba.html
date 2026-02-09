@@ -372,16 +372,13 @@ cidadeEl.onchange = () => {
 };
 
 
+
+  
    
 function finalizar() {
 const cursoSelecionado = CURSOS_MAPA[cursoEl.value] || {};
 
-// 🔴 VALIDA CURSO (OBRIGATÓRIO)
-  if (!cursoEl.value) {
-    alert("⚠️ Selecione o curso desejado.");
-    cursoEl.focus();
-    return;
-  }
+
 
   
 
