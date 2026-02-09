@@ -351,7 +351,7 @@ cidadeEl.onchange = () => {
 
    
 function finalizar() {
-
+const cursoSelecionado = CURSOS_MAPA[cursoEl.value] || {};
 
 // 🔴 VALIDA CURSO (OBRIGATÓRIO)
   if (!cursoEl.value) {
@@ -508,7 +508,7 @@ fetch(ENDPOINT, {
     return;
   }
 
-  const cursoSelecionado = CURSOS_MAPA[cursoEl.value] || {};
+  
   
   document.body.innerHTML = `
     <div style="
