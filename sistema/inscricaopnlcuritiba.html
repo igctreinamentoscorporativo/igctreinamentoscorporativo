@@ -79,7 +79,7 @@ button:active,
   <h2 id="titulo">Formulário de Inscrição</h2>
 
 
-  <select id="curso">
+  <select id="curso" disabled style="display:none">
   <option value="">Selecione o curso</option>
   </select>
  
@@ -132,7 +132,7 @@ const LINK_PAGAMENTO = "https://mpago.la/1U1TPB1";
   
 const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
-
+const CURSO_FIXO = "FORMAÇÃO EM PNL - PROGRAMAÇÃO NEUROLINGUÍSTICA"; // ⬅️ EXATAMENTE como está no Excel
 
 
 /* ===========================
@@ -150,9 +150,15 @@ window.onload = () => {
 
       const select = document.getElementById("curso");
 
+
+// 🔒 CURSO FIXO (SEM ESCOLHA DO USUÁRIO)
+select.value = CURSO_FIXO;
+      
       cursos
   .filter(c => c.ativo === true)
   .forEach(curso => {
+
+    
 
     // 🔑 GUARDA O CURSO COMPLETO EM MEMÓRIA
     CURSOS_MAPA[curso.nome] = curso;
@@ -163,6 +169,23 @@ window.onload = () => {
     select.appendChild(opt);
 
   });
+
+
+// 🛡️ GARANTE CURSO FIXO NO MAPA (caso não venha do fetch)
+if (!CURSOS_MAPA[CURSO_FIXO]) {
+  CURSOS_MAPA[CURSO_FIXO] = {
+    nome: CURSO_FIXO,
+    turma: "",
+    carga: "",
+    local: "",
+    data: "",
+    token: ""
+  };
+}
+      
+// garante que o select fique com o valor certo
+      select.value = CURSO_FIXO;
+      
 
     })
     .catch(() => {
