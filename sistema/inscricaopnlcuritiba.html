@@ -375,20 +375,14 @@ function finalizar() {
 
 const chaveCurso = `${CURSO_FIXO}__${TURMA_FIXA}`;
 
-
-
-  
-// 🔒 VALIDA SE O CURSO FIXO EXISTE NA BASE
-  // 🔒 VALIDA CURSO + TURMA
+// 🔒 VALIDA CURSO + TURMA
 if (!CURSOS_MAPA[chaveCurso]) {
   console.error("Curso/turma não encontrada:", chaveCurso);
   alert("Curso indisponível no momento. Entre em contato com a organização.");
   return;
 }
-  
-   
-  
-  const cursoSelecionado = CURSOS_MAPA[CURSO_FIXO];
+
+const cursoSelecionado = CURSOS_MAPA[chaveCurso];
 
 
   
