@@ -74,7 +74,7 @@ button:active,
 </style>
 </head>
 
-<body>
+<>
 
 
 
@@ -481,18 +481,24 @@ fetch(ENDPOINT, {
   body: new URLSearchParams({
     tipo: "PRE",
 
+    cpf: cpfEl.value.replace(/\D/g, ''),
     nome: nomeEl.value.toUpperCase(),
-    cpf: cpfEl.value.replace(/\D/g,''),
     email: emailEl.value.toLowerCase(),
     telefone: telefoneEl.value,
+
+    nomeCurso: cursoSelecionado.nome || cursoEl.value,
+    turma: cursoSelecionado.turma || "",
+
+    cargaHoraria: cursoSelecionado.carga || "",
+    localCurso: cursoSelecionado.local || "",
+    dataHorarioCurso: cursoSelecionado.data || "",
 
     cidade: cidadeFinal,
     estado: estadoFinal,
 
-    nomeCurso: cursoEl.value,
-    turma: ""
+    token: cursoSelecionado.token || ""
   })
-})
+});
 
 
 
