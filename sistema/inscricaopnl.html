@@ -475,7 +475,10 @@ const estadoFinal =
 /* 🔽 AGORA SIM O FETCH */
 fetch(ENDPOINT, {
   method: "POST",
-  body: new URLSearchParams({
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
     tipo: "PRE",
 
     cpf: cpfEl.value.replace(/\D/g, ''),
