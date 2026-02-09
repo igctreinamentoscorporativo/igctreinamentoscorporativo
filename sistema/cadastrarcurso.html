@@ -782,7 +782,11 @@ async function login() {
     })
   }).then(r => r.json());
 
-  if (!res.ok || !res.permissoes.includes("GERENCIAR_CURSO")) {
+  const permissoes = Array.isArray(res.permissoes)
+  ? res.permissoes
+  : [];
+
+if (!res.ok || !permissoes.includes("GERENCIAR_CURSO")) {
   loginErro.innerText = "Acesso não autorizado.";
   return;
 }
