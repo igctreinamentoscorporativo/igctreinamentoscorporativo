@@ -168,8 +168,17 @@ select.value = CURSO_FIXO;
     
 
     // 🔑 GUARDA O CURSO COMPLETO EM MEMÓRIA
-    const chave = `${curso.nome}__${curso.turma}`;
+    const nome = (curso.nome || "").trim();
+    const turma = (curso.turma || "").trim();
+
+    const chave = `${nome}__${turma}`;
     CURSOS_MAPA[chave] = curso;
+
+
+
+
+
+    
 
     const opt = document.createElement("option");
     opt.value = curso.nome;
@@ -373,7 +382,12 @@ cidadeEl.onchange = () => {
    
 function finalizar() {
 
-const chaveCurso = `${CURSO_FIXO}__${TURMA_FIXA}`;
+const chaveCurso = `${CURSO_FIXO.trim()}__${TURMA_FIXA.trim()}`;
+
+console.log("🔎 CHAVE ESPERADA:", chaveCurso);
+console.log("📦 CHAVES DISPONÍVEIS:", Object.keys(CURSOS_MAPA));
+
+  
 
 // 🔒 VALIDA CURSO + TURMA
 if (!CURSOS_MAPA[chaveCurso]) {
