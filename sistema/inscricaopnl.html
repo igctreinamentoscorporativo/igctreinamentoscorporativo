@@ -349,25 +349,8 @@ cidadeEl.onchange = () => {
 };
 
 
-
-
-
-
-
-async function cpfJaExiste(cpf) {
-  const r = await fetch(
-    `${ENDPOINT}?acao=verificarCPF&cpf=${cpf}`
-  );
-  const res = await r.json();
-  return res.existe === true;
-
-
-
-
-
-  
    
-async function finalizar() {
+function finalizar() {
 const cursoSelecionado = CURSOS_MAPA[cursoEl.value] || {};
 
 // 🔴 VALIDA CURSO (OBRIGATÓRIO)
@@ -472,32 +455,6 @@ if (
     return;
   }
 
-
-
-
- // 🔍 VERIFICA SE CPF JÁ ESTÁ NA PRÉ-INSCRIÇÃO
-cpfEl.value = cpfEl.value.replace(/\D/g, '');
-
-const jaExiste = await cpfJaExiste(cpfEl.value);
-
-if (jaExiste) {
-  alert(
-    "⚠️ Seu CPF já está registrado em nossa base de pré-inscritos.\n\n" +
-    "Converse com o consultor que realizou o seu atendimento\n" +
-    "ou entre em contato agora pelo nosso WhatsApp (18) 99122-1171."
-  );
-
-  btnConfirmar.disabled = false;
-  btnConfirmar.innerText = "CONFIRMAR INSCRIÇÃO";
-  return;
-} 
-
-
-
-
-
-
-  
   // 🔒 INÍCIO DO SALVAMENTO
 btnConfirmar.innerText = "Registrando no sistema...";
 btnConfirmar.disabled = true;
