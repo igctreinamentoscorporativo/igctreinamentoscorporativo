@@ -170,18 +170,6 @@ select.value = CURSO_FIXO;
 
   });
 
-
-// 🛡️ GARANTE CURSO FIXO NO MAPA (caso não venha do fetch)
-if (!CURSOS_MAPA[CURSO_FIXO]) {
-  CURSOS_MAPA[CURSO_FIXO] = {
-    nome: CURSO_FIXO,
-    turma: "",
-    carga: "",
-    local: "",
-    data: "",
-    token: ""
-  };
-}
       
 // garante que o select fique com o valor certo
       select.value = CURSO_FIXO;
@@ -376,8 +364,17 @@ cidadeEl.onchange = () => {
   
    
 function finalizar() {
-const cursoSelecionado = CURSOS_MAPA[cursoEl.value] || {};
 
+// 🔒 VALIDA SE O CURSO FIXO EXISTE NA BASE
+  if (!CURSOS_MAPA[CURSO_FIXO]) {
+    console.error("Curso fixo não encontrado na base:", CURSO_FIXO);
+    alert("Curso indisponível no momento. Entre em contato com a organização.");
+    return;
+  }  
+  
+   
+  
+  const cursoSelecionado = CURSOS_MAPA[CURSO_FIXO];
 
 
   
