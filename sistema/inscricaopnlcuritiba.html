@@ -129,12 +129,19 @@ button:active,
 <script>
 
 const LINK_PAGAMENTO = "https://mpago.la/1U1TPB1";
-  
 const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
+
+
+
+  
+
+  
 const CURSO_FIXO = "FORMAÇÃO EM PNL - PROGRAMAÇÃO NEUROLINGUÍSTICA"; // ⬅️ EXATAMENTE como está no Excel
+const TURMA_FIXA = "ABR 26 CUR-03"; // exatamente como está na planilha
 
 
+  
 /* ===========================
    🔽 CARREGA CURSOS ATIVOS
    =========================== */
@@ -161,7 +168,8 @@ select.value = CURSO_FIXO;
     
 
     // 🔑 GUARDA O CURSO COMPLETO EM MEMÓRIA
-    CURSOS_MAPA[curso.nome] = curso;
+    const chave = `${curso.nome}__${curso.turma}`;
+    CURSOS_MAPA[chave] = curso;
 
     const opt = document.createElement("option");
     opt.value = curso.nome;
@@ -365,6 +373,11 @@ cidadeEl.onchange = () => {
    
 function finalizar() {
 
+const chaveCurso = `${CURSO_FIXO}__${TURMA_FIXA}`;
+
+
+
+  
 // 🔒 VALIDA SE O CURSO FIXO EXISTE NA BASE
   if (!CURSOS_MAPA[CURSO_FIXO]) {
     console.error("Curso fixo não encontrado na base:", CURSO_FIXO);
