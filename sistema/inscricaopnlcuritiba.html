@@ -90,10 +90,7 @@ button:active,
 
 
   
-  <select id="curso" disabled style="display:none">
-  <option value="">Selecione o curso</option>
-  </select>
- 
+  
   <input id="nome" placeholder="Seu Nome Completo">
   <input id="cpf" placeholder="CPF (somente números)">
   <input id="email" placeholder="Seu Melhor E-mail">
@@ -161,61 +158,29 @@ let CURSOS_MAPA = {};
 
   
 window.onload = () => {
-
   fetch(`${ENDPOINT}?acao=listarCursos`)
     .then(r => r.json())
     .then(cursos => {
 
-      const select = document.getElementById("curso");
-
-
-// 🔒 CURSO FIXO (SEM ESCOLHA DO USUÁRIO)
-select.value = CURSO_FIXO;
-      
       cursos
-  .filter(c => c.ativo === true)
-  .forEach(curso => {
+        .filter(c => c.ativo === true)
+        .forEach(curso => {
 
-    
+          const nome = (curso.nome || "").trim();
+          const turma = (curso.turma || "").trim();
+          const chave = `${nome}__${turma}`;
 
-    // 🔑 GUARDA O CURSO COMPLETO EM MEMÓRIA
-    const nome = (curso.nome || "").trim();
-    const turma = (curso.turma || "").trim();
-
-    const chave = `${nome}__${turma}`;
-    CURSOS_MAPA[chave] = curso;
-
-
-
-
-
-    
-
-    const opt = document.createElement("option");
-    opt.value = curso.nome;
-    opt.textContent = curso.nome;
-    select.appendChild(opt);
-
-  });
-
-      
-// garante que o select fique com o valor certo
-      select.value = CURSO_FIXO;
-      
+          CURSOS_MAPA[chave] = curso;
+        });
 
     })
-    .catch(() => {
-      alert("Não foi possível carregar a lista de cursos.");
+    .catch(err => {
+      console.warn("Falha ao carregar cursos:", err);
     });
-
 };
 
 
-
-  
-
-
-  
+   
 
 // ===== VALIDAÇÕES =====
 
@@ -229,7 +194,7 @@ const cidadeEl = document.getElementById("cidade");
 const cidadeOutraEl = document.getElementById("cidadeOutra");
 const estadoOutroEl = document.getElementById("estadoOutro");
 const btnConfirmar = document.getElementById("btnConfirmar");  
-const cursoEl = document.getElementById("curso");
+
 
   
 
@@ -531,7 +496,7 @@ fetch(ENDPOINT, {
     email: emailEl.value.toLowerCase(),
     telefone: telefoneEl.value,
 
-    nomeCurso: cursoSelecionado.nome || cursoEl.value,
+    nomeCurso: cursoSelecionado.nome,
     turma: cursoSelecionado.turma || "",
 
     cargaHoraria: cursoSelecionado.carga || "",
