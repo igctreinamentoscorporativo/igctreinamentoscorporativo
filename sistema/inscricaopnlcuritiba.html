@@ -29,7 +29,7 @@ body {
 
 .card {
   display: block;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);  /* 👈 5% de transparência background: #fff;*/
   padding: 25px;
   max-width: 420px;
   width: 100%;
@@ -88,6 +88,14 @@ button:active,
     line-height: 1.25;
     font-size: 15px;
   }
+
+
+  @media (max-width: 768px) {
+  body {
+    background-position: center top;
+  }
+}
+
   
   
 </style>
@@ -536,7 +544,6 @@ fetch(ENDPOINT, {
   document.body.innerHTML = `
     <div style="
       font-family: Arial, sans-serif;
-      background: #f4f6f8;
       min-height: 100vh;
       display: flex;
       align-items: center;
