@@ -70,6 +70,14 @@ button:active,
   from { opacity: 0; transform: scale(.95); }
   to { opacity: 1; transform: scale(1); }
 }
+
+
+.dados-inscricao p {
+    margin: 3px 0;
+    line-height: 1.25;
+    font-size: 15px;
+  }
+  
   
 </style>
 </head>
@@ -566,7 +574,7 @@ fetch(ENDPOINT, {
       ">
 
         <h2 style="color:#1f3c88; text-align:center;">
-          📝 Inscrição registrada com sucesso!
+          📝 Pré-Inscrição registrada!
         </h2>
 
         <p style="margin-top:15px; font-size:15px; text-align:center;">
@@ -574,8 +582,9 @@ fetch(ENDPOINT, {
         
         <hr style="margin:20px 0;">
 
-        <h3 style="color:#1f3c88;">Dados da sua inscrição</h3>
+        <h3 style="color:#1f3c88;">Dados da sua pré-inscrição</h3>
 
+        <div class="dados-inscricao">
         <p><b>Participante:</b> ${nomeEl.value}</p>
         <p><b>E-mail:</b> ${emailEl.value.toLowerCase()}</p>
         <p><b>Curso:</b> ${cursoSelecionado.nome}</p>
@@ -583,9 +592,9 @@ fetch(ENDPOINT, {
         <p><b>Carga horária:</b> ${cursoSelecionado.carga || "-"}</p>
         <p><b>Local:</b> ${cursoSelecionado.local || "-"}</p>
         <p><b>Dia(s):</b> ${cursoSelecionado.data || "-"}</p>
-
-        <b>Atenção:</b> o acesso aos materiais, apostilas
-          e voucher será enviado somente após a confirmação do pagamento</b>.
+        </div>
+        
+        <b>Atenção:</b> o acesso aos materiais, apostilas e voucher será enviado somente após a confirmação do pagamento</b>.
         </p>
 
         <hr style="margin:20px 0;">
@@ -610,15 +619,12 @@ fetch(ENDPOINT, {
         </a>
 
         <p style="margin-top:20px; font-size:14px; text-align:left;">
-          Após o pagamento, envie o comprovante
-          ao consultor responsável e assim que o pagamento for confirmado,
-          você receberá de <b>igctreinamentoscorporativo@gmail.com</b>:<br><br>
+          Após pagar, envie o comprovante para o consultor que está te atendendo por WhatsApp e você receberá de <b>igctreinamentoscorporativo@gmail.com</b>:<br><br>
 
           • E-mail de inscrição confirmada<br>
-          • Voucher de participação<br>
+          • Voucher para ingresso no evento<br>
           • Apostilas e materiais completos em PDF<br><br>
-
-          <b>Importante:</b> verifique sua caixa de spam.<br><br>
+                    
           Nos vemos em breve! 🙌
         </p>
 
