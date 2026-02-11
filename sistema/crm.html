@@ -608,24 +608,23 @@ document.getElementById("telefone")
 // ===============================
 function salvar(){
 
+  const elStatus = document.getElementById("status");
+
   const payload = {
     id: leadEmEdicao,
-    nome: nome.value.toUpperCase(),
-    telefone: telefone.value,
-    cidade: cidade.value.toUpperCase(),
-    servico: servico.value.toUpperCase(),
-    status: status.value,
-    dataContato: dataContato.value,
-    horaContato: horaContato.value,
-    observacoes: obs.value.toUpperCase()
+    nome: document.getElementById("nome").value.toUpperCase(),
+    telefone: document.getElementById("telefone").value,
+    cidade: document.getElementById("cidade").value.toUpperCase(),
+    servico: document.getElementById("servico").value.toUpperCase(),
+    status: elStatus ? elStatus.value : "",
+    dataContato: document.getElementById("dataContato").value,
+    horaContato: document.getElementById("horaContato").value,
+    observacoes: document.getElementById("obs").value.toUpperCase()
   };
 
-  const acao = leadEmEdicao ? "crmEditarLead" : "crmSalvarLead";
+  console.log("PAYLOAD FINAL:", payload);
 
-  console.log("===================================");
-  console.log("AÇÃO:", acao);
-  console.log("LEAD EM EDIÇÃO:", leadEmEdicao);
-  console.log("PAYLOAD:", payload);
+  const acao = leadEmEdicao ? "crmEditarLead" : "crmSalvarLead";
 
   fetch(ENDPOINT,{
     method:"POST",
@@ -642,9 +641,10 @@ function salvar(){
     listar();
   })
   .catch(err=>{
-    console.error("ERRO NO FETCH:", err);
+    console.error(err);
   });
 }
+
 
 
 
