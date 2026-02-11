@@ -322,8 +322,18 @@ button:hover{
 
 <div class="card">
 
-<div class="search-box">
-<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()">
+<div class="search-box row">
+
+<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()" style="width:160px">
+
+<input type="date" id="filtroData" onchange="render()">
+
+<input type="time" id="filtroHora" onchange="render()">
+
+<input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()" style="width:150px">
+
+<button class="btn-secondary" onclick="limparFiltros()">LIMPAR FILTROS</button>
+
 </div>
 
 <table class="table">
@@ -435,22 +445,42 @@ function listar(){
 // ===============================
 function render(){
 
-  const filtro = filtroNome.value.toUpperCase();
+  const filtroNome = document.getElementById("filtroNome").value.toUpperCase();
+  const filtroData = document.getElementById("filtroData").value;
+  const filtroHora = document.getElementById("filtroHora").value;
+  const filtroCidade = document.getElementById("filtroCidade").value.toUpperCase();
 
-  let html="";
+  let html = "";
 
   dadosGlobais.forEach(l=>{
 
-    if(!l[3].includes(filtro)) return;
+    const nome = (l[3] || "").toUpperCase();
+    const telefone = l[4] || "";
+    const cidade = (l[5] || "").toUpperCase();
+    const status = l[7] || "";
+    const data = l[1] || "";
+    const hora = l[2] || "";
+
+    // 🔎 FILTRO NOME
+    if(filtroNome && !nome.includes(filtroNome)) return;
+
+    // 🏙️ FILTRO CIDADE
+    if(filtroCidade && !cidade.includes(filtroCidade)) return;
+
+    // 📅 FILTRO DATA
+    if(filtroData && data !== filtroData) return;
+
+    // ⏰ FILTRO HORA
+    if(filtroHora && hora !== filtroHora) return;
 
     html+=`
     <tr onclick="editar('${l[0]}')">
-      <td>${l[3]}</td>
-      <td>${l[4]}</td>
-      <td>${l[5]}</td>
-      <td><span class="status ${l[7]}">${l[7]}</span></td>
+      <td>${nome}</td>
+      <td>${telefone}</td>
+      <td>${cidade}</td>
+      <td><span class="status ${status}">${status}</span></td>
       <td>
-        <button onclick="event.stopPropagation(); abrirWhats('${l[4]}')">💬</button>
+        <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
         <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
       </td>
     </tr>`;
@@ -458,6 +488,26 @@ function render(){
 
   tbody.innerHTML = html;
 }
+
+
+
+   
+
+// ===============================
+//  FUNÇÃO LIMPAR FILTROS
+// ===============================
+
+function limparFiltros(){
+  filtroNome.value = "";
+  filtroData.value = "";
+  filtroHora.value = "";
+  filtroCidade.value = "";
+  render();
+}
+
+
+   
+   
 
 // ===============================
 // 📲 WHATS
@@ -481,6 +531,8 @@ function ordenar(col){
   render();
 }
 
+
+   
 // ===============================
 // ✏ EDITAR
 // ===============================
