@@ -497,9 +497,12 @@ function listar(){
   .then(r=>r.json())
   .then(res=>{
 
+    console.log("RESPOSTA COMPLETA:", res);
+
     dadosGlobais = res.dados || [];
 
-    // 🔥 ordenar do mais novo para o mais antigo
+    console.log("DADOS RECEBIDOS:", dadosGlobais);
+
     dadosGlobais.sort((a,b)=>{
 
       function converter(dataStr){
@@ -515,8 +518,12 @@ function listar(){
     atualizarDashboard();
     render();
 
+  })
+  .catch(err=>{
+    console.error("ERRO NO FETCH:", err);
   });
 }
+
 
 
 
