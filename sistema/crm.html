@@ -474,15 +474,17 @@ document.getElementById("telefone")
 function salvar(){
 
   const payload = {
-    nome: nome.value.toUpperCase(),
+    nome: nome.value,
     telefone: telefone.value,
-    cidade: cidade.value.toUpperCase(),
-    servico: servico.value.toUpperCase(),
+    cidade: cidade.value,
+    servico: servico.value,
     status: status.value,
     dataContato: dataContato.value,
     horaContato: horaContato.value,
     observacoes: obs.value
   };
+
+  console.log("🔍 PAYLOAD ENVIADO:", payload);
 
   fetch(ENDPOINT,{
     method:"POST",
@@ -493,11 +495,16 @@ function salvar(){
     })
   })
   .then(r=>r.json())
-  .then(()=>{
+  .then(res=>{
+    console.log("✅ RESPOSTA DO SERVIDOR:", res);
     limpar();
     listar();
+  })
+  .catch(err=>{
+    console.error("❌ ERRO NO SALVAR:", err);
   });
 }
+
 
 // ===============================
 // 📥 LISTAR
