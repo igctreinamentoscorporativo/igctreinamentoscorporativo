@@ -465,7 +465,8 @@ button:hover{
   
 <textarea id="obs" placeholder="OBSERVAÇÕES" rows="2"></textarea>
 
-<button onclick="salvar()">SALVAR</button>
+<button id="btnSalvar" onclick="salvar()">SALVAR</button>
+
 <button class="btn-secondary" onclick="limpar()">NOVO</button>
 
 </div>
@@ -610,6 +611,11 @@ function salvar(){
 
   const elStatus = document.getElementById("status");
 
+// 🔒 BLOQUEIA BOTÃO
+  btn.disabled = true;
+  btn.innerText = "SALVANDO...";
+
+  
   const payload = {
     id: leadEmEdicao,
     nome: document.getElementById("nome").value.toUpperCase(),
@@ -642,9 +648,21 @@ function salvar(){
   })
   .catch(err=>{
     console.error(err);
+
+    })
+  .finally(()=>{
+
+    // 🔓 DESBLOQUEIA BOTÃO
+    btn.disabled = false;
+
+    if(leadEmEdicao){
+      btn.innerText = "ATUALIZAR";
+    } else {
+      btn.innerText = "SALVAR";
+    }
+
   });
 }
-
 
 
 
@@ -840,7 +858,7 @@ function editar(id){
 
   obs.value = "";
 
-  document.querySelector("button[onclick='salvar()']").innerText = "ATUALIZAR";
+  document.getElementById("btnSalvar").innerText = "ATUALIZAR";
 }
 
 
@@ -852,7 +870,7 @@ function limpar(){
 
   leadEmEdicao = null;
 
-  document.querySelector("button[onclick='salvar()']").innerText = "SALVAR";
+  document.getElementById("btnSalvar").innerText = "SALVAR";
 }
 
 
