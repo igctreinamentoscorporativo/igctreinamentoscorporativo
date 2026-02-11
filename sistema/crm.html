@@ -358,9 +358,15 @@ button:hover{
   <option>PERDIDO</option>
 </select>
 
-<input type="date" id="dataContato">
-<input type="time" id="horaContato">
+<input type="text" id="dataContato" placeholder="INSERIR DATA"
+       onfocus="this.type='date'"
+       onblur="if(!this.value)this.type='text'">
 
+<input type="text" id="horaContato" placeholder="INSERIR HORA"
+       onfocus="this.type='time'"
+       onblur="if(!this.value)this.type='text'">
+
+  
 <textarea id="obs" placeholder="OBSERVAÇÕES" rows="2"></textarea>
 
 <button onclick="salvar()">SALVAR</button>
@@ -375,9 +381,15 @@ button:hover{
 
 <input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()">
 
-<input type="date" id="filtroDataInicio" onchange="render()">
+<input type="text" id="filtroDataInicio" placeholder="SELECIONE DATA INÍCIO"
+       onfocus="this.type='date'"
+       onblur="if(!this.value)this.type='text'"
+       onchange="render()">
 
-   <input type="date" id="filtroDataFim" onchange="render()">
+<input type="text" id="filtroDataFim" placeholder="SELECIONE DATA FIM"
+       onfocus="this.type='date'"
+       onblur="if(!this.value)this.type='text'"
+       onchange="render()">
 
 <input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()">
 
