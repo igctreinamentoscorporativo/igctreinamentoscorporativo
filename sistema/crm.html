@@ -1,0 +1,38 @@
+<div class="container-leads">
+
+  <h2>GESTÃO DE LEADS</h2>
+
+  <div class="card-form">
+
+    <input type="hidden" id="leadId">
+
+    <input type="text" id="nome" placeholder="NOME">
+    <input type="text" id="telefone" placeholder="TELEFONE">
+    <input type="text" id="cidade" placeholder="CIDADE">
+    <input type="text" id="servico" placeholder="SERVIÇO DE INTERESSE">
+
+    <select id="status">
+      <option>LEAD</option>
+      <option>EM CONTATO</option>
+      <option>NEGOCIAÇÃO</option>
+      <option>FECHADO</option>
+      <option>PERDIDO</option>
+    </select>
+
+    <input type="date" id="dataContato">
+    <input type="time" id="horaContato">
+
+    <textarea id="observacoes" placeholder="OBSERVAÇÕES"></textarea>
+
+    <button onclick="salvarLead()">SALVAR</button>
+    <button onclick="novoLead()">NOVO</button>
+
+  </div>
+
+  <hr>
+
+  <input type="text" id="filtroNome" placeholder="BUSCAR POR NOME" onkeyup="carregarLeads()">
+
+  <div id="tabelaLeads"></div>
+
+</div>
