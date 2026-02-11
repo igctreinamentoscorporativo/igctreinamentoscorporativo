@@ -236,9 +236,54 @@ button:hover{
    
    
 
+.kpi{ cursor:pointer; transition:.2s; }
+.kpi:hover{ transform:scale(1.05); }
+
+.kpi-total{ background:#2b2b2b; }
+.kpi-contato{ background:#004c99; }
+.kpi-negociacao{ background:#cc8400; }
+.kpi-fechado{ background:#006633; }
+.kpi-perdido{ background:#660000; }
+
+.kpi.active{
+  outline:2px solid #00bfff;
+}
    
 
    
+@media(max-width:768px){
+
+  .container{
+    padding:15px;
+  }
+
+  .row{
+    flex-direction:column;
+  }
+
+  .table{
+    font-size:12px;
+  }
+
+  .table th,
+  .table td{
+    padding:6px;
+  }
+
+  .dashboard{
+    flex-direction:column;
+  }
+
+  .kpi{
+    width:100%;
+  }
+
+  header{
+    font-size:18px;
+    text-align:center;
+  }
+
+}
 
    
 
@@ -254,27 +299,27 @@ button:hover{
 
 <div class="dashboard">
 
-  <div class="kpi">
-    <h4>TOTAL LEADS</h4>
+  <div class="kpi kpi-total" onclick="filtrarStatus(event,'TODOS')">
+    <h4>TOTAL</h4>
     <span id="kpiTotal">0</span>
   </div>
 
-  <div class="kpi">
+  <div class="kpi kpi-contato" onclick="filtrarStatus(event,'EM CONTATO')">
     <h4>EM CONTATO</h4>
     <span id="kpiContato">0</span>
   </div>
 
-  <div class="kpi">
+  <div class="kpi kpi-negociacao" onclick="filtrarStatus(event,'NEGOCIAÇÃO')">
     <h4>NEGOCIAÇÃO</h4>
     <span id="kpiNegociacao">0</span>
   </div>
 
-  <div class="kpi">
+  <div class="kpi kpi-fechado" onclick="filtrarStatus(event,'FECHADO')">
     <h4>FECHADOS</h4>
     <span id="kpiFechados">0</span>
   </div>
 
-  <div class="kpi">
+  <div class="kpi kpi-perdido" onclick="filtrarStatus(event,'PERDIDO')">
     <h4>PERDIDOS</h4>
     <span id="kpiPerdidos">0</span>
   </div>
@@ -326,9 +371,9 @@ button:hover{
 
 <input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()" style="width:160px">
 
-<input type="date" id="filtroData" onchange="render()">
+<input type="date" id="filtroDataInicio" onchange="render()">
 
-<input type="time" id="filtroHora" onchange="render()">
+   <input type="date" id="filtroDataFim" onchange="render()">
 
 <input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()" style="width:150px">
 
@@ -360,6 +405,8 @@ const ENDPOINT = "https://script.google.com/macros/s/AKfycbw5-8ipl32njS9C5YKp67i
 let SENHA = "";
 let dadosGlobais = [];
 let ordemAsc = true;
+let statusSelecionado = "TODOS";
+   
 
 // ===============================
 // 🔒 LOGIN AUTOMÁTICO
@@ -369,6 +416,34 @@ window.onload = function(){
   listar();
 };
 
+
+   
+
+
+// ===============================
+// 🔒 FILTRAR POR STATUS
+// ===============================
+
+function filtrarStatus(e, status){
+
+  statusSelecionado = status;
+
+  document.querySelectorAll(".kpi").forEach(k=>{
+    k.classList.remove("active");
+  });
+
+  e.currentTarget.classList.add("active");
+
+  render();
+}
+
+
+
+   
+
+
+
+  
 // ===============================
 // 🔢 TELEFONE SOMENTE NÚMERO
 // ===============================
@@ -421,11 +496,20 @@ function listar(){
   })
   .then(r=>r.json())
   .then(res=>{
+
     dadosGlobais = res.dados || [];
+
+    // 🔥 ordenar do mais novo para o mais antigo
+    dadosGlobais.sort((a,b)=>{
+      return new Date(b[1]) - new Date(a[1]);
+    });
+
     atualizarDashboard();
     render();
+
   });
 }
+
 
 
 
@@ -446,8 +530,8 @@ function listar(){
 function render(){
 
   const filtroNome = document.getElementById("filtroNome").value.toUpperCase();
-  const filtroData = document.getElementById("filtroData").value;
-  const filtroHora = document.getElementById("filtroHora").value;
+  const dataInicio = document.getElementById("filtroDataInicio").value;
+  const dataFim = document.getElementById("filtroDataFim").value;
   const filtroCidade = document.getElementById("filtroCidade").value.toUpperCase();
 
   let html = "";
@@ -461,17 +545,34 @@ function render(){
     const data = l[1] || "";
     const hora = l[2] || "";
 
+// 🔥 FILTRO POR KPI (STATUS)
+  if(statusSelecionado !== "TODOS" && status !== statusSelecionado) return;
+
+     
     // 🔎 FILTRO NOME
     if(filtroNome && !nome.includes(filtroNome)) return;
 
     // 🏙️ FILTRO CIDADE
     if(filtroCidade && !cidade.includes(filtroCidade)) return;
 
-    // 📅 FILTRO DATA
-    if(filtroData && data !== filtroData) return;
+    // 📆 FILTRO INTERVALO DE DATA
+if(dataInicio || dataFim){
 
-    // ⏰ FILTRO HORA
-    if(filtroHora && hora !== filtroHora) return;
+  const dataLead = new Date(data.split("T")[0]);
+
+  if(dataInicio){
+    const inicio = new Date(dataInicio);
+    if(dataLead < inicio) return;
+  }
+
+  if(dataFim){
+    const fim = new Date(dataFim);
+    fim.setHours(23,59,59,999);
+    if(dataLead > fim) return;
+  }
+}
+
+    
 
     html+=`
     <tr onclick="editar('${l[0]}')">
@@ -498,10 +599,16 @@ function render(){
 // ===============================
 
 function limparFiltros(){
-  filtroNome.value = "";
-  filtroData.value = "";
-  filtroHora.value = "";
-  filtroCidade.value = "";
+  document.getElementById("filtroNome").value = "";
+  document.getElementById("filtroDataInicio").value = "";
+  document.getElementById("filtroDataFim").value = "";
+  document.getElementById("filtroCidade").value = "";
+  statusSelecionado = "TODOS";
+
+  document.querySelectorAll(".kpi").forEach(k=>{
+    k.classList.remove("active");
+  });
+
   render();
 }
 
