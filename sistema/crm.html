@@ -474,15 +474,15 @@ document.getElementById("telefone")
 function salvar(){
 
   const payload = {
-    nome: nome.value,
-    telefone: telefone.value,
-    cidade: cidade.value,
-    servico: servico.value,
-    status: status.value,
-    dataContato: dataContato.value,
-    horaContato: horaContato.value,
-    observacoes: obs.value
-  };
+  nome: document.getElementById("nome").value.toUpperCase(),
+  telefone: document.getElementById("telefone").value,
+  cidade: document.getElementById("cidade").value.toUpperCase(),
+  servico: document.getElementById("servico").value.toUpperCase(),
+  status: document.getElementById("status").value,
+  dataContato: document.getElementById("dataContato").value,
+  horaContato: document.getElementById("horaContato").value,
+  observacoes: document.getElementById("obs").value
+};
 
   console.log("🔍 PAYLOAD ENVIADO:", payload);
 
