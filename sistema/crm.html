@@ -133,6 +133,73 @@ button:hover{
   margin-bottom:10px;
 }
 
+
+
+ /* ===============================
+   🔥 MODAL DETALHES
+================================ */
+.modal{
+  position:fixed;
+  top:0;
+  right:-500px;
+  width:450px;
+  height:100%;
+  background:#121212;
+  box-shadow:-3px 0 10px rgba(0,0,0,.5);
+  padding:25px;
+  transition:.3s;
+  overflow-y:auto;
+}
+
+.modal.active{
+  right:0;
+}
+
+.modal h3{
+  margin-top:0;
+}
+
+.modal-close{
+  cursor:pointer;
+  color:#00bfff;
+  font-size:12px;
+}
+  
+
+
+/* ===============================
+   🔥 MODAL DETALHES
+================================ */
+.modal{
+  position:fixed;
+  top:0;
+  right:-500px;
+  width:450px;
+  height:100%;
+  background:#121212;
+  box-shadow:-3px 0 10px rgba(0,0,0,.5);
+  padding:25px;
+  transition:.3s;
+  overflow-y:auto;
+}
+
+.modal.active{
+  right:0;
+}
+
+.modal h3{
+  margin-top:0;
+}
+
+.modal-close{
+  cursor:pointer;
+  color:#00bfff;
+  font-size:12px;
+}
+
+   
+
+   
 </style>
 </head>
 <body>
@@ -286,6 +353,7 @@ function render(){
       <td><span class="status ${l[7]}">${l[7]}</span></td>
       <td>
         <button onclick="event.stopPropagation(); abrirWhats('${l[4]}')">💬</button>
+        <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
       </td>
     </tr>`;
   });
@@ -336,7 +404,49 @@ function limpar(){
   document.querySelectorAll("input, textarea").forEach(e=>e.value="");
 }
 
+
+
+function verDetalhes(id){
+
+  const l = dadosGlobais.find(x=>x[0]===id);
+
+  detNome.innerText = l[3];
+  detTel.innerText = l[4];
+  detCidade.innerText = l[5];
+  detStatus.innerText = l[7];
+  detObs.innerText = l[8] || "SEM OBSERVAÇÕES";
+
+  document.getElementById("modalDetalhes")
+    .classList.add("active");
+}
+
+function fecharModal(){
+  document.getElementById("modalDetalhes")
+    .classList.remove("active");
+}
+
+
+
+
+
+
+   
 </script>
 
+
+<div id="modalDetalhes" class="modal">
+  <div class="modal-close" onclick="fecharModal()">FECHAR ✕</div>
+  <h3 id="detNome"></h3>
+  <p><strong>Telefone:</strong> <span id="detTel"></span></p>
+  <p><strong>Cidade:</strong> <span id="detCidade"></span></p>
+  <p><strong>Status:</strong> <span id="detStatus"></span></p>
+  <hr>
+  <h4>HISTÓRICO DE ATENDIMENTO</h4>
+  <div id="detObs" style="white-space:pre-wrap; font-size:13px;"></div>
+</div>
+
+
+
+   
 </body>
 </html>
