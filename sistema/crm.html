@@ -503,16 +503,9 @@ function listar(){
 
     console.log("DADOS RECEBIDOS:", dadosGlobais);
 
+    // 🔥 ORDENA DO MAIS NOVO PARA O MAIS ANTIGO
     dadosGlobais.sort((a,b)=>{
-
-      function converter(dataStr){
-        if(!dataStr) return new Date(0);
-
-        let partes = dataStr.split(" ")[0].split("/");
-        return new Date(partes[2], partes[1]-1, partes[0]);
-      }
-
-      return converter(b[1]) - converter(a[1]);
+      return new Date(b[1]) - new Date(a[1]);
     });
 
     atualizarDashboard();
@@ -523,6 +516,7 @@ function listar(){
     console.error("ERRO NO FETCH:", err);
   });
 }
+
 
 
 
