@@ -820,19 +820,22 @@ function editar(id){
   const l = dadosGlobais.find(x=>x[0]===id);
   if(!l) return;
 
-  leadEmEdicao = id; // 🔥 ativa modo edição
+  leadEmEdicao = id;
 
-  nome.value = l[3];
-  telefone.value = l[4];
-  cidade.value = l[5];
-  servico.value = l[6];
-  status.value = l[7];
+  nome.value = l[3] || "";
+  telefone.value = l[4] || "";
+  cidade.value = l[5] || "";
+  servico.value = l[6] || "";
+  status.value = l[7] || "";
+
   dataContato.value = formatarDataISO(l[1]);
-  horaContato.value = l[2];
+  horaContato.value = formatarHoraISO(l[2]);
+
   obs.value = "";
 
   document.querySelector("button[onclick='salvar()']").innerText = "ATUALIZAR";
 }
+
 
 
 // ===============================
@@ -855,16 +858,54 @@ function limpar(){
 // ===============================
   
 
-  function formatarDataISO(dataBR){
+  function formatarDataISO(data){
 
-  if(!dataBR) return "";
+  if(!data) return "";
 
-  const partes = dataBR.split(" ")[0].split("/");
-  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+  // Se já estiver ISO
+  if(data.includes("-")){
+    return data.split("T")[0];
+  }
+
+  // Se estiver DD/MM/YYYY
+  if(data.includes("/")){
+    const partes = data.split(" ")[0].split("/");
+    return `${partes[2]}-${partes[1]}-${partes[0]}`;
+  }
+
+  return "";
 }
 
 
 
+  // ===============================
+// ✏ FUNÇÃO PARA HORA
+// ===============================
+
+  
+
+function formatarHoraISO(hora){
+
+  if(!hora) return "";
+
+  // Se vier formato ISO tipo 1899-12-30T12:08:00Z
+  if(hora.includes("T")){
+    const partes = hora.split("T")[1].split(":");
+    return `${partes[0]}:${partes[1]}`;
+  }
+
+  // Se já estiver HH:mm
+  if(hora.includes(":")){
+    return hora.substring(0,5);
+  }
+
+  return "";
+}
+
+
+
+
+  
 
 // ===============================
 // ✏ FUNÇÃO VER DETALHES DA OBERVAVAÇÃO DO LEAD
