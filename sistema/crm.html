@@ -1,38 +1,170 @@
-<div class="container-leads">
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CRM LEADS</title>
 
-  <h2>GESTÃO DE LEADS</h2>
+<style>
+body {
+  background:#000;
+  color:#fff;
+  font-family:Arial;
+}
+input, select, textarea {
+  padding:6px;
+  margin:3px;
+}
+button {
+  padding:6px 10px;
+  cursor:pointer;
+}
+</style>
 
-  <div class="card-form">
+</head>
+<body>
 
-    <input type="hidden" id="leadId">
+<h2>GESTÃO DE LEADS</h2>
 
-    <input type="text" id="nome" placeholder="NOME">
-    <input type="text" id="telefone" placeholder="TELEFONE">
-    <input type="text" id="cidade" placeholder="CIDADE">
-    <input type="text" id="servico" placeholder="SERVIÇO DE INTERESSE">
+<div id="loginBox">
+  <input type="password" id="senha" placeholder="SENHA">
+  <button onclick="login()">ENTRAR</button>
+</div>
 
-    <select id="status">
-      <option>LEAD</option>
-      <option>EM CONTATO</option>
-      <option>NEGOCIAÇÃO</option>
-      <option>FECHADO</option>
-      <option>PERDIDO</option>
-    </select>
+<div id="crmBox" style="display:none">
 
-    <input type="date" id="dataContato">
-    <input type="time" id="horaContato">
+<input type="hidden" id="leadId">
 
-    <textarea id="observacoes" placeholder="OBSERVAÇÕES"></textarea>
+<input id="nome" placeholder="NOME">
+<input id="telefone" placeholder="TELEFONE">
+<input id="cidade" placeholder="CIDADE">
+<input id="servico" placeholder="SERVIÇO">
+<select id="status">
+  <option>LEAD</option>
+  <option>EM CONTATO</option>
+  <option>NEGOCIAÇÃO</option>
+  <option>FECHADO</option>
+  <option>PERDIDO</option>
+</select>
 
-    <button onclick="salvarLead()">SALVAR</button>
-    <button onclick="novoLead()">NOVO</button>
+<input type="date" id="dataContato">
+<input type="time" id="horaContato">
 
-  </div>
+<textarea id="obs" placeholder="OBSERVAÇÕES"></textarea>
 
-  <hr>
+<button onclick="salvar()">SALVAR</button>
 
-  <input type="text" id="filtroNome" placeholder="BUSCAR POR NOME" onkeyup="carregarLeads()">
+<hr>
 
-  <div id="tabelaLeads"></div>
+<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="listar()">
+
+<div id="lista"></div>
 
 </div>
+
+<script>
+
+const ENDPOINT = "COLE_AQUI_SEU_ENDPOINT";
+
+let SENHA_GLOBAL = "";
+
+function login() {
+
+  SENHA_GLOBAL = document.getElementById("senha").value;
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"crmListarLeads",
+      senha:SENHA_GLOBAL
+    })
+  })
+  .then(r=>r.json())
+  .then(res=>{
+    if(res.sucesso){
+      document.getElementById("loginBox").style.display="none";
+      document.getElementById("crmBox").style.display="block";
+      listar();
+    } else {
+      alert("Senha inválida");
+    }
+  });
+}
+
+function salvar(){
+
+  const payload = {
+    id: document.getElementById("leadId").value,
+    nome: document.getElementById("nome").value.toUpperCase(),
+    telefone: document.getElementById("telefone").value,
+    cidade: document.getElementById("cidade").value.toUpperCase(),
+    servico: document.getElementById("servico").value.toUpperCase(),
+    status: document.getElementById("status").value,
+    dataContato: document.getElementById("dataContato").value,
+    horaContato: document.getElementById("horaContato").value,
+    observacoes: document.getElementById("obs").value
+  };
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      acao: payload.id ? "crmEditarLead":"crmSalvarLead",
+      senha:SENHA_GLOBAL,
+      payload:payload
+    })
+  })
+  .then(r=>r.json())
+  .then(()=>{
+    alert("SALVO");
+    listar();
+  });
+}
+
+function listar(){
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"crmListarLeads",
+      senha:SENHA_GLOBAL
+    })
+  })
+  .then(r=>r.json())
+  .then(res=>{
+
+    let html="<table border=1>";
+
+    const filtro = document
+      .getElementById("filtroNome")
+      .value
+      .toUpperCase();
+
+    res.dados.forEach(l=>{
+
+      if(!l[3].includes(filtro)) return;
+
+      html+=`
+      <tr>
+        <td>${l[3]}</td>
+        <td>${l[4]}</td>
+        <td>${l[7]}</td>
+        <td>
+          <button onclick="abrirWhats('${l[4]}')">💬</button>
+        </td>
+      </tr>`;
+    });
+
+    html+="</table>";
+
+    document.getElementById("lista").innerHTML=html;
+  });
+}
+
+function abrirWhats(numero){
+  const n = numero.replace(/\D/g,'');
+  window.open("https://wa.me/55"+n,"_blank");
+}
+
+</script>
+
+</body>
+</html>
