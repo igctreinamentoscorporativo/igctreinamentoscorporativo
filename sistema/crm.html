@@ -511,7 +511,7 @@ let SENHA = "";
 let dadosGlobais = [];
 let ordemAsc = true;
 let statusSelecionado = "TODOS";
-   
+let leadEmEdicao = null;  
 
 
 
@@ -599,44 +599,51 @@ document.getElementById("telefone")
   this.value = this.value.replace(/\D/g,'');
 });
 
+
+
+
+  
 // ===============================
 // 💾 SALVAR
 // ===============================
 function salvar(){
 
   const payload = {
-  nome: document.getElementById("nome").value.toUpperCase(),
-  telefone: document.getElementById("telefone").value,
-  cidade: document.getElementById("cidade").value.toUpperCase(),
-  servico: document.getElementById("servico").value.toUpperCase(),
-  status: document.getElementById("status").value,
-  dataContato: document.getElementById("dataContato").value,
-  horaContato: document.getElementById("horaContato").value,
-  observacoes: document.getElementById("obs").value
-};
+    id: leadEmEdicao,
+    nome: nome.value.toUpperCase(),
+    telefone: telefone.value,
+    cidade: cidade.value.toUpperCase(),
+    servico: servico.value.toUpperCase(),
+    status: status.value,
+    dataContato: dataContato.value,
+    horaContato: horaContato.value,
+    observacoes: obs.value.toUpperCase()
+  };
 
-  console.log("🔍 PAYLOAD ENVIADO:", payload);
+  const acao = leadEmEdicao ? "crmEditarLead" : "crmSalvarLead";
 
   fetch(ENDPOINT,{
     method:"POST",
     body:JSON.stringify({
-      acao:"crmSalvarLead",
+      acao,
       senha:SENHA,
       payload
     })
   })
   .then(r=>r.json())
   .then(res=>{
-    console.log("✅ RESPOSTA DO SERVIDOR:", res);
     limpar();
     listar();
   })
   .catch(err=>{
-    console.error("❌ ERRO NO SALVAR:", err);
+    console.error(err);
   });
 }
 
 
+
+
+  
 // ===============================
 // 📥 LISTAR
 // ===============================
@@ -670,15 +677,6 @@ function listar(){
     console.error("ERRO NO FETCH:", err);
   });
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -757,6 +755,7 @@ let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
 
 
 
+  
    
 
 // ===============================
@@ -788,6 +787,10 @@ function abrirWhats(num){
   window.open("https://wa.me/55"+num,"_blank");
 }
 
+
+
+
+  
 // ===============================
 // 🔄 ORDENAR
 // ===============================
@@ -804,6 +807,10 @@ function ordenar(col){
 }
 
 
+
+
+
+  
    
 // ===============================
 // ✏ EDITAR
@@ -811,22 +818,59 @@ function ordenar(col){
 function editar(id){
 
   const l = dadosGlobais.find(x=>x[0]===id);
+  if(!l) return;
+
+  leadEmEdicao = id; // 🔥 ativa modo edição
 
   nome.value = l[3];
   telefone.value = l[4];
   cidade.value = l[5];
   servico.value = l[6];
   status.value = l[7];
-  dataContato.value = l[1];
+  dataContato.value = formatarDataISO(l[1]);
   horaContato.value = l[2];
+  obs.value = "";
+
+  document.querySelector("button[onclick='salvar()']").innerText = "ATUALIZAR";
 }
+
 
 // ===============================
 function limpar(){
+
   document.querySelectorAll("input, textarea").forEach(e=>e.value="");
+
+  leadEmEdicao = null;
+
+  document.querySelector("button[onclick='salvar()']").innerText = "SALVAR";
 }
 
 
+
+
+  
+
+// ===============================
+// ✏ FUNÇÃO AUXILIAR DO EDITAR
+// ===============================
+  
+
+  function formatarDataISO(dataBR){
+
+  if(!dataBR) return "";
+
+  const partes = dataBR.split(" ")[0].split("/");
+  return `${partes[2]}-${partes[1]}-${partes[0]}`;
+}
+
+
+
+
+// ===============================
+// ✏ FUNÇÃO VER DETALHES DA OBERVAVAÇÃO DO LEAD
+// ===============================
+  
+  
 
 function verDetalhes(id){
 
@@ -850,7 +894,11 @@ function fecharModal(){
 
 
 
+// ===============================
+// ✏ FUNÇÃO ATUALIZAR DASHBOARD
+// ===============================
 
+  
 function atualizarDashboard(){
 
   let total = dadosGlobais.length;
