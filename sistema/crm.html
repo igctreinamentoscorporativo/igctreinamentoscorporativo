@@ -512,7 +512,7 @@ let dadosGlobais = [];
 let ordemAsc = true;
 let statusSelecionado = "TODOS";
 let leadEmEdicao = null;  
-
+let idEditando = null;
 
 
 
@@ -745,7 +745,7 @@ let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
     
 
     html+=`
-    <tr onclick="editar('${l[0]}')">
+    <tr>
       <td>${nome}</td>
       <td>${telefone}</td>
       <td>${cidade}</td>
@@ -753,6 +753,7 @@ let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
       <td>
         <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
         <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
+        <button onclick="event.stopPropagation(); abrirModalEditar('${l[0]}')">✏️</button>
       </td>
     </tr>`;
   });
@@ -977,6 +978,78 @@ function atualizarDashboard(){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function abrirModalEditar(id){
+
+  const l = dadosGlobais.find(x=>x[0]===id);
+  if(!l) return;
+
+  idEditando = id;
+
+  document.getElementById("editNome").value = l[3] || "";
+  document.getElementById("editTelefone").value = l[4] || "";
+  document.getElementById("editCidade").value = l[5] || "";
+  document.getElementById("editServico").value = l[6] || "";
+  document.getElementById("editStatus").value = l[7] || "";
+  document.getElementById("editData").value = formatarDataISO(l[1]);
+  document.getElementById("editHora").value = formatarHoraISO(l[2]);
+  document.getElementById("editObs").value = l[8] || "";
+
+  document.getElementById("modalEditar").classList.add("active");
+}
+
+function fecharModalEditar(){
+  document.getElementById("modalEditar").classList.remove("active");
+}
+
+function salvarEdicao(){
+
+  const payload = {
+    id: idEditando,
+    nome: document.getElementById("editNome").value.toUpperCase(),
+    telefone: document.getElementById("editTelefone").value,
+    cidade: document.getElementById("editCidade").value.toUpperCase(),
+    servico: document.getElementById("editServico").value.toUpperCase(),
+    status: document.getElementById("editStatus").value,
+    dataContato: document.getElementById("editData").value,
+    horaContato: document.getElementById("editHora").value,
+    observacoes: document.getElementById("editObs").value.toUpperCase()
+  };
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"crmEditarLead",
+      senha:SENHA,
+      payload
+    })
+  })
+  .then(r=>r.json())
+  .then(res=>{
+    fecharModalEditar();
+    listar();
+  });
+}
+
+
+  
+
+
    
 
 
@@ -985,6 +1058,9 @@ function atualizarDashboard(){
 </script>
 
 
+
+
+  
 <div id="modalDetalhes" class="modal">
   <div class="modal-close" onclick="fecharModal()">FECHAR ✕</div>
   <h3 id="detNome"></h3>
@@ -997,6 +1073,42 @@ function atualizarDashboard(){
 </div>
 
 
+
+
+
+  
+
+
+  <div id="modalEditar" class="modal">
+  <div class="modal-close" onclick="fecharModalEditar()">FECHAR ✕</div>
+  <h3>EDITAR LEAD</h3>
+
+  <input id="editNome" placeholder="NOME">
+  <input id="editTelefone" placeholder="TELEFONE">
+  <input id="editCidade" placeholder="CIDADE">
+  <input id="editServico" placeholder="SERVIÇO">
+
+  <select id="editStatus">
+    <option>LEAD</option>
+    <option>EM CONTATO</option>
+    <option>NEGOCIAÇÃO</option>
+    <option>FECHADO</option>
+    <option>PERDIDO</option>
+  </select>
+
+  <input type="date" id="editData">
+  <input type="time" id="editHora">
+
+  <textarea id="editObs" rows="3" placeholder="OBSERVAÇÕES"></textarea>
+
+  <br><br>
+  <button onclick="salvarEdicao()">ATUALIZAR</button>
+</div>
+
+
+
+
+  
 
  </div>  
 </body>
