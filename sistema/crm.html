@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">   
 <meta charset="UTF-8">
-<title>CRM LEADS</title>
+<title>CRM LEADS WHTASAPP</title>
 
 <style>
 
@@ -89,6 +90,12 @@ button:hover{
   background:#444;
 }
 
+input, select, textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+   
 /* ===============================
    🔹 TABELA CRM
 ================================ */
@@ -133,38 +140,6 @@ button:hover{
   margin-bottom:10px;
 }
 
-
-
- /* ===============================
-   🔥 MODAL DETALHES
-================================ */
-.modal{
-  position:fixed;
-  top:0;
-  right:-500px;
-  width:450px;
-  height:100%;
-  background:#121212;
-  box-shadow:-3px 0 10px rgba(0,0,0,.5);
-  padding:25px;
-  transition:.3s;
-  overflow-y:auto;
-}
-
-.modal.active{
-  right:0;
-}
-
-.modal h3{
-  margin-top:0;
-}
-
-.modal-close{
-  cursor:pointer;
-  color:#00bfff;
-  font-size:12px;
-}
-  
 
 
 /* ===============================
@@ -250,32 +225,55 @@ button:hover{
 }
    
 
+
+
+   /* ===============================
+   RESPONSIVIDADE TELA CELULAR
+================================ */
    
 @media(max-width:768px){
+
+  body{
+    font-size:15px;
+  }
 
   .container{
     padding:15px;
   }
 
-  .row{
-    flex-direction:column;
-  }
-
-  .table{
-    font-size:12px;
-  }
-
-  .table th,
-  .table td{
-    padding:6px;
-  }
-
   .dashboard{
-    flex-direction:column;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:10px;
   }
 
   .kpi{
+    min-width:auto;
+    padding:12px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .row{
+    flex-direction:column;
+    gap:12px;
+  }
+
+  input, select, textarea{
+    font-size:15px;
+    padding:12px;
+  }
+
+  button{
     width:100%;
+    padding:14px;
+    font-size:14px;
+  }
+
+  .table{
+    font-size:13px;
   }
 
   header{
@@ -284,6 +282,7 @@ button:hover{
   }
 
 }
+
 
    
 
@@ -325,26 +324,17 @@ button:hover{
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
    
-<div class="container">
+
 
 <div class="card">
 
 <div class="row">
 
-<input id="nome" placeholder="NOME" style="width:160px">
-<input id="telefone" placeholder="TELEFONE" style="width:130px">
-<input id="cidade" placeholder="CIDADE" style="width:140px">
-<input id="servico" placeholder="SERVIÇO" style="width:140px">
+<input id="nome" placeholder="NOME">
+<input id="telefone" placeholder="TELEFONE">
+<input id="cidade" placeholder="CIDADE">
+<input id="servico" placeholder="SERVIÇO">
 
 <select id="status">
   <option>LEAD</option>
@@ -357,7 +347,7 @@ button:hover{
 <input type="date" id="dataContato">
 <input type="time" id="horaContato">
 
-<textarea id="obs" placeholder="OBSERVAÇÕES" rows="2" style="width:220px"></textarea>
+<textarea id="obs" placeholder="OBSERVAÇÕES" rows="2"></textarea>
 
 <button onclick="salvar()">SALVAR</button>
 <button class="btn-secondary" onclick="limpar()">NOVO</button>
@@ -369,13 +359,13 @@ button:hover{
 
 <div class="search-box row">
 
-<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()" style="width:160px">
+<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()">
 
 <input type="date" id="filtroDataInicio" onchange="render()">
 
    <input type="date" id="filtroDataFim" onchange="render()">
 
-<input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()" style="width:150px">
+<input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()">
 
 <button class="btn-secondary" onclick="limparFiltros()">LIMPAR FILTROS</button>
 
