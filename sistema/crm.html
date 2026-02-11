@@ -197,6 +197,49 @@ button:hover{
   font-size:12px;
 }
 
+
+
+
+/* ===============================
+   📊 DASHBOARD CRM
+================================ */
+.dashboard{
+  display:flex;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+.kpi{
+  flex:1;
+  min-width:150px;
+  background:#181818;
+  padding:15px;
+  border-radius:8px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,0,0,.3);
+}
+
+.kpi h4{
+  margin:0;
+  font-size:12px;
+  letter-spacing:.5px;
+  color:#aaa;
+}
+
+.kpi span{
+  display:block;
+  font-size:22px;
+  margin-top:5px;
+  font-weight:bold;
+}
+   
+   
+
+   
+
+   
+
    
 
    
@@ -206,6 +249,47 @@ button:hover{
 
 <header>GESTÃO DE LEADS</header>
 
+
+<div class="container">
+
+<div class="dashboard">
+
+  <div class="kpi">
+    <h4>TOTAL LEADS</h4>
+    <span id="kpiTotal">0</span>
+  </div>
+
+  <div class="kpi">
+    <h4>EM CONTATO</h4>
+    <span id="kpiContato">0</span>
+  </div>
+
+  <div class="kpi">
+    <h4>NEGOCIAÇÃO</h4>
+    <span id="kpiNegociacao">0</span>
+  </div>
+
+  <div class="kpi">
+    <h4>FECHADOS</h4>
+    <span id="kpiFechados">0</span>
+  </div>
+
+  <div class="kpi">
+    <h4>PERDIDOS</h4>
+    <span id="kpiPerdidos">0</span>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+   
 <div class="container">
 
 <div class="card">
@@ -328,10 +412,24 @@ function listar(){
   .then(r=>r.json())
   .then(res=>{
     dadosGlobais = res.dados || [];
+    atualizarDashboard();
     render();
   });
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+   
 // ===============================
 // 🎨 RENDER
 // ===============================
@@ -427,6 +525,39 @@ function fecharModal(){
 
 
 
+
+
+function atualizarDashboard(){
+
+  let total = dadosGlobais.length;
+  let contato = 0;
+  let negociacao = 0;
+  let fechados = 0;
+  let perdidos = 0;
+
+  dadosGlobais.forEach(l => {
+
+    const status = l[7];
+
+    if(status === "EM CONTATO") contato++;
+    if(status === "NEGOCIAÇÃO") negociacao++;
+    if(status === "FECHADO") fechados++;
+    if(status === "PERDIDO") perdidos++;
+  });
+
+  kpiTotal.innerText = total;
+  kpiContato.innerText = contato;
+  kpiNegociacao.innerText = negociacao;
+  kpiFechados.innerText = fechados;
+  kpiPerdidos.innerText = perdidos;
+}
+
+
+
+
+
+
+   
 
 
 
