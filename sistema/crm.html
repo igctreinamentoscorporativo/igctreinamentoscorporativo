@@ -610,6 +610,12 @@ function salvar(){
 
   const elStatus = document.getElementById("status");
 
+
+// 🔒 BLOQUEIA BOTÃO
+  btn.disabled = true;
+  btn.innerText = "SALVANDO...";
+
+  
   const payload = {
     id: leadEmEdicao,
     nome: document.getElementById("nome").value.toUpperCase(),
@@ -642,6 +648,18 @@ function salvar(){
   })
   .catch(err=>{
     console.error(err);
+   })
+  .finally(()=>{
+
+    // 🔓 DESBLOQUEIA BOTÃO
+    btn.disabled = false;
+
+    if(leadEmEdicao){
+      btn.innerText = "ATUALIZAR";
+    } else {
+      btn.innerText = "SALVAR";
+    }
+
   });
 }
 
