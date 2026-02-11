@@ -622,6 +622,11 @@ function salvar(){
 
   const acao = leadEmEdicao ? "crmEditarLead" : "crmSalvarLead";
 
+  console.log("===================================");
+  console.log("AÇÃO:", acao);
+  console.log("LEAD EM EDIÇÃO:", leadEmEdicao);
+  console.log("PAYLOAD:", payload);
+
   fetch(ENDPOINT,{
     method:"POST",
     body:JSON.stringify({
@@ -632,13 +637,15 @@ function salvar(){
   })
   .then(r=>r.json())
   .then(res=>{
+    console.log("RESPOSTA DO SERVIDOR:", res);
     limpar();
     listar();
   })
   .catch(err=>{
-    console.error(err);
+    console.error("ERRO NO FETCH:", err);
   });
 }
+
 
 
 
