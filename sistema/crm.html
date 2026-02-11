@@ -558,7 +558,9 @@ function render(){
     // 📆 FILTRO INTERVALO DE DATA
 if(dataInicio || dataFim){
 
-  const dataLead = new Date(data.split("T")[0]);
+  // converte formato DD/MM/YYYY HH:MM:SS para objeto Date válido
+let partes = data.split(" ")[0].split("/");
+let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
 
   if(dataInicio){
     const inicio = new Date(dataInicio);
