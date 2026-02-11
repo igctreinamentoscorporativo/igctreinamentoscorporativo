@@ -5,39 +5,151 @@
 <title>CRM LEADS</title>
 
 <style>
-body {
-  background:#000;
+
+/* ===============================
+   🔥 BASE VISUAL PROFISSIONAL
+================================ */
+body{
+  background:#0f0f0f;
   color:#fff;
-  font-family:Arial;
+  font-family:Segoe UI, Arial;
+  margin:0;
 }
-input, select, textarea {
-  padding:6px;
-  margin:3px;
+
+header{
+  padding:20px;
+  font-size:22px;
+  font-weight:600;
+  letter-spacing:1px;
+  border-bottom:1px solid #222;
 }
-button {
-  padding:6px 10px;
+
+.container{
+  padding:20px 30px;
+}
+
+/* ===============================
+   🔹 FORM CARD
+================================ */
+.card{
+  background:#181818;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+  margin-bottom:20px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+input, select, textarea{
+  background:#111;
+  border:1px solid #333;
+  color:#fff;
+  padding:8px;
+  border-radius:5px;
+  outline:none;
+  font-size:13px;
+}
+
+input:focus, select:focus, textarea:focus{
+  border:1px solid #00bfff;
+}
+
+input{
+  text-transform:uppercase;
+}
+
+textarea{
+  resize:none;
+}
+
+button{
+  background:#00bfff;
+  border:none;
+  padding:9px 14px;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:12px;
+}
+
+button:hover{
+  background:#009acd;
+}
+
+.btn-secondary{
+  background:#333;
+}
+
+.btn-secondary:hover{
+  background:#444;
+}
+
+/* ===============================
+   🔹 TABELA CRM
+================================ */
+.table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.table th{
+  background:#1e1e1e;
+  padding:10px;
+  text-align:left;
+  font-size:12px;
+  letter-spacing:.5px;
   cursor:pointer;
 }
-</style>
 
+.table td{
+  padding:10px;
+  border-bottom:1px solid #222;
+  font-size:13px;
+}
+
+.table tr:hover{
+  background:#1a1a1a;
+}
+
+.status{
+  padding:4px 8px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.LEAD{background:#555;}
+.EM\ CONTATO{background:#0066cc;}
+.NEGOCIAÇÃO{background:#ff9900;}
+.FECHADO{background:#00aa55;}
+.PERDIDO{background:#aa0000;}
+
+.search-box{
+  margin-bottom:10px;
+}
+
+</style>
 </head>
 <body>
 
-<h2>GESTÃO DE LEADS</h2>
+<header>GESTÃO DE LEADS</header>
 
-<div id="loginBox">
-  <input type="password" id="senha" placeholder="SENHA">
-  <button onclick="login()">ENTRAR</button>
-</div>
+<div class="container">
 
-<div id="crmBox" style="display:none">
+<div class="card">
 
-<input type="hidden" id="leadId">
+<div class="row">
 
-<input id="nome" placeholder="NOME">
-<input id="telefone" placeholder="TELEFONE">
-<input id="cidade" placeholder="CIDADE">
-<input id="servico" placeholder="SERVIÇO">
+<input id="nome" placeholder="NOME" style="width:160px">
+<input id="telefone" placeholder="TELEFONE" style="width:130px">
+<input id="cidade" placeholder="CIDADE" style="width:140px">
+<input id="servico" placeholder="SERVIÇO" style="width:140px">
+
 <select id="status">
   <option>LEAD</option>
   <option>EM CONTATO</option>
@@ -49,15 +161,34 @@ button {
 <input type="date" id="dataContato">
 <input type="time" id="horaContato">
 
-<textarea id="obs" placeholder="OBSERVAÇÕES"></textarea>
+<textarea id="obs" placeholder="OBSERVAÇÕES" rows="2" style="width:220px"></textarea>
 
 <button onclick="salvar()">SALVAR</button>
+<button class="btn-secondary" onclick="limpar()">NOVO</button>
 
-<hr>
+</div>
+</div>
 
-<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="listar()">
+<div class="card">
 
-<div id="lista"></div>
+<div class="search-box">
+<input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()">
+</div>
+
+<table class="table">
+<thead>
+<tr>
+<th onclick="ordenar(3)">NOME</th>
+<th onclick="ordenar(4)">TELEFONE</th>
+<th onclick="ordenar(5)">CIDADE</th>
+<th onclick="ordenar(7)">STATUS</th>
+<th>AÇÕES</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+
+</div>
 
 </div>
 
@@ -65,103 +196,144 @@ button {
 
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbw5-8ipl32njS9C5YKp67i2eQJWDoAfrShx3p4IAtDzayVlaIyuztlNMeoF2a3-aAqf/exec";
 
-let SENHA_GLOBAL = "";
+let SENHA = "";
+let dadosGlobais = [];
+let ordemAsc = true;
 
-function login() {
+// ===============================
+// 🔒 LOGIN AUTOMÁTICO
+// ===============================
+window.onload = function(){
+  SENHA = prompt("DIGITE SUA SENHA");
+  listar();
+};
 
-  SENHA_GLOBAL = document.getElementById("senha").value;
+// ===============================
+// 🔢 TELEFONE SOMENTE NÚMERO
+// ===============================
+document.getElementById("telefone")
+.addEventListener("input", function(){
+  this.value = this.value.replace(/\D/g,'');
+});
 
-  fetch(ENDPOINT,{
-    method:"POST",
-    body:JSON.stringify({
-      acao:"crmListarLeads",
-      senha:SENHA_GLOBAL
-    })
-  })
-  .then(r=>r.json())
-  .then(res=>{
-    if(res.sucesso){
-      document.getElementById("loginBox").style.display="none";
-      document.getElementById("crmBox").style.display="block";
-      listar();
-    } else {
-      alert("Senha inválida");
-    }
-  });
-}
-
+// ===============================
+// 💾 SALVAR
+// ===============================
 function salvar(){
 
   const payload = {
-    id: document.getElementById("leadId").value,
-    nome: document.getElementById("nome").value.toUpperCase(),
-    telefone: document.getElementById("telefone").value,
-    cidade: document.getElementById("cidade").value.toUpperCase(),
-    servico: document.getElementById("servico").value.toUpperCase(),
-    status: document.getElementById("status").value,
-    dataContato: document.getElementById("dataContato").value,
-    horaContato: document.getElementById("horaContato").value,
-    observacoes: document.getElementById("obs").value
+    nome: nome.value.toUpperCase(),
+    telefone: telefone.value,
+    cidade: cidade.value.toUpperCase(),
+    servico: servico.value.toUpperCase(),
+    status: status.value,
+    dataContato: dataContato.value,
+    horaContato: horaContato.value,
+    observacoes: obs.value
   };
 
   fetch(ENDPOINT,{
     method:"POST",
     body:JSON.stringify({
-      acao: payload.id ? "crmEditarLead":"crmSalvarLead",
-      senha:SENHA_GLOBAL,
-      payload:payload
+      acao:"crmSalvarLead",
+      senha:SENHA,
+      payload
     })
   })
   .then(r=>r.json())
   .then(()=>{
-    alert("SALVO");
+    limpar();
     listar();
   });
 }
 
+// ===============================
+// 📥 LISTAR
+// ===============================
 function listar(){
-
   fetch(ENDPOINT,{
     method:"POST",
     body:JSON.stringify({
       acao:"crmListarLeads",
-      senha:SENHA_GLOBAL
+      senha:SENHA
     })
   })
   .then(r=>r.json())
   .then(res=>{
-
-    let html="<table border=1>";
-
-    const filtro = document
-      .getElementById("filtroNome")
-      .value
-      .toUpperCase();
-
-    res.dados.forEach(l=>{
-
-      if(!l[3].includes(filtro)) return;
-
-      html+=`
-      <tr>
-        <td>${l[3]}</td>
-        <td>${l[4]}</td>
-        <td>${l[7]}</td>
-        <td>
-          <button onclick="abrirWhats('${l[4]}')">💬</button>
-        </td>
-      </tr>`;
-    });
-
-    html+="</table>";
-
-    document.getElementById("lista").innerHTML=html;
+    dadosGlobais = res.dados || [];
+    render();
   });
 }
 
-function abrirWhats(numero){
-  const n = numero.replace(/\D/g,'');
-  window.open("https://wa.me/55"+n,"_blank");
+// ===============================
+// 🎨 RENDER
+// ===============================
+function render(){
+
+  const filtro = filtroNome.value.toUpperCase();
+
+  let html="";
+
+  dadosGlobais.forEach(l=>{
+
+    if(!l[3].includes(filtro)) return;
+
+    html+=`
+    <tr onclick="editar('${l[0]}')">
+      <td>${l[3]}</td>
+      <td>${l[4]}</td>
+      <td>${l[5]}</td>
+      <td><span class="status ${l[7]}">${l[7]}</span></td>
+      <td>
+        <button onclick="event.stopPropagation(); abrirWhats('${l[4]}')">💬</button>
+      </td>
+    </tr>`;
+  });
+
+  tbody.innerHTML = html;
+}
+
+// ===============================
+// 📲 WHATS
+// ===============================
+function abrirWhats(num){
+  window.open("https://wa.me/55"+num,"_blank");
+}
+
+// ===============================
+// 🔄 ORDENAR
+// ===============================
+function ordenar(col){
+
+  dadosGlobais.sort((a,b)=>{
+    return ordemAsc
+      ? String(a[col]).localeCompare(String(b[col]))
+      : String(b[col]).localeCompare(String(a[col]));
+  });
+
+  ordemAsc = !ordemAsc;
+  render();
+}
+
+// ===============================
+// ✏ EDITAR
+// ===============================
+function editar(id){
+
+  const l = dadosGlobais.find(x=>x[0]===id);
+
+  nome.value = l[3];
+  telefone.value = l[4];
+  cidade.value = l[5];
+  servico.value = l[6];
+  status.value = l[7];
+  dataContato.value = l[1];
+  horaContato.value = l[2];
+}
+
+// ===============================
+function limpar(){
+  document.querySelectorAll("input, textarea").forEach(e=>e.value="");
 }
 
 </script>
