@@ -492,6 +492,89 @@ button:hover{
 }
 
 
+
+/* ===============================
+   🔥 TABELA MOBILE ESTILO CARD
+================================ */
+
+.table thead{
+  display:none;
+}
+
+.table,
+.table tbody,
+.table tr{
+  display:block;
+  width:100%;
+}
+
+.table tr{
+  background:#141414;
+  margin-bottom:12px;
+  padding:14px;
+  border-radius:8px;
+  border:1px solid #222;
+}
+
+/* Zebra */
+.table tr:nth-child(even){
+  background:#1a1a1a;
+}
+
+.table td{
+  display:block;
+  border:none;
+  padding:4px 0;
+}
+
+/* 1️⃣ Linha Nome + Status */
+.table td:nth-child(1),
+.table td:nth-child(3){
+  display:inline-block;
+  vertical-align:middle;
+}
+
+.table td:nth-child(1){
+  font-size:16px;
+  font-weight:600;
+  width:70%;
+}
+
+.table td:nth-child(3){
+  width:30%;
+  text-align:right;
+}
+
+/* 2️⃣ Última interação */
+.table td:nth-child(2){
+  margin-top:10px;
+  font-size:13px;
+  color:#bbb;
+}
+
+/* Título pequeno */
+.table td:nth-child(2)::before{
+  content:"ÚLTIMA INTERAÇÃO";
+  display:block;
+  font-size:11px;
+  letter-spacing:.5px;
+  color:#888;
+  margin-bottom:4px;
+}
+
+/* 3️⃣ Botões */
+.table td:nth-child(4){
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+}
+
+.table td:nth-child(4) button{
+  flex:1;
+  padding:10px;
+  font-size:16px;
+}
+
   
   
 }
