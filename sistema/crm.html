@@ -137,11 +137,11 @@ button:hover{
 }
 
 .LEAD{background:#555;}
-.EM\ CONTATO{background:#0066cc;}
+.EM-CONTATO{background:#0066cc;}
 .NEGOCIAÇÃO{background:#ff9900;}
 .FECHADO{background:#00aa55;}
 .PERDIDO{background:#aa0000;}
-.LISTA\ DE\ ESPERA{background:#7e22ce;}
+.LISTA-DE-ESPERA{background:#7e22ce;}
   
 .search-box{
   margin-bottom:10px;
@@ -948,6 +948,7 @@ function render(){
     const telefone = l[4] || "";
     const cidade = (l[5] || "").toUpperCase();
     const status = l[7] || "";
+    const classeStatus = status.replace(/\s/g,'-'); // troca espaço por hífen
     const data = l[1] || "";
     const hora = l[2] || "";
     const observacoes = l[8] || "";
@@ -990,7 +991,7 @@ function render(){
     <tr>
       <td>${nome}</td>
       <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
-      <td><span class="status ${status}">${status}</span></td>
+      <td><span class="status ${classeStatus}">${status}</span></td>
       <td>
         <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
         <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
