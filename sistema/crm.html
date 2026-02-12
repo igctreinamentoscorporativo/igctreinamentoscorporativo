@@ -416,6 +416,12 @@ button:hover{
   font-size:16px;
   padding:14px;
 }
+
+
+#novaObs{
+  min-height:140px;
+  font-size:16px;
+}
   
   
 }
@@ -1054,7 +1060,7 @@ function atualizarDashboard(){
   document.getElementById("editStatus").value = l[7] || "";
   document.getElementById("editData").value = formatarDataISO(l[1]);
   document.getElementById("editHora").value = formatarHoraISO(l[2]);
-  document.getElementById("editObs").value = l[8] || "";
+  document.getElementById("novaObs").value = "";
 
   document.getElementById("modalEditar").classList.add("active");
 }
@@ -1074,7 +1080,7 @@ function salvarEdicao(){
     status: document.getElementById("editStatus").value,
     dataContato: document.getElementById("editData").value,
     horaContato: document.getElementById("editHora").value,
-    observacoes: document.getElementById("editObs").value.toUpperCase()
+    observacoes: document.getElementById("novaObs").value.toUpperCase()
   };
 
   fetch(ENDPOINT,{
@@ -1171,8 +1177,10 @@ function salvarEdicao(){
 </div>
 
 <div class="form-group">
-  <label>Histórico / Observações</label>
-  <textarea id="editObs" rows="4"></textarea>
+  <label>Nova Observação</label>
+  <textarea id="novaObs"
+            rows="5"
+            style="resize:vertical;"></textarea>
 </div>
   <br><br>
   <button onclick="salvarEdicao()">ATUALIZAR</button>
