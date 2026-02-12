@@ -141,7 +141,8 @@ button:hover{
 .NEGOCIAÇÃO{background:#ff9900;}
 .FECHADO{background:#00aa55;}
 .PERDIDO{background:#aa0000;}
-
+.LISTA\ DE\ ESPERA{background:#7e22ce;}
+  
 .search-box{
   margin-bottom:10px;
 }
@@ -288,6 +289,7 @@ button:hover{
 .kpi-negociacao{ background:#cc8400; }
 .kpi-fechado{ background:#006633; }
 .kpi-perdido{ background:#660000; }
+.kpi-espera{ background:#6b21a8; } /* Roxo elegante */
 
 .kpi.active{
   outline:2px solid #00bfff;
@@ -558,6 +560,12 @@ button:hover{
     <span id="kpiPerdidos">0</span>
   </div>
 
+
+  <div class="kpi kpi-espera" onclick="filtrarStatus(event,'LISTA DE ESPERA')">
+  <h4>LISTA DE ESPERA</h4>
+  <span id="kpiEspera">0</span>
+</div>
+
 </div>
    
 
@@ -583,6 +591,7 @@ button:hover{
   <option>NEGOCIAÇÃO</option>
   <option>FECHADO</option>
   <option>PERDIDO</option>
+  <option>LISTA DE ESPERA</option>
 </select>
 
 <input type="date" id="dataContato">
@@ -616,6 +625,8 @@ button:hover{
   <option value="NEGOCIAÇÃO">NEGOCIAÇÃO</option>
   <option value="FECHADO">FECHADO</option>
   <option value="PERDIDO">PERDIDO</option>
+  <option value="LISTA DE ESPERA">LISTA DE ESPERA</option>
+  
 </select>  
 
 <button class="btn-secondary" onclick="limparFiltros()">LIMPAR FILTROS</button>
@@ -1188,6 +1199,7 @@ function atualizarDashboard(){
   let negociacao = 0;
   let fechados = 0;
   let perdidos = 0;
+  let espera = 0;
 
   dadosGlobais.forEach(l => {
 
@@ -1197,6 +1209,7 @@ function atualizarDashboard(){
     if(status === "NEGOCIAÇÃO") negociacao++;
     if(status === "FECHADO") fechados++;
     if(status === "PERDIDO") perdidos++;
+    if(status === "LISTA DE ESPERA") espera++;
   });
 
   kpiTotal.innerText = total;
@@ -1204,7 +1217,13 @@ function atualizarDashboard(){
   kpiNegociacao.innerText = negociacao;
   kpiFechados.innerText = fechados;
   kpiPerdidos.innerText = perdidos;
+
+  const elEspera = document.getElementById("kpiEspera");
+  if(elEspera){
+    elEspera.innerText = espera;
+  }
 }
+
 
 
 
