@@ -708,16 +708,26 @@ function fazerLogin(){
 
 function filtrarStatus(e, status){
 
+  // 🔥 LIMPA TODOS OS FILTROS MANUAIS
+  document.getElementById("filtroNome").value = "";
+  document.getElementById("filtroDataInicio").value = "";
+  document.getElementById("filtroDataFim").value = "";
+  document.getElementById("filtroCidade").value = "";
+  
+  // 🔥 DEFINE O STATUS DO KPI
   statusSelecionado = status;
 
+  // Remove destaque de todos
   document.querySelectorAll(".kpi").forEach(k=>{
     k.classList.remove("active");
   });
 
+  // Ativa o clicado
   e.currentTarget.classList.add("active");
 
   render();
 }
+
 
 
 
