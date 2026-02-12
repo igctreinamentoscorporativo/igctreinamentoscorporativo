@@ -605,7 +605,9 @@ button:hover{
 <input type="date" id="filtroDataInicio" onchange="render()">
 <input type="date" id="filtroDataFim" onchange="render()">
 
-<input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()">
+<select id="filtroCidade" onchange="render()">
+  <option value="">FILTRAR CIDADE</option>
+</select>
 
 <select id="filtroStatus" onchange="render()">
   <option value="">FILTRAR STATUS</option>
@@ -719,7 +721,33 @@ function filtrarStatus(e, status){
 
 
 
-   
+// ===============================
+// FUNÇÃO AUXILIAR PAR POPULAR O FILTRAR POR CIDADE
+// ===============================
+
+  
+ function popularFiltroCidades(){
+
+  const select = document.getElementById("filtroCidade");
+
+  // Limpa mantendo a primeira opção
+  select.innerHTML = '<option value="">FILTRAR CIDADE</option>';
+
+  // Pega cidades únicas
+  const cidadesUnicas = [...new Set(
+    dadosGlobais
+      .map(l => (l[5] || "").toUpperCase().trim())
+      .filter(c => c !== "")
+  )].sort();
+
+  cidadesUnicas.forEach(cidade => {
+    const option = document.createElement("option");
+    option.value = cidade;
+    option.textContent = cidade;
+    select.appendChild(option);
+  });
+}
+  
 
 
 
@@ -814,6 +842,7 @@ function listar(){
     });
 
     atualizarDashboard();
+    popularFiltroCidades();
     render();
 
   })
@@ -878,6 +907,7 @@ function render(){
   const dataInicio = document.getElementById("filtroDataInicio").value;
   const dataFim = document.getElementById("filtroDataFim").value;
   const filtroCidade = document.getElementById("filtroCidade").value.toUpperCase();
+  
 
  
 
