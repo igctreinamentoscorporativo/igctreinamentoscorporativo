@@ -492,6 +492,7 @@ button:hover{
 }
 
 
+  
 
 /* ===============================
    🔥 TABELA MOBILE ESTILO CARD
@@ -509,16 +510,16 @@ button:hover{
   width:100%;
 }
 
-/* Card visual */
+/* Card */
 .table tr{
   background:#141414;
-  margin-bottom:12px;
-  padding:14px;
-  border-radius:8px;
+  margin-bottom:14px;
+  padding:16px;
+  border-radius:10px;
   border:1px solid #222;
 }
 
-/* Zebra leve */
+/* Zebra */
 .table tr:nth-child(even){
   background:#181818;
 }
@@ -530,7 +531,7 @@ button:hover{
 }
 
 /* ===============================
-   🧠 Linha 1 — Nome + Status
+   🧠 Nome + Status
 ================================ */
 
 .table td:nth-child(1){
@@ -539,41 +540,43 @@ button:hover{
   align-items:center;
   font-size:16px;
   font-weight:600;
-  margin-bottom:8px;
-}
-
-/* Status fica alinhado à direita */
-.table td:nth-child(3){
-  margin:0;
 }
 
 /* ===============================
-   📌 Linha 2 — Última interação
+   📌 Última interação
 ================================ */
 
 .table td:nth-child(2){
   font-size:13px;
   color:#bbb;
-  margin-bottom:10px;
+  margin-top:8px;
 }
 
-/* Título pequeno acima */
 .table td:nth-child(2)::before{
   content:"ÚLTIMA INTERAÇÃO";
   display:block;
   font-size:11px;
-  letter-spacing:.5px;
   color:#888;
   margin-bottom:4px;
+  letter-spacing:.5px;
 }
 
 /* ===============================
-   🎯 Linha 3 — Botões
+   🎯 Status
+================================ */
+
+.table td:nth-child(3){
+  margin-top:6px;
+}
+
+/* ===============================
+   🎯 Botões
 ================================ */
 
 .table td:nth-child(4){
   display:flex;
   gap:10px;
+  margin-top:12px;
 }
 
 .table td:nth-child(4) button{
