@@ -1080,17 +1080,9 @@ function render(){
 
     html+=`
 <tr>
-  <td>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span>${nome}</span>
-      <span class="status ${classeStatus}">${status}</span>
-    </div>
-  </td>
-
-  <td style="color:#aaa; font-size:12px;">
-    ${ultimaObs}
-  </td>
-
+  <td>${nome}</td>
+  <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
+  <td><span class="status ${classeStatus}">${status}</span></td>
   <td>
     <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
     <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
