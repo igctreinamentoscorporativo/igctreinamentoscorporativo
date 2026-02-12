@@ -1094,6 +1094,7 @@ function verDetalhes(id){
   detNome.innerText = l[3];
   detTel.innerText = l[4];
   detCidade.innerText = l[5];
+  detServico.innerText = l[6] || "";
   detStatus.innerText = l[7];
   detObs.innerText = l[8] || "SEM OBSERVAÇÕES";
 
@@ -1253,6 +1254,7 @@ function salvarEdicao(){
   <h3 id="detNome"></h3>
   <p><strong>Telefone:</strong> <span id="detTel"></span></p>
   <p><strong>Cidade:</strong> <span id="detCidade"></span></p>
+  <p><strong>Serviço:</strong> <span id="detServico"></span></p>
   <p><strong>Status:</strong> <span id="detStatus"></span></p>
   <hr>
   <h4>HISTÓRICO DE ATENDIMENTO</h4>
