@@ -580,8 +580,7 @@ button:hover{
 <thead>
 <tr>
 <th onclick="ordenar(3)">NOME</th>
-<th onclick="ordenar(4)">TELEFONE</th>
-<th onclick="ordenar(5)">CIDADE</th>
+<th>ÚLTIMA INTERAÇÃO</th>
 <th onclick="ordenar(7)">STATUS</th>
 <th>AÇÕES</th>
 </tr>
@@ -785,6 +784,33 @@ function listar(){
 
 
 
+ // ===============================
+//  FUNÇÃO PARA PEGAR A ÚLTIMA OBSERVAÇÃO REGISTRADA E COLOCAR NA TELA DE CRM
+// ===============================
+
+function obterUltimaObservacao(texto){
+
+  if(!texto) return "SEM INTERAÇÃO";
+
+  // divide por quebra de linha
+  const linhas = texto.split("\n").filter(l => l.trim() !== "");
+
+  if(linhas.length === 0) return "SEM INTERAÇÃO";
+
+  // pega a última linha
+  let ultima = linhas[linhas.length - 1];
+
+  // limita tamanho para não quebrar layout
+  if(ultima.length > 60){
+    ultima = ultima.substring(0,60) + "...";
+  }
+
+  return ultima;
+} 
+
+  
+
+
    
 // ===============================
 // 🎨 RENDER
@@ -806,11 +832,13 @@ function render(){
     const status = l[7] || "";
     const data = l[1] || "";
     const hora = l[2] || "";
+    const observacoes = l[8] || "";
 
-// 🔥 FILTRO POR KPI (STATUS)
-  if(statusSelecionado !== "TODOS" && status !== statusSelecionado) return;
+    const ultimaObs = obterUltimaObservacao(observacoes);
 
-     
+    // 🔥 FILTRO POR KPI (STATUS)
+    if(statusSelecionado !== "TODOS" && status !== statusSelecionado) return;
+
     // 🔎 FILTRO NOME
     if(filtroNome && !nome.includes(filtroNome)) return;
 
@@ -818,31 +846,27 @@ function render(){
     if(filtroCidade && !cidade.includes(filtroCidade)) return;
 
     // 📆 FILTRO INTERVALO DE DATA
-if(dataInicio || dataFim){
+    if(dataInicio || dataFim){
 
-  // converte formato DD/MM/YYYY HH:MM:SS para objeto Date válido
-let partes = data.split(" ")[0].split("/");
-let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
+      let partes = data.split(" ")[0].split("/");
+      let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
 
-  if(dataInicio){
-    const inicio = new Date(dataInicio);
-    if(dataLead < inicio) return;
-  }
+      if(dataInicio){
+        const inicio = new Date(dataInicio);
+        if(dataLead < inicio) return;
+      }
 
-  if(dataFim){
-    const fim = new Date(dataFim);
-    fim.setHours(23,59,59,999);
-    if(dataLead > fim) return;
-  }
-}
-
-    
+      if(dataFim){
+        const fim = new Date(dataFim);
+        fim.setHours(23,59,59,999);
+        if(dataLead > fim) return;
+      }
+    }
 
     html+=`
     <tr>
       <td>${nome}</td>
-      <td>${telefone}</td>
-      <td>${cidade}</td>
+      <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
       <td><span class="status ${status}">${status}</span></td>
       <td>
         <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
@@ -854,6 +878,7 @@ let dataLead = new Date(partes[2], partes[1]-1, partes[0]);
 
   tbody.innerHTML = html;
 }
+
 
 
 
@@ -1161,6 +1186,12 @@ function salvarEdicao(){
 }
   
 
+
+
+
+
+
+  
 
 
    
