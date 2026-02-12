@@ -713,20 +713,27 @@ function filtrarStatus(e, status){
   document.getElementById("filtroDataInicio").value = "";
   document.getElementById("filtroDataFim").value = "";
   document.getElementById("filtroCidade").value = "";
-  
+
+  const filtroStatus = document.getElementById("filtroStatus");
+  if(filtroStatus){
+    filtroStatus.value = "";
+  }
+
   // 🔥 DEFINE O STATUS DO KPI
   statusSelecionado = status;
 
-  // Remove destaque de todos
+  // 🔥 REMOVE DESTAQUE DE TODOS OS KPIs
   document.querySelectorAll(".kpi").forEach(k=>{
     k.classList.remove("active");
   });
 
-  // Ativa o clicado
+  // 🔥 ATIVA O KPI CLICADO
   e.currentTarget.classList.add("active");
 
+  // 🔥 RENDERIZA NOVAMENTE
   render();
 }
+
 
 
 
