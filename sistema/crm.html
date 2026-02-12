@@ -792,21 +792,31 @@ function obterUltimaObservacao(texto){
 
   if(!texto) return "SEM INTERAÇÃO";
 
-  // divide por quebra de linha
-  const linhas = texto.split("\n").filter(l => l.trim() !== "");
+  // Divide em blocos usando a linha de separação
+  const blocos = texto.split('------------------------')
+                      .map(b => b.trim())
+                      .filter(b => b !== "");
+
+  if(blocos.length === 0) return "SEM INTERAÇÃO";
+
+  const ultimoBloco = blocos[blocos.length - 1];
+
+  const linhas = ultimoBloco.split("\n").filter(l => l.trim() !== "");
 
   if(linhas.length === 0) return "SEM INTERAÇÃO";
 
-  // pega a última linha
-  let ultima = linhas[linhas.length - 1];
+  const data = linhas[0]; // [11/02/2026 20:11]
+  const conteudo = linhas[1] || "";
 
-  // limita tamanho para não quebrar layout
-  if(ultima.length > 60){
-    ultima = ultima.substring(0,60) + "...";
+  let resumo = conteudo;
+
+  if(resumo.length > 50){
+    resumo = resumo.substring(0,50) + "...";
   }
 
-  return ultima;
-} 
+  return `${data} ${resumo}`;
+}
+
 
   
 
