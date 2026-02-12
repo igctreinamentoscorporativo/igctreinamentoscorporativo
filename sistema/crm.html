@@ -792,20 +792,22 @@ function obterUltimaObservacao(texto){
 
   if(!texto) return "SEM INTERAÇÃO";
 
-  // Divide em blocos usando a linha de separação
-  const blocos = texto.split('------------------------')
-                      .map(b => b.trim())
-                      .filter(b => b !== "");
+  // Divide por datas no formato [dd/mm/yyyy hh:mm]
+  const partes = texto.split(/(?=\[\d{2}\/\d{2}\/\d{4})/g)
+                      .map(p => p.trim())
+                      .filter(p => p !== "");
 
-  if(blocos.length === 0) return "SEM INTERAÇÃO";
+  if(partes.length === 0) return "SEM INTERAÇÃO";
 
-  const ultimoBloco = blocos[blocos.length - 1];
+  const ultimoBloco = partes[partes.length - 1];
 
-  const linhas = ultimoBloco.split("\n").filter(l => l.trim() !== "");
+  const linhas = ultimoBloco.split("\n")
+                            .map(l => l.trim())
+                            .filter(l => l !== "" && !l.includes('---'));
 
   if(linhas.length === 0) return "SEM INTERAÇÃO";
 
-  const data = linhas[0]; // [11/02/2026 20:11]
+  const data = linhas[0] || "";
   const conteudo = linhas[1] || "";
 
   let resumo = conteudo;
