@@ -1174,16 +1174,30 @@ function verDetalhes(id){
   detCidade.innerText = l[5];
   detServico.innerText = l[6] || "";
   detStatus.innerText = l[7];
-  detObs.innerText = l[8] || "SEM OBSERVAÇÕES";
+
+  const texto = l[8] || "";
+
+  if(!texto){
+    detObs.innerText = "SEM OBSERVAÇÕES";
+  } else {
+
+    // Divide os blocos por data
+    const blocos = texto
+      .split(/(?=\[\d{2}\/\d{2}\/\d{4})/g)
+      .map(b => b.trim())
+      .filter(b => b !== "");
+
+    // Inverte a ordem (mais recente primeiro)
+    blocos.reverse();
+
+    // Junta novamente
+    detObs.innerText = blocos.join("\n\n");
+  }
 
   document.getElementById("modalDetalhes")
     .classList.add("active");
 }
 
-function fecharModal(){
-  document.getElementById("modalDetalhes")
-    .classList.remove("active");
-}
 
 
 
