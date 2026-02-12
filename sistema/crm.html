@@ -607,6 +607,15 @@ button:hover{
 
 <input id="filtroCidade" placeholder="FILTRAR CIDADE" onkeyup="render()">
 
+<select id="filtroStatus" onchange="render()">
+  <option value="">FILTRAR STATUS</option>
+  <option value="LEAD">LEAD</option>
+  <option value="EM CONTATO">EM CONTATO</option>
+  <option value="NEGOCIAÇÃO">NEGOCIAÇÃO</option>
+  <option value="FECHADO">FECHADO</option>
+  <option value="PERDIDO">PERDIDO</option>
+</select>  
+
 <button class="btn-secondary" onclick="limparFiltros()">LIMPAR FILTROS</button>
 
 </div>
@@ -864,11 +873,15 @@ function obterUltimaObservacao(texto){
 // ===============================
 function render(){
 
+  const filtroStatus = document.getElementById("filtroStatus").value;
   const filtroNome = document.getElementById("filtroNome").value.toUpperCase();
   const dataInicio = document.getElementById("filtroDataInicio").value;
   const dataFim = document.getElementById("filtroDataFim").value;
   const filtroCidade = document.getElementById("filtroCidade").value.toUpperCase();
 
+ 
+
+  
   let html = "";
 
   dadosGlobais.forEach(l=>{
@@ -891,6 +904,11 @@ function render(){
 
     // 🏙️ FILTRO CIDADE
     if(filtroCidade && !cidade.includes(filtroCidade)) return;
+
+
+     // 🔎 FILTRO STATUS (select)
+     if(filtroStatus && status !== filtroStatus) return;
+    
 
     // 📆 FILTRO INTERVALO DE DATA
     if(dataInicio || dataFim){
@@ -941,6 +959,7 @@ function limparFiltros(){
   document.getElementById("filtroDataInicio").value = "";
   document.getElementById("filtroDataFim").value = "";
   document.getElementById("filtroCidade").value = "";
+  document.getElementById("filtroStatus").value = "";
   statusSelecionado = "TODOS";
 
   document.querySelectorAll(".kpi").forEach(k=>{
