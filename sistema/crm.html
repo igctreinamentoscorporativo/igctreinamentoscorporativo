@@ -152,6 +152,17 @@ button:hover{
   display:none;
 }
   
+
+.card-title{
+  margin:0 0 15px 0;
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.5px;
+  color:#00bfff;
+  border-bottom:1px solid #222;
+  padding-bottom:8px;
+}
+
   
 
 
@@ -552,8 +563,9 @@ button:hover{
 
 
 <div class="card" id="cardNovoLead">
+<h3 class="card-title">CADASTRAR NOVO LEAD</h3>
 
-<!-- Botão mobile -->
+  <!-- Botão mobile -->
 <button id="btnNovoLeadMobile" class="btn-novo-lead-mobile" onclick="toggleNovoLead()">
   + NOVO LEAD
 </button>
@@ -580,13 +592,12 @@ button:hover{
 <textarea id="obs" placeholder="OBSERVAÇÕES" rows="2"></textarea>
 
 <button onclick="salvar()">SALVAR</button>
-<button class="btn-secondary" onclick="limpar()">NOVO</button>
 
 </div>
 </div>
 
 <div class="card">
-
+<h3 class="card-title">FILTRAR LEADS</h3>
 <div class="search-box row">
 
 <input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()">
