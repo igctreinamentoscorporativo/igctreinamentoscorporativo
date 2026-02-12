@@ -582,7 +582,35 @@ button:hover{
   font-size:16px;
 }
 
-  
+
+
+
+
+
+
+
+
+
+  /* Remove a coluna original do status no mobile */
+.table td:nth-child(3){
+  display:none;
+}
+
+/* Linha nome + status */
+.table td:nth-child(1){
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:16px;
+  font-weight:600;
+}
+
+/* Insere o status visualmente ao lado do nome */
+.table td:nth-child(1)::after{
+  content: attr(data-status);
+}
+
+ 
   
 }
 
@@ -1079,7 +1107,9 @@ function render(){
 
     html+=`
     <tr>
-      <td>${nome}</td>
+      <td data-status="${status}">
+      ${nome}
+      </td>
       <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
       <td><span class="status ${classeStatus}">${status}</span></td>
       <td>
