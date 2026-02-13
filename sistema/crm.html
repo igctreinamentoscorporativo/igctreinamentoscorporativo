@@ -1136,10 +1136,12 @@ if(
   (status === "EM CONTATO" || 
    status === "QUALIFICADO" ||
    status === "NEGOCIAÇÃO") &&
-  passou24h(observacoes)
-)
-){
+  passou24h(observacoes))
+
+{
+  
   statusFinal = "⚠️ " + status;
+  
 }
 
 
