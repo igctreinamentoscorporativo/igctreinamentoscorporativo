@@ -151,6 +151,8 @@ button:active{
 .LISTA-DE-ESPERA{background:#7e22ce;}
 .QUALIFICADO{background:#0ea5a4;} 
 .MATURAÇÃO-DE-VALOR{background:#b45309;}
+.AGUARDANDO-PAGAMENTO{background:#1d4ed8;}
+
   
 .search-box{
   margin-bottom:10px;
@@ -301,7 +303,7 @@ button:active{
 .kpi-lead{ background:#3a3a3a; }
 .kpi-qualificado{ background:#0d9488; }  
 .kpi-maturacao{ background:#92400e; }
-
+.kpi-aguardando{ background:#1e40af; }
 
 
   
@@ -689,6 +691,15 @@ button:active{
 
 
 
+
+
+  <div class="kpi kpi-aguardando" onclick="filtrarStatus(event,'AGUARDANDO PAGAMENTO')">
+  <h4>AG. PAGAMENTO</h4>
+  <span id="kpiAguardando">0</span>
+</div>
+
+  
+
   
 
   <div class="kpi kpi-fechado" onclick="filtrarStatus(event,'FECHADO')">
@@ -732,6 +743,7 @@ button:active{
   <option>QUALIFICADO</option>
   <option>NEGOCIAÇÃO</option>
   <option>MATURAÇÃO DE VALOR</option>
+  <option>AGUARDANDO PAGAMENTO</option>
   <option>FECHADO</option>
   <option>PERDIDO</option>
   <option>LISTA DE ESPERA</option>
@@ -767,6 +779,7 @@ button:active{
   <option value="EM CONTATO">EM CONTATO</option>
   <option value="QUALIFICADO">QUALIFICADO</option>
   <option value="MATURAÇÃO DE VALOR">MATURAÇÃO DE VALOR</option>
+  <option value="AGUARDANDO PAGAMENTO">AGUARDANDO PAGAMENTO</option>
   <option value="NEGOCIAÇÃO">NEGOCIAÇÃO</option>
   <option value="FECHADO">FECHADO</option>
   <option value="PERDIDO">PERDIDO</option>
@@ -1150,8 +1163,9 @@ let statusFinal = status;
 if(
   (status === "EM CONTATO" || 
    status === "QUALIFICADO" ||
-   status === "NEGOCIAÇÃO") &&
-  passou24h(observacoes))
+   status === "NEGOCIAÇÃO" ||
+   status === "AGUARDANDO PAGAMENTO") &&
+   passou24h(observacoes))
 
 {
   
@@ -1441,9 +1455,11 @@ function atualizarDashboard(){
   let qualificado = 0;
   let negociacao = 0;
   let maturacao = 0;
+  let aguardando = 0;
   let fechados = 0;
   let perdidos = 0;
   let espera = 0;
+  
 
   dadosGlobais.forEach(l => {
 
@@ -1454,9 +1470,11 @@ function atualizarDashboard(){
     if(status === "QUALIFICADO") qualificado++;
     if(status === "NEGOCIAÇÃO") negociacao++;
     if(status === "MATURAÇÃO DE VALOR") maturacao++;
+    if(status === "AGUARDANDO PAGAMENTO") aguardando++;
     if(status === "FECHADO") fechados++;
     if(status === "PERDIDO") perdidos++;
     if(status === "LISTA DE ESPERA") espera++;
+    
   });
 
   kpiTotal.innerText = total;
@@ -1465,8 +1483,10 @@ function atualizarDashboard(){
   document.getElementById("kpiQualificado").innerText = qualificado;
   kpiNegociacao.innerText = negociacao;
   document.getElementById("kpiMaturacao").innerText = maturacao;
+  document.getElementById("kpiAguardando").innerText = aguardando;
   kpiFechados.innerText = fechados;
   kpiPerdidos.innerText = perdidos;
+  
 
   const elEspera = document.getElementById("kpiEspera");
   if(elEspera){
@@ -1636,6 +1656,7 @@ function salvarEdicao(){
     <option>QUALIFICADO</option>
     <option>NEGOCIAÇÃO</option>
     <option>MATURAÇÃO DE VALOR</option>
+    <option>AGUARDANDO PAGAMENTO</option>
     <option>FECHADO</option>
     <option>PERDIDO</option>
   </select>
