@@ -190,7 +190,7 @@
     <div id="resultado" class="resultado"></div>
 
     <footer>
-      williambrioli.com.br<br>
+      igctreinamentoscorporativo.com.br<br>
       Verificação oficial de certificados
     </footer>
   </div>
@@ -304,17 +304,26 @@ function verificar() {
         <div class="sucesso">
           <strong>✅ Certificado válido</strong>
           <p><b>Nome:</b> ${data.nome}</p>
+          <p><b>CPF:</b> ${mascararCPF(data.cpf)}</p>
           <p><b>Curso:</b> ${data.curso}</p>
-          <p><b>Data:</b> ${
-  new Date(data.data).toLocaleString("pt-BR", {
-    timeZone: "America/Sao_Paulo"
-  })
-}</p>
+          <p><b>Data:</b> ${new Date(data.data).toLocaleString("pt-BR", {timeZone: "America/Sao_Paulo"})}</p>
+          <p><b>Local:</b> ${data.cidade} - ${data.estado}</p>
+          
           <!-- <a href="${data.link}" target="_blank">📄 Visualizar certificado</a> -->
         </div>
       `;
     });
 }
+
+
+
+function mascararCPF(cpf) {
+  return cpf.replace(/^(\d{3})\d{3}\d{3}(\d{2})$/, "$1.***.***-$2");
+}   
+   
+
+
+   
 </script>
 
 
