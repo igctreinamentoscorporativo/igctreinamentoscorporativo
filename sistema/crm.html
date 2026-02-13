@@ -1086,11 +1086,15 @@ function render(){
     const nome = (l[3] || "").toUpperCase();
     const telefone = l[4] || "";
     const cidade = (l[5] || "").toUpperCase();
-    const status = l[7] || "";
-    const classeStatus = status.replace(/\s/g,'-'); // troca espaço por hífen
+
     
-    
-    let statusFinal = status;
+const status = l[7] || "";
+const classeStatus = status.replace(/\s/g,'-');
+const data = l[1] || "";
+const hora = l[2] || "";
+const observacoes = l[8] || "";
+
+let statusFinal = status;
 
 // ⚠️ Aplica alerta se for EM CONTATO ou NEGOCIAÇÃO
 if(
@@ -1099,11 +1103,9 @@ if(
 ){
   statusFinal = "⚠️ " + status;
 }
+
+
     
-    
-    const data = l[1] || "";
-    const hora = l[2] || "";
-    const observacoes = l[8] || "";
 
     const ultimaObs = obterUltimaObservacao(observacoes);
 
