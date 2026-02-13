@@ -1016,6 +1016,50 @@ function obterUltimaObservacao(texto){
 }
 
 
+
+
+// ===============================
+// INSERE ALERTA TEMPO DE ESPERA
+// ===============================
+
+
+function passou24h(observacoes){
+
+  if(!observacoes) return false;
+
+  // Pega o último bloco que começa com [dd/mm/yyyy hh:mm]
+  const partes = observacoes.split(/(?=\[\d{2}\/\d{2}\/\d{4})/g)
+                            .map(p => p.trim())
+                            .filter(p => p !== "");
+
+  if(partes.length === 0) return false;
+
+  const ultimoBloco = partes[partes.length - 1];
+
+  // Extrai data dentro de [ ]
+  const match = ultimoBloco.match(/\[(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})\]/);
+
+  if(!match) return false;
+
+  const dia = match[1];
+  const mes = match[2];
+  const ano = match[3];
+  const hora = match[4];
+  const minuto = match[5];
+
+  const dataUltima = new Date(ano, mes-1, dia, hora, minuto);
+  const agora = new Date();
+
+  const diffMs = agora - dataUltima;
+  const diffHoras = diffMs / (1000 * 60 * 60);
+
+  return diffHoras >= 24;
+}
+
+
+
+  
+
   
 
 
@@ -1044,6 +1088,19 @@ function render(){
     const cidade = (l[5] || "").toUpperCase();
     const status = l[7] || "";
     const classeStatus = status.replace(/\s/g,'-'); // troca espaço por hífen
+    
+    
+    let statusFinal = status;
+
+// ⚠️ Aplica alerta se for EM CONTATO ou NEGOCIAÇÃO
+if(
+  (status === "EM CONTATO" || status === "NEGOCIAÇÃO") &&
+  passou24h(observacoes)
+){
+  statusFinal = "⚠️ " + status;
+}
+    
+    
     const data = l[1] || "";
     const hora = l[2] || "";
     const observacoes = l[8] || "";
@@ -1085,7 +1142,7 @@ function render(){
     html+=`
 <tr>
   <td>${nome}</td>
-  <td><span class="status ${classeStatus}">${status}</span></td>
+  <td><span class="status ${classeStatus}">${statusFinal}</span></td>
   <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
   <td>
     <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
