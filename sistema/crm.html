@@ -86,10 +86,17 @@ button{
   cursor:pointer;
   font-weight:600;
   font-size:12px;
+  transition: all .15s ease;
+  box-shadow:0 4px 0 #0080aa;
 }
 
 button:hover{
   background:#009acd;
+}
+
+button:active{
+  transform: translateY(3px);
+  box-shadow:0 1px 0 #0080aa;
 }
 
 .btn-secondary{
