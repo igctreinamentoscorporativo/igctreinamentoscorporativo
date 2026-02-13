@@ -149,7 +149,8 @@ button:active{
 .FECHADO{background:#00aa55;}
 .PERDIDO{background:#aa0000;}
 .LISTA-DE-ESPERA{background:#7e22ce;}
-.QUALIFICADO{background:#0ea5a4;}  
+.QUALIFICADO{background:#0ea5a4;} 
+.MATURAÇÃO-DE-VALOR{background:#b45309;}
   
 .search-box{
   margin-bottom:10px;
@@ -299,7 +300,7 @@ button:active{
 .kpi-espera{ background:#6b21a8; } /* Roxo elegante */
 .kpi-lead{ background:#3a3a3a; }
 .kpi-qualificado{ background:#0d9488; }  
-
+.kpi-maturacao{ background:#92400e; }
 
 
 
@@ -678,6 +679,18 @@ button:active{
     <span id="kpiNegociacao">0</span>
   </div>
 
+
+
+
+<div class="kpi kpi-maturacao" onclick="filtrarStatus(event,'MATURAÇÃO DE VALOR')">
+  <h4>MATURAÇÃO</h4>
+  <span id="kpiMaturacao">0</span>
+</div>
+
+
+
+  
+
   <div class="kpi kpi-fechado" onclick="filtrarStatus(event,'FECHADO')">
     <h4>FECHADOS</h4>
     <span id="kpiFechados">0</span>
@@ -718,6 +731,7 @@ button:active{
   <option>EM CONTATO</option>
   <option>QUALIFICADO</option>
   <option>NEGOCIAÇÃO</option>
+  <option>MATURAÇÃO DE VALOR</option>
   <option>FECHADO</option>
   <option>PERDIDO</option>
   <option>LISTA DE ESPERA</option>
@@ -752,6 +766,7 @@ button:active{
   <option value="LEAD">LEAD</option>
   <option value="EM CONTATO">EM CONTATO</option>
   <option value="QUALIFICADO">QUALIFICADO</option>
+  <option value="MATURAÇÃO DE VALOR">MATURAÇÃO DE VALOR</option>
   <option value="NEGOCIAÇÃO">NEGOCIAÇÃO</option>
   <option value="FECHADO">FECHADO</option>
   <option value="PERDIDO">PERDIDO</option>
@@ -1425,6 +1440,7 @@ function atualizarDashboard(){
   let contato = 0;
   let qualificado = 0;
   let negociacao = 0;
+  let maturacao = 0;
   let fechados = 0;
   let perdidos = 0;
   let espera = 0;
@@ -1437,6 +1453,7 @@ function atualizarDashboard(){
     if(status === "EM CONTATO") contato++;
     if(status === "QUALIFICADO") qualificado++;
     if(status === "NEGOCIAÇÃO") negociacao++;
+    if(status === "MATURAÇÃO DE VALOR") maturacao++;
     if(status === "FECHADO") fechados++;
     if(status === "PERDIDO") perdidos++;
     if(status === "LISTA DE ESPERA") espera++;
@@ -1447,6 +1464,7 @@ function atualizarDashboard(){
   kpiContato.innerText = contato;
   document.getElementById("kpiQualificado").innerText = qualificado;
   kpiNegociacao.innerText = negociacao;
+  document.getElementById("kpiMaturacao").innerText = maturacao;
   kpiFechados.innerText = fechados;
   kpiPerdidos.innerText = perdidos;
 
@@ -1617,6 +1635,7 @@ function salvarEdicao(){
     <option>EM CONTATO</option>
     <option>QUALIFICADO</option>
     <option>NEGOCIAÇÃO</option>
+    <option>MATURAÇÃO DE VALOR</option>
     <option>FECHADO</option>
     <option>PERDIDO</option>
   </select>
