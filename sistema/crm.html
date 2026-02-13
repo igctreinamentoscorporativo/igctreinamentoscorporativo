@@ -297,6 +297,7 @@ button:active{
 .kpi-fechado{ background:#006633; }
 .kpi-perdido{ background:#660000; }
 .kpi-espera{ background:#6b21a8; } /* Roxo elegante */
+.kpi-lead{ background:#3a3a3a; }
 
 .kpi.active{
   outline:2px solid #00bfff;
@@ -641,6 +642,16 @@ button:active{
     <h4>TOTAL</h4>
     <span id="kpiTotal">0</span>
   </div>
+
+
+
+  <div class="kpi kpi-lead" onclick="filtrarStatus(event,'LEAD')">
+  <h4>LEADS</h4>
+  <span id="kpiLead">0</span>
+</div>
+
+
+  
 
   <div class="kpi kpi-contato" onclick="filtrarStatus(event,'EM CONTATO')">
     <h4>EM CONTATO</h4>
@@ -1388,6 +1399,7 @@ function verDetalhes(id){
 function atualizarDashboard(){
 
   let total = dadosGlobais.length;
+  let lead = 0;
   let contato = 0;
   let negociacao = 0;
   let fechados = 0;
@@ -1398,6 +1410,7 @@ function atualizarDashboard(){
 
     const status = l[7];
 
+    if(status === "LEAD") lead++;
     if(status === "EM CONTATO") contato++;
     if(status === "NEGOCIAÇÃO") negociacao++;
     if(status === "FECHADO") fechados++;
@@ -1406,6 +1419,7 @@ function atualizarDashboard(){
   });
 
   kpiTotal.innerText = total;
+  document.getElementById("kpiLead").innerText = lead;
   kpiContato.innerText = contato;
   kpiNegociacao.innerText = negociacao;
   kpiFechados.innerText = fechados;
