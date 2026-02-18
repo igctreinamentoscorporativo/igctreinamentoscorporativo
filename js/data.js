@@ -82,141 +82,246 @@ const produtos = [
       
        oQueE: `
 
-      <h2>Sobre o Treinamento</h2>
-      <br>
-      <p>
-      O Treinamento <strong>Programação Neurolinguística (PNL) – Alta Performance</strong>
-      foi desenvolvido para pessoas que desejam compreender como a mente humana
-      funciona e como pensamentos, linguagem e comportamento influenciam
-      diretamente os resultados da vida pessoal e profissional.
-    </p>
+<h2>PARA QUEM É ESTE TREINAMENTO</h2>
+<br>
+<strong>Este curso é para você que:</strong>
+<br>
+✅ Quer dominar a sua mente para tomar decisões melhores
+<br>
+✅ Precisa influenciar e persuadir pessoas com ética e clareza
+<br>
+✅ Busca maior performance em carreira, relações e comunicação
+<br>
+✅ Quer romper padrões limitantes que te impedem de evoluir
+<br>
+✅ Deseja um certificado internacional reconhecido
+<br>
+✅ Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais
+<br>
 
-    <p>
-      Ao longo da formação, o participante aprenderá técnicas consagradas
-      da PNL para melhorar a comunicação interpessoal, criar conexões mais
-      profundas, desenvolver inteligência emocional, reprogramar padrões
-      mentais limitantes e estabelecer objetivos claros e alcançáveis.
-    </p>
+<strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
+<br>
+<br>
 
-    <p>
-      A proposta do Treinamento imersivvo é unir <strong>conhecimento, prática e consciência</strong>,
-      permitindo que cada aluno aplique imediatamente as ferramentas aprendidas
-      em seu cotidiano, promovendo maior segurança, clareza, autonomia emocional
-      e produtividade.
-    </p>
+Você já se sentiu preso, sem conseguir expressar tudo o que sabe?
+<br>
+Já viu oportunidades escaparem porque você não foi ouvido?
+<br>
+Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?
+<br>
+
+<strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong>
+<br>
+👉 Como você percebe o mundo
+<br>
+👉 Como processa os seus pensamentos
+<br>
+👉 Como influencia e negocia com as suas palavras
+<br>
+E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong>
+<br>
+<br>
+
+<h2>🧠 O que você vai aprender?</h2>
+<br>
+🔹 Como interpretar e ajustar a sua linguagem interna
+<br>
+🔹 Técnicas de comunicação eficaz e persuasiva
+<br>
+🔹 Como reconhecer e modificar padrões limitantes
+<br>
+🔹 Como construir confiança instantânea em si mesmo
+<br>
+🔹 Estratégias de influência sem manipulação
+<br>
+🔹 Ferramentas práticas para situações reais
+<br>
+🔹 Comportamento emocional estável sob pressão
+<br>
+
+<strong>É uma formação completa, aplicada e orientada à ação.</strong>
+<br>
+<br>
+
+
+
+
+
+<h2>💡Benefícios</h2> 
+<br>
+<strong>Imagine daqui a 30 dias:</strong>
+<br>
+
+✨ Sua comunicação mais clara, precisa e assertiva
+<br>
+✨ Você entendendo as motivações de quem está à sua frente
+<br>
+✨ Liderar com impacto — não apenas autoridade
+<br>
+✨ Resolver conflitos com precisão e equilíbrio emocional
+<br>
+✨ Conseguir conexões que antes pareciam impossíveis
+<br>
+<br>
+
+
+<b>Isso não é motivação passageira...</b>
+<br>
+<strong>É método aplicado com base em ciência comportamental.</strong>
+
+
+
+
+<h2>🫶 Por que essa Formação é poderosa?</h2>
+<br>
+✔ Três dias intensivos de imersão prática em PNL
+<br>
+✔ Certificação Internacional com carga horária oficial de 20h 
+<br>
+✔ Metodologia apoiada nas bases da PNL moderna
+<br>
+✔ Conteúdo aplicável desde o primeiro módulo
+<br>
+✔ Ferramentas práticas, não apenas teoria
+<br>
+✔ Foco em mudança comportamental real
+<br>
+✔ Resultados visíveis na sua vida e no seu entorno
+<br>
+✔ Registro IGC-MEC no certificado
+<br>
+✔ Validação online via QR Code
+<br>
+✔ Atividades práticas individuais e em grupo com alto impacto transformacional
+<br>
+<br>
+
+<strong>PNL não muda apenas o que você sabe.</strong>
+<br>
+<b>PNL muda o que você faz.</b>
+<br>
+<br>
+
+
+
+
+
+<h2>📍 Como será a Formação?</h2>
+<br>
+
+<strong>Local:</strong> Curitiba-PR – Del Rey Hotel
+<br><br>
+
+<strong>Datas e formato:</strong>
+<br>
+Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
+<br>
+Sábado – 11/04/2026 das 09h às 19h (presencial – imersivo)
+<br>
+Domingo – 12/04/2026 das 09h às 19h (presencial – imersivo)
+<br><br>
+
+<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
+<br>
+Após o preenchimento das vagas, as inscrições serão encerradas.
+<br>
+<br>
+
+
+
       
       `,      
+
        
       composicao: `
-      
-     <h2>Conteúdo Programático</h2> 
-     <br>
 
-    <h4>Módulo 1 – Fundamentos da PNL</h4>
-    
-    <ul>
-      <li>O que é Programação Neurolinguística: história, princípios e aplicações</li>
-      <li>A relação entre pensamento, linguagem e comportamento</li>
-      <li>Pressupostos da PNL e seus impactos na percepção da realidade</li>
-      <li>O conceito: o mapa não é o território</li>
-      <li>Os 4 pilares da PNL:
-        <ul>
-          <li>Rapport</li>
-          <li>Acuidade sensorial</li>
-          <li>Flexibilidade comportamental</li>
-          <li>Formulação de objetivos</li>
-        </ul>
-      </li>
-    </ul>
-    <br>
-    <h4>Módulo 2 – Aprimorando a Comunicação</h4>
-    
-    <ul>
-      <li>Rapport: técnicas para criar conexão e sintonia rapidamente</li>
-      <li>Sistemas representacionais: visual, auditivo e cinestésico</li>
-      <li>Como identificar e utilizar o canal de comunicação preferencial</li>
-      <li>Meta Modelagem:
-        <ul>
-          <li>Como fazer perguntas específicas e estratégicas</li>
-          <li>Identificação de generalizações, omissões e distorções</li>
-          <li>Clareza, objetividade e precisão na comunicação</li>
-        </ul>
-      </li>
-      <li>O poder das palavras: impacto da linguagem verbal e não verbal</li>
-    </ul>
-    <br>
 
-    <h4>Módulo 3 – Técnicas de Mudança e Reprogramação Mental</h4>
-    
-    <ul>
-      <li>Círculo de Excelência:
-        <ul>
-          <li>Criação de gatilhos mentais positivos</li>
-          <li>Acesso consciente a estados emocionais desejados</li>
-        </ul>
-      </li>
-      <li>Níveis Neurológicos:
-        <ul>
-          <li>Mudança de significado e percepção</li>
-          <li>Potencialização de recursos internos</li>
-          <li>Transformação da visão sobre situações e desafios</li>
-        </ul>
-      </li>
-      <li>Análise Transacional:
-        <ul>
-          <li>Autonomia emocional</li>
-          <li>Responsabilidade sobre ações, sentimentos e decisões</li>
-          <li>Identificação e substituição de padrões mentais improdutivos</li>
-        </ul>
-      </li>
-    </ul>
-     <br> 
+
+<h2>👨‍🏫 Quem conduz a Formação?</h2>
+<br>
+
+<strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
+com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
+<br><br>
+
+Sua metodologia integra PNL, comportamento e comunicação estratégica,
+com aplicação prática e foco em transformação real.
+<br><br>
+
+<strong>Você não aprende apenas teoria.</strong>
+<strong>Você aprende com quem aplica há décadas.</strong>
+<br>
+<br>
+
+<strong>As vagas são limitadas.</strong>
+<br>
+Se você deseja participar desta turma em Curitiba,
+essa é a sua oportunidade.
+<br><br>
+<strong>Garanta sua inscrição agora.</strong>
+
+     
       `,
-      comoUsar: `
       
-      <h2>Metodologia</h2>
-      <br>
-    <p>
-      A metodologia do curso é <strong>prática, dinâmica e experiencial</strong>,
-      focada no aprendizado real e aplicável.
-    </p>
+       comoUsar: `
+
+
+<h2>❓Será que eu vou conseguir acompanhar?</h2>
 <br>
-    <ul>
-      <li>Exposição clara e objetiva dos conceitos</li>
-      <li>Exercícios práticos individuais e em grupo</li>
-      <li>Dinâmicas de vivência emocional e comportamental</li>
-      <li>Exemplos reais do cotidiano pessoal e profissional</li>
-      <li>Aplicação imediata das técnicas aprendidas</li>
-    </ul>
+Sim.
 <br>
-    <p>
-      O aluno não apenas aprende o conteúdo, mas desenvolve a capacidade
-      de utilizá-lo conscientemente em diferentes contextos da vida.
-    </p>
-      <br>
+A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
+<br>
+<br>
+
+<h2>❓Isso é apenas motivacional?</h2>
+<br>
+Não.
+<br>
+Motivação passa…
+<br>
+PNL é técnica + aplicação + transformação comportamental real.
+<br>
+<br>
+
+<h2>❓Preciso de experiência anterior?</h2>
+<br>
+Não.
+<br>
+Você aprende tudo desde as bases até aplicações avançadas.
+<br>
+<br>
+
+<h2>❓Isso traz resultados práticos?</h2>
+<br>
+Sim.
+<br>
+Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
+<br>
+<br>
+
+
+      
       `,
       advertencias: `
       
-      <h2>Conheça o Palestrante</h2>
-      <br>
-    <p>
-      <strong>Dr. Paulo Takahashi</strong> atua há mais de duas décadas na área
-      de desenvolvimento humano, comunicação e comportamento.
-    </p>
 
-    <p>
-      Seu trabalho integra Programação Neurolinguística, psicologia aplicada
-      e desenvolvimento pessoal, com uma abordagem ética, prática e
-      orientada a resultados consistentes.
-    </p>
-
-    <p>
-      Com uma didática clara e acessível, Dr. Paulo Takahashi conduz seus cursos e
-      treinamentos criando um ambiente seguro, profissional e estimulante,
-      favorecendo aprendizado profundo, reflexão e transformação real.
-    </p>
+<h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
+<br>
+<strong>A pergunta é:</strong>
+<br>
+👉 Você vai tomar decisões conscientes e estratégicas…
+<br>
+ou continuar reagindo sem controle?
 <br>
 <br>
+A mudança começa aqui.
+<br>
+<strong>Se você sente que está pronto para evoluir sua mente, sua comunicação e sua performance,
+essa decisão começa aqui.</strong>
+
+    
+
       `
     },
 
