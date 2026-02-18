@@ -15,6 +15,7 @@ if (!produto) {
     "<p>Produto não encontrado.</p>";
 } else {
   montarProduto(produto);
+  
 }
 
 function montarProduto(produto) {
@@ -115,6 +116,11 @@ function montarProduto(produto) {
   `;
 
 
+// 🔽 AQUI VOCÊ CHAMA OS BLOCOS ASSISTIVOS
+  renderBlocosAssistivos(produto);
+  
+  
+
 // ================= CTA DINÂMICO =================
 if (produto.configuracoes?.cta?.mostrar) {
 
@@ -134,6 +140,143 @@ if (produto.configuracoes?.cta?.mostrar) {
 
     
 }
+
+
+
+
+
+function renderBlocosAssistivos(produto) {
+
+  const container = document.getElementById("produto-blocos");
+  container.innerHTML = "";
+
+  // ============================
+  // DEPOIMENTOS
+  // ============================
+  if (produto.configuracoes?.depoimentos?.mostrar) {
+
+    const videos = produto.configuracoes.depoimentos.videos || [];
+
+    const section = document.createElement("section");
+    section.className = "produto-depoimentos";
+
+    section.innerHTML = `
+      <div class="institucional-header">
+        <h2 class="institucional-title-center">
+          O que dizem nossos alunos
+        </h2>
+      </div>
+
+      <div class="depoimentos-slider">
+        <div class="depoimentos-track"></div>
+      </div>
+
+      <div class="depoimentos-dots"></div>
+    `;
+
+    container.appendChild(section);
+
+    initProdutoDepoimentos(videos);
+  }
+
+  // ============================
+  // CLIENTES
+  // ============================
+  if (produto.configuracoes?.clientes?.mostrar) {
+
+    const clientesSection = document.createElement("section");
+    clientesSection.className = "produto-clientes";
+
+    clientesSection.innerHTML = `
+      <h2 class="ads-logos-title">
+        Alguns de nossos clientes
+      </h2>
+
+      <div class="ads-wrapper">
+        <div class="logos-track">
+          ${document.querySelector(".logos-track").innerHTML}
+        </div>
+      </div>
+    `;
+
+    container.appendChild(clientesSection);
+  }
+}
+
+
+
+
+
+
+
+
+
+function initProdutoDepoimentos(videos) {
+
+  const track = document.querySelector("#produto-blocos .depoimentos-track");
+  const dots = document.querySelector("#produto-blocos .depoimentos-dots");
+
+  if (!track || !dots) return;
+
+  track.innerHTML = "";
+  dots.innerHTML = "";
+
+  videos.forEach(id => {
+
+    const card = document.createElement("div");
+    card.className = "depoimento-card";
+
+    card.innerHTML = `
+      <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg">
+    `;
+
+    card.onclick = () => {
+      window.open(`https://www.youtube.com/watch?v=${id}`, "_blank");
+    };
+
+    track.appendChild(card);
+  });
+
+  const perPage = window.innerWidth >= 1024 ? 3 : 1;
+  const pages = Math.ceil(videos.length / perPage);
+  let page = 0;
+
+  for (let i = 0; i < pages; i++) {
+    const dot = document.createElement("span");
+    if (i === 0) dot.classList.add("active");
+
+    dot.onclick = () => {
+      page = i;
+      update();
+    };
+
+    dots.appendChild(dot);
+  }
+
+  function update() {
+    const cardWidth = track.children[0].offsetWidth + 24;
+
+    track.style.transform =
+      `translateX(-${page * cardWidth * perPage}px)`;
+
+    [...dots.children].forEach((d, i) =>
+      d.classList.toggle("active", i === page)
+    );
+  }
+
+  update();
+}
+
+
+
+
+
+
+
+
+
+
+
 
 // ================================
 // MODAL DE VÍDEO
