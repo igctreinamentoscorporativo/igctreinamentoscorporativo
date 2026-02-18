@@ -151,33 +151,45 @@ function renderBlocosAssistivos(produto) {
   container.innerHTML = "";
 
   // ============================
-  // DEPOIMENTOS
-  // ============================
-  if (produto.depoimentos?.mostrar) {
+// DEPOIMENTOS (USANDO SLIDER DO INDEX)
+// ============================
+if (produto.depoimentos?.mostrar) {
 
-    const videos = produto.depoimentos.videos || [];
+  const videos = produto.depoimentos.videos || [];
 
-    const section = document.createElement("section");
-    section.className = "produto-depoimentos";
+  const section = document.createElement("section");
+  section.className = "categoria-section";
 
-    section.innerHTML = `
-      <div class="institucional-header">
-        <h2 class="institucional-title-center">
-          O que dizem nossos alunos
-        </h2>
+  section.innerHTML = `
+    <div class="container">
+      <h2>O que dizem nossos alunos</h2>
+
+      <div class="slider">
+        <button class="arrow left">&#10094;</button>
+
+        <div class="slider-track">
+          ${videos.map(id => `
+            <div class="card depoimento-card"
+                 onclick="abrirModalYoutube('${id}')">
+              <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg">
+            </div>
+          `).join("")}
+        </div>
+
+        <button class="arrow right">&#10095;</button>
       </div>
 
-      <div class="depoimentos-slider">
-        <div class="depoimentos-track"></div>
-      </div>
+      <div class="slider-dots"></div>
+    </div>
+  `;
 
-      <div class="depoimentos-dots"></div>
-    `;
+  container.appendChild(section);
 
-    container.appendChild(section);
-
-    initProdutoDepoimentos(videos);
-  }
+  // 🔥 chama a MESMA função do index
+requestAnimationFrame(() => {
+  inicializarSliders();
+});
+}
 
 
 
@@ -209,72 +221,6 @@ if (produto.clientes?.mostrar) {
   container.appendChild(clientesSection);
 }
 }
-
-
-
-
-
-
-
-
-
-function initProdutoDepoimentos(videos) {
-
-  const track = document.querySelector("#produto-blocos .depoimentos-track");
-  const dots = document.querySelector("#produto-blocos .depoimentos-dots");
-
-  if (!track || !dots) return;
-
-  track.innerHTML = "";
-  dots.innerHTML = "";
-
-  videos.forEach(id => {
-
-    const card = document.createElement("div");
-    card.className = "depoimento-card";
-
-    card.innerHTML = `
-      <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg">
-    `;
-
-    card.onclick = () => {
-      abrirModalYoutube(id);
-    };
-
-    track.appendChild(card);
-  });
-
-  const perPage = window.innerWidth >= 1024 ? 3 : 1;
-  const pages = Math.ceil(videos.length / perPage);
-  let page = 0;
-
-  for (let i = 0; i < pages; i++) {
-    const dot = document.createElement("span");
-    if (i === 0) dot.classList.add("active");
-
-    dot.onclick = () => {
-      page = i;
-      update();
-    };
-
-    dots.appendChild(dot);
-  }
-
-  function update() {
-    const cardWidth = track.children[0].offsetWidth + 24;
-
-    track.style.transform =
-      `translateX(-${page * cardWidth * perPage}px)`;
-
-    [...dots.children].forEach((d, i) =>
-      d.classList.toggle("active", i === page)
-    );
-  }
-
-  update();
-}
-
-
 
 
 
