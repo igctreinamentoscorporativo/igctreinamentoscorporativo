@@ -81,9 +81,12 @@ const produtos = [
        `,
       
        oQueE: `
+<div class="layout-pnl">
+<br>
+<br>
 
-<br>
-<br>
+<div class="bloco azul-claro">
+
 <h2>PARA QUEM É ESTE TREINAMENTO?</h2>
 <br>
 <strong>Este curso é para você que:</strong>
@@ -105,6 +108,8 @@ const produtos = [
 <strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
 <br>
 <br>
+</div>
+
 
 Você já se sentiu preso, sem conseguir expressar tudo o que sabe?
 <br>
@@ -126,6 +131,8 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 <br>
 <br>
 
+
+<div class="bloco cinza-claro">
 <h2>🧠 O que você vai aprender?</h2>
 🔹 Como interpretar e ajustar a sua linguagem interna
 <br>
@@ -145,10 +152,10 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 <strong>É uma formação completa, aplicada e orientada à ação.</strong>
 <br>
 <br>
+</div>
 
 
-
-
+<div class="bloco azul-claro">
 <h2>💡Benefícios</h2> 
 <em>Imagine daqui a 30 dias:</em>
 <br>
@@ -170,7 +177,7 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 <br>
 <strong>É método aplicado com base em ciência comportamental.</strong>
 <br>
-
+</div>
 
 
 <h2>🫶 Por que essa Formação é poderosa?</h2>
@@ -205,7 +212,7 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 
 
 
-
+<div class="bloco escuro">
 <h2>📍 Como será a Formação?</h2>
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
@@ -224,8 +231,10 @@ Domingo – 12/04/2026 das 09h às 19h (presencial – imersivo)
 Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
 <br>
+</div>
 
 
+</div>
 
       
       `,      
