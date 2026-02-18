@@ -208,7 +208,7 @@ if (produto.clientes?.mostrar) {
 
   container.appendChild(clientesSection);
 }
-
+}
 
 
 
