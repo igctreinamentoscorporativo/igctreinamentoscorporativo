@@ -281,29 +281,31 @@ function initProdutoDepoimentos(videos) {
 function abrirModalYoutube(id) {
 
   const modal = document.createElement("div");
-  modal.className = "produto-video-modal";
+  modal.className = "video-modal active";
 
   modal.innerHTML = `
-    <div class="produto-video-content">
-      <button class="produto-video-close">✕</button>
-      <iframe 
-        src="https://www.youtube.com/embed/${id}?autoplay=1"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-      </iframe>
+    <div class="video-modal-content">
+      <button class="video-modal-close">×</button>
+      <div class="video-modal-frame">
+        <iframe 
+          src="https://www.youtube.com/embed/${id}?autoplay=1"
+          allow="autoplay; encrypted-media"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
   `;
 
   document.body.appendChild(modal);
 
-  modal.querySelector(".produto-video-close")
+  modal.querySelector(".video-modal-close")
     .addEventListener("click", () => modal.remove());
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal) modal.remove();
   });
 }
+
 
 
 
