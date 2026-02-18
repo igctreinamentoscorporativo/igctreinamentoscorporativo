@@ -230,7 +230,7 @@ const produtos = [
   mostrar: true,
   texto: "QUERO FAZER MINHA PRÉ-INSCRIÇÃO AGORA",
   link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
-  } 
+  
 },
 
 
@@ -246,7 +246,9 @@ depoimentos: {
 
  clientes: {
     mostrar: true
-  },    
+
+ }
+},    
 
         
     destaque: true,
