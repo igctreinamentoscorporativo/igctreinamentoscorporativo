@@ -187,7 +187,10 @@ if (produto.depoimentos?.mostrar) {
 
   // 🔥 chama a MESMA função do index
 requestAnimationFrame(() => {
-  inicializarSliders();
+  const slider = container.querySelector(".slider");
+  if (slider) {
+    inicializarSliderIndividual(slider);
+  }
 });
 }
 
