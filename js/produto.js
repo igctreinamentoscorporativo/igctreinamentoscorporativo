@@ -132,8 +132,14 @@ if (produto.configuracoes?.cta?.mostrar) {
     </div>
   `;
 
+  // CTA no topo (já existente)
   document
     .getElementById("produto-topo")
+    .insertAdjacentHTML("afterend", ctaHTML);
+
+  // 🔥 CTA repetido após blocos assistivos
+  document
+    .getElementById("produto-blocos")
     .insertAdjacentHTML("afterend", ctaHTML);
 }
 // ================= FIM CTA DINÂMICO =================
