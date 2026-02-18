@@ -242,7 +242,7 @@ depoimentos: {
 },
 
 clientes: {
-  mostrar: true,
+  mostrar: false,
   logos: [
     "assets/img/clientes/cliente1.png",
     "assets/img/clientes/cliente2.png",
