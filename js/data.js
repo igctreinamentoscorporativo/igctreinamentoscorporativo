@@ -224,18 +224,20 @@ const produtos = [
  configuracoes: {
   mostrarNome: true,
   mostrarPreco: false,
-  mostrarResumo: false
+  mostrarResumo: false,
+  cta: {
+  mostrar: true,
+  texto: "QUERO FAZER MINHA PRÉ-INSCRIÇÃO AGORA",
+  link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
+  } 
 },
    
     destaque: true,
     mostrarlancamento: true,
     mostrarVideo: true,
-    textoParcelamento: "",
-    cta: {
-    mostrar: true,
-    texto: "QUERO FAZER MINHA PRÉ-INSCRIÇÃO AGORA",
-    link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
-} 
+    textoParcelamento: ""
+    
+ 
     },
 
 
