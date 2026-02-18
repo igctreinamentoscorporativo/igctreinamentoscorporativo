@@ -2092,3 +2092,77 @@ a.btn-comprar {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================
+   LAYOUT PREMIUM - FORMAÇÃO PNL CURITIBA
+   ========================================= */
+
+.layout-pnl h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #0d2f4f;
+}
+
+.layout-pnl {
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* Blocos alternados */
+.layout-pnl .bloco {
+  padding: 40px 25px;
+  margin-bottom: 40px;
+  border-radius: 14px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+}
+
+.layout-pnl .azul-claro {
+  background: #f3f7fb;
+}
+
+.layout-pnl .cinza-claro {
+  background: #f7f7f7;
+}
+
+.layout-pnl .escuro {
+  background: #0d2f4f;
+  color: #ffffff;
+}
+
+.layout-pnl .escuro h2 {
+  color: #ffffff;
+}
+
+/* Lista mais bonita */
+.layout-pnl .lista {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.layout-pnl .lista li {
+  list-style: none;
+  margin-bottom: 12px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.layout-pnl .lista li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #1ca74f;
+  font-weight: bold;
+}
+
+
