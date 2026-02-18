@@ -179,29 +179,36 @@ function renderBlocosAssistivos(produto) {
     initProdutoDepoimentos(videos);
   }
 
+
+
+
+
+  
   // ============================
-  // CLIENTES
-  // ============================
-  if (produto.configuracoes?.clientes?.mostrar) {
+// CLIENTES
+// ============================
+if (produto.clientes?.mostrar) {
 
-    const clientesSection = document.createElement("section");
-    clientesSection.className = "produto-clientes";
+  const logos = produto.clientes.logos || [];
 
-    clientesSection.innerHTML = `
-      <h2 class="ads-logos-title">
-        Alguns de nossos clientes
-      </h2>
+  const clientesSection = document.createElement("section");
+  clientesSection.className = "produto-clientes";
 
-      <div class="ads-wrapper">
-        <div class="logos-track">
-          ${document.querySelector(".logos-track").innerHTML}
-        </div>
+  clientesSection.innerHTML = `
+    <h2 class="ads-logos-title">
+      Alguns de nossos clientes
+    </h2>
+
+    <div class="ads-wrapper">
+      <div class="logos-track">
+        ${logos.map(logo => `<img src="${logo}" />`).join("")}
       </div>
-    `;
+    </div>
+  `;
 
-    container.appendChild(clientesSection);
-  }
+  container.appendChild(clientesSection);
 }
+
 
 
 
