@@ -91,67 +91,54 @@ const produtos = [
 <br>
 <strong>Este curso é para você que:</strong>
 <br>
-<br>
-✅ Quer dominar a sua mente para tomar decisões melhores
-<br>
-✅ Precisa influenciar e persuadir pessoas com ética e clareza
-<br>
-✅ Busca maior performance em carreira, relações e comunicação
-<br>
-✅ Quer romper padrões limitantes que te impedem de evoluir
-<br>
-✅ Deseja um certificado internacional reconhecido
-<br>
-✅ Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais
-<br>
-<br>
+<ul class="lista">
+<li>Quer dominar a sua mente para tomar decisões melhores</li>
+<li>Precisa influenciar e persuadir pessoas com ética e clareza</li>
+<li>Busca maior performance em carreira, relações e comunicação</li>
+<li>Quer romper padrões limitantes que te impedem de evoluir</li>
+<li>Deseja um certificado internacional reconhecido</li>
+<li>Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</li>
+</ul>
+
 <strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
-<br>
-<br>
+
 </div>
 
 
-Você já se sentiu preso, sem conseguir expressar tudo o que sabe?
-<br>
-Já viu oportunidades escaparem porque você não foi ouvido?
-<br>
-Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?
-<br>
-<br>
-<strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong>
-<br>
-<br>
-👉 Como você percebe o mundo
-<br>
-👉 Como processa os seus pensamentos
-<br>
-👉 Como influencia e negocia com as suas palavras
-<br>
-E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong>
-<br>
-<br>
+<div class="bloco branco">
+<p>Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
+<p>Já viu oportunidades escaparem porque você não foi ouvido?</p>
+<p>Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
+
+<p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
+
+<ul>
+<li>Como você percebe o mundo</li>
+<li>Como processa os seus pensamentos</li>
+<li>Como influencia e negocia com as suas palavras</li>
+</ul>
+
+<p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
+
+</div>
+
 
 
 <div class="bloco cinza-claro">
 <h2>🧠 O que você vai aprender?</h2>
-🔹 Como interpretar e ajustar a sua linguagem interna
-<br>
-🔹 Técnicas de comunicação eficaz e persuasiva
-<br>
-🔹 Como reconhecer e modificar padrões limitantes
-<br>
-🔹 Como construir confiança instantânea em si mesmo
-<br>
-🔹 Estratégias de influência sem manipulação
-<br>
-🔹 Ferramentas práticas para situações reais
-<br>
-🔹 Comportamento emocional estável sob pressão
-<br>
-<br>
-<strong>É uma formação completa, aplicada e orientada à ação.</strong>
-<br>
-<br>
+
+<ul class="lista">
+<li>Como interpretar e ajustar a sua linguagem interna</li>
+<li>Técnicas de comunicação eficaz e persuasiva</li>
+<li>Como reconhecer e modificar padrões limitantes</li>
+<li>Como construir confiança instantânea em si mesmo</li>
+<li>Estratégias de influência sem manipulação</li>
+<li>Ferramentas práticas para situações reais</li>
+<li>Comportamento emocional estável sob pressão</li>
+</ul>
+
+<p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
+
 </div>
 
 
@@ -180,34 +167,26 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 </div>
 
 
+<div class="bloco branco">
 <h2>🫶 Por que essa Formação é poderosa?</h2>
-✔ Três dias intensivos de imersão prática em PNL
-<br>
-✔ Certificação Internacional com carga horária oficial de 20h 
-<br>
-✔ Metodologia apoiada nas bases da PNL moderna
-<br>
-✔ Conteúdo aplicável desde o primeiro módulo
-<br>
-✔ Ferramentas práticas, não apenas teoria
-<br>
-✔ Foco em mudança comportamental real
-<br>
-✔ Resultados visíveis na sua vida e no seu entorno
-<br>
-✔ Registro IGC-MEC no certificado
-<br>
-✔ Validação online via QR Code
-<br>
-✔ Atividades práticas individuais e em grupo com alto impacto transformacional
-<br>
-<br>
 
-<strong>PNL não muda apenas o que você sabe.</strong>
+<ul class="lista">
+<li>Três dias intensivos de imersão prática em PNL</li>
+<li>Certificação Internacional com carga horária oficial de 20h</li> 
+<li>Metodologia apoiada nas bases da PNL moderna</li>
+<li>Conteúdo aplicável desde o primeiro módulo</li>
+<li>Ferramentas práticas, não apenas teoria</li>
+<li>Foco em mudança comportamental real</li>
+<li>Resultados visíveis na sua vida e no seu entorno</li>
+<li>Registro IGC-MEC no certificado</li>
+<li>Validação online via QR Code</li>
+<li>Atividades práticas individuais e em grupo com alto impacto transformacional</li>
+</ul>
+
+<p><strong>PNL não muda apenas o que você sabe.</strong>
 <br>
-<b>PNL muda o que você faz.</b>
-<br>
-<br>
+strong>PNL muda o que você faz.</strong>
+</p>
 
 
 
@@ -232,8 +211,6 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
 <br>
 </div>
-
-
 </div>
 
       
@@ -243,7 +220,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
       composicao: `
 
 
-
+<div class="bloco cinza-claro">
 <h2>👨‍🏫 Quem conduz a Formação?</h2>
 
 
@@ -265,10 +242,12 @@ essa é a sua oportunidade.
 <strong>Garanta sua inscrição agora.</strong>
 <br>
 <br>
-     
+ </div>    
       `,
       
        comoUsar: `
+
+<div class="bloco branco">
 <br>
 <br>
 <h2>Será que eu vou conseguir acompanhar❓</h2>
@@ -300,13 +279,13 @@ Sim.
 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
 <br>
 <br>
-
+</div
 
       
       `,
       advertencias: `
       
-
+<div class="bloco azul-claro">
 <h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
 <strong>A pergunta é:</strong>
 <br><br>
@@ -319,7 +298,7 @@ A mudança começa aqui.
 <br>
 <strong>Se você sente que está pronto para evoluir sua mente, sua comunicação e sua performance,
 essa decisão começa aqui.</strong>
-
+</div>
     
 
       `
