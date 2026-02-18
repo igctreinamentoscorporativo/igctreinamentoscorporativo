@@ -10,24 +10,6 @@ const produtoId = params.get("id");
 const produto = produtos.find(p => p.id == produtoId);
 
 
-// ================= CTA DINÂMICO =================
-if (produto.cta && produto.cta.mostrar) {
-  const ctaHTML = `
-    <div class="cta-inscricao">
-      <a href="${produto.cta.link}" class="btn-pre-inscricao">
-        ${produto.cta.texto}
-      </a>
-    </div>
-  `;
-
-  document
-    .getElementById("produto-topo")
-    .insertAdjacentHTML("afterend", ctaHTML);
-}
-
-// ================= FIM CTA DINÂMICO =================
-
-
 if (!produto) {
   document.getElementById("produto-topo").innerHTML =
     "<p>Produto não encontrado.</p>";
@@ -110,6 +92,27 @@ function montarProduto(produto) {
   // ----- DESCRIÇÃO COMPLETA -----
   document.getElementById("produto-descricao").innerHTML = `
     <section>
+
+
+// ================= CTA DINÂMICO =================
+if (produto.configuracoes?.cta?.mostrar) {
+
+  const ctaHTML = `
+    <div class="cta-inscricao">
+      <a href="${produto.configuracoes.cta.link}" class="btn-pre-inscricao">
+        ${produto.configuracoes.cta.texto}
+      </a>
+    </div>
+  `;
+
+  document
+    .getElementById("produto-topo")
+    .insertAdjacentHTML("afterend", ctaHTML);
+}
+// ================= FIM CTA DINÂMICO =================
+
+
+    
       
       <p>${produto.descricao.oQueE}</p>
     </section>
