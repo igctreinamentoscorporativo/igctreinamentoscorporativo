@@ -153,9 +153,9 @@ function renderBlocosAssistivos(produto) {
   // ============================
   // DEPOIMENTOS
   // ============================
-  if (produto.configuracoes?.depoimentos?.mostrar) {
+  if (produto.depoimentos?.mostrar) {
 
-    const videos = produto.configuracoes.depoimentos.videos || [];
+    const videos = produto.depoimentos.videos || [];
 
     const section = document.createElement("section");
     section.className = "produto-depoimentos";
@@ -238,7 +238,7 @@ function initProdutoDepoimentos(videos) {
     `;
 
     card.onclick = () => {
-      window.open(`https://www.youtube.com/watch?v=${id}`, "_blank");
+      abrirModalYoutube(id);
     };
 
     track.appendChild(card);
@@ -278,6 +278,32 @@ function initProdutoDepoimentos(videos) {
 
 
 
+function abrirModalYoutube(id) {
+
+  const modal = document.createElement("div");
+  modal.className = "produto-video-modal";
+
+  modal.innerHTML = `
+    <div class="produto-video-content">
+      <button class="produto-video-close">✕</button>
+      <iframe 
+        src="https://www.youtube.com/embed/${id}?autoplay=1"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+      </iframe>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.querySelector(".produto-video-close")
+    .addEventListener("click", () => modal.remove());
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) modal.remove();
+  });
+}
 
 
 
