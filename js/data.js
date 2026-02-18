@@ -240,18 +240,16 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
 <strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
 com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
-<br><br>
-
+<br>
 Sua metodologia integra PNL, comportamento e comunicação estratégica,
 com aplicação prática e foco em transformação real.
-<br>
-
+<br><br>
 <strong>Você não aprende apenas teoria.</strong>
 <strong>Você aprende com quem aplica há décadas.</strong>
 <br>
 
 <strong>As vagas são limitadas.</strong>
-<br>
+<br><br>
 Se você deseja participar desta turma em Curitiba,
 essa é a sua oportunidade.
 <br>
@@ -302,7 +300,7 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
 
 <h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
 <strong>A pergunta é:</strong>
-<br>
+<br><br>
 👉 Você vai tomar decisões conscientes e estratégicas…
 <br>
 ou continuar reagindo sem controle?
