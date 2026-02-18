@@ -109,15 +109,15 @@ const produtos = [
 <p>Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
 <p>Já viu oportunidades escaparem porque você não foi ouvido?</p>
 <p>Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
-
+<br>
 <p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
-
+<br>
 <ul class="lista">
 <li>Como você percebe o mundo</li>
 <li>Como processa os seus pensamentos</li>
 <li>Como influencia e negocia com as suas palavras</li>
 </ul>
-
+<br>
 <p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
 
 </div>
@@ -185,8 +185,9 @@ const produtos = [
 
 <p><strong>PNL não muda apenas o que você sabe.</strong>
 <br>
-<strong>PNL muda o que você faz.</strong>
-</p>
+<strong>PNL muda o que você faz.</strong></p>
+<br>
+<br>
 </div>
 
 
@@ -211,7 +212,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
 <br>
 </div>
-</div>
+
 
       
       `,      
@@ -300,7 +301,7 @@ A mudança começa aqui.
 essa decisão começa aqui.</strong>
 </div>
     
-
+</div>
       `
     },
 
