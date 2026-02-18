@@ -2021,6 +2021,39 @@ a.btn-comprar {
 
 
 
+/* ===== SLIDER DEPOIMENTOS PRODUTO ===== */
+
+.produto-depoimentos .depoimentos-slider {
+  overflow: hidden;
+}
+
+.produto-depoimentos .depoimentos-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.4s ease;
+}
+
+.produto-depoimentos .depoimento-card {
+  flex: 0 0 calc(33.333% - 16px);
+  cursor: pointer;
+}
+
+@media (max-width: 1023px) {
+  .produto-depoimentos .depoimento-card {
+    flex: 0 0 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
