@@ -93,26 +93,7 @@ function montarProduto(produto) {
   document.getElementById("produto-descricao").innerHTML = `
     <section>
 
-
-// ================= CTA DINÂMICO =================
-if (produto.configuracoes?.cta?.mostrar) {
-
-  const ctaHTML = `
-    <div class="cta-inscricao">
-      <a href="${produto.configuracoes.cta.link}" class="btn-pre-inscricao">
-        ${produto.configuracoes.cta.texto}
-      </a>
-    </div>
-  `;
-
-  document
-    .getElementById("produto-topo")
-    .insertAdjacentHTML("afterend", ctaHTML);
-}
-// ================= FIM CTA DINÂMICO =================
-
-
-    
+ 
       
       <p>${produto.descricao.oQueE}</p>
     </section>
@@ -132,6 +113,26 @@ if (produto.configuracoes?.cta?.mostrar) {
       <p>${produto.descricao.advertencias}</p>
     </section>
   `;
+
+
+// ================= CTA DINÂMICO =================
+if (produto.configuracoes?.cta?.mostrar) {
+
+  const ctaHTML = `
+    <div class="cta-inscricao">
+      <a href="${produto.configuracoes.cta.link}" class="btn-pre-inscricao">
+        ${produto.configuracoes.cta.texto}
+      </a>
+    </div>
+  `;
+
+  document
+    .getElementById("produto-topo")
+    .insertAdjacentHTML("afterend", ctaHTML);
+}
+// ================= FIM CTA DINÂMICO =================
+
+    
 }
 
 // ================================
