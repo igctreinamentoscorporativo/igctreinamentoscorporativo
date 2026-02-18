@@ -245,10 +245,14 @@ depoimentos: {
 
 
  clientes: {
-    mostrar: true
-
- }
-},    
+  mostrar: true,
+  logos: [
+    "assets/img/clientes/cliente1.png",
+    "assets/img/clientes/cliente2.png",
+    "assets/img/clientes/cliente3.png",
+    "assets/img/clientes/cliente4.png"
+  ]
+}, 
 
         
     destaque: true,
