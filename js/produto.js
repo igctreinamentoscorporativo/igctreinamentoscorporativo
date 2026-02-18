@@ -186,12 +186,88 @@ if (produto.depoimentos?.mostrar) {
   container.appendChild(section);
 
   // 🔥 chama a MESMA função do index
-requestAnimationFrame(() => {
-  const slider = container.querySelector(".slider");
-  if (slider) {
-    inicializarSliderIndividual(slider);
-  }
-});
+setTimeout(() => {
+  document.querySelectorAll(".slider").forEach(slider => {
+    if (!slider.dataset.inicializado) {
+      slider.dataset.inicializado = "true";
+
+      const track = slider.querySelector(".slider-track");
+      const left = slider.querySelector(".arrow.left");
+      const right = slider.querySelector(".arrow.right");
+      const dots = slider.parentElement.querySelector(".slider-dots");
+
+      if (!track) return;
+
+      const cards = [...track.children];
+      if (!cards.length) return;
+
+      const cardWidth = cards[0].offsetWidth + 16;
+      const visible =
+        window.innerWidth >= 1024 ? Math.min(4, cards.length) : 1;
+
+      const pages = Math.ceil(cards.length / visible);
+      let page = 0;
+
+      if (dots) {
+        dots.innerHTML = "";
+
+        for (let i = 0; i < pages; i++) {
+          const dot = document.createElement("span");
+          if (i === 0) dot.classList.add("active");
+          dots.appendChild(dot);
+
+          dot.onclick = () => {
+            page = i;
+            update();
+          };
+        }
+      }
+
+      function update() {
+        track.scrollTo({
+          left: page * cardWidth * visible,
+          behavior: "smooth"
+        });
+
+        if (dots) {
+          [...dots.children].forEach((d, i) =>
+            d.classList.toggle("active", i === page)
+          );
+        }
+      }
+
+      left?.addEventListener("click", () => {
+        page = Math.max(0, page - 1);
+        update();
+      });
+
+      right?.addEventListener("click", () => {
+        page = Math.min(pages - 1, page + 1);
+        update();
+      });
+
+      if (window.innerWidth < 1024 && dots) {
+        track.addEventListener("scroll", () => {
+          const scrollLeft = track.scrollLeft;
+          const newPage = Math.round(
+            scrollLeft / (cardWidth * visible)
+          );
+
+          if (newPage !== page) {
+            page = Math.min(Math.max(newPage, 0), pages - 1);
+
+            [...dots.children].forEach((d, i) =>
+              d.classList.toggle("active", i === page)
+            );
+          }
+        });
+      }
+
+      update();
+    }
+  });
+}, 100);
+
 }
 
 
