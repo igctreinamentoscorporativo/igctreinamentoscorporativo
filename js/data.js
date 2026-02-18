@@ -82,9 +82,12 @@ const produtos = [
       
        oQueE: `
 
-<h2>PARA QUEM É ESTE TREINAMENTO</h2>
+<br>
+<br>
+<h2>PARA QUEM É ESTE TREINAMENTO?</h2>
 <br>
 <strong>Este curso é para você que:</strong>
+<br>
 <br>
 ✅ Quer dominar a sua mente para tomar decisões melhores
 <br>
@@ -98,7 +101,7 @@ const produtos = [
 <br>
 ✅ Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais
 <br>
-
+<br>
 <strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
 <br>
 <br>
@@ -109,8 +112,9 @@ Já viu oportunidades escaparem porque você não foi ouvido?
 <br>
 Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?
 <br>
-
+<br>
 <strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong>
+<br>
 <br>
 👉 Como você percebe o mundo
 <br>
@@ -123,7 +127,6 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 <br>
 
 <h2>🧠 O que você vai aprender?</h2>
-<br>
 🔹 Como interpretar e ajustar a sua linguagem interna
 <br>
 🔹 Técnicas de comunicação eficaz e persuasiva
@@ -138,7 +141,7 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 <br>
 🔹 Comportamento emocional estável sob pressão
 <br>
-
+<br>
 <strong>É uma formação completa, aplicada e orientada à ação.</strong>
 <br>
 <br>
@@ -146,12 +149,10 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 
 
 
-
 <h2>💡Benefícios</h2> 
+<em>Imagine daqui a 30 dias:</em>
 <br>
-<strong>Imagine daqui a 30 dias:</strong>
 <br>
-
 ✨ Sua comunicação mais clara, precisa e assertiva
 <br>
 ✨ Você entendendo as motivações de quem está à sua frente
@@ -168,12 +169,11 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 <b>Isso não é motivação passageira...</b>
 <br>
 <strong>É método aplicado com base em ciência comportamental.</strong>
-
+<br>
 
 
 
 <h2>🫶 Por que essa Formação é poderosa?</h2>
-<br>
 ✔ Três dias intensivos de imersão prática em PNL
 <br>
 ✔ Certificação Internacional com carga horária oficial de 20h 
@@ -207,12 +207,10 @@ E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vid
 
 
 <h2>📍 Como será a Formação?</h2>
-<br>
-
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
-<br><br>
-
+<br>
 <strong>Datas e formato:</strong>
+<br>
 <br>
 Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
 <br>
@@ -238,7 +236,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
 
 <h2>👨‍🏫 Quem conduz a Formação?</h2>
-<br>
+
 
 <strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
 com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
@@ -246,36 +244,34 @@ com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão 
 
 Sua metodologia integra PNL, comportamento e comunicação estratégica,
 com aplicação prática e foco em transformação real.
-<br><br>
+<br>
 
 <strong>Você não aprende apenas teoria.</strong>
 <strong>Você aprende com quem aplica há décadas.</strong>
-<br>
 <br>
 
 <strong>As vagas são limitadas.</strong>
 <br>
 Se você deseja participar desta turma em Curitiba,
 essa é a sua oportunidade.
-<br><br>
+<br>
 <strong>Garanta sua inscrição agora.</strong>
-
+<br>
+<br>
      
       `,
       
        comoUsar: `
-
-
-<h2>❓Será que eu vou conseguir acompanhar?</h2>
 <br>
+<br>
+<h2>Será que eu vou conseguir acompanhar❓</h2>
 Sim.
 <br>
 A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
 <br>
 <br>
 
-<h2>❓Isso é apenas motivacional?</h2>
-<br>
+<h2>Isso é apenas motivacional❓</h2>
 Não.
 <br>
 Motivação passa…
@@ -284,16 +280,14 @@ PNL é técnica + aplicação + transformação comportamental real.
 <br>
 <br>
 
-<h2>❓Preciso de experiência anterior?</h2>
-<br>
+<h2>Preciso de experiência anterior❓</h2>
 Não.
 <br>
 Você aprende tudo desde as bases até aplicações avançadas.
 <br>
 <br>
 
-<h2>❓Isso traz resultados práticos?</h2>
-<br>
+<h2>Isso traz resultados práticos❓</h2>
 Sim.
 <br>
 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
@@ -307,7 +301,6 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
       
 
 <h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
-<br>
 <strong>A pergunta é:</strong>
 <br>
 👉 Você vai tomar decisões conscientes e estratégicas…
