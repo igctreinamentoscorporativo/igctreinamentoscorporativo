@@ -234,7 +234,7 @@ const produtos = [
     cta: {
     mostrar: true,
     texto: "QUERO FAZER MINHA PRÉ-INSCRIÇÃO AGORA",
-    link: "igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
+    link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
 } 
     },
 
