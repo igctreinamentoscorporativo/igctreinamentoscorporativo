@@ -334,7 +334,7 @@ if (produto.clientes?.mostrar) {
 
   section.innerHTML = `
     <div class="container">
-      <h2 style="text-align:center;">Depoimentos auditados pelo Google</h2>
+      <h2 style="text-align:center;">Depoimentos auditado pelo Google</h2>
 
       <div class="slider">
         <button class="arrow left">&#10094;</button>
