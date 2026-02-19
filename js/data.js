@@ -280,7 +280,7 @@ Sim.
 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
 <br>
 <br>
-</div
+</div>
 
       
       `,
