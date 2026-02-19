@@ -2099,6 +2099,21 @@ a.btn-comprar {
 
 
 
+/* =========================================
+   CENTRALIZAR VÍDEO PRINCOPAL NOS PRODUTOS
+   ========================================= */
+
+
+.categoria-section h2 {
+  text-align: center;
+}
+
+.slider-estatico {
+  display: flex;
+  justify-content: center;
+}
+
+
 
 
 
