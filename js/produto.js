@@ -150,8 +150,7 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 
 
 
-  
-  
+    
 
 // ================= CTA DINÂMICO =================
 if (produto.configuracoes?.cta?.mostrar) {
