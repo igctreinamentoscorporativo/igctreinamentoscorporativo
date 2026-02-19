@@ -212,7 +212,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
 <br>
 </div>
-
+</div>
 
       
       `,      
@@ -220,7 +220,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
        
       composicao: `
 
-
+<div class="layout-pnl">
 <div class="bloco cinza-claro">
 <h2>👨‍🏫 Quem conduz a Formação?</h2>
 
@@ -243,11 +243,13 @@ essa é a sua oportunidade.
 <strong>Garanta sua inscrição agora.</strong>
 <br>
 <br>
- </div>    
+ </div>  
+ </div>
+ 
       `,
       
        comoUsar: `
-
+<div class="layout-pnl">
 <div class="bloco azul-claro">
 <br>
 <br>
@@ -281,11 +283,12 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
 <br>
 <br>
 </div>
-
+</div>
       
       `,
       advertencias: `
-      
+
+ <div class="layout-pnl">
 <div class="bloco cinza-claro">
 <h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
 <strong>A pergunta é:</strong>
@@ -302,6 +305,9 @@ essa decisão começa aqui.</strong>
 </div>
     
 </div>
+</div>
+
+
       `
     },
 
