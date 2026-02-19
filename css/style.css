@@ -2128,22 +2128,21 @@ a.btn-comprar {
 }
 
 .layout-pnl .azul-claro {
-  background: #EAF3F8;
+ background: #F5F9FC;   /* quase branco sofisticado */;
 }
 
 .layout-pnl .cinza-claro {
-  background: #E2E8F0;
+  background: #E8EEF5;   /* cinza com personalidade */
 }
 
 .layout-pnl .escuro {
-  background: #0d2f4f;
+  background: #0C2238;   /* azul profundo premium */
   color: #ffffff;
   padding: 60px 35px;
-  text-align: center;
-}
+  }
 
 .layout-pnl .branco {
-  background: #F4F8FC;
+  background: #ffffff;
 }
 
 .layout-pnl .escuro h2 {
