@@ -192,7 +192,6 @@ const produtos = [
 <br>
 <strong>Datas e formato:</strong>
 <br>
-<br>
 Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
 <br>
 Sábado – 11/04/2026 das 09h às 19h (presencial – imersivo)
@@ -331,7 +330,7 @@ depoimentos: {
 },
 
 clientes: {
-  mostrar: false,
+  mostrar: true,
   logos: [
     "assets/img/depoimentos/2.jpg",
     "assets/img/depoimentos/3.jpg",
@@ -351,8 +350,8 @@ videoPrincipal: {
      
 
 destaque: true,
-mostrarlancamento: true,
-mostrarVideo: true,
+mostrarlancamento: false,
+mostrarVideo: false,
 textoParcelamento: ""
      
     },
