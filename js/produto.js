@@ -164,7 +164,7 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
     <div class="slider-estatico">
       <div class="card depoimento-card"
            onclick="abrirModalYoutube('${produto.videoPrincipal.youtubeId}')">
-        <img src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&playsinline=1&rel=0"">
+        <img src="https://img.youtube.com/vi/${produto.videoPrincipal.youtubeId}/hqdefault.jpg">
       </div>
     </div>
     
