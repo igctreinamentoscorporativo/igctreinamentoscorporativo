@@ -124,7 +124,7 @@ function montarProduto(produto) {
 if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 
   const section = document.createElement("section");
-  section.className = "categoria-section";
+  section.className = "video-principal-section";
 
   section.innerHTML = `
     <div class="container">
