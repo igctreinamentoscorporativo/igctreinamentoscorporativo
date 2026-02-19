@@ -2103,76 +2103,91 @@ a.btn-comprar {
 
 
 
+
 /* =========================================
-   LAYOUT PREMIUM - FORMAÇÃO PNL CURITIBA
+   LAYOUT HIGH TICKET - PNL CURITIBA
    ========================================= */
 
-.layout-pnl h2 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: #0d2f4f;
-  letter-spacing: -0.5px;
-}
-
 .layout-pnl {
-  line-height: 1.7;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.8;
 }
 
-/* Blocos alternados */
+/* TÍTULOS */
+.layout-pnl h2 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #0b2545;
+}
+
+/* SEÇÕES */
 .layout-pnl .bloco {
-  padding: 40px 25px;
-  margin-bottom: 90px;
-  border-radius: 10px;
+  padding: 80px 40px;
+  margin-bottom: 0;
+  border-radius: 0;
   box-shadow: none;
 }
 
-.layout-pnl .azul-claro {
- background: #F5F9FC;   /* quase branco sofisticado */;
-}
-
-.layout-pnl .cinza-claro {
-  background: #E8EEF5;   /* cinza com personalidade */
-}
-
-.layout-pnl .escuro {
-  background: #0C2238;   /* azul profundo premium */
-  color: #ffffff;
-  padding: 60px 35px;
-  }
-
+/* BRANCO PREMIUM */
 .layout-pnl .branco {
   background: #ffffff;
 }
 
+/* CINZA ELEGANTE */
+.layout-pnl .cinza-claro {
+  background: #f3f5f8;
+}
+
+/* AZUL PREMIUM */
+.layout-pnl .azul-claro {
+  background: #eef4f9;
+}
+
+/* SEÇÃO DARK IMPACTO */
+.layout-pnl .escuro {
+  background: #0b2545;
+  color: #ffffff;
+  text-align: center;
+  padding: 100px 40px;
+}
+
 .layout-pnl .escuro h2 {
   color: #ffffff;
+  font-size: 32px;
 }
 
 .layout-pnl .escuro strong {
-  font-size: 18px;
+  font-size: 20px;
 }
 
-/* Lista mais bonita */
+/* LISTAS PREMIUM */
 .layout-pnl .lista {
-  margin-left: 0;
+  margin-top: 20px;
   padding-left: 0;
 }
 
 .layout-pnl .lista li {
   list-style: none;
-  margin-bottom: 12px;
-  padding-left: 25px;
+  margin-bottom: 18px;
+  padding-left: 30px;
   position: relative;
+  font-size: 18px;
 }
 
 .layout-pnl .lista li::before {
   content: "✔";
   position: absolute;
   left: 0;
-  color: #1ca74f;
+  color: #0f9d58;
   font-weight: bold;
+  font-size: 18px;
 }
+
+/* RESPIRAÇÃO GERAL */
+.layout-pnl p {
+  margin-bottom: 18px;
+}
+
 
 
