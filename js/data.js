@@ -341,7 +341,7 @@ clientes: {
 },
 
 videoPrincipal: {
-  mostrar: true,
+  mostrar: false,
   youtubeId: "BEV6upQhPEA"
 },
      
