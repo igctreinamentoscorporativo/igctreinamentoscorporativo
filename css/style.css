@@ -2122,22 +2122,24 @@ a.btn-comprar {
 /* Blocos alternados */
 .layout-pnl .bloco {
   padding: 40px 25px;
-  margin-bottom: 40px;
+  margin-bottom: 70px;
   border-radius: 14px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.04);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.03);
 }
 
 .layout-pnl .azul-claro {
-  background: #E8F5F1;
+  background: #EAF3F8;
 }
 
 .layout-pnl .cinza-claro {
-  background: #DCE3EA;
+  background: #E2E8F0;
 }
 
 .layout-pnl .escuro {
   background: #0d2f4f;
   color: #ffffff;
+  padding: 60px 35px;
+  text-align: center;
 }
 
 .layout-pnl .branco {
@@ -2146,6 +2148,10 @@ a.btn-comprar {
 
 .layout-pnl .escuro h2 {
   color: #ffffff;
+}
+
+.layout-pnl .escuro strong {
+  font-size: 18px;
 }
 
 /* Lista mais bonita */
