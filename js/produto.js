@@ -342,7 +342,7 @@ if (produto.clientes?.mostrar) {
         <div class="slider-track">
           ${logos.map(logo => `
             <div class="card">
-              <img src="${logo}" style="height:160px; object-fit:contain;" />
+              <img src="${logo}" style="height:200px; object-fit:contain;" />
             </div>
           `).join("")}
         </div>
