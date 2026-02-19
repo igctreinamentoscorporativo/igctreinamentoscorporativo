@@ -119,6 +119,38 @@ function montarProduto(produto) {
 // 🔽 AQUI VOCÊ CHAMA OS BLOCOS ASSISTIVOS
   renderBlocosAssistivos(produto);
   
+
+// ================= INICIO VIDEO PRINCIPAL TOPO =================
+if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
+
+  const section = document.createElement("section");
+  section.className = "categoria-section";
+
+  section.innerHTML = `
+    <div class="container">
+      <h2>Veja como funciona na prática</h2>
+
+      <div class="slider-estatico">
+        <div class="slider-track">
+          <div class="card depoimento-card"
+               onclick="abrirModalYoutube('${produto.videoPrincipal.youtubeId}')">
+            <img src="https://img.youtube.com/vi/${produto.videoPrincipal.youtubeId}/hqdefault.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document
+    .getElementById("produto-topo")
+    .insertAdjacentElement("afterend", section);
+}
+  
+// ================= FIM VIDEO PRINCIPAL TOPO =================
+
+
+
+  
   
 
 // ================= CTA DINÂMICO =================
