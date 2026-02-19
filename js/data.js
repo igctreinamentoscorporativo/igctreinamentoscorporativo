@@ -187,7 +187,7 @@ const produtos = [
 <br>
 </div>
 
-<div class="bloco azul-claro">
+<div class="bloco escuro">
 <h2>📍 Como será a Formação?</h2>
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
@@ -293,8 +293,6 @@ A mudança começa aqui.
 <br>
 <strong>Se você sente que está pronto para evoluir sua mente, sua comunicação e sua performance,
 essa decisão começa aqui.</strong>
-</div>
-    
 </div>
 </div>
 
