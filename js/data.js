@@ -246,14 +246,16 @@ essa é a sua oportunidade.
 
 <h2>Dúvidas❓</h2>
 
-<strong>Será que eu vou conseguir acompanhar❓</strong>
+<strong>Será que eu vou conseguir acompanhar?</strong>
+<br>
 Sim.
 <br>
 A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
 <br>
 <br>
 
-<strong>Isso é apenas motivacional❓</strong>
+<strong>Isso é apenas motivacional?</strong>
+<br>
 Não.
 <br>
 Motivação passa…
@@ -262,14 +264,16 @@ PNL é técnica + aplicação + transformação comportamental real.
 <br>
 <br>
 
-<strong>Preciso de experiência anterior❓</strong>
+<strong>Preciso de experiência anterior?</strong>
+<br>
 Não.
 <br>
 Você aprende tudo desde as bases até aplicações avançadas.
 <br>
 <br>
 
-<strong>Isso traz resultados práticos❓</strong>
+<strong>Isso traz resultados práticos?</strong>
+<br>
 Sim.
 <br>
 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
