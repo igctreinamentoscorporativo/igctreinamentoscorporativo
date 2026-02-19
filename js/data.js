@@ -342,7 +342,7 @@ clientes: {
 },
 
 videoPrincipal: {
-  mostrar: true,
+  mostrar: false,
   youtubeId: "b8gtT8X6Z2w"
 },
      
