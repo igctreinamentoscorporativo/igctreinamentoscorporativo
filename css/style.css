@@ -2123,6 +2123,10 @@ a.btn-comprar {
   color: #0d2f4f;
 }
 
+.layout-pnl .bloco h2 {
+  text-align: center;
+}
+
 /* BLOCO PADRÃO */
 .layout-pnl .bloco {
   padding: 70px 50px;
@@ -2141,7 +2145,7 @@ a.btn-comprar {
 .layout-pnl .escuro {
   background: linear-gradient(135deg, #0d2f4f, #0a2238);
   color: #ffffff;
-  text-align: center;
+  
 }
 
 /* FORÇA TÍTULO BRANCO NO BLOCO ESCURO */
