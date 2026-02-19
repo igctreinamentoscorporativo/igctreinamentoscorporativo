@@ -330,22 +330,33 @@ if (produto.clientes?.mostrar) {
   const logos = produto.clientes.logos || [];
 
   const section = document.createElement("section");
-  section.className = "categoria-section ads-logos";
+  section.className = "categoria-section";
 
   section.innerHTML = `
     <div class="container">
-      <h2 class="ads-logos-title" style="text-align:center;">Depoimentos auditados pelo google</h2>
+      <h2 style="text-align:center;">Depoimentos auditados pelo Google</h2>
 
-      <div class="ads-wrapper">
-        <div class="logos-track">
-          ${logos.map(logo => `<img src="${logo}" />`).join("")}
+      <div class="slider">
+        <button class="arrow left">&#10094;</button>
+
+        <div class="slider-track">
+          ${logos.map(logo => `
+            <div class="card">
+              <img src="${logo}" style="height:160px; object-fit:contain;" />
+            </div>
+          `).join("")}
         </div>
+
+        <button class="arrow right">&#10095;</button>
       </div>
+
+      <div class="slider-dots"></div>
     </div>
   `;
 
   container.appendChild(section);
 }
+
 }
 
 
