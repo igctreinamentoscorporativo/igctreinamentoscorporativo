@@ -2134,29 +2134,27 @@ a.btn-comprar {
   margin-bottom: 30px;
   border-radius: 10px;
 
-  /* estado base */
-  filter: brightness(1);
+  
 
   transition: 
-    transform 0.35s cubic-bezier(.4,0,.2,1),
-    box-shadow 0.35s cubic-bezier(.4,0,.2,1),
-    filter 0.35s ease;
+  transform 0.35s cubic-bezier(.4,0,.2,1),
+  box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+  background-color 0.35s ease;
 }
 
 
 /* Blocos claros */
 .layout-pnl .bloco:not(.escuro):hover {
   transform: translateY(-6px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
-  filter: brightness(0.97);
+  box-shadow: 0 25px 60px rgba(13,47,79,0.12);
+  background-color: #E3F0FF;
 }
 
 
 /* Bloco escuro */
 .layout-pnl .escuro:hover {
   transform: translateY(-6px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.25);
-  filter: brightness(1.08);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
 }
 
 
@@ -2171,7 +2169,7 @@ a.btn-comprar {
 .layout-pnl .azul-claro,
 .layout-pnl .cinza-claro,
 .layout-pnl .branco {
-  background: #f8fafc;
+  background: #F2F8FF;
 }
 
 /* BLOCO ESCURO PREMIUM */
