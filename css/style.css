@@ -2129,7 +2129,7 @@ a.btn-comprar {
 
 /* BLOCO PADRÃO */
 .layout-pnl .bloco {
-  padding: 15px 30px;
+  padding: 0px 40px;
   margin-bottom: 30px;
   border-radius: 18px;
 }
