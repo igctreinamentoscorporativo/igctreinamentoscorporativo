@@ -2127,35 +2127,44 @@ a.btn-comprar {
   text-align: center;
 }
 
+
 /* BLOCO PADRÃO */
 .layout-pnl .bloco {
   padding: 8px 40px;
   margin-bottom: 30px;
   border-radius: 18px;
-  transition: all 0.35s ease;
-  cursor: default;
+
+  /* estado base */
+  filter: brightness(1);
+
+  transition: 
+    transform 0.35s cubic-bezier(.4,0,.2,1),
+    box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+    filter 0.35s ease;
 }
 
-.layout-pnl .bloco:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+
+/* Blocos claros */
+.layout-pnl .bloco:not(.escuro):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
+  filter: brightness(0.97);
 }
 
 
-
-.layout-pnl .azul-claro:hover {
-  background: #ddeaf2;
-}
-
-.layout-pnl .cinza-claro:hover {
-  background: #d6dde6;
-}
-
+/* Bloco escuro */
 .layout-pnl .escuro:hover {
-  background: #163b5c; /* levemente mais claro */
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+  filter: brightness(1.08);
 }
+
+
+/* Mobile toque */
+.layout-pnl .bloco:active {
+  transform: translateY(-3px);
+}
+
 
 
 /* FUNDO CLARO PRINCIPAL */
