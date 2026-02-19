@@ -158,18 +158,16 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
   section.className = "video-principal-section";
 
   section.innerHTML = `
-    <div class="container">
-      <h2>Dr. Paulo Takahashi tem um mensagem para você</h2>
+    
+      <h2>Dr. Paulo Takahashi tem uma mensagem para você</h2>
 
-      <div class="slider-estatico">
-        <div class="slider-track">
-          <div class="card depoimento-card"
-               onclick="abrirModalYoutube('${produto.videoPrincipal.youtubeId}')">
-            <img src="https://img.youtube.com/vi/${produto.videoPrincipal.youtubeId}/hqdefault.jpg">
-          </div>
-        </div>
+    <div class="slider-estatico">
+      <div class="card depoimento-card"
+           onclick="abrirModalYoutube('${produto.videoPrincipal.youtubeId}')">
+        <img src="https://img.youtube.com/vi/${produto.videoPrincipal.youtubeId}/hqdefault.jpg">
       </div>
     </div>
+    
   `;
 
   document
