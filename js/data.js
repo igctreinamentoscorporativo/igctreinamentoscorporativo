@@ -139,7 +139,7 @@ const produtos = [
 </div>
 
 
-<div class="bloco escuro">
+<div class="bloco azul-claro">
 <h2>💡Benefícios</h2> 
 <em>Imagine daqui a 30 dias:</em>
 <br>
