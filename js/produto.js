@@ -142,8 +142,8 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
   `;
 
   document
-    .getElementById("produto-topo")
-    .insertAdjacentElement("afterend", section);
+  .querySelector(".cta-inscricao")
+  ?.insertAdjacentElement("beforebegin", section);
 }
   
 // ================= FIM VIDEO PRINCIPAL TOPO =================
