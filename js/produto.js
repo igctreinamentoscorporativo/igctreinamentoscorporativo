@@ -209,7 +209,7 @@ if (produto.depoimentos?.mostrar) {
 
   section.innerHTML = `
     <div class="container">
-      <h2>O que dizem nossos alunos</h2>
+      <h2 style="text-align:center;">O que dizem nossos alunos</h2>
 
       <div class="slider">
         <button class="arrow left">&#10094;</button>
@@ -329,22 +329,22 @@ if (produto.clientes?.mostrar) {
 
   const logos = produto.clientes.logos || [];
 
-  const clientesSection = document.createElement("section");
-  clientesSection.className = "produto-clientes";
+  const section = document.createElement("section");
+  section.className = "categoria-section ads-logos";
 
-  clientesSection.innerHTML = `
-    <h2 class="ads-logos-title">
-      Alguns de nossos clientes
-    </h2>
+  section.innerHTML = `
+    <div class="container">
+      <h2 class="ads-logos-title" style="text-align:center;">Depoimentos auditados pelo google</h2>
 
-    <div class="ads-wrapper">
-      <div class="logos-track">
-        ${logos.map(logo => `<img src="${logo}" />`).join("")}
+      <div class="ads-wrapper">
+        <div class="logos-track">
+          ${logos.map(logo => `<img src="${logo}" />`).join("")}
+        </div>
       </div>
     </div>
   `;
 
-  container.appendChild(clientesSection);
+  container.appendChild(section);
 }
 }
 
