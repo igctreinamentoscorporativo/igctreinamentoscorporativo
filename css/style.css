@@ -2128,7 +2128,7 @@ a.btn-comprar {
 }
 
 .layout-pnl .azul-claro {
-  background: #f3f7fb;
+  background: #E8F5F1;
 }
 
 .layout-pnl .cinza-claro {
@@ -2138,6 +2138,10 @@ a.btn-comprar {
 .layout-pnl .escuro {
   background: #0d2f4f;
   color: #ffffff;
+}
+
+.layout-pnl .branco {
+  background: #F4F8FC;
 }
 
 .layout-pnl .escuro h2 {
