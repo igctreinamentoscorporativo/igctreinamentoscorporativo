@@ -331,12 +331,16 @@ depoimentos: {
 },
 
 clientes: {
-  mostrar: false,
+  mostrar: true,
   logos: [
-    "assets/img/clientes/cliente1.png",
-    "assets/img/clientes/cliente2.png",
-    "assets/img/clientes/cliente3.png",
-    "assets/img/clientes/cliente4.png"
+    "assets/img/depoimentos/2.jpg",
+    "assets/img/depoimentos/3.jpg",
+    "assets/img/depoimentos/4.jpg",
+    "assets/img/depoimentos/5.jpg",
+    "assets/img/depoimentos/6.jpg",
+    "assets/img/depoimentos/7.jpg",
+    "assets/img/depoimentos/8.jpg",
+    "assets/img/depoimentos/9.jpg"
   ]
 },
 
