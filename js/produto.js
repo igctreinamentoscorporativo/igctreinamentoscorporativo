@@ -405,7 +405,7 @@ function abrirModalHeroYoutube(id) {
       <button class="video-modal-close">×</button>
       <div class="video-modal-frame">
         <iframe 
-          src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1"
+          src="https://www.youtube.com/embed/${id}?autoplay=1&mute=0"
           allow="autoplay; encrypted-media"
           allowfullscreen>
         </iframe>
