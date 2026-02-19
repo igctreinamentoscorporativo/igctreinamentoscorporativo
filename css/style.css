@@ -2132,7 +2132,7 @@ a.btn-comprar {
 .layout-pnl .bloco {
   padding: 15px 40px;
   margin-bottom: 30px;
-  border-radius: 18px;
+  border-radius: 10px;
 
   /* estado base */
   filter: brightness(1);
