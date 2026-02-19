@@ -2108,10 +2108,11 @@ a.btn-comprar {
    ========================================= */
 
 .layout-pnl h2 {
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 20px;
   color: #0d2f4f;
+  letter-spacing: -0.5px;
 }
 
 .layout-pnl {
@@ -2122,9 +2123,9 @@ a.btn-comprar {
 /* Blocos alternados */
 .layout-pnl .bloco {
   padding: 40px 25px;
-  margin-bottom: 70px;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.03);
+  margin-bottom: 90px;
+  border-radius: 10px;
+  box-shadow: none;
 }
 
 .layout-pnl .azul-claro {
