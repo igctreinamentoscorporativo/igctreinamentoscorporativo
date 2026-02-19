@@ -2117,7 +2117,7 @@ a.btn-comprar {
 }
 
 .layout-pnl h2 {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   margin-bottom: 25px;
   color: #0d2f4f;
@@ -2129,7 +2129,7 @@ a.btn-comprar {
 
 /* BLOCO PADRÃO */
 .layout-pnl .bloco {
-  padding: 30px 30px;
+  padding: 15px 30px;
   margin-bottom: 30px;
   border-radius: 18px;
 }
