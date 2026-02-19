@@ -2108,86 +2108,74 @@ a.btn-comprar {
    LAYOUT HIGH TICKET - PNL CURITIBA
    ========================================= */
 
+
 .layout-pnl {
-  font-size: 18px;
   line-height: 1.8;
+  font-size: 17px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* TÍTULOS */
 .layout-pnl h2 {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 700;
   margin-bottom: 25px;
-  color: #0b2545;
+  color: #0d2f4f;
 }
 
-/* SEÇÕES */
+/* BLOCO PADRÃO */
 .layout-pnl .bloco {
-  padding: 80px 40px;
-  margin-bottom: 0;
-  border-radius: 0;
-  box-shadow: none;
+  padding: 70px 50px;
+  margin-bottom: 90px;
+  border-radius: 18px;
 }
 
-/* BRANCO PREMIUM */
+/* FUNDO CLARO PRINCIPAL */
+.layout-pnl .azul-claro,
+.layout-pnl .cinza-claro,
 .layout-pnl .branco {
-  background: #ffffff;
+  background: #f8fafc;
 }
 
-/* CINZA ELEGANTE */
-.layout-pnl .cinza-claro {
-  background: #f3f5f8;
-}
-
-/* AZUL PREMIUM */
-.layout-pnl .azul-claro {
-  background: #eef4f9;
-}
-
-/* SEÇÃO DARK IMPACTO */
+/* BLOCO ESCURO PREMIUM */
 .layout-pnl .escuro {
-  background: #0b2545;
+  background: linear-gradient(135deg, #0d2f4f, #0a2238);
   color: #ffffff;
   text-align: center;
-  padding: 100px 40px;
 }
 
+/* FORÇA TÍTULO BRANCO NO BLOCO ESCURO */
 .layout-pnl .escuro h2 {
+  color: #ffffff !important;
+}
+
+.layout-pnl .escuro p,
+.layout-pnl .escuro strong,
+.layout-pnl .escuro em {
   color: #ffffff;
-  font-size: 32px;
 }
 
-.layout-pnl .escuro strong {
-  font-size: 20px;
-}
-
-/* LISTAS PREMIUM */
+/* LISTA PREMIUM */
 .layout-pnl .lista {
+  list-style: none;
+  padding: 0;
   margin-top: 20px;
-  padding-left: 0;
 }
 
 .layout-pnl .lista li {
-  list-style: none;
-  margin-bottom: 18px;
+  margin-bottom: 15px;
   padding-left: 30px;
   position: relative;
-  font-size: 18px;
 }
 
 .layout-pnl .lista li::before {
   content: "✔";
   position: absolute;
   left: 0;
-  color: #0f9d58;
+  color: #22c55e;
   font-weight: bold;
-  font-size: 18px;
 }
 
-/* RESPIRAÇÃO GERAL */
-.layout-pnl p {
-  margin-bottom: 18px;
-}
 
 
 
