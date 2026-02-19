@@ -192,7 +192,7 @@ const produtos = [
 
 
 
-<div class="bloco escuro">
+<div class="bloco azul-claro">
 <h2>📍 Como será a Formação?</h2>
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
