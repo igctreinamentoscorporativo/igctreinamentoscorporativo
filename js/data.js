@@ -103,9 +103,9 @@ const produtos = [
 <br>
 
 
-<p>Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
-<p>Já viu oportunidades escaparem porque você não foi ouvido?</p>
-<p>Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
+ <p>👉 Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
+ <p>👉 Já viu oportunidades escaparem porque você não foi ouvido?</p>
+ <p>👉 Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
 <br>
 <p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
 <br>
@@ -190,9 +190,7 @@ const produtos = [
 <h2>📍 Como será a Formação?</h2>
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
-<strong>Datas e formato:</strong>
-<br>
-Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
+<strong>Datas e formato:</strong> Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
 <br>
 Sábado – 11/04/2026 das 09h às 19h (presencial – imersivo)
 <br>
@@ -285,7 +283,7 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
 
  <div class="layout-pnl">
 <div class="bloco escuro">
-<h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
+<h2>🚀 Todos os dias você toma decisões que moldam a sua vida.</h2>
 <strong>A pergunta é:</strong>
 <br><br>
 👉 Você vai tomar decisões conscientes e estratégicas…
@@ -293,9 +291,9 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
 ou continuar reagindo sem controle?
 <br>
 <br>
-A mudança começa aqui.
+A mudança começa aqui!
 <br>
-<strong>Se você sente que está pronto para evoluir sua mente, sua comunicação e sua performance,
+👉 <strong>Se você sente que está pronto para evoluir sua mente, sua comunicação e sua performance,
 essa decisão começa aqui.</strong>
 </div>
 </div>
