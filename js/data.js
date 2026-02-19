@@ -330,7 +330,7 @@ depoimentos: {
 },
 
 clientes: {
-  mostrar: false,
+  mostrar: true,
   logos: [
     "assets/img/depoimentos/2.jpg",
     "assets/img/depoimentos/3.jpg",
