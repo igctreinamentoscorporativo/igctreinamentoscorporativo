@@ -82,8 +82,6 @@ const produtos = [
       
        oQueE: `
 <div class="layout-pnl">
-<br>
-<br>
 
 <div class="bloco azul-claro">
 
@@ -187,7 +185,6 @@ const produtos = [
 <br>
 <strong>PNL muda o que você faz.</strong></p>
 <br>
-<br>
 </div>
 
 <div class="bloco azul-claro">
@@ -207,7 +204,6 @@ Domingo – 12/04/2026 das 09h às 19h (presencial – imersivo)
 <strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
 <br>
 Após o preenchimento das vagas, as inscrições serão encerradas.
-<br>
 <br>
 </div>
 </div>
@@ -240,7 +236,6 @@ essa é a sua oportunidade.
 <br>
 <strong>Garanta sua inscrição agora.</strong>
 <br>
-<br>
  </div>  
  </div>
  
@@ -249,8 +244,7 @@ essa é a sua oportunidade.
        comoUsar: `
 <div class="layout-pnl">
 <div class="bloco azul-claro">
-<br>
-<br>
+
 <h2>Será que eu vou conseguir acompanhar❓</h2>
 Sim.
 <br>
@@ -278,7 +272,6 @@ Você aprende tudo desde as bases até aplicações avançadas.
 Sim.
 <br>
 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
-<br>
 <br>
 </div>
 </div>
