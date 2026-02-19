@@ -103,7 +103,7 @@ const produtos = [
 </div>
 
 
-<div class="bloco branco">
+<div class="bloco azul-claro">
 <p>Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
 <p>Já viu oportunidades escaparem porque você não foi ouvido?</p>
 <p>Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
@@ -122,7 +122,7 @@ const produtos = [
 
 
 
-<div class="bloco cinza-claro">
+<div class="bloco azul-claro">
 <h2>🧠 O que você vai aprender?</h2>
 
 <ul class="lista">
@@ -187,7 +187,7 @@ const produtos = [
 <br>
 </div>
 
-<div class="bloco cinza-claro">
+<div class="bloco azul-claro">
 <h2>📍 Como será a Formação?</h2>
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
@@ -280,7 +280,7 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
       advertencias: `
 
  <div class="layout-pnl">
-<div class="bloco cinza-claro">
+<div class="bloco escuro">
 <h2>🚀Todos os dias você toma decisões que moldam a sua vida.</h2>
 <strong>A pergunta é:</strong>
 <br><br>
