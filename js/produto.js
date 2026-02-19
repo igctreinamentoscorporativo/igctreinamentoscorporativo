@@ -173,28 +173,19 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
   document
   .getElementById("produto-topo")
   .insertAdjacentElement("afterend", section);
-
-  setTimeout(() => {
-  abrirModalHeroYoutube(produto.videoPrincipal.youtubeId);
-}, 200);
-  
+    
 }
   
 // ================= FIM VIDEO PRINCIPAL TOPO =================  
-  //document
-  //.getElementById("produto-topo")
-  //.insertAdjacentElement("afterend", section);
-
-
+  
   
 // ================= AUTO ABRIR VÍDEO =================
-//if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
-//  setTimeout(() => {
-//    abrirModalYoutube(produto.videoPrincipal.youtubeId);
-  //}, 200); // pequeno delay para carregar layout
-//}
-
-     
+if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
+  setTimeout(() => {
+  abrirModalYoutube(produto.videoPrincipal.youtubeId);
+  }, 200); // pequeno delay para carregar layout
+  }
+   
 }
 
 
@@ -387,41 +378,6 @@ function abrirModalYoutube(id) {
   });
 }
 
-
-
-
-
-// ================================
-// ABRIR MODAL VÍDEO PRINCIPAL
-// ================================
-
-function abrirModalHeroYoutube(id) {
-
-  const modal = document.createElement("div");
-  modal.className = "video-modal active";
-
-  modal.innerHTML = `
-    <div class="video-modal-content">
-      <button class="video-modal-close">×</button>
-      <div class="video-modal-frame">
-        <iframe 
-          src="https://www.youtube.com/embed/${id}?autoplay=1&mute=0"
-          allow="autoplay; encrypted-media"
-          allowfullscreen>
-        </iframe>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-
-  modal.querySelector(".video-modal-close")
-    .addEventListener("click", () => modal.remove());
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) modal.remove();
-  });
-}
 
 
 
