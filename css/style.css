@@ -2095,23 +2095,54 @@ a.btn-comprar {
 
 
 
+/* ===========================
+   VÍDEO PRINCIPAL HERO PREMIUM
+   (100% isolado do resto)
+   =========================== */
 
-
-
-
-/* =========================================
-   CENTRALIZAR VÍDEO PRINCOPAL NOS PRODUTOS
-   ========================================= */
-
-
-.categoria-section h2 {
-  text-align: center;
+.video-principal-section {
+  max-width: 1200px;
+  margin: 60px auto 40px auto;
+  padding: 0 20px;
 }
 
-.slider-estatico {
+.video-principal-section h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.video-principal-section .slider-estatico {
   display: flex;
   justify-content: center;
 }
+
+.video-principal-section .depoimento-card {
+  width: 100%;
+  max-width: 850px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.video-principal-section .depoimento-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.18);
+}
+
+.video-principal-section .depoimento-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .video-principal-section .depoimento-card {
+    max-width: 100%;
+  }
+}
+
 
 
 
