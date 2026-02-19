@@ -140,7 +140,7 @@ const produtos = [
 </div>
 
 
-<div class="bloco azul-claro">
+<div class="bloco escuro">
 <h2>💡Benefícios</h2> 
 <em>Imagine daqui a 30 dias:</em>
 <br>
@@ -165,7 +165,7 @@ const produtos = [
 </div>
 
 
-<div class="bloco branco">
+<div class="bloco azul-claro">
 <h2>🫶 Por que essa Formação é poderosa?</h2>
 
 <ul class="lista">
@@ -187,7 +187,7 @@ const produtos = [
 <br>
 </div>
 
-<div class="bloco escuro">
+<div class="bloco cinza-claro">
 <h2>📍 Como será a Formação?</h2>
 <strong>Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
@@ -215,7 +215,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
       composicao: `
 
 <div class="layout-pnl">
-<div class="bloco cinza-claro">
+<div class="bloco escuro">
 <h2>👨‍🏫 Quem conduz a Formação?</h2>
 
 
