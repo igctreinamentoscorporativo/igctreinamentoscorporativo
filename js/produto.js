@@ -159,7 +159,7 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 
   section.innerHTML = `
     
-      <h2>Dr. Paulo Takahashi tem uma mensagem para você</h2>
+      <h2>Veja o que diz Dr. Paulo Takahashi</h2>
 
     <div class="slider-estatico">
       <div class="card depoimento-card"
@@ -178,9 +178,15 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 // ================= FIM VIDEO PRINCIPAL TOPO =================  
 
 
-
   
-    
+// ================= AUTO ABRIR VÍDEO =================
+if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
+  setTimeout(() => {
+    abrirModalYoutube(produto.videoPrincipal.youtubeId);
+  }, 200); // pequeno delay para carregar layout
+}
+
+     
 }
 
 
