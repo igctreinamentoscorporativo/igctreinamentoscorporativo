@@ -546,11 +546,17 @@ fetch(ENDPOINT, {
   const res = JSON.parse(txt);
 
   if (!res.sucesso) {
+
+  if (res.tipo === "JA_CADASTRADO_MESMA_TURMA") {
+    alert(res.mensagem);
+  } else {
     alert("Erro ao registrar a pré-inscrição.");
-    btnConfirmar.disabled = false;
-    btnConfirmar.innerText = "CONFIRMAR INSCRIÇÃO";
-    return;
   }
+
+  btnConfirmar.disabled = false;
+  btnConfirmar.innerText = "CONFIRMAR ENVIO";
+  return;
+}
 
  window.location.href = "https://igctreinamentoscorporativo.com.br/sistema/obrigado-pnlcuritiba-ads.html"; 
   
