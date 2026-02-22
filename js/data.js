@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>Desenvolva clareza mental, comunicação eficaz e domínio emocional por meio de técnicas práticas e aplicáveis da Programação Neurolinguística.</p>
+      <p>✔️ Condição especial para essa turma, com parcelamento facilitado até 23/02.</p>
              
        `,
       
@@ -306,7 +306,7 @@ essa decisão começa aqui.</strong>
  configuracoes: {
   mostrarNome: true,
   mostrarPreco: false,
-  mostrarResumo: false,
+  mostrarResumo: true,
   cta: {
     mostrar: true,
     texto: "QUERO GARANTIR MINHA VAGA",
