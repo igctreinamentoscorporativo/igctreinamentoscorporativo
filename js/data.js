@@ -66,7 +66,7 @@ const categorias = [
 const produtos = [
   {
     id: "1",
-    nome: "Formação em PNL - Programação Neurolinguística - Alta Performance - Ed. CURITIBA-PR",
+    nome: "Formação em PNL Presencial em Curitiba 10 a 12 de Abril | Certificação Internacional Vagas Limitadas",
     categoria: "pnl",
     preco: 997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
@@ -309,7 +309,7 @@ essa decisão começa aqui.</strong>
   mostrarResumo: false,
   cta: {
     mostrar: true,
-    texto: "QUERO FAZER MINHA PRÉ-INSCRIÇÃO AGORA",
+    texto: "QUERO GARANTIR MINHA VAGA",
     link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
   }
 },
