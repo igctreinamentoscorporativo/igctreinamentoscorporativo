@@ -218,5 +218,22 @@
 <!-- Script para carregar integração/funcionalidade do WhatsApp -->
 
 
+<!-- ================= GRAVA VISITA ACESSO A PÁGINA ================= -->
+
+<script>
+(function(){
+  var utm = window.location.search;
+  var url = window.location.href;
+
+  var img = new Image();
+  img.src = "SUA_URL_DO_WEBAPP?log=landing"
+            + "&url=" + encodeURIComponent(url)
+            + "&utm=" + encodeURIComponent(utm);
+})();
+</script>
+
+
+  
+
 </body>
 </html>
