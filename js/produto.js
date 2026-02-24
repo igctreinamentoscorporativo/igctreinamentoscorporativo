@@ -482,6 +482,7 @@ function iniciarOfertaRelampago(config, produtoId) {
     `;
 
     document.body.appendChild(banner);
+    ativarComportamentoMobileOferta();
 
     const contadorEl = document.getElementById("contador-oferta");
 
@@ -509,6 +510,57 @@ function iniciarOfertaRelampago(config, produtoId) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+// ================================
+// COMPORTAMENTO MOBILE INTELIGENTE
+// ================================
+
+function ativarComportamentoMobileOferta() {
+
+  if (window.innerWidth > 768) return;
+
+  const banner = document.querySelector(".oferta-relampago-banner");
+  if (!banner) return;
+
+  let minimizado = false;
+
+  function minimizar() {
+    if (minimizado) return;
+    banner.classList.add("oferta-minimizada");
+    minimizado = true;
+  }
+
+  function expandir() {
+    banner.classList.remove("oferta-minimizada");
+    minimizado = false;
+  }
+
+  // Minimiza ao rolar
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 120) {
+      minimizar();
+    }
+  });
+
+  // Clique para expandir se estiver minimizado
+  banner.addEventListener("click", () => {
+    if (minimizado) {
+      expandir();
+    }
+  });
+
+}
 
 
 
