@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>✔️ Condição especial para essa turma, com parcelamento facilitado até 23/02.</p>
+      <p>✔️ Condição especial para essa turma, com parcelamento facilitado até 28/02.</p>
              
        `,
       
