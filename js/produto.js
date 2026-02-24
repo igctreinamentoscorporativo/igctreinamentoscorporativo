@@ -185,7 +185,14 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
   abrirModalYoutube(produto.videoPrincipal.youtubeId);
   }, 200); // pequeno delay para carregar layout
   }
-   
+
+
+// ================= OFERTA RELÂMPAGO =================
+if (produto.ofertaRelampago?.mostrar) {
+  iniciarOfertaRelampago(produto.ofertaRelampago);
+}
+
+  
 }
 
 
@@ -388,6 +395,76 @@ function abrirModalYoutube(id) {
     if (e.target === modal) modal.remove();
   });
 }
+
+
+
+
+
+
+
+
+
+
+// ================================
+// OFERTA RELÂMPAGO COM CONTADOR
+// ================================
+
+function iniciarOfertaRelampago(config) {
+
+  const duracao = config.tempoMinutos * 60; // segundos
+  let tempoRestante = duracao;
+
+  const banner = document.createElement("div");
+  banner.className = "oferta-relampago-banner";
+
+  banner.innerHTML = `
+    <div class="oferta-conteudo">
+      <strong>🎉 Parabéns! Você ganhou um SUPER desconto!</strong>
+      <div class="oferta-precos">
+        De <span class="de">R$ ${config.valorDe}</span>
+        por <span class="por">R$ ${config.valorPor}</span>
+        <span class="off">R$ ${config.valorDe - config.valorPor} OFF</span>
+      </div>
+      <div class="oferta-tempo">
+        Válido por: <span id="contador-oferta"></span>
+      </div>
+      <a href="${config.link}" class="btn-oferta">
+        ${config.textoBotao}
+      </a>
+    </div>
+  `;
+
+  document.body.appendChild(banner);
+
+  const contadorEl = document.getElementById("contador-oferta");
+
+  const intervalo = setInterval(() => {
+
+    const minutos = Math.floor(tempoRestante / 60);
+    const segundos = tempoRestante % 60;
+
+    contadorEl.textContent =
+      `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
+
+    tempoRestante--;
+
+    if (tempoRestante < 0) {
+      clearInterval(intervalo);
+      banner.remove();
+    }
+
+  }, 1000);
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
