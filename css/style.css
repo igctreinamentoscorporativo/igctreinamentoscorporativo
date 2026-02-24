@@ -2288,33 +2288,79 @@ a.btn-comprar {
   text-align: center;
 }
 
+
+
+/* ======================================= */
+/* OFERTA RELÂMPAGO - AGRESSIVA CONVERSÃO */
+/* ======================================= */
+
 .oferta-precos {
-  margin: 8px 0;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Linha principal */
+.preco-linha-principal {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* PREÇO ANTIGO */
 .preco-de {
-  font-size: 26px;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 700;
   text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* PREÇO NOVO (PROTAGONISTA) */
+.preco-por {
+  font-size: 40px;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255,255,255,0.6);
+  animation: pulsarPreco 1.5s infinite;
+}
+
+/* Texto "por" menor */
+.texto-por {
+  font-size: 16px;
+  font-weight: 400;
+  margin-right: 6px;
+}
+
+/* PARCELAMENTO - GATILHO */
+.preco-parcelamento {
+  margin-top: 10px;
+  font-size: 22px;
+  font-weight: 800;
+  background: #ffffff;
+  color: #ff0000;
+  padding: 6px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* OFF */
+.preco-off {
+  margin-top: 6px;
+  font-size: 14px;
   opacity: 0.9;
 }
 
-.preco-por {
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 4px;
+/* ANIMAÇÃO DE PULSO */
+@keyframes pulsarPreco {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-.preco-parcelamento {
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 4px;
-}
 
-.preco-off {
-  font-size: 16px;
-  margin-top: 4px;
-}
+
 
 .oferta-tempo {
   font-size: 16px;
@@ -2378,5 +2424,20 @@ a.btn-comprar {
     content: "🔥";
     font-size: 22px;
   }
+
+
+.preco-de {
+  font-size: 22px;
+}
+
+.preco-por {
+  font-size: 30px;
+}
+
+.preco-parcelamento {
+  font-size: 18px;
+}
+
+ 
 
 }
