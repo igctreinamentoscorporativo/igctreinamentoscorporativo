@@ -360,8 +360,7 @@ ofertaRelampago: {
   textoBotao: "Garantir meu desconto agora",
   link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads",
 
-  mostrarApenasUmaVez: true,
-  persistirTempo: true
+  
 },
 
 
