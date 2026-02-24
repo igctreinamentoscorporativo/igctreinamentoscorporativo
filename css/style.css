@@ -2289,23 +2289,31 @@ a.btn-comprar {
 }
 
 .oferta-precos {
-  font-size: 18px;
-  margin: 5px 0;
+  margin: 8px 0;
 }
 
-.oferta-precos .de {
+.preco-de {
+  font-size: 28px;
+  font-weight: bold;
   text-decoration: line-through;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-.oferta-precos .por {
+.preco-por {
   font-size: 22px;
   font-weight: bold;
+  margin-top: 4px;
 }
 
-.oferta-precos .off {
-  display: block;
+.preco-parcelamento {
+  font-size: 18px;
   font-weight: bold;
+  margin-top: 4px;
+}
+
+.preco-off {
+  font-size: 16px;
+  margin-top: 4px;
 }
 
 .oferta-tempo {
