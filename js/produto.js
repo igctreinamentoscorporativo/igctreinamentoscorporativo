@@ -420,21 +420,27 @@ function iniciarOfertaRelampago(config, produtoId) {
   setTimeout(() => {
 
     let expiraEm;
+    const salvo = localStorage.getItem(storageKeyExpira);
 
-    // Se já existe timestamp salvo
-    if (localStorage.getItem(storageKeyExpira)) {
-      expiraEm = parseInt(localStorage.getItem(storageKeyExpira));
+    // 🔒 Se já expirou antes, nunca mais mostra
+    if (salvo === "expirado") {
+      return;
+    }
+
+    // 🔄 Se já existe timestamp salvo
+    if (salvo && !isNaN(salvo)) {
+      expiraEm = parseInt(salvo);
     } else {
-      // Cria timestamp real de expiração
+      // 🆕 Cria novo timestamp
       expiraEm = Date.now() + (config.tempoMinutos * 60 * 1000);
       localStorage.setItem(storageKeyExpira, expiraEm);
     }
 
     const tempoRestanteMs = expiraEm - Date.now();
 
-    // Se já expirou
+    // ⛔ Se já expirou antes de renderizar
     if (tempoRestanteMs <= 0) {
-      localStorage.removeItem(storageKeyExpira);
+      localStorage.setItem(storageKeyExpira, "expirado");
       return;
     }
 
@@ -450,26 +456,24 @@ function iniciarOfertaRelampago(config, produtoId) {
         </div>
 
         <div class="oferta-precos">
+          <div class="preco-de">
+            ${formatarPreco(config.valorDe)}
+          </div>
 
-  <div class="preco-de">
-    ${formatarPreco(config.valorDe)}
-  </div>
+          <div class="preco-por">
+            por ${formatarPreco(config.valorPor)}
+          </div>
 
-  <div class="preco-por">
-    por ${formatarPreco(config.valorPor)}
-  </div>
+          ${config.parcelamento?.mostrar ? `
+            <div class="preco-parcelamento">
+              ${config.parcelamento.texto}
+            </div>
+          ` : ""}
 
-  ${config.parcelamento?.mostrar ? `
-    <div class="preco-parcelamento">
-      ${config.parcelamento.texto}
-    </div>
-  ` : ""}
-
-  <div class="preco-off">
-    ${formatarPreco(config.valorDe - config.valorPor)} OFF
-  </div>
-
-</div>
+          <div class="preco-off">
+            ${formatarPreco(config.valorDe - config.valorPor)} OFF
+          </div>
+        </div>
 
         <div class="oferta-tempo">
           Válido por: <span id="contador-oferta"></span>
@@ -493,7 +497,7 @@ function iniciarOfertaRelampago(config, produtoId) {
       if (restante <= 0) {
         clearInterval(intervalo);
         banner.remove();
-        localStorage.removeItem(storageKeyExpira);
+        localStorage.setItem(storageKeyExpira, "expirado");
         return;
       }
 
@@ -508,7 +512,6 @@ function iniciarOfertaRelampago(config, produtoId) {
 
   }, config.delaySegundos * 1000);
 }
-
 
 
 
