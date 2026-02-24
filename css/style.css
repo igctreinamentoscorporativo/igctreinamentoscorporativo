@@ -2337,3 +2337,49 @@ a.btn-comprar {
   to { transform: translate(-50%, 0); opacity: 1; }
 }
 
+
+/* ========================= */
+/* OFERTA MOBILE AJUSTE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .oferta-relampago-banner {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+    padding: 12px;
+    animation: none;
+  }
+
+  .oferta-conteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preco-de {
+    font-size: 22px;
+  }
+
+  .preco-por {
+    font-size: 18px;
+  }
+
+  .preco-parcelamento {
+    font-size: 16px;
+  }
+
+  .preco-off {
+    font-size: 14px;
+  }
+
+  .btn-oferta {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+}
