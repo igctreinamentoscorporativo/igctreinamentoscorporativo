@@ -2338,48 +2338,45 @@ a.btn-comprar {
 }
 
 
+
 /* ========================= */
-/* OFERTA MOBILE AJUSTE */
+/* OFERTA MOBILE PROFISSIONAL */
 /* ========================= */
 
 @media (max-width: 768px) {
 
   .oferta-relampago-banner {
     top: auto;
-    bottom: 0;
-    left: 0;
+    bottom: 90px; /* não briga com WhatsApp */
+    left: 15px;
+    right: auto;
     transform: none;
-    width: 100%;
-    border-radius: 20px 20px 0 0;
-    padding: 12px;
-    animation: none;
+    width: 90%;
+    max-width: 350px;
+    border-radius: 16px;
+    padding: 14px;
+    transition: all 0.3s ease;
   }
 
-  .oferta-conteudo {
+  /* ESTADO MINIMIZADO */
+  .oferta-relampago-banner.oferta-minimizada {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
   }
 
-  .preco-de {
+  .oferta-relampago-banner.oferta-minimizada .oferta-conteudo {
+    display: none;
+  }
+
+  .oferta-relampago-banner.oferta-minimizada::after {
+    content: "🔥";
     font-size: 22px;
-  }
-
-  .preco-por {
-    font-size: 18px;
-  }
-
-  .preco-parcelamento {
-    font-size: 16px;
-  }
-
-  .preco-off {
-    font-size: 14px;
-  }
-
-  .btn-oferta {
-    width: 100%;
-    margin-top: 8px;
   }
 
 }
