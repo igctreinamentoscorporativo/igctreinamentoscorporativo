@@ -409,25 +409,33 @@ function abrirModalYoutube(id) {
 // OFERTA RELÂMPAGO PROFISSIONAL
 // ================================
 
+// ================================
+// OFERTA RELÂMPAGO COM TIMESTAMP REAL
+// ================================
+
 function iniciarOfertaRelampago(config, produtoId) {
 
-  const storageKeyTempo = "ofertaTempo_" + produtoId;
-  const storageKeyExibido = "ofertaExibida_" + produtoId;
+  const storageKeyExpira = "ofertaExpira_" + produtoId;
 
-  // Se for para mostrar só uma vez
-  if (config.mostrarApenasUmaVez && localStorage.getItem(storageKeyExibido)) {
-    return;
-  }
-
-  // Delay
   setTimeout(() => {
 
-    let tempoRestante;
+    let expiraEm;
 
-    if (config.persistirTempo && localStorage.getItem(storageKeyTempo)) {
-      tempoRestante = parseInt(localStorage.getItem(storageKeyTempo));
+    // Se já existe timestamp salvo
+    if (localStorage.getItem(storageKeyExpira)) {
+      expiraEm = parseInt(localStorage.getItem(storageKeyExpira));
     } else {
-      tempoRestante = config.tempoMinutos * 60;
+      // Cria timestamp real de expiração
+      expiraEm = Date.now() + (config.tempoMinutos * 60 * 1000);
+      localStorage.setItem(storageKeyExpira, expiraEm);
+    }
+
+    const tempoRestanteMs = expiraEm - Date.now();
+
+    // Se já expirou
+    if (tempoRestanteMs <= 0) {
+      localStorage.removeItem(storageKeyExpira);
+      return;
     }
 
     const banner = document.createElement("div");
@@ -436,17 +444,14 @@ function iniciarOfertaRelampago(config, produtoId) {
     banner.innerHTML = `
       <div class="oferta-conteudo">
         <strong>${config.titulo}</strong>
+
         <div style="font-size:14px;margin-top:4px;">
           ${config.subtitulo || ""}
         </div>
 
         <div class="oferta-precos">
-          De <span class="de">
-            ${formatarPreco(config.valorDe)}
-          </span>
-          por <span class="por">
-            ${formatarPreco(config.valorPor)}
-          </span>
+          De <span class="de">${formatarPreco(config.valorDe)}</span>
+          por <span class="por">${formatarPreco(config.valorPor)}</span>
           <span class="off">
             ${formatarPreco(config.valorDe - config.valorPor)} OFF
           </span>
@@ -464,29 +469,25 @@ function iniciarOfertaRelampago(config, produtoId) {
 
     document.body.appendChild(banner);
 
-    localStorage.setItem(storageKeyExibido, "true");
-
     const contadorEl = document.getElementById("contador-oferta");
 
     const intervalo = setInterval(() => {
 
-      const minutos = Math.floor(tempoRestante / 60);
-      const segundos = tempoRestante % 60;
+      const restante = expiraEm - Date.now();
+
+      if (restante <= 0) {
+        clearInterval(intervalo);
+        banner.remove();
+        localStorage.removeItem(storageKeyExpira);
+        return;
+      }
+
+      const totalSegundos = Math.floor(restante / 1000);
+      const minutos = Math.floor(totalSegundos / 60);
+      const segundos = totalSegundos % 60;
 
       contadorEl.textContent =
         `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
-
-      tempoRestante--;
-
-      if (config.persistirTempo) {
-        localStorage.setItem(storageKeyTempo, tempoRestante);
-      }
-
-      if (tempoRestante < 0) {
-        clearInterval(intervalo);
-        banner.remove();
-        localStorage.removeItem(storageKeyTempo);
-      }
 
     }, 1000);
 
