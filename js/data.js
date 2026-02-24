@@ -345,6 +345,17 @@ videoPrincipal: {
   mostrar: true,
   youtubeId: "FU66p66t4ag"
 },
+
+ofertaRelampago: {
+  mostrar: true,
+  tempoMinutos: 10,
+  valorDe: 1997,
+  valorPor: 497,
+  textoBotao: "Garantir meu desconto agora",
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads"
+},
+
+
      
 
 destaque: true,
