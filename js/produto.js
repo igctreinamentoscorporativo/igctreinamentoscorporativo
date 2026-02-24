@@ -189,7 +189,7 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 
 // ================= OFERTA RELÂMPAGO =================
 if (produto.ofertaRelampago?.mostrar) {
-  iniciarOfertaRelampago(produto.ofertaRelampago);
+  iniciarOfertaRelampago(produto.ofertaRelampago, produto.id);
 }
 
   
@@ -406,54 +406,91 @@ function abrirModalYoutube(id) {
 
 
 // ================================
-// OFERTA RELÂMPAGO COM CONTADOR
+// OFERTA RELÂMPAGO PROFISSIONAL
 // ================================
 
-function iniciarOfertaRelampago(config) {
+function iniciarOfertaRelampago(config, produtoId) {
 
-  const duracao = config.tempoMinutos * 60; // segundos
-  let tempoRestante = duracao;
+  const storageKeyTempo = "ofertaTempo_" + produtoId;
+  const storageKeyExibido = "ofertaExibida_" + produtoId;
 
-  const banner = document.createElement("div");
-  banner.className = "oferta-relampago-banner";
+  // Se for para mostrar só uma vez
+  if (config.mostrarApenasUmaVez && localStorage.getItem(storageKeyExibido)) {
+    return;
+  }
 
-  banner.innerHTML = `
-    <div class="oferta-conteudo">
-      <strong>🎉 Parabéns! Você ganhou um SUPER desconto!</strong>
-      <div class="oferta-precos">
-        De <span class="de">R$ ${config.valorDe}</span>
-        por <span class="por">R$ ${config.valorPor}</span>
-        <span class="off">R$ ${config.valorDe - config.valorPor} OFF</span>
-      </div>
-      <div class="oferta-tempo">
-        Válido por: <span id="contador-oferta"></span>
-      </div>
-      <a href="${config.link}" class="btn-oferta">
-        ${config.textoBotao}
-      </a>
-    </div>
-  `;
+  // Delay
+  setTimeout(() => {
 
-  document.body.appendChild(banner);
+    let tempoRestante;
 
-  const contadorEl = document.getElementById("contador-oferta");
-
-  const intervalo = setInterval(() => {
-
-    const minutos = Math.floor(tempoRestante / 60);
-    const segundos = tempoRestante % 60;
-
-    contadorEl.textContent =
-      `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
-
-    tempoRestante--;
-
-    if (tempoRestante < 0) {
-      clearInterval(intervalo);
-      banner.remove();
+    if (config.persistirTempo && localStorage.getItem(storageKeyTempo)) {
+      tempoRestante = parseInt(localStorage.getItem(storageKeyTempo));
+    } else {
+      tempoRestante = config.tempoMinutos * 60;
     }
 
-  }, 1000);
+    const banner = document.createElement("div");
+    banner.className = "oferta-relampago-banner";
+
+    banner.innerHTML = `
+      <div class="oferta-conteudo">
+        <strong>${config.titulo}</strong>
+        <div style="font-size:14px;margin-top:4px;">
+          ${config.subtitulo || ""}
+        </div>
+
+        <div class="oferta-precos">
+          De <span class="de">
+            ${formatarPreco(config.valorDe)}
+          </span>
+          por <span class="por">
+            ${formatarPreco(config.valorPor)}
+          </span>
+          <span class="off">
+            ${formatarPreco(config.valorDe - config.valorPor)} OFF
+          </span>
+        </div>
+
+        <div class="oferta-tempo">
+          Válido por: <span id="contador-oferta"></span>
+        </div>
+
+        <a href="${config.link}" class="btn-oferta">
+          ${config.textoBotao}
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    localStorage.setItem(storageKeyExibido, "true");
+
+    const contadorEl = document.getElementById("contador-oferta");
+
+    const intervalo = setInterval(() => {
+
+      const minutos = Math.floor(tempoRestante / 60);
+      const segundos = tempoRestante % 60;
+
+      contadorEl.textContent =
+        `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
+
+      tempoRestante--;
+
+      if (config.persistirTempo) {
+        localStorage.setItem(storageKeyTempo, tempoRestante);
+      }
+
+      if (tempoRestante < 0) {
+        clearInterval(intervalo);
+        banner.remove();
+        localStorage.removeItem(storageKeyTempo);
+      }
+
+    }, 1000);
+
+  }, config.delaySegundos * 1000);
 }
 
 
