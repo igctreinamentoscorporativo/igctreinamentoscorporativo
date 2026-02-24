@@ -2403,6 +2403,13 @@ a.btn-comprar {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  /* 🔥 NOVO POSICIONAMENTO */
+  top: auto;
+  left: 20px;
+  right: auto;
+  bottom: 90px; /* não briga com WhatsApp */
+  transform: none;
 }
 
 .oferta-relampago-banner.oferta-minimizada .oferta-conteudo {
