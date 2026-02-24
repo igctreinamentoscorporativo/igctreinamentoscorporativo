@@ -450,12 +450,26 @@ function iniciarOfertaRelampago(config, produtoId) {
         </div>
 
         <div class="oferta-precos">
-          De <span class="de">${formatarPreco(config.valorDe)}</span>
-          por <span class="por">${formatarPreco(config.valorPor)}</span>
-          <span class="off">
-            ${formatarPreco(config.valorDe - config.valorPor)} OFF
-          </span>
-        </div>
+
+  <div class="preco-de">
+    ${formatarPreco(config.valorDe)}
+  </div>
+
+  <div class="preco-por">
+    por ${formatarPreco(config.valorPor)}
+  </div>
+
+  ${config.parcelamento?.mostrar ? `
+    <div class="preco-parcelamento">
+      ${config.parcelamento.texto}
+    </div>
+  ` : ""}
+
+  <div class="preco-off">
+    ${formatarPreco(config.valorDe - config.valorPor)} OFF
+  </div>
+
+</div>
 
         <div class="oferta-tempo">
           Válido por: <span id="contador-oferta"></span>
