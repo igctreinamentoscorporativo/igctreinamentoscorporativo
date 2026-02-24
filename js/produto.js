@@ -536,9 +536,11 @@ function iniciarOfertaRelampago(config, produtoId) {
 // COMPORTAMENTO MOBILE INTELIGENTE
 // ================================
 
-function ativarComportamentoMobileOferta() {
+// ================================
+// COMPORTAMENTO RESPONSIVO OFERTA
+// ================================
 
-  if (window.innerWidth > 768) return;
+function ativarComportamentoMobileOferta() {
 
   const banner = document.querySelector(".oferta-relampago-banner");
   if (!banner) return;
@@ -556,16 +558,19 @@ function ativarComportamentoMobileOferta() {
     minimizado = false;
   }
 
-  // Minimiza ao rolar
+  // 🔥 Desktop e Mobile
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 120) {
+    if (window.scrollY > 150) {
       minimizar();
+    } else {
+      expandir();
     }
   });
 
-  // Clique para expandir se estiver minimizado
-  banner.addEventListener("click", () => {
+  // Clique na bolinha para expandir
+  banner.addEventListener("click", (e) => {
     if (minimizado) {
+      e.stopPropagation();
       expandir();
     }
   });
