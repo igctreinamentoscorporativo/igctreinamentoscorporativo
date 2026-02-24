@@ -348,11 +348,20 @@ videoPrincipal: {
 
 ofertaRelampago: {
   mostrar: true,
+  delaySegundos: 3,
   tempoMinutos: 10,
+
+  titulo: "🎉 Parabéns! Você ganhou um SUPER desconto!",
+  subtitulo: "Somente agora! Oferta exclusiva para esta página.",
+
   valorDe: 1997,
   valorPor: 497,
+
   textoBotao: "Garantir meu desconto agora",
-  link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads"
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads",
+
+  mostrarApenasUmaVez: true,
+  persistirTempo: true
 },
 
 
