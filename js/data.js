@@ -357,6 +357,14 @@ ofertaRelampago: {
   valorDe: 1997,
   valorPor: 497,
 
+
+// 🔥 NOVO BLOCO
+  parcelamento: {
+    mostrar: true,
+    texto: "Apenas 12x de R$ 44,13"
+  },
+   
+
   textoBotao: "Garantir meu desconto agora",
   link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads",
 
