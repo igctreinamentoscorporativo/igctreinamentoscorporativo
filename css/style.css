@@ -2385,6 +2385,46 @@ a.btn-comprar {
 
 
 
+
+
+
+/* ================================= */
+/* ESTADO MINIMIZADO GLOBAL */
+/* ================================= */
+
+.oferta-relampago-banner.oferta-minimizada {
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.oferta-relampago-banner.oferta-minimizada .oferta-conteudo {
+  display: none;
+}
+
+.oferta-relampago-banner.oferta-minimizada::after {
+  content: "🔥";
+  font-size: 26px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* ========================= */
 /* OFERTA MOBILE PROFISSIONAL */
 /* ========================= */
@@ -2420,12 +2460,7 @@ a.btn-comprar {
     display: none;
   }
 
-  .oferta-relampago-banner.oferta-minimizada::after {
-    content: "🔥";
-    font-size: 22px;
-  }
-
-
+  
 .preco-de {
   font-size: 22px;
 }
