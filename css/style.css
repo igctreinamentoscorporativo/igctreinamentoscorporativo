@@ -2260,3 +2260,72 @@ a.btn-comprar {
 
 
 
+
+
+
+
+
+/* ============================= */
+/* OFERTA RELÂMPAGO TOPO */
+/* ============================= */
+
+.oferta-relampago-banner {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #ff0000, #ff6600);
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  z-index: 9999;
+  animation: aparecer 0.4s ease-out;
+  max-width: 95%;
+}
+
+.oferta-conteudo {
+  text-align: center;
+}
+
+.oferta-precos {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.oferta-precos .de {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.oferta-precos .por {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.oferta-precos .off {
+  display: block;
+  font-weight: bold;
+}
+
+.oferta-tempo {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.btn-oferta {
+  display: inline-block;
+  background: #fff;
+  color: #ff0000;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+@keyframes aparecer {
+  from { transform: translate(-50%, -20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
