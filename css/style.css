@@ -2293,14 +2293,14 @@ a.btn-comprar {
 }
 
 .preco-de {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: bold;
   text-decoration: line-through;
   opacity: 0.9;
 }
 
 .preco-por {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   margin-top: 4px;
 }
@@ -2317,7 +2317,7 @@ a.btn-comprar {
 }
 
 .oferta-tempo {
-  font-size: 14px;
+  font-size: 16px;
   margin: 5px 0;
 }
 
