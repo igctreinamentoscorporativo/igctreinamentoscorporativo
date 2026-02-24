@@ -456,24 +456,31 @@ function iniciarOfertaRelampago(config, produtoId) {
         </div>
 
         <div class="oferta-precos">
-          <div class="preco-de">
-            ${formatarPreco(config.valorDe)}
-          </div>
 
-          <div class="preco-por">
-            por ${formatarPreco(config.valorPor)}
-          </div>
+  <div class="preco-linha-principal">
 
-          ${config.parcelamento?.mostrar ? `
-            <div class="preco-parcelamento">
-              ${config.parcelamento.texto}
-            </div>
-          ` : ""}
+    <div class="preco-de">
+      ${formatarPreco(config.valorDe)}
+    </div>
 
-          <div class="preco-off">
-            ${formatarPreco(config.valorDe - config.valorPor)} OFF
-          </div>
-        </div>
+    <div class="preco-por">
+      <span class="texto-por">por</span>
+      ${formatarPreco(config.valorPor)}
+    </div>
+
+  </div>
+
+  ${config.parcelamento?.mostrar ? `
+    <div class="preco-parcelamento">
+      ${config.parcelamento.texto}
+    </div>
+  ` : ""}
+
+  <div class="preco-off">
+    ${formatarPreco(config.valorDe - config.valorPor)} OFF
+  </div>
+
+</div>
 
         <div class="oferta-tempo">
           Válido por: <span id="contador-oferta"></span>
