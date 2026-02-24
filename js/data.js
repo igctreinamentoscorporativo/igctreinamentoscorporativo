@@ -349,7 +349,7 @@ videoPrincipal: {
 ofertaRelampago: {
   mostrar: true,
   delaySegundos: 3,
-  tempoMinutos: 10,
+  tempoMinutos: 45,
 
   titulo: "🎉 Parabéns! Você ganhou um SUPER desconto!",
   subtitulo: "Somente agora! Oferta exclusiva para esta página.",
