@@ -390,6 +390,29 @@ button:active{
 
 
 
+  /* ===============================
+  BOTÃO DELETAR EXCLUIR
+================================ */
+
+.btn-delete{
+  background:#cc0000;
+  box-shadow:0 4px 0 #990000;
+  color:#fff;
+  font-size:14px;
+  padding:8px 12px;
+}
+
+.btn-delete:hover{
+  background:#ff0000;
+}
+
+.btn-delete:active{
+  box-shadow:0 1px 0 #990000;
+}
+
+
+
+
 
   
 
@@ -512,6 +535,27 @@ button:active{
 }
 
 
+
+  
+/* ===============================
+   BOTÃO DELETAR EXLUIR MOBILE
+================================ */
+
+
+.table td:nth-child(4){
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.table td:nth-child(4) button{
+  flex:1;
+  padding:12px;
+  font-size:16px;
+}
+
+
+  
   
 
 /* ===============================
@@ -1300,6 +1344,7 @@ if(dataInicio || dataFim){
     <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
     <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
     <button onclick="event.stopPropagation(); abrirModalEditar('${l[0]}')">✏️</button>
+    <button class="btn-delete" onclick="event.stopPropagation(); excluir('${l[0]}')">🗑</button>
   </td>
 </tr>`;
 
@@ -1396,6 +1441,58 @@ function editar(id){
 }
 
 
+
+
+
+
+  
+
+
+
+
+// ===============================
+// 🗑️ EXCLUIR LEAD
+// ===============================
+function excluir(id){
+
+  if(!confirm("Tem certeza que deseja excluir este lead?")){
+    return;
+  }
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"crmExcluirLead",
+      senha:SENHA,
+      id:id
+    })
+  })
+  .then(r=>r.json())
+  .then(res=>{
+    listar();
+  })
+  .catch(err=>{
+    console.error("Erro ao excluir:", err);
+  });
+}
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
 
 // ===============================
 function limpar(){
