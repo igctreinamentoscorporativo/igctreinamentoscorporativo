@@ -411,17 +411,10 @@ button:active{
 }
 
 
-/* ===============================
-   DESABILITA BOTÕES PERFIL VER
-================================ */
 
-.btn-disabled{
-  opacity:0.4 !important;
-  cursor:not-allowed !important;
-  pointer-events:none;
-}
 
-   
+
+  
 
 
    /* ===============================
@@ -884,7 +877,7 @@ let statusSelecionado = "TODOS";
 let leadEmEdicao = null;  
 let idEditando = null;
 let autoRefreshInterval = null;  
-let SOMENTE_LEITURA = false;
+
 
 
 // ===============================
@@ -905,12 +898,11 @@ function fazerLogin(){
   })
   .then(r=>r.json())
   .then(res=>{
-  console.log("RES LOGIN:", res);
+
     if(res.ok){
 
       SENHA = senhaDigitada;
 
-           
       document.getElementById("loginScreen").style.display="none";
       document.getElementById("loadingScreen").style.display="flex";
 
@@ -918,9 +910,7 @@ function fazerLogin(){
         document.getElementById("loadingScreen").style.display="none";
         document.getElementById("crmSistema").style.display="block";
         listar();
-        iniciarAutoRefresh();
-        
-        
+        iniciarAutoRefresh(); // 🔥 ativa atualização automática
       },1500);
 
     }else{
@@ -934,13 +924,6 @@ function fazerLogin(){
 
 }
 
-
-
-
-
-
-
-  
 
 // ===============================
 // 🔒 FILTRAR POR STATUS
@@ -1075,6 +1058,8 @@ function salvar(){
     observacoes: document.getElementById("obs").value.toUpperCase()
   };
 
+  console.log("PAYLOAD FINAL:", payload);
+
   const acao = leadEmEdicao ? "crmEditarLead" : "crmSalvarLead";
 
   fetch(ENDPOINT,{
@@ -1087,27 +1072,19 @@ function salvar(){
   })
   .then(r=>r.json())
   .then(res=>{
-
-    // 🔒 Se backend negar → ativa somente leitura
-    if(res.ok === false || res.success === false){
-      SOMENTE_LEITURA = true;
-      render();
-      alert("Perfil somente leitura.");
-      return;
-    }
-
+    console.log("RESPOSTA DO SERVIDOR:", res);
     limpar();
     listar();
 
-    if(window.innerWidth <= 768){
-      document.getElementById("formNovoLead").style.display = "none";
-    }
-
+if(window.innerWidth <= 768){
+  document.getElementById("formNovoLead").style.display = "none";
+} 
   })
   .catch(err=>{
     console.error(err);
   });
 }
+
 
 
 
@@ -1364,14 +1341,10 @@ if(dataInicio || dataFim){
   <td><span class="status ${classeStatus}">${statusFinal}</span></td>
   <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
   <td>
-    <button ${SOMENTE_LEITURA ? 'disabled class="btn-disabled"' : ''} onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
-    
+    <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
     <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
-    
-    <button ${SOMENTE_LEITURA ? 'disabled class="btn-disabled"' : ''} onclick="event.stopPropagation(); abrirModalEditar('${l[0]}')">✏️</button>
-
-    <button ${SOMENTE_LEITURA ? 'disabled class="btn-delete btn-disabled"' : 'class="btn-delete"'} onclick="event.stopPropagation(); excluir('${l[0]}')">🗑</button>
-    
+    <button onclick="event.stopPropagation(); abrirModalEditar('${l[0]}')">✏️</button>
+    <button class="btn-delete" onclick="event.stopPropagation(); excluir('${l[0]}')">🗑</button>
   </td>
 </tr>`;
 
@@ -1496,14 +1469,6 @@ function excluir(id){
   })
   .then(r=>r.json())
   .then(res=>{
-
-    if(res.ok === false || res.success === false){
-      SOMENTE_LEITURA = true;
-      render();
-      alert("Perfil somente leitura.");
-      return;
-    }
-
     listar();
   })
   .catch(err=>{
@@ -1755,13 +1720,6 @@ function fecharModalEditar(){
   document.getElementById("modalEditar").classList.remove("active");
 }
 
-
-
-
-
-
-
-
 function salvarEdicao(){
 
   const payload = {
@@ -1786,27 +1744,10 @@ function salvarEdicao(){
   })
   .then(r=>r.json())
   .then(res=>{
-
-    if(res.ok === false || res.success === false){
-      SOMENTE_LEITURA = true;
-      render();
-      alert("Perfil somente leitura.");
-      return;
-    }
-
     fecharModalEditar();
     listar();
   });
 }
-
-  
-
-
-
-
-
-
-  
 
 
   
