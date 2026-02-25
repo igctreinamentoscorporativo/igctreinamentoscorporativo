@@ -910,9 +910,7 @@ function fazerLogin(){
 
       SENHA = senhaDigitada;
 
-     if(res.perfil === "CRM_LEADS_VER"){SOMENTE_LEITURA = true;}
-
-      
+           
       document.getElementById("loginScreen").style.display="none";
       document.getElementById("loadingScreen").style.display="flex";
 
@@ -921,7 +919,7 @@ function fazerLogin(){
         document.getElementById("crmSistema").style.display="block";
         listar();
         iniciarAutoRefresh();
-        aplicarModoSomenteLeitura();
+        
         
       },1500);
 
@@ -939,30 +937,6 @@ function fazerLogin(){
 
 
 
-// ===============================
-// 🔒  PERFIL MODO SOMENTE LEITURA
-// ===============================
-function aplicarModoSomenteLeitura(){
-
-  if(!SOMENTE_LEITURA) return;
-
-  // 🔒 Desabilita botão salvar novo lead
-  const btnSalvar = document.querySelector("#formNovoLead button");
-  if(btnSalvar){
-    btnSalvar.disabled = true;
-    btnSalvar.style.opacity = "0.5";
-    btnSalvar.style.cursor = "not-allowed";
-  }
-
-  // 🔒 Desabilita botão atualizar edição
-  const btnAtualizar = document.querySelector("#modalEditar button");
-  if(btnAtualizar){
-    btnAtualizar.disabled = true;
-    btnAtualizar.style.opacity = "0.5";
-    btnAtualizar.style.cursor = "not-allowed";
-  }
-
-}
 
 
 
@@ -1101,8 +1075,6 @@ function salvar(){
     observacoes: document.getElementById("obs").value.toUpperCase()
   };
 
-  console.log("PAYLOAD FINAL:", payload);
-
   const acao = leadEmEdicao ? "crmEditarLead" : "crmSalvarLead";
 
   fetch(ENDPOINT,{
@@ -1115,19 +1087,27 @@ function salvar(){
   })
   .then(r=>r.json())
   .then(res=>{
-    console.log("RESPOSTA DO SERVIDOR:", res);
+
+    // 🔒 Se backend negar → ativa somente leitura
+    if(res.ok === false || res.success === false){
+      SOMENTE_LEITURA = true;
+      render();
+      alert("Perfil somente leitura.");
+      return;
+    }
+
     limpar();
     listar();
 
-if(window.innerWidth <= 768){
-  document.getElementById("formNovoLead").style.display = "none";
-} 
+    if(window.innerWidth <= 768){
+      document.getElementById("formNovoLead").style.display = "none";
+    }
+
   })
   .catch(err=>{
     console.error(err);
   });
 }
-
 
 
 
@@ -1516,6 +1496,14 @@ function excluir(id){
   })
   .then(r=>r.json())
   .then(res=>{
+
+    if(res.ok === false || res.success === false){
+      SOMENTE_LEITURA = true;
+      render();
+      alert("Perfil somente leitura.");
+      return;
+    }
+
     listar();
   })
   .catch(err=>{
@@ -1767,6 +1755,13 @@ function fecharModalEditar(){
   document.getElementById("modalEditar").classList.remove("active");
 }
 
+
+
+
+
+
+
+
 function salvarEdicao(){
 
   const payload = {
@@ -1791,10 +1786,27 @@ function salvarEdicao(){
   })
   .then(r=>r.json())
   .then(res=>{
+
+    if(res.ok === false || res.success === false){
+      SOMENTE_LEITURA = true;
+      render();
+      alert("Perfil somente leitura.");
+      return;
+    }
+
     fecharModalEditar();
     listar();
   });
 }
+
+  
+
+
+
+
+
+
+  
 
 
   
