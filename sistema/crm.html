@@ -905,7 +905,7 @@ function fazerLogin(){
   })
   .then(r=>r.json())
   .then(res=>{
-
+  console.log("RES LOGIN:", res);
     if(res.ok){
 
       SENHA = senhaDigitada;
