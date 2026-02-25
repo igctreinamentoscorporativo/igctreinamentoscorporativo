@@ -778,6 +778,12 @@ button:active{
 <input type="date" id="filtroDataInicio" onchange="render()">
 <input type="date" id="filtroDataFim" onchange="render()">
 
+
+ <select id="filtroTurma" onchange="render()">
+  <option value="">FILTRAR TURMA</option>
+</select> 
+  
+
 <select id="filtroCidade" onchange="render()">
   <option value="">FILTRAR CIDADE</option>
 </select>
@@ -941,6 +947,41 @@ function filtrarStatus(e, status){
 
 
 
+
+// ===============================
+// FUNÇÃO AUXILIAR FILTRAR POR TURMA
+// ===============================
+
+
+function popularFiltroTurmas(){
+
+  const select = document.getElementById("filtroTurma");
+
+  select.innerHTML = '<option value="">FILTRAR TURMA</option>';
+
+  const turmasUnicas = [...new Set(
+    dadosGlobais
+      .map(l => (l[6] || "").toUpperCase().trim())
+      .filter(t => t !== "")
+  )].sort();
+
+  turmasUnicas.forEach(turma => {
+
+    const option = document.createElement("option");
+    option.value = turma;
+    option.textContent = turma;
+
+    select.appendChild(option);
+  });
+}
+  
+
+
+
+
+  
+
+
   
 // ===============================
 // 🔢 TELEFONE SOMENTE NÚMERO
@@ -1033,6 +1074,7 @@ function listar(){
 
     atualizarDashboard();
     popularFiltroCidades();
+    popularFiltroTurmas();
     render();
 
   })
@@ -1141,6 +1183,7 @@ function render(){
   const filtroTelefone = document.getElementById("filtroTelefone").value.replace(/\D/g,'');
   const dataInicio = document.getElementById("filtroDataInicio").value;
   const dataFim = document.getElementById("filtroDataFim").value;
+  const filtroTurma = document.getElementById("filtroTurma").value.toUpperCase();
   const filtroCidade = document.getElementById("filtroCidade").value.toUpperCase();
   
 
@@ -1155,7 +1198,7 @@ function render(){
     const nome = (l[3] || "").toUpperCase();
     const telefone = l[4] || "";
     const cidade = (l[5] || "").toUpperCase();
-
+    const turma = (l[6] || "").toUpperCase(); 
     
 const status = l[7] || "";
 const classeStatus = status.replace(/\s/g,'-');
@@ -1194,6 +1237,11 @@ if(
 
     // 📞 FILTRO TELEFONE
     if(filtroTelefone && !telefone.includes(filtroTelefone)) return;
+
+
+
+    // 🎓 FILTRO TURMA (SERVIÇO)
+   if(filtroTurma && turma !== filtroTurma) return;
     
     
 
@@ -1276,6 +1324,8 @@ function limparFiltros(){
   document.getElementById("filtroDataFim").value = "";
   document.getElementById("filtroCidade").value = "";
   document.getElementById("filtroStatus").value = "";
+  document.getElementById("filtroTelefone").value = "";
+  document.getElementById("filtroTurma").value = "";
   statusSelecionado = "TODOS";
 
   document.querySelectorAll(".kpi").forEach(k=>{
