@@ -411,10 +411,17 @@ button:active{
 }
 
 
+/* ===============================
+   DESABILITA BOTÕES PERFIL VER
+================================ */
 
+.btn-disabled{
+  opacity:0.4 !important;
+  cursor:not-allowed !important;
+  pointer-events:none;
+}
 
-
-  
+   
 
 
    /* ===============================
@@ -877,7 +884,7 @@ let statusSelecionado = "TODOS";
 let leadEmEdicao = null;  
 let idEditando = null;
 let autoRefreshInterval = null;  
-
+let SOMENTE_LEITURA = false;
 
 
 // ===============================
@@ -903,6 +910,9 @@ function fazerLogin(){
 
       SENHA = senhaDigitada;
 
+     if(res.perfil === "CRM_LEADS_VER"){SOMENTE_LEITURA = true;}
+
+      
       document.getElementById("loginScreen").style.display="none";
       document.getElementById("loadingScreen").style.display="flex";
 
@@ -910,7 +920,9 @@ function fazerLogin(){
         document.getElementById("loadingScreen").style.display="none";
         document.getElementById("crmSistema").style.display="block";
         listar();
-        iniciarAutoRefresh(); // 🔥 ativa atualização automática
+        iniciarAutoRefresh();
+        aplicarModoSomenteLeitura();
+        
       },1500);
 
     }else{
@@ -924,6 +936,37 @@ function fazerLogin(){
 
 }
 
+
+
+
+// ===============================
+// 🔒  PERFIL MODO SOMENTE LEITURA
+// ===============================
+function aplicarModoSomenteLeitura(){
+
+  if(!SOMENTE_LEITURA) return;
+
+  // 🔒 Desabilita botão salvar novo lead
+  const btnSalvar = document.querySelector("#formNovoLead button");
+  if(btnSalvar){
+    btnSalvar.disabled = true;
+    btnSalvar.style.opacity = "0.5";
+    btnSalvar.style.cursor = "not-allowed";
+  }
+
+  // 🔒 Desabilita botão atualizar edição
+  const btnAtualizar = document.querySelector("#modalEditar button");
+  if(btnAtualizar){
+    btnAtualizar.disabled = true;
+    btnAtualizar.style.opacity = "0.5";
+    btnAtualizar.style.cursor = "not-allowed";
+  }
+
+}
+
+
+
+  
 
 // ===============================
 // 🔒 FILTRAR POR STATUS
@@ -1341,10 +1384,14 @@ if(dataInicio || dataFim){
   <td><span class="status ${classeStatus}">${statusFinal}</span></td>
   <td style="color:#aaa; font-size:12px;">${ultimaObs}</td>
   <td>
-    <button onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
+    <button ${SOMENTE_LEITURA ? 'disabled class="btn-disabled"' : ''} onclick="event.stopPropagation(); abrirWhats('${telefone}')">💬</button>
+    
     <button onclick="event.stopPropagation(); verDetalhes('${l[0]}')">👁</button>
-    <button onclick="event.stopPropagation(); abrirModalEditar('${l[0]}')">✏️</button>
-    <button class="btn-delete" onclick="event.stopPropagation(); excluir('${l[0]}')">🗑</button>
+    
+    <button ${SOMENTE_LEITURA ? 'disabled class="btn-disabled"' : ''} onclick="event.stopPropagation(); abrirModalEditar('${l[0]}')">✏️</button>
+
+    <button ${SOMENTE_LEITURA ? 'disabled class="btn-delete btn-disabled"' : 'class="btn-delete"'} onclick="event.stopPropagation(); excluir('${l[0]}')">🗑</button>
+    
   </td>
 </tr>`;
 
