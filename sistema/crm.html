@@ -773,6 +773,7 @@ button:active{
 <div class="search-box row">
 
 <input id="filtroNome" placeholder="BUSCAR NOME" onkeyup="render()">
+<input id="filtroTelefone" placeholder="BUSCAR TELEFONE" onkeyup="render()">
 
 <input type="date" id="filtroDataInicio" onchange="render()">
 <input type="date" id="filtroDataFim" onchange="render()">
@@ -1137,11 +1138,13 @@ function render(){
 
   const filtroStatus = document.getElementById("filtroStatus").value;
   const filtroNome = document.getElementById("filtroNome").value.toUpperCase();
+  const filtroTelefone = document.getElementById("filtroTelefone").value.replace(/\D/g,'');
   const dataInicio = document.getElementById("filtroDataInicio").value;
   const dataFim = document.getElementById("filtroDataFim").value;
   const filtroCidade = document.getElementById("filtroCidade").value.toUpperCase();
   
 
+  
  
 
   
@@ -1186,6 +1189,13 @@ if(
 
     // 🔎 FILTRO NOME
     if(filtroNome && !nome.includes(filtroNome)) return;
+
+
+
+    // 📞 FILTRO TELEFONE
+    if(filtroTelefone && !telefone.includes(filtroTelefone)) return;
+    
+    
 
     // 🏙️ FILTRO CIDADE
     if(filtroCidade && !cidade.includes(filtroCidade)) return;
