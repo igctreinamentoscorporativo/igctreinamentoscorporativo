@@ -825,6 +825,7 @@ let ordemAsc = true;
 let statusSelecionado = "TODOS";
 let leadEmEdicao = null;  
 let idEditando = null;
+let autoRefreshInterval = null;  
 
 
 
@@ -858,6 +859,7 @@ function fazerLogin(){
         document.getElementById("loadingScreen").style.display="none";
         document.getElementById("crmSistema").style.display="block";
         listar();
+        iniciarAutoRefresh(); // 🔥 ativa atualização automática
       },1500);
 
     }else{
@@ -871,12 +873,20 @@ function fazerLogin(){
 
 }
 
+document.addEventListener("visibilitychange", function(){
 
+  if(document.hidden){
+    clearInterval(autoRefreshInterval);
+    console.log("⏸ Auto refresh pausado (aba inativa)");
+  } else {
+    iniciarAutoRefresh();
+    console.log("▶ Auto refresh retomado");
+  }
 
+});
 
 
   
-   
 
 
 // ===============================
@@ -1600,6 +1610,79 @@ function salvarEdicao(){
 
 
 
+
+
+
+
+
+
+
+
+
+function iniciarAutoRefresh(){
+
+  // 🔥 Evita múltiplos intervalos
+  if(autoRefreshInterval){
+    clearInterval(autoRefreshInterval);
+  }
+
+  autoRefreshInterval = setInterval(()=>{
+
+    const modalEditarAberto =
+      document.getElementById("modalEditar").classList.contains("active");
+
+    const modalDetalhesAberto =
+      document.getElementById("modalDetalhes").classList.contains("active");
+
+    const campoEmFoco =
+      ["INPUT","TEXTAREA","SELECT"]
+      .includes(document.activeElement.tagName);
+
+    if(!modalEditarAberto && !modalDetalhesAberto && !campoEmFoco){
+
+      console.log("🔄 Atualização automática executada");
+      listar();
+
+    } else {
+
+      console.log("⏸ Atualização pausada (usuário editando)");
+
+    }
+
+  }, 60000);
+
+}
+
+
+document.addEventListener("visibilitychange", function(){
+
+  if(document.hidden){
+
+    if(autoRefreshInterval){
+      clearInterval(autoRefreshInterval);
+      autoRefreshInterval = null;
+    }
+
+    console.log("⏸ Auto refresh pausado (aba inativa)");
+
+  } else {
+
+    iniciarAutoRefresh();
+    console.log("▶ Auto refresh retomado");
+
+  }
+
+});
+  
+
+
+
+  
+
+
+
+
+  
 
 
 
