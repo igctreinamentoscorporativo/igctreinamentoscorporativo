@@ -873,21 +873,6 @@ function fazerLogin(){
 
 }
 
-document.addEventListener("visibilitychange", function(){
-
-  if(document.hidden){
-    clearInterval(autoRefreshInterval);
-    console.log("⏸ Auto refresh pausado (aba inativa)");
-  } else {
-    iniciarAutoRefresh();
-    console.log("▶ Auto refresh retomado");
-  }
-
-});
-
-
-  
-
 
 // ===============================
 // 🔒 FILTRAR POR STATUS
