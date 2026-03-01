@@ -310,7 +310,7 @@ essa decisão começa aqui.</strong>
   cta: {
     mostrar: true,
     texto: "COMPRAR 2º LOTE COM DESCONTO",
-    link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
+    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-lote.html"
   }
 },
 
@@ -366,7 +366,7 @@ ofertaRelampago: {
    
 
   textoBotao: "COMPRAR COM DESCONTO",
-  link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads",
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
 
   
 },
