@@ -377,7 +377,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "Ou Valor especial para o 2º Lote até 07/03 por <strong>apenas 12x de R$ 59,00</strong> ou R$ 697,00"
+textoParcelamento: "Ou Valor especial para o 2º Lote até 07/03 por <strong>apenas 12x de R$ 67,00</strong> ou R$ 797,00"
      
     },
 
