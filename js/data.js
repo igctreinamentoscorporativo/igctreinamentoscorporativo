@@ -66,7 +66,7 @@ const categorias = [
 const produtos = [
   {
     id: "1",
-    nome: "Formação em PNL Presencial em Curitiba 10 a 12 de Abril | Certificação Internacional Vagas Limitadas",
+    nome: "Formação em PNL Practitioner em Curitiba 10 a 12 de Abril | Certificação Internacional Vagas Limitadas",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
@@ -305,7 +305,7 @@ essa decisão começa aqui.</strong>
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: false,
+  mostrarPreco: true,
   mostrarResumo: true,
   cta: {
     mostrar: true,
