@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p></p>
+      <p>Resumo</p>
              
        `,
       
@@ -306,10 +306,10 @@ essa decisão começa aqui.</strong>
  configuracoes: {
   mostrarNome: true,
   mostrarPreco: true,
-  mostrarResumo: true,
+  mostrarResumo: false,
   cta: {
     mostrar: true,
-    texto: "COMPRAR AGORA",
+    texto: "COMPRAR 2º LOTE COM DESCONTO",
     link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
   }
 },
