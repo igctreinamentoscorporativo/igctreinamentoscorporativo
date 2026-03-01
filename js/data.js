@@ -68,7 +68,7 @@ const produtos = [
     id: "1",
     nome: "Formação em PNL Presencial em Curitiba 10 a 12 de Abril | Certificação Internacional Vagas Limitadas",
     categoria: "pnl",
-    preco: 997.00,
+    preco: 1997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
     videos: [
       "assets/videos/PNLIMERSAO.mp4"
@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>✔️ Condição especial para essa turma, com parcelamento facilitado até 28/02.</p>
+      <p>✔️ Condição especial para o 2º Lote, com parcelamento facilitado até 07/03.</p>
              
        `,
       
@@ -309,7 +309,7 @@ essa decisão começa aqui.</strong>
   mostrarResumo: true,
   cta: {
     mostrar: true,
-    texto: "QUERO GARANTIR MINHA VAGA",
+    texto: "COMPRAR AGORA",
     link: "https://igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads.html"
   }
 },
@@ -352,20 +352,20 @@ ofertaRelampago: {
   tempoMinutos: 45,
 
   titulo: "🎉 Parabéns! Oferta Única!",
-  subtitulo: "Somente agora. Exclusiva para esta página!",
+  subtitulo: "2º Lote. Exclusivo para esta página!",
 
   valorDe: 1997,
-  valorPor: 497,
+  valorPor: 697,
 
 
 // 🔥 NOVO BLOCO
   parcelamento: {
     mostrar: true,
-    texto: "Apenas 12x de R$ 44,13"
+    texto: "Apenas 12x de R$ 59,00"
   },
    
 
-  textoBotao: "Garantir meu desconto agora",
+  textoBotao: "COMPRAR COM DESCONTO",
   link: "https://www.igctreinamentoscorporativo.com.br/sistema/inscricaopnlcuritiba-ads",
 
   
@@ -377,7 +377,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: ""
+textoParcelamento: "Ou condição especial de 2º Lote"
      
     },
 
