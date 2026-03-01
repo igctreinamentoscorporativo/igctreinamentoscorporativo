@@ -361,7 +361,7 @@ ofertaRelampago: {
 // 🔥 NOVO BLOCO
   parcelamento: {
     mostrar: true,
-    texto: "Apenas 12x de R$ 59,00"
+    texto: "Apenas 12x de R$ 61,89"
   },
    
 
