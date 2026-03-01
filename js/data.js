@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>✔️ Condição especial para o 2º Lote, com parcelamento facilitado até 07/03.</p>
+      <p></p>
              
        `,
       
@@ -377,7 +377,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "Ou condição especial de 2º Lote"
+textoParcelamento: "Ou Valor especial para o 2º Lote até 07/03 por Apenas R$697,00 em 12x de 59,00"
      
     },
 
