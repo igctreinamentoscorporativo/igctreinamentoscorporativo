@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17961730607"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-17961730607');
+</script>
+  
+  
+  
+
+
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscrição</title>
+
+<style>
+* { box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+/* 🔥 BACKGROUND RESPONSIVO */
+  background-image: url("/assets/imginscricao/inscricaopnlcuritiba.jpg");
+  background-size: cover;        /* cobre toda a tela */
+  background-position: center;   /* centraliza */
+  background-repeat: no-repeat;  /* não repete */
+  background-attachment: fixed;  /* desktop bonito */
+
+
+
+
+  
+}
+
+.card {
+  display: block;
+  background: rgba(255, 255, 255, 0.95);  /* 👈 5% de transparência background: #fff;*/
+  padding: 25px;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+.loader {
+  font-size: 18px;
+  color: #1f3c88;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+input.erro {
+  border-color: red;
+}
+
+button {
+  background: linear-gradient(135deg, #1f3c88, #2f55d4);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+}
+
+button,
+.btn {
+  transition: 
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    opacity 0.2s ease;
+}
+
+button:active,
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(0,0,0,.2) inset;
+  opacity: 0.85;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+.dados-inscricao p {
+    margin: 3px 0;
+    line-height: 1.25;
+    font-size: 15px;
+  }
+
+
+  
+
+  
+  
+</style>
+</head>
+
+
+<div class="card" id="formCard">
+  <h2 id="titulo" style="text-align:center;">📝 Ficha de Inscrição</h2>
+  
+  <p style="font-size:15px; text-align:center;">Formação em PNL - Programação Neurolinguística - Edição Curitiba/PR - De 10 à 12/04/2026</p>
+
+
+  
+  
+  <input id="nome" placeholder="Seu Nome Completo">
+  <input id="cpf" placeholder="CPF (somente números)">
+  <input id="email" placeholder="Seu Melhor E-mail">
+  <input id="telefone" placeholder="Telefone/WhatsApp">
+  
+
+
+<select id="pais">
+  <option value="">País</option>
+  <option value="BR">Brasil</option>
+  <option value="JP">Japão</option>
+  <option value="PY">Paraguai</option>
+</select>
+
+
+  
+<select id="estado" disabled>
+  <option value="">Estado / Região</option>
+</select>
+
+<input
+  id="estadoOutro"
+  placeholder="Digite o estado / região"
+  style="display:none">
+
+
+<select id="cidade" disabled>
+  <option value="">Cidade</option>
+</select>
+
+<input
+  id="cidadeOutra"
+  placeholder="Digite a cidade"
+  style="display:none"
+>
+
+<button id="btnConfirmar" onclick="finalizar()">CONFIRMAR ENVIO</button>
+</div>
+
+<script src="/js/localidades.js"></script>
+
+<script src="/js/igc-config.js"></script>  
+  
+<script>
+
+const LINK_PAGAMENTO = "https://pagamento.sejaefi.com.br";
+const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+
+
+
+  
+
+  
+const CURSO_FIXO = "FORMAÇÃO EM PNL - PROGRAMAÇÃO NEUROLINGUÍSTICA"; // ⬅️ EXATAMENTE como está no Excel
+const TURMA_FIXA = "ABR 26 CUR-03"; // exatamente como está na planilha
+
+
+  
+/* ===========================
+   🔽 CARREGA CURSOS ATIVOS
+   =========================== */
+
+let CURSOS_MAPA = {};
+
+  
+window.onload = () => {
+  fetch(`${ENDPOINT}?acao=listarCursos`)
+    .then(r => r.json())
+    .then(cursos => {
+
+      cursos
+        .filter(c => c.ativo === true)
+        .forEach(curso => {
+
+          const nome = (curso.nome || "").trim();
+          const turma = (curso.turma || "").trim();
+          const chave = `${nome}__${turma}`;
+
+          CURSOS_MAPA[chave] = curso;
+        });
+
+    })
+    .catch(err => {
+      console.warn("Falha ao carregar cursos:", err);
+    });
+};
+
+
+   
+
+// ===== VALIDAÇÕES =====
+
+const nomeEl = document.getElementById("nome");
+const cpfEl = document.getElementById("cpf");
+const emailEl = document.getElementById("email");
+const telefoneEl = document.getElementById("telefone");
+const paisEl = document.getElementById("pais");
+const estadoEl = document.getElementById("estado");
+const cidadeEl = document.getElementById("cidade");
+const cidadeOutraEl = document.getElementById("cidadeOutra");
+const estadoOutroEl = document.getElementById("estadoOutro");
+const btnConfirmar = document.getElementById("btnConfirmar");  
+
+
+  
+
+nomeEl.oninput = e => e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+cidadeEl.oninput = e => e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+telefoneEl.oninput = e => e.target.value = e.target.value.replace(/\D/g,'');
+cpfEl.oninput = e => {
+  e.target.value = e.target.value.replace(/\D/g, '').slice(0, 11);
+};
+
+  estadoOutroEl.oninput = e => {e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+};
+  
+cidadeOutraEl.oninput = e => {e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+};
+  
+
+cpfEl.onblur = () => cpfEl.classList.toggle("erro", !validarCPF(cpfEl.value));
+emailEl.oninput = e => {
+  e.target.value = e.target.value.toLowerCase();
+};
+
+emailEl.onblur = () => {
+  emailEl.classList.toggle(
+    "erro",
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)
+  );
+};
+
+function validarCPF(cpf) {
+  cpf = cpf.replace(/\D/g,'');
+  if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+  let soma = 0, resto;
+  for (let i=1;i<=9;i++) soma += parseInt(cpf[i-1])*(11-i);
+  resto = (soma*10)%11;
+  if (resto===10) resto=0;
+  if (resto!=cpf[9]) return false;
+  soma=0;
+  for (let i=1;i<=10;i++) soma += parseInt(cpf[i-1])*(12-i);
+  resto = (soma*10)%11;
+  if (resto===10) resto=0;
+  return resto==cpf[10];
+}
+
+
+
+ paisEl.onchange = () => {
+
+  // 🔹 define o rótulo correto conforme o país
+  estadoEl.innerHTML =
+    paisEl.value === "JP"
+      ? `<option value="">Prefeitura</option>`
+      : paisEl.value === "PY"
+      ? `<option value="">Departamento</option>`
+      : `<option value="">Estado</option>`;
+
+
+// 🔹 rótulo da CIDADE conforme o país
+cidadeEl.placeholder =
+  paisEl.value === "JP"
+    ? "市 (Cidade)"
+    : paisEl.value === "PY"
+    ? "Ciudad"
+    : "Cidade";
+   
+
+  estadoEl.disabled = true;
+  cidadeEl.value = "";
+  cidadeEl.disabled = true;
+
+  const lista = ESTADOS[paisEl.value];
+
+  if (!lista) return;
+
+  lista.forEach(([valor, nome]) => {
+    const opt = document.createElement("option");
+    opt.value = valor;
+    opt.textContent = nome;
+    estadoEl.appendChild(opt);
+  
+  });
+
+    const optOutroEstado = document.createElement("option");
+    optOutroEstado.value = "OUTRO";
+    optOutroEstado.textContent = "OUTRO";
+    estadoEl.appendChild(optOutroEstado);
+
+   
+  estadoEl.disabled = false;
+};
+
+
+
+
+  
+ 
+estadoEl.onchange = () => {
+  // reset estado outro
+  estadoOutroEl.style.display = "none";
+  estadoOutroEl.value = "";
+
+  // reset cidade (SEM FORÇAR OUTRA)
+  cidadeEl.innerHTML = `<option value="">Cidade</option>`;
+  cidadeEl.disabled = true;
+  cidadeOutraEl.style.display = "none";
+  cidadeOutraEl.value = "";
+
+  if (!estadoEl.value) return;
+
+  // 🟡 ESTADO = OUTRO → só abre o campo de estado
+  if (estadoEl.value === "OUTRO") {
+    estadoOutroEl.style.display = "block";
+    estadoOutroEl.focus();
+
+    // cidade fica disponível, mas neutra
+    cidadeEl.disabled = false;
+
+    const optOutra = document.createElement("option");
+    optOutra.value = "OUTRA";
+    optOutra.textContent = "OUTRA";
+    cidadeEl.appendChild(optOutra);
+
+    return;
+  }
+
+  // 🟢 ESTADO NORMAL → carrega cidades
+  const listaCidades = CIDADES[paisEl.value]?.[estadoEl.value];
+
+  if (listaCidades) {
+    listaCidades.forEach(cidade => {
+      const opt = document.createElement("option");
+      opt.value = cidade;
+      opt.textContent = cidade;
+      cidadeEl.appendChild(opt);
+    });
+  }
+
+  // adiciona OUTRA como opção
+  const optOutra = document.createElement("option");
+  optOutra.value = "OUTRA";
+  optOutra.textContent = "OUTRA";
+  cidadeEl.appendChild(optOutra);
+
+  cidadeEl.disabled = false;
+};
+
+
+cidadeEl.onchange = () => {
+  if (cidadeEl.value === "OUTRA") {
+    cidadeOutraEl.style.display = "block";
+    cidadeOutraEl.focus();
+  } else {
+    cidadeOutraEl.style.display = "none";
+    cidadeOutraEl.value = "";
+  }
+};
+
+
+
+  
+   
+function finalizar() {
+
+const chaveCurso = `${CURSO_FIXO.trim()}__${TURMA_FIXA.trim()}`;
+
+console.log("🔎 CHAVE ESPERADA:", chaveCurso);
+console.log("📦 CHAVES DISPONÍVEIS:", Object.keys(CURSOS_MAPA));
+
+  
+
+// 🔒 VALIDA CURSO + TURMA
+if (!CURSOS_MAPA[chaveCurso]) {
+  console.error("Curso/turma não encontrada:", chaveCurso);
+  alert("Curso indisponível no momento. Entre em contato com a organização.");
+  return;
+}
+
+const cursoSelecionado = CURSOS_MAPA[chaveCurso];
+
+
+  
+
+// 🔴 VALIDA NOME (OBRIGATÓRIO)
+  
+ if (!nomeEl.value.trim()) {
+  alert("⚠️ Informe o nome do participante.");
+  nomeEl.classList.add("erro");
+  nomeEl.focus();
+  return;
+} else {
+  nomeEl.classList.remove("erro");
+}
+  
+  
+  
+  
+  // 🔴 VALIDA EMAIL (OBRIGATÓRIO)
+if (!emailEl.value.trim()) {
+  alert("⚠️ Informe o e-mail.");
+  emailEl.classList.add("erro");
+  emailEl.focus();
+  return;
+}
+
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+  alert("⚠️ Informe um e-mail válido.");
+  emailEl.classList.add("erro");
+  emailEl.focus();
+  return;
+} else {
+  emailEl.classList.remove("erro");
+}
+  
+  
+    
+  
+  // 🔴 VALIDA TELEFONE (OBRIGATÓRIO)
+if (!telefoneEl.value.trim()) {
+  alert("⚠️ Informe o telefone / WhatsApp.");
+  telefoneEl.classList.add("erro");
+  telefoneEl.focus();
+  return;
+}
+
+// mínimo 10 dígitos (DDD + número)
+if (telefoneEl.value.length < 10) {
+  alert("⚠️ Informe um telefone válido com DDD.");
+  telefoneEl.classList.add("erro");
+  telefoneEl.focus();
+  return;
+} else {
+  telefoneEl.classList.remove("erro");
+} 
+
+
+  
+  
+// 🔴 VALIDA PAÍS
+if (!paisEl.value) {
+  alert("⚠️ Selecione o país.");
+  paisEl.focus();
+  return;
+}
+
+// 🔴 VALIDA ESTADO / PREFEITURA / DEPARTAMENTO
+if (
+  !estadoEl.value ||
+  (estadoEl.value === "OUTRO" && !estadoOutroEl.value.trim())
+) {
+  alert("⚠️ Informe o estado / região.");
+  estadoEl.focus();
+  return;
+}
+
+// 🔴 VALIDA CIDADE
+if (
+  !cidadeEl.value ||
+  (cidadeEl.value === "OUTRA" && !cidadeOutraEl.value.trim())
+) {
+  alert("⚠️ Informe a cidade.");
+  cidadeEl.classList.add("erro");
+  cidadeEl.focus();
+  return;
+} else {
+  cidadeEl.classList.remove("erro");
+}
+
+
+
+  
+  if (document.querySelector(".erro")) {
+    alert("⚠️ Corrija os campos destacados.");
+    return;
+  }
+
+  // 🔒 INÍCIO DO SALVAMENTO
+btnConfirmar.innerText = "Registrando no sistema...";
+btnConfirmar.disabled = true;
+btnConfirmar.style.opacity = "0.7";
+btnConfirmar.style.cursor = "not-allowed";
+
+/* ✅ AQUI É A CORREÇÃO */
+const cidadeFinal =
+  cidadeEl.value === "OUTRA"
+    ? cidadeOutraEl.value.toUpperCase()
+    : cidadeEl.value.toUpperCase();
+
+const estadoFinal =
+  estadoEl.value === "OUTRO"
+    ? estadoOutroEl.value.toUpperCase()
+    : estadoEl.value;
+
+/* 🔽 AGORA SIM O FETCH */
+fetch(ENDPOINT, {
+  method: "POST",
+  body: JSON.stringify({
+    cpf: cpfEl.value.replace(/\D/g, ''),
+    nome: nomeEl.value.toUpperCase(),
+    email: emailEl.value.toLowerCase(),
+    telefone: telefoneEl.value,
+
+    nomeCurso: cursoSelecionado.nome,
+    turma: cursoSelecionado.turma || "",
+
+    cargaHoraria: cursoSelecionado.carga || "",
+    localCurso: cursoSelecionado.local || "",
+    dataHorarioCurso: cursoSelecionado.data || "",
+
+    cidade: cidadeFinal,
+    estado: estadoFinal,
+
+    token: cursoSelecionado.token || ""
+  })
+})
+.then(r => r.text())
+.then(txt => {
+  const res = JSON.parse(txt);
+
+  if (!res.sucesso) {
+
+  if (res.tipo === "JA_CADASTRADO_MESMA_TURMA") {
+    alert(res.mensagem);
+  } else {
+    alert("Erro ao registrar a pré-inscrição.");
+  }
+
+  btnConfirmar.disabled = false;
+  btnConfirmar.innerText = "CONFIRMAR ENVIO";
+  return;
+}
+
+ window.location.href = "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/pagamento-curitiba-ads-oferta-unica.html"; 
+  
+  
+});
+
+}
+  
+</script>
+ </body>
+</html>
