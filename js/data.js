@@ -306,7 +306,7 @@ essa decisão começa aqui.</strong>
  configuracoes: {
   mostrarNome: true,
   mostrarPreco: true,
-  mostrarResumo: false,
+  mostrarResumo: true,
   cta: {
     mostrar: true,
     texto: "COMPRAR 2º LOTE COM DESCONTO",
@@ -351,7 +351,7 @@ ofertaRelampago: {
   delaySegundos: 10,
   tempoMinutos: 45,
 
-  titulo: "🎉 Parabéns! Oferta Única!<br><br>SEJA UM PRACTITIONER EM PROGRAMAÇÃO NEUROLINGUÍTICA",
+  titulo: "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "2º Lote. Exclusivo para esta página!",
 
   valorDe: 1997,
