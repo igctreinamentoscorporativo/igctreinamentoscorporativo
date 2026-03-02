@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>Resumo</p>
+      <p>Seja um Practitioner em PNL Programação Neorolingística</p>
              
        `,
       
@@ -85,7 +85,7 @@ const produtos = [
 
 <div class="bloco azul-claro">
 
-<h2>PARA QUEM É ESTE TREINAMENTO?</h2>
+<h2>PARA QUEM É ESTE TREINAMENTO EM PRACTITIONER PNL?</h2>
 <br>
 <strong>Este curso é para você que:</strong>
 <br>
@@ -351,7 +351,7 @@ ofertaRelampago: {
   delaySegundos: 10,
   tempoMinutos: 45,
 
-  titulo: "🎉 Parabéns! Oferta Única!",
+  titulo: "🎉 Parabéns! Oferta Única!<br><br>SEJA UM PRACTITIONER EM PROGRAMAÇÃO NEUROLINGUÍTICA",
   subtitulo: "2º Lote. Exclusivo para esta página!",
 
   valorDe: 1997,
