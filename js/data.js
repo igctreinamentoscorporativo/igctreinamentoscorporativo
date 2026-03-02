@@ -349,7 +349,7 @@ videoPrincipal: {
 ofertaRelampago: {
   mostrar: true,
   delaySegundos: 10,
-  tempoMinutos: 45,
+  tempoMinutos: 120,
 
   titulo: "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "2º Lote. Exclusivo para esta página!",
