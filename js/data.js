@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>Seja um Practitioner em PNL Programação Neurolingística</p>
+      <p>Seja um Practitioner em PNL Programação Neurolinguística</p>
              
        `,
       
