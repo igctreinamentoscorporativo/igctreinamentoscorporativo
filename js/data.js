@@ -350,16 +350,12 @@ ofertaRelampago: {
   mostrar: true,
   delaySegundos: 10,
   tempoMinutos: 120,
-
-  // 👇 NOVO
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
-
   titulo: "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "2º Lote. Exclusivo para esta página!",
-
+  mostrarPrecos: true,
   valorDe: 1997,
   valorPor: 697,
-
 
 // 🔥 NOVO BLOCO
   parcelamento: {
@@ -374,8 +370,6 @@ ofertaRelampago: {
   
 },
 
-
-     
 
 destaque: true,
 mostrarlancamento: false,
