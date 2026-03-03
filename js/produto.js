@@ -416,16 +416,31 @@ function abrirModalYoutube(id) {
 function iniciarOfertaRelampago(config, produtoId) {
 
   const storageKeyExpira = "ofertaExpira_" + produtoId;
+  const storageKeyBloqueio = "ofertaBloqueio_" + produtoId;
 
   setTimeout(() => {
+
+    const agora = Date.now();
+
+    // 🔒 Verifica se está bloqueado
+    const bloqueioSalvo = localStorage.getItem(storageKeyBloqueio);
+
+    if (bloqueioSalvo) {
+      const desbloqueiaEm = parseInt(bloqueioSalvo);
+
+      if (agora < desbloqueiaEm) {
+        return; // ainda bloqueado
+      } else {
+        // desbloqueou
+        localStorage.removeItem(storageKeyBloqueio);
+        localStorage.removeItem(storageKeyExpira);
+      }
+    }
 
     let expiraEm;
     const salvo = localStorage.getItem(storageKeyExpira);
 
-    // 🔒 Se já expirou antes, nunca mais mostra
-    if (salvo === "expirado") {
-      return;
-    }
+    
 
     // 🔄 Se já existe timestamp salvo
     if (salvo && !isNaN(salvo)) {
@@ -440,9 +455,9 @@ function iniciarOfertaRelampago(config, produtoId) {
 
     // ⛔ Se já expirou antes de renderizar
     if (tempoRestanteMs <= 0) {
-      localStorage.setItem(storageKeyExpira, "expirado");
-      return;
-    }
+  aplicarBloqueio(config, produtoId);
+  return;
+}
 
     const banner = document.createElement("div");
     banner.className = "oferta-relampago-banner";
@@ -504,7 +519,7 @@ function iniciarOfertaRelampago(config, produtoId) {
       if (restante <= 0) {
         clearInterval(intervalo);
         banner.remove();
-        localStorage.setItem(storageKeyExpira, "expirado");
+        aplicarBloqueio(config, produtoId);
         return;
       }
 
@@ -521,6 +536,24 @@ function iniciarOfertaRelampago(config, produtoId) {
 }
 
 
+
+
+
+
+function aplicarBloqueio(config, produtoId) {
+
+  const dias = config.diasParaReexibir || 0;
+
+  const storageKeyBloqueio = "ofertaBloqueio_" + produtoId;
+  const storageKeyExpira = "ofertaExpira_" + produtoId;
+
+  const agora = Date.now();
+
+  const desbloqueiaEm = agora + (dias * 24 * 60 * 60 * 1000);
+
+  localStorage.setItem(storageKeyBloqueio, desbloqueiaEm);
+  localStorage.removeItem(storageKeyExpira);
+}
 
 
 
