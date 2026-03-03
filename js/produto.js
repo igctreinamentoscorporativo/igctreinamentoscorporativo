@@ -470,7 +470,9 @@ function iniciarOfertaRelampago(config, produtoId) {
           ${config.subtitulo || ""}
         </div>
 
-        <div class="oferta-precos">
+        ${config.mostrarPrecos ? `
+
+<div class="oferta-precos">
 
   <div class="preco-linha-principal">
 
@@ -496,6 +498,8 @@ function iniciarOfertaRelampago(config, produtoId) {
   </div>
 
 </div>
+
+` : ""}
 
         <div class="oferta-tempo">
           Válido por: <span id="contador-oferta"></span>
