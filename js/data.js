@@ -353,7 +353,7 @@ ofertaRelampago: {
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
   titulo: "🎉 PARABÉNS! <br>VOCÊ ACABA DE GANHAR...",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "Oferta Única - Practitioner em PNL",            //2º Lote. Exclusivo para esta página!
-  mostrarPrecos: true,
+  mostrarPrecos: false,
   valorDe: 1997,
   valorPor: 697,
 
