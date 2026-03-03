@@ -544,6 +544,7 @@ function iniciarOfertaRelampago(config, produtoId) {
 
 
 
+
 function aplicarBloqueio(config, produtoId) {
 
   const dias = config.diasParaReexibir || 0;
