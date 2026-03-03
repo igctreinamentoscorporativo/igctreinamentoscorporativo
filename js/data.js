@@ -349,10 +349,10 @@ videoPrincipal: {
 ofertaRelampago: {
   mostrar: true,
   delaySegundos: 10,
-  tempoMinutos: 1,
+  tempoMinutos: 120,
 
   // 👇 NOVO
-  diasParaReexibir: 0.003, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
+  diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
 
   titulo: "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "2º Lote. Exclusivo para esta página!",
