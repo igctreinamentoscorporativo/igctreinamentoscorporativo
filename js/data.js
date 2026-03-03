@@ -351,8 +351,8 @@ ofertaRelampago: {
   delaySegundos: 10,
   tempoMinutos: 120,
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
-  titulo: "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
-  subtitulo: "2º Lote. Exclusivo para esta página!",
+  titulo: "🎉 PARABÉNS! <br>VOCÊ ACABA DE GANHAR...",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "Oferta Única - Practitioner em PNL",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: true,
   valorDe: 1997,
   valorPor: 697,
@@ -360,12 +360,12 @@ ofertaRelampago: {
 // 🔥 NOVO BLOCO
   parcelamento: {
     mostrar: true,
-    texto: "Apenas 12x de R$ 61,89"
+    texto: "Super Desconto + Bônus Grátis"                    //Apenas 12x de R$ 61,89
   },
    
 
-  textoBotao: "COMPRAR COM DESCONTO",
-  link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
+  textoBotao: "RECEBA AGORA",
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",           // "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
 
   
 },
