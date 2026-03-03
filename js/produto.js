@@ -470,7 +470,7 @@ function iniciarOfertaRelampago(config, produtoId) {
           ${config.subtitulo || ""}
         </div>
 
-        ${config.mostrarPrecos ? `
+       ${config.mostrarPrecos ? `
 
 <div class="oferta-precos">
 
@@ -487,16 +487,18 @@ function iniciarOfertaRelampago(config, produtoId) {
 
   </div>
 
-  ${config.parcelamento?.mostrar ? `
-    <div class="preco-parcelamento">
-      ${config.parcelamento.texto}
-    </div>
-  ` : ""}
-
   <div class="preco-off">
     ${formatarPreco(config.valorDe - config.valorPor)} OFF
   </div>
 
+</div>
+
+` : ""}
+
+${config.mostrarParcelamento ? `
+
+<div class="preco-parcelamento" style="margin-top:8px;">
+  ${config.parcelamento?.texto || ""}
 </div>
 
 ` : ""}
