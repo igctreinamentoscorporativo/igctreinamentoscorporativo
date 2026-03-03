@@ -351,8 +351,8 @@ ofertaRelampago: {
   delaySegundos: 10,
   tempoMinutos: 120,
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
-  titulo: "🎉 PARABÉNS! <br>VOCÊ GANHOU🏅",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
-  subtitulo: "✨Oferta Única - 🎓Practitioner em PNL",            //2º Lote. Exclusivo para esta página!
+  titulo: "🎉 PARABÉNS! VOCÊ GANHOU🏅",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "✨Oferta Única - 🎓<strong>Practitioner em PNL</strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
   mostrarParcelamento: true,   // 🔥 ESTA LINHA FALTAVA
   valorDe: 1997,
