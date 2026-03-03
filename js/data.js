@@ -348,7 +348,7 @@ videoPrincipal: {
 
 ofertaRelampago: {
   mostrar: true,
-  delaySegundos: 10,
+  delaySegundos: 3,
   tempoMinutos: 120,
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
   titulo: "🎉 PARABÉNS! VOCÊ GANHOU🏅",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
