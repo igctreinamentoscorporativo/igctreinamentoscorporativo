@@ -361,7 +361,7 @@ ofertaRelampago: {
    // 🔥 NOVO BLOCO
   parcelamento: { 
   
-     texto: "🔥Super Desconto + 👑Bônus Grátis"                    //Apenas 12x de R$ 61,89
+     texto: "🔥Super Desconto + 💎Bônus Grátis"                    //Apenas 12x de R$ 61,89
   },
    
   textoBotao: "🎁RECEBA AGORA",
