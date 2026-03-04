@@ -354,7 +354,7 @@ ofertaRelampago: {
   titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Exclusivo 🆓",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "🔥 <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓<strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
-  mostrarParcelamento: false,
+  mostrarParcelamento: true,
   valorDe: 1997,
   valorPor: 697,
   
