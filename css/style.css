@@ -2386,6 +2386,7 @@ a.btn-comprar {
   animation: pulseGlow 2s infinite;
   position: relative;
   z-index: 2;
+  line-height:1.2;
 }
 
 .btn-oferta:hover {
@@ -2396,7 +2397,7 @@ a.btn-comprar {
 
 .texto-botao-extra{
   display:block;
-  font-size:10px;
+  font-size:12px;
   font-weight:500;
   opacity:0.85;
   margin-top:2px;
