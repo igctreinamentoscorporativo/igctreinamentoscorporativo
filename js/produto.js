@@ -128,6 +128,7 @@ setTimeout(() => {
     const header = item.querySelector(".accordion-header-premium");
     const content = item.querySelector(".accordion-content-premium");
 
+    // se algum iniciar aberto
     if (item.classList.contains("active")) {
       content.style.maxHeight = content.scrollHeight + "px";
     }
@@ -136,32 +137,40 @@ setTimeout(() => {
 
       const aberto = item.classList.contains("active");
 
+      // posição do header antes de abrir
+      const posAntes = header.getBoundingClientRect().top;
+
+      // fecha todos
       items.forEach(i => {
         i.classList.remove("active");
         const c = i.querySelector(".accordion-content-premium");
         if (c) c.style.maxHeight = null;
       });
 
+      // abre o clicado
       if (!aberto) {
-
         item.classList.add("active");
         content.style.maxHeight = content.scrollHeight + "px";
-
-        setTimeout(() => {
-          item.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
-        }, 250);
-
       }
+
+      // corrige o scroll para não "pular"
+      requestAnimationFrame(() => {
+
+        const posDepois = header.getBoundingClientRect().top;
+        const diferenca = posDepois - posAntes;
+
+        window.scrollBy({
+          top: diferenca,
+          behavior: "auto"
+        });
+
+      });
 
     });
 
   });
 
 }, 200);
-
 
 
   
