@@ -352,7 +352,7 @@ ofertaRelampago: {
   tempoMinutos: 120,
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
   titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Exclusivo 🆓",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
-  subtitulo: "🔥 <strong>4327 pessoas já de certificaram nesse treinamento<strong>",            //2º Lote. Exclusivo para esta página!
+  subtitulo: "🔥 <strong>4327 pessoas já se 📜 certificaram nesse treinamento<strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
   mostrarParcelamento: false,
   valorDe: 1997,
@@ -364,7 +364,7 @@ ofertaRelampago: {
      texto: "🔥Super Desconto + 💎Bônus Grátis"                    //Apenas 12x de R$ 61,89
   },
    
-  textoBotao: "🎁 RECEBER SUPER DESCONTO + BÔNUS",
+  textoBotao: "🎁 QUERO RECEBER",
   link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/receberbonus.html",           // "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
 
   
