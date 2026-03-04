@@ -191,7 +191,7 @@ accordion: [
 
 
 {
-      titulo: "🫶 Por que essa Formação é poderosa?",
+      titulo: "🫶 Por que essa formação é poderosa?",
       conteudo: `
       
  
@@ -222,7 +222,7 @@ accordion: [
    
 
 {
-      titulo: "📌 Como funciona a imersão",
+      titulo: "📌 Onde vai aconter o treinamento?",
       conteudo: `
      
 
@@ -252,7 +252,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
 
 {
-      titulo: "👨 Quem conduz a Formação?",
+      titulo: "👨 Quem conduz a formação?",
       conteudo: `
      
 
@@ -283,7 +283,7 @@ essa é a sua oportunidade.
 
 
 {
-      titulo: "💬 Perguntas Frequentes",
+      titulo: "💬 Dúvidas frequentes",
       conteudo: `
      
 
