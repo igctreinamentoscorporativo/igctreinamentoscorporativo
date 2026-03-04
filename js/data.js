@@ -364,7 +364,7 @@ ofertaRelampago: {
      texto: "🔥Super Desconto + 💎Bônus Grátis"                    //Apenas 12x de R$ 61,89
   },
    
-  textoBotao: "🎁 RECEBER DESCONTO + BÔNUS",
+  textoBotao: "🎁 RECEBER OFERTA + BÔNUS",
   link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/receberbonus.html",           // "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
 
   
