@@ -353,8 +353,8 @@ ofertaRelampago: {
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
   titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Exclusivo 🆓",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "🔥 <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓<strong>",            //2º Lote. Exclusivo para esta página!
-  mostrarPrecos: true,
-  mostrarParcelamento: true,
+  mostrarPrecos: false,
+  mostrarParcelamento: false,
   valorDe: 1997,
   valorPor: 697,
   
@@ -374,7 +374,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "Ou Valor especial para o 2º Lote até 07/03 por <strong>apenas 12x de R$ 70,77</strong> ou R$ 797,00"
+textoParcelamento: "<strong>Ou Valor especial para:</strong><br> 1º Lote R$ 497,00 até 28/02<br>2º Lote R$ 797,00 até 07/03<br>3º Lote R$ 997,00 até 14/03<br>4º Lote até 28/03 R$ 1197,00<br><strong>Condições de pagamento facilitado</strong>"
      
     },
 
