@@ -2378,6 +2378,9 @@ a.btn-comprar {
   font-weight: bold;
   margin-top: 5px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  animation: pulseGlow 2s infinite;
+  position: relative;
+  z-index: 2;
 }
 
 .btn-oferta:hover {
@@ -2389,6 +2392,24 @@ a.btn-comprar {
   from { transform: translate(-50%, -20px); opacity: 0; }
   to { transform: translate(-50%, 0); opacity: 1; }
 }
+
+
+
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255,200,0,0.6);
+  }
+
+  70% {
+    box-shadow: 0 0 0 14px rgba(255,255,255,0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255,255,255,0);
+  }
+}
+
 
 
 
