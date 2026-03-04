@@ -66,7 +66,7 @@ const categorias = [
 const produtos = [
   {
     id: "1",
-    nome: "Formação Practitioner em PNL | Curitiba 10 a 12 de Abril | Certificação Internacional | Vagas Limitadas",
+    nome: "Practitioner em PNL | Ed. Curitiba - 10, 11 e 12 de Abril",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
@@ -92,12 +92,12 @@ accordion: [
 <strong>Este curso é para você que:</strong>
 <br>
 <ul class="lista">
-<li>Quer dominar a sua mente para tomar decisões melhores</li>
-<li>Precisa influenciar e persuadir pessoas com ética e clareza</li>
-<li>Busca maior performance em carreira, relações e comunicação</li>
-<li>Quer romper padrões limitantes que te impedem de evoluir</li>
-<li>Deseja um certificado internacional reconhecido</li>
-<li>Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</li>
+<li>🌟 Quer dominar a sua mente para tomar decisões melhores</li>
+<li>🌟 Precisa influenciar e persuadir pessoas com ética e clareza</li>
+<li>🌟 Busca maior performance em carreira, relações e comunicação</li>
+<li>🌟 Quer romper padrões limitantes que te impedem de evoluir</li>
+<li>🌟 Deseja um certificado internacional reconhecido</li>
+<li>🌟 Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</li>
 </ul>
 
 <strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
@@ -112,9 +112,9 @@ accordion: [
 <p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
 <br>
 <ul class="lista">
-<li>Como você percebe o mundo</li>
-<li>Como processa os seus pensamentos</li>
-<li>Como influencia e negocia com as suas palavras</li>
+<li>✔️ Como você percebe o mundo</li>
+<li>✔️ Como processa os seus pensamentos</li>
+<li>✔️ Como influencia e negocia com as suas palavras</li>
 </ul>
 <br>
 <p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
@@ -237,14 +237,14 @@ accordion: [
    
 
 {
-      titulo: "📍 Como funciona a imersão",
+      titulo: "📌 Como funciona a imersão",
       conteudo: `
      
 
 
-<strong>Local:</strong> Curitiba-PR – Del Rey Hotel
+<strong>📍 Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
-<strong>Datas e formato:</strong> Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
+<strong>📅 Datas e formato:</strong> Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
 <br>
 Sábado – 11/04/2026 das 09h às 19h (presencial – imersivo)
 <br>
