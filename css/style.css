@@ -2332,21 +2332,25 @@ ACCORDION PRODUTO VERSÃO ANTIGA
   transition: all 0.3s ease;
 }
 
-.accordion-header-premium {
-  width: 100%;
-  background: none;
-  border: none;
-  padding: 22px 0;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--azul-escuro);
-  cursor: pointer;
+.accordion-header-premium{
+  width:100%;
+  background:none;
+  border:none;
+  padding:22px 0;
+  font-size:20px;
+  font-weight:600;
+  color:var(--azul-escuro);
+  cursor:pointer;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+}
 
-  transition: color 0.3s ease;
+.accordion-header-premium span:first-child{
+  text-align:left;
+  flex:1;
 }
 
 .accordion-header-premium:hover {
@@ -2414,13 +2418,9 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 
 .accordion-content-premium{
-  max-height:0;
+  height:0;
   overflow:hidden;
-  transition:max-height .35s ease;
-}
-
-.accordion-item-premium.active .accordion-content-premium{
-  max-height:5000px;
+  transition:height .35s ease;
 }
 
 
