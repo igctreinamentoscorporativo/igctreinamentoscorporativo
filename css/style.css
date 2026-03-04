@@ -2274,7 +2274,7 @@ a.btn-comprar {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, #ff0000, #ff6600);
+  background: linear-gradient(135deg, #ff3d00, #ff7a00, #ff3d00);
   color: #fff;
   padding: 14px 20px;
   border-radius: 12px;
@@ -2322,8 +2322,8 @@ a.btn-comprar {
   font-size: 40px;
   font-weight: 900;
   color: #ffffff;
-  text-shadow: 0 0 12px rgba(255,255,255,0.6);
-  animation: pulsarPreco 1.5s infinite;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  animation: pulsarPreco 2.4s ease-in-out infinite;
 }
 
 /* Texto "por" menor */
@@ -2337,9 +2337,9 @@ a.btn-comprar {
 .preco-parcelamento {
   margin-top: 10px;
   font-size: 22px;
-  font-weight: 800;
-  background: #ffffff;
-  color: #ff0000;
+  font-weight: 900;
+  background: rgba(255,255,255,0.95);
+  color: #ff3d00;
   padding: 6px 12px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -2365,17 +2365,24 @@ a.btn-comprar {
 .oferta-tempo {
   font-size: 16px;
   margin: 5px 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .btn-oferta {
-  display: inline-block;
-  background: #fff;
-  color: #ff0000;
-  padding: 8px 14px;
+  background: #ffffff;
+  color: #ff3d00;
+  font-size: 16px;
+  padding: 12px 18px;
   border-radius: 8px;
   font-weight: bold;
-  text-decoration: none;
   margin-top: 5px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.btn-oferta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.35);
 }
 
 @keyframes aparecer {
@@ -2449,6 +2456,8 @@ a.btn-comprar {
     border-radius: 16px;
     padding: 14px;
     transition: all 0.3s ease;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+    backdrop-filter: blur(6px);
   }
 
   /* ESTADO MINIMIZADO */
