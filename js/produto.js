@@ -133,23 +133,29 @@ setTimeout(() => {
 
     header.addEventListener("click", () => {
 
-      const aberto = item.classList.contains("active");
+  const aberto = item.classList.contains("active");
 
-      items.forEach(i => {
-        i.classList.remove("active");
-        i.querySelector(".accordion-content-premium").style.maxHeight = null;
-      });
-
-      if (!aberto) {
-        item.classList.add("active");
-        content.style.maxHeight = content.scrollHeight + "px";
-      }
-
-    });
-
+  items.forEach(i => {
+    i.classList.remove("active");
+    i.querySelector(".accordion-content-premium").style.maxHeight = null;
   });
 
-}, 200);
+  if (!aberto) {
+
+    item.classList.add("active");
+    content.style.maxHeight = content.scrollHeight + "px";
+
+    // 🔥 CORREÇÃO DO FOCO
+    setTimeout(() => {
+      item.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 250);
+
+  }
+
+});
 
 
 
