@@ -371,7 +371,7 @@ Sim.
  configuracoes: {
   mostrarNome: true,
   mostrarPreco: true,
-  mostrarResumo: true,
+  mostrarResumo: false,
   cta: {
     mostrar: true,
     texto: "COMPRAR 2º LOTE",
