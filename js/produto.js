@@ -91,29 +91,21 @@ function montarProduto(produto) {
   `;
 
   // ----- DESCRIÇÃO COMPLETA -----
+  if (produto.descricao?.accordion) {
+
+  document.getElementById("produto-descricao").innerHTML =
+    renderAccordion(produto.descricao.accordion);
+
+} else {
+
   document.getElementById("produto-descricao").innerHTML = `
-    <section>
-
- 
-      
-      <p>${produto.descricao.oQueE}</p>
-    </section>
-
-    <section>
-      
-      <p>${produto.descricao.composicao}</p>
-    </section>
-
-    <section>
-      
-      <p>${produto.descricao.comoUsar}</p>
-    </section>
-
-    <section>
-      
-      <p>${produto.descricao.advertencias}</p>
-    </section>
+    <section>${produto.descricao.oQueE || ""}</section>
+    <section>${produto.descricao.composicao || ""}</section>
+    <section>${produto.descricao.comoUsar || ""}</section>
+    <section>${produto.descricao.advertencias || ""}</section>
   `;
+
+}
 
 
 // 🔽 AQUI VOCÊ CHAMA OS BLOCOS ASSISTIVOS
@@ -121,6 +113,38 @@ function montarProduto(produto) {
   
 
 
+
+/ =============================
+// ATIVAR ACCORDION (SE EXISTIR)
+// =============================
+  
+setTimeout(() => {
+
+  document.querySelectorAll(".accordion-header").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+      const item = btn.parentElement;
+      const content = item.querySelector(".accordion-content");
+
+      item.classList.toggle("active");
+
+      if (item.classList.contains("active")) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.style.maxHeight = null;
+      }
+
+    });
+
+  });
+
+}, 200);
+
+
+
+
+  
 
 
 
@@ -798,3 +822,38 @@ document.addEventListener("click", function (event) {
     menu.classList.remove("active");
   }
 });
+
+
+
+
+/* ============================================================
+   CONTRE DOS ACORDEONS DOS PRODUTOS
+   ============================================================ */
+
+
+function renderAccordion(itens) {
+
+  return `
+  <div class="produto-accordion">
+
+    ${itens.map((item, i) => `
+    
+      <div class="accordion-item">
+
+        <button class="accordion-header">
+          <span>${item.titulo}</span>
+          <span class="accordion-icon">+</span>
+        </button>
+
+        <div class="accordion-content">
+          ${item.conteudo}
+        </div>
+
+      </div>
+
+    `).join("")}
+
+  </div>
+  `;
+
+}
