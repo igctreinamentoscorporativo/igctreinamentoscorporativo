@@ -2266,7 +2266,7 @@ a.btn-comprar {
 
 
 /* =============================
-ACCORDION PRODUTO
+ACCORDION PRODUTO VERSÃO ANTIGA
 ============================= */
 
 .produto-accordion {
@@ -2307,6 +2307,108 @@ ACCORDION PRODUTO
 .accordion-item.active .accordion-content {
   padding: 16px;
 }
+
+
+
+
+
+
+
+
+
+/* ===============================
+   ACCORDION PREMIUM VERSÃO NOVA
+=============================== */
+
+.accordion-premium {
+  max-width: 900px;
+  margin: 50px auto;
+}
+
+.accordion-item-premium {
+  border-bottom: 1px solid #E5E7EB;
+  transition: all 0.3s ease;
+}
+
+.accordion-header-premium {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 22px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--azul-escuro);
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: color 0.3s ease;
+}
+
+.accordion-header-premium:hover {
+  color: var(--azul-medio);
+}
+
+/* ICON */
+
+.accordion-icon-premium {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.accordion-icon-premium::before,
+.accordion-icon-premium::after {
+  content: "";
+  position: absolute;
+  background: var(--azul-escuro);
+  transition: all 0.4s ease;
+}
+
+.accordion-icon-premium::before {
+  width: 18px;
+  height: 2px;
+  top: 8px;
+  left: 0;
+}
+
+.accordion-icon-premium::after {
+  width: 2px;
+  height: 18px;
+  left: 8px;
+  top: 0;
+}
+
+/* ROTACIONAR */
+
+.accordion-item-premium.active .accordion-icon-premium::after {
+  transform: scaleY(0);
+}
+
+/* CONTENT */
+
+.accordion-content-premium {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+
+.accordion-inner {
+  padding: 10px 0 30px 0;
+  color: #374151;
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+/* EFEITO */
+
+.accordion-item-premium.active {
+  border-color: var(--azul-medio);
+}
+
 
 
 
