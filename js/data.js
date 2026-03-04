@@ -105,6 +105,7 @@ accordion: [
 <br>
 
 
+
  <p>👉 Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
  <p>👉 Já viu oportunidades escaparem porque você não foi ouvido?</p>
  <p>👉 Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
