@@ -2413,7 +2413,15 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 
 
+.accordion-content-premium{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+}
 
+.accordion-item-premium.active .accordion-content-premium{
+  max-height:1000px;
+}
 
 
 
