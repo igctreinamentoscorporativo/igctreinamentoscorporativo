@@ -119,8 +119,6 @@ accordion: [
 <br>
 <p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
 
-</div>
-
 
       
       `
@@ -235,49 +233,6 @@ accordion: [
     },
 
 
-
-
-
-
-
-{
-      titulo: "🫶 Por que essa Formação é poderosa?",
-      conteudo: `
-      
-      
- 
-    
-    
-<ul class="lista">
-<li>Três dias intensivos de imersão prática em PNL</li>
-<li>Certificação Internacional com carga horária oficial de 20h</li> 
-<li>Metodologia apoiada nas bases da PNL moderna</li>
-<li>Conteúdo aplicável desde o primeiro módulo</li>
-<li>Ferramentas práticas, não apenas teoria</li>
-<li>Foco em mudança comportamental real</li>
-<li>Resultados visíveis na sua vida e no seu entorno</li>
-<li>Registro IGC-MEC no certificado</li>
-<li>Validação online via QR Code</li>
-<li>Atividades práticas individuais e em grupo com alto impacto transformacional</li>
-</ul>
-
-<p><strong>PNL não muda apenas o que você sabe.</strong>
-<br>
-<strong>PNL muda o que você faz.</strong></p>
-<br>  
-      
-  
-      
-     
-      `
-    },
-
-
-
-   
-
-   
-
    
 
 {
@@ -383,15 +338,10 @@ Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalh
 
      
       `
-    }
-   
+    } 
+ 
+  ],
 
-   
-
-
-   
-  ]
-},
 
    
        
@@ -667,7 +617,7 @@ ofertaRelampago: {
   tempoMinutos: 120,
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
   titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Exclusivo 🆓",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
-  subtitulo: "🔥 <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓<strong>",            //2º Lote. Exclusivo para esta página!
+  subtitulo: "🔥 <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓</strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
   mostrarParcelamento: false,
   valorDe: 1997,
