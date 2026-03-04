@@ -114,7 +114,7 @@ function montarProduto(produto) {
 
 
 
-/ =============================
+// =============================
 // ATIVAR ACCORDION (SE EXISTIR)
 // =============================
   
