@@ -91,14 +91,14 @@ accordion: [
 <br>
 <strong>Este curso é para você que:</strong>
 <br>
-<ul class="lista">
-<li>🌟 Quer dominar a sua mente para tomar decisões melhores</li>
-<li>🌟 Precisa influenciar e persuadir pessoas com ética e clareza</li>
-<li>🌟 Busca maior performance em carreira, relações e comunicação</li>
-<li>🌟 Quer romper padrões limitantes que te impedem de evoluir</li>
-<li>🌟 Deseja um certificado internacional reconhecido</li>
-<li>🌟 Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</li>
-</ul>
+
+<p>🌟 Quer dominar a sua mente para tomar decisões melhores</p>
+<p>🌟 Precisa influenciar e persuadir pessoas com ética e clareza</p>
+<p>🌟 Busca maior performance em carreira, relações e comunicação</p>
+<p>🌟 Quer romper padrões limitantes que te impedem de evoluir</p>
+<p>🌟 Deseja um certificado internacional reconhecido</p>
+<p>🌟 Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
+
 
 <strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
 <br>
@@ -112,11 +112,10 @@ accordion: [
 <br>
 <p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
 <br>
-<ul class="lista">
-<li>✔️ Como você percebe o mundo</li>
-<li>✔️ Como processa os seus pensamentos</li>
-<li>✔️ Como influencia e negocia com as suas palavras</li>
-</ul>
+
+<p>✔️ Como você percebe o mundo</p>
+<p>✔️ Como processa os seus pensamentos</p>
+<p>✔️ Como influencia e negocia com as suas palavras</p>
 <br>
 <p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
 
@@ -131,26 +130,19 @@ accordion: [
       titulo: "🧠 O que você vai aprender?",
       conteudo: `
      
+   
       
-      
-      
-      <ul>
-        <li>✔️ Comunicação poderosa</li>
-        <li>✔️ Controle emocional</li>
-        <li>✔️ Alta performance</li>
-      </ul>
+<p>✔️ Comunicação poderosa</p>
+<p>✔️ Controle emocional</p>
+<p>✔️ Alta performance</p>
+<p>✔️ Como interpretar e ajustar a sua linguagem interna</p>
+<p>✔️ Técnicas de comunicação eficaz e persuasiva</p>
+<p>✔️ Como reconhecer e modificar padrões limitantes</p>
+<p>✔️ Como construir confiança instantânea em si mesmo</p>
+<p>✔️ Estratégias de influência sem manipulação</p>
+<p>✔️ Ferramentas práticas para situações reais</p>
+<p>✔️ Comportamento emocional estável sob pressão</p>
 
-
-
-<ul class="lista">
-<li>✔️ Como interpretar e ajustar a sua linguagem interna</li>
-<li>✔️ Técnicas de comunicação eficaz e persuasiva</li>
-<li>✔️ Como reconhecer e modificar padrões limitantes</li>
-<li>✔️ Como construir confiança instantânea em si mesmo</li>
-<li>✔️ Estratégias de influência sem manipulação</li>
-<li>✔️ Ferramentas práticas para situações reais</li>
-<li>✔️ Comportamento emocional estável sob pressão</li>
-</ul>
 <br>
 <p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
 
@@ -187,10 +179,7 @@ accordion: [
 <br>
 <strong>É método aplicado com base em ciência comportamental.</strong>
 <br>  
-      
-      
-  
-      
+
      
       `
     },
@@ -205,31 +194,26 @@ accordion: [
       titulo: "🫶 Por que essa Formação é poderosa?",
       conteudo: `
       
-      
  
-    
-    
-<ul class="lista">
-<li>✔️ Três dias intensivos de imersão prática em PNL</li>
-<li>✔️ Certificação Internacional com carga horária oficial de 20h</li> 
-<li>✔️ Metodologia apoiada nas bases da PNL moderna</li>
-<li>✔️ Conteúdo aplicável desde o primeiro módulo</li>
-<li>✔️ Ferramentas práticas, não apenas teoria</li>
-<li>✔️ Foco em mudança comportamental real</li>
-<li>✔️ Resultados visíveis na sua vida e no seu entorno</li>
-<li>✔️ Registro IGC-MEC no certificado</li>
-<li>✔️ Validação online via QR Code</li>
-<li>✔️ Atividades práticas individuais e em grupo com alto impacto transformacional</li>
-</ul>
+
+<p>✔️ Três dias intensivos de imersão prática em PNL</p>
+<p>✔️ Certificação Internacional com carga horária oficial de 20h</p> 
+<p>✔️ Metodologia apoiada nas bases da PNL moderna</p>
+<p>✔️ Conteúdo aplicável desde o primeiro módulo</p>
+<p>✔️ Ferramentas práticas, não apenas teoria</p>
+<p>✔️ Foco em mudança comportamental real</p>
+<p>✔️ Resultados visíveis na sua vida e no seu entorno</p>
+<p>✔️ Registro IGC-MEC no certificado</p>
+<p>✔️ Validação online via QR Code</p>
+<p>✔️ Atividades práticas individuais e em grupo com alto impacto transformacional</p>
+
 <br>
 <br>
 <p><strong>PNL não muda apenas o que você sabe.</strong>
 <br>
 <strong>PNL muda o que você faz.</strong></p>
 <br>  
-      
-  
-      
+     
      
       `
     },
