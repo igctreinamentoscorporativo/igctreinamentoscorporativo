@@ -2413,9 +2413,11 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 
 .accordion-content-premium{
-  height:0;
-  overflow:hidden;
-  transition:height .35s ease;
+  display:none;
+}
+
+.accordion-item-premium.active .accordion-content-premium{
+  display:block;
 }
 
 
