@@ -2370,13 +2370,18 @@ a.btn-comprar {
 }
 
 .btn-oferta {
+  display: inline-block; 
   background: #ffffff;
   color: #ff3d00;
   font-size: 16px;
   padding: 12px 18px;
   border-radius: 8px;
+  text-decoration: none;
   font-weight: bold;
   margin-top: 5px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box; 
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   animation: pulseGlow 2s infinite;
   position: relative;
@@ -2506,6 +2511,11 @@ a.btn-comprar {
   font-size: 18px;
 }
 
+
+.btn-oferta {
+  font-size: 14px;
+  padding: 10px 12px;
+}   
  
 
 }
