@@ -207,11 +207,16 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
   
   
 // ================= AUTO ABRIR VÍDEO =================
-if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
+
+  if (
+  produto.videoPrincipal?.mostrar &&
+  produto.videoPrincipal?.autoplay &&
+  produto.videoPrincipal.youtubeId
+) {
   setTimeout(() => {
-  abrirModalYoutube(produto.videoPrincipal.youtubeId);
-  }, 200); // pequeno delay para carregar layout
-  }
+    abrirModalYoutube(produto.videoPrincipal.youtubeId);
+  }, 200);
+}
 
 
 // ================= OFERTA RELÂMPAGO =================
