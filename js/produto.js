@@ -116,7 +116,7 @@ function montarProduto(produto) {
 
   
 // =============================
-// ATIVAR ACCORDION (SE EXISTIR)
+// ATIVAR ACCORDION (VERSÃO ESTÁVEL)
 // =============================
 
 setTimeout(() => {
@@ -128,41 +128,43 @@ setTimeout(() => {
     const header = item.querySelector(".accordion-header-premium");
     const content = item.querySelector(".accordion-content-premium");
 
-    // se algum iniciar aberto
-    if (item.classList.contains("active")) {
-      content.style.maxHeight = content.scrollHeight + "px";
-    }
-
     header.addEventListener("click", () => {
 
       const aberto = item.classList.contains("active");
 
-      // posição do header antes de abrir
+      // posição do header antes da mudança
       const posAntes = header.getBoundingClientRect().top;
 
-      // fecha todos
-      items.forEach(i => {
-        i.classList.remove("active");
-        const c = i.querySelector(".accordion-content-premium");
-        if (c) c.style.maxHeight = null;
-      });
-
-      // abre o clicado
       if (!aberto) {
+
+        // abre o clicado primeiro
         item.classList.add("active");
         content.style.maxHeight = content.scrollHeight + "px";
+
+        // fecha os outros depois
+        items.forEach(i => {
+          if (i !== item) {
+            i.classList.remove("active");
+            const c = i.querySelector(".accordion-content-premium");
+            if (c) c.style.maxHeight = null;
+          }
+        });
+
+      } else {
+
+        // fechar se clicar no mesmo
+        item.classList.remove("active");
+        content.style.maxHeight = null;
+
       }
 
-      // corrige o scroll para não "pular"
+      // corrige a posição do scroll
       requestAnimationFrame(() => {
 
         const posDepois = header.getBoundingClientRect().top;
         const diferenca = posDepois - posAntes;
 
-        window.scrollBy({
-          top: diferenca,
-          behavior: "auto"
-        });
+        window.scrollBy(0, diferenca);
 
       });
 
