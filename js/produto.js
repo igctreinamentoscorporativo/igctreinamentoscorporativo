@@ -123,7 +123,7 @@ function montarProduto(produto) {
 // ACCORDION ESTÁVEL
 // =============================
 
-setTimeout(() => {
+function iniciarAccordion(){
 
   const items = document.querySelectorAll(".accordion-item-premium");
 
@@ -136,40 +136,28 @@ setTimeout(() => {
 
       const aberto = item.classList.contains("active");
 
-      const posAntes = header.getBoundingClientRect().top;
-
-      // fecha todos
       items.forEach(i => {
         const c = i.querySelector(".accordion-content-premium");
         i.classList.remove("active");
         c.style.height = "0px";
       });
 
-      // se estava fechado, abre
-      if (!aberto) {
+      if(!aberto){
 
         item.classList.add("active");
 
-        const alturaReal = content.scrollHeight;
-        content.style.height = alturaReal + "px";
+        const altura = content.scrollHeight;
+        content.style.height = altura + "px";
 
       }
-
-      // corrige salto da tela
-      requestAnimationFrame(() => {
-
-        const posDepois = header.getBoundingClientRect().top;
-        const diff = posDepois - posAntes;
-
-        window.scrollBy(0, diff);
-
-      });
 
     });
 
   });
 
-},200);
+}
+
+setTimeout(iniciarAccordion,100);
 
   
 
