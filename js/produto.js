@@ -120,19 +120,29 @@ function montarProduto(produto) {
   
 setTimeout(() => {
 
-  document.querySelectorAll(".accordion-header").forEach(btn => {
+  const items = document.querySelectorAll(".accordion-item-premium");
 
-    btn.addEventListener("click", () => {
+  items.forEach(item => {
 
-      const item = btn.parentElement;
-      const content = item.querySelector(".accordion-content");
+    const header = item.querySelector(".accordion-header-premium");
+    const content = item.querySelector(".accordion-content-premium");
 
-      item.classList.toggle("active");
+    if (item.classList.contains("active")) {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
 
-      if (item.classList.contains("active")) {
+    header.addEventListener("click", () => {
+
+      const aberto = item.classList.contains("active");
+
+      items.forEach(i => {
+        i.classList.remove("active");
+        i.querySelector(".accordion-content-premium").style.maxHeight = null;
+      });
+
+      if (!aberto) {
+        item.classList.add("active");
         content.style.maxHeight = content.scrollHeight + "px";
-      } else {
-        content.style.maxHeight = null;
       }
 
     });
@@ -834,19 +844,21 @@ document.addEventListener("click", function (event) {
 function renderAccordion(itens) {
 
   return `
-  <div class="produto-accordion">
+  <div class="accordion-premium">
 
     ${itens.map((item, i) => `
     
-      <div class="accordion-item">
+      <div class="accordion-item-premium ${i === 0 ? "active" : ""}">
 
-        <button class="accordion-header">
+        <button class="accordion-header-premium">
           <span>${item.titulo}</span>
-          <span class="accordion-icon">+</span>
+          <span class="accordion-icon-premium"></span>
         </button>
 
-        <div class="accordion-content">
-          ${item.conteudo}
+        <div class="accordion-content-premium">
+          <div class="accordion-inner">
+            ${item.conteudo}
+          </div>
         </div>
 
       </div>
@@ -855,5 +867,4 @@ function renderAccordion(itens) {
 
   </div>
   `;
-
 }
