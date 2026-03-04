@@ -114,6 +114,10 @@ function montarProduto(produto) {
 
 
 
+
+
+
+
   
 // =============================
 // ACCORDION ESTÁVEL
@@ -126,6 +130,7 @@ setTimeout(() => {
   items.forEach(item => {
 
     const header = item.querySelector(".accordion-header-premium");
+    const content = item.querySelector(".accordion-content-premium");
 
     header.addEventListener("click", () => {
 
@@ -133,10 +138,23 @@ setTimeout(() => {
 
       const posAntes = header.getBoundingClientRect().top;
 
-      items.forEach(i => i.classList.remove("active"));
+      items.forEach(i => {
+
+        const c = i.querySelector(".accordion-content-premium");
+
+        i.classList.remove("active");
+        c.style.height = "0px";
+
+      });
 
       if (!aberto) {
+
         item.classList.add("active");
+
+        const alturaReal = content.scrollHeight;
+
+        content.style.height = alturaReal + "px";
+
       }
 
       requestAnimationFrame(() => {
@@ -154,9 +172,13 @@ setTimeout(() => {
 
 },200);
 
-
   
 
+
+
+
+
+  
 
 
     
