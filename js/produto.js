@@ -250,7 +250,7 @@ if (produto.depoimentos?.mostrar) {
 
   section.innerHTML = `
     <div class="container">
-      <h2 style="text-align:center;">O que dizem nossos alunos</h2>
+      <h2 style="text-align:center;">Depoimentos<span>⭐⭐⭐⭐⭐</span></h2>
 
       <div class="slider">
         <button class="arrow left">&#10094;</button>
@@ -375,7 +375,7 @@ if (produto.clientes?.mostrar) {
 
   section.innerHTML = `
     <div class="container">
-      <h2 style="text-align:center;">Depoimentos auditado pelo Google</h2>
+      <h2 style="text-align:center;">Google<span>⭐⭐⭐⭐⭐</span></h2>
 
       <div class="slider">
         <button class="arrow left">&#10094;</button>
