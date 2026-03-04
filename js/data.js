@@ -84,7 +84,7 @@ const produtos = [
 accordion: [
 
     {
-      titulo: "🧠 Para quem é este treinamento Practitioner PNL?",
+      titulo: "🙋 Para quem é este treinamento Practitioner PNL?",
       conteudo: `
        
       
@@ -266,7 +266,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
 
 {
-      titulo: "👨‍🏫 Quem conduz a Formação?",
+      titulo: "👨 Quem conduz a Formação?",
       conteudo: `
      
 
@@ -297,7 +297,7 @@ essa é a sua oportunidade.
 
 
 {
-      titulo: "Dúvidas❓?",
+      titulo: "Dúvidas❓",
       conteudo: `
      
 
