@@ -116,7 +116,7 @@ function montarProduto(produto) {
 
   
 // =============================
-// ATIVAR ACCORDION (VERSÃO ESTÁVEL)
+// ACCORDION ESTÁVEL
 // =============================
 
 setTimeout(() => {
@@ -126,45 +126,32 @@ setTimeout(() => {
   items.forEach(item => {
 
     const header = item.querySelector(".accordion-header-premium");
-    const content = item.querySelector(".accordion-content-premium");
 
     header.addEventListener("click", () => {
 
       const aberto = item.classList.contains("active");
 
-      // posição do header antes da mudança
+      // posição antes
       const posAntes = header.getBoundingClientRect().top;
 
+      // fecha todos
+      items.forEach(i => i.classList.remove("active"));
+
+      // abre o clicado
       if (!aberto) {
-
-        // abre o clicado primeiro
         item.classList.add("active");
-        content.style.maxHeight = content.scrollHeight + "px";
-
-        // fecha os outros depois
-        items.forEach(i => {
-          if (i !== item) {
-            i.classList.remove("active");
-            const c = i.querySelector(".accordion-content-premium");
-            if (c) c.style.maxHeight = null;
-          }
-        });
-
-      } else {
-
-        // fechar se clicar no mesmo
-        item.classList.remove("active");
-        content.style.maxHeight = null;
-
       }
 
-      // corrige a posição do scroll
+      // corrige scroll
       requestAnimationFrame(() => {
 
         const posDepois = header.getBoundingClientRect().top;
-        const diferenca = posDepois - posAntes;
+        const diff = posDepois - posAntes;
 
-        window.scrollBy(0, diferenca);
+        window.scrollBy({
+          top: diff,
+          behavior: "auto"
+        });
 
       });
 
@@ -172,7 +159,7 @@ setTimeout(() => {
 
   });
 
-}, 200);
+},200);
 
 
   
