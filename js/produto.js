@@ -193,7 +193,7 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 
   section.innerHTML = `
     
-      <h2>Veja o que diz Dr. Paulo Takahashi</h2>
+    
 
     <div class="slider-estatico">
       <div class="card depoimento-card"
