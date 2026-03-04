@@ -131,27 +131,20 @@ setTimeout(() => {
 
       const aberto = item.classList.contains("active");
 
-      // posição antes
       const posAntes = header.getBoundingClientRect().top;
 
-      // fecha todos
       items.forEach(i => i.classList.remove("active"));
 
-      // abre o clicado
       if (!aberto) {
         item.classList.add("active");
       }
 
-      // corrige scroll
       requestAnimationFrame(() => {
 
         const posDepois = header.getBoundingClientRect().top;
         const diff = posDepois - posAntes;
 
-        window.scrollBy({
-          top: diff,
-          behavior: "auto"
-        });
+        window.scrollBy(0, diff);
 
       });
 
