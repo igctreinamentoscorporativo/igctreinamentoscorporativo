@@ -2265,6 +2265,63 @@ a.btn-comprar {
 
 
 
+/* =============================
+ACCORDION PRODUTO
+============================= */
+
+.produto-accordion {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 600;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #f7f9fc;
+  border: none;
+  cursor: pointer;
+}
+
+.accordion-icon {
+  font-size: 22px;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  padding: 0 16px;
+}
+
+.accordion-item.active .accordion-content {
+  padding: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ============================= */
 /* OFERTA RELÂMPAGO TOPO */
 /* ============================= */
