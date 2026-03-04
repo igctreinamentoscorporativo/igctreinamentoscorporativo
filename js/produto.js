@@ -125,23 +125,15 @@ function montarProduto(produto) {
 
 function iniciarAccordion(){
 
-  const items = document.querySelectorAll(".accordion-item-premium");
+  const headers = document.querySelectorAll(".accordion-header-premium");
 
-  items.forEach(item => {
-
-    const header = item.querySelector(".accordion-header-premium");
+  headers.forEach(header => {
 
     header.addEventListener("click", () => {
 
-      const aberto = item.classList.contains("active");
+      const item = header.parentElement;
 
-      // fecha todos
-      items.forEach(i => i.classList.remove("active"));
-
-      // abre o clicado se estava fechado
-      if(!aberto){
-        item.classList.add("active");
-      }
+      item.classList.toggle("active");
 
     });
 
