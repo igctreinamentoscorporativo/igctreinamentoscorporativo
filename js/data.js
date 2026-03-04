@@ -416,7 +416,7 @@ ofertaRelampago: {
   delaySegundos: 3,
   tempoMinutos: 120,
   diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
-  titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Exclusivo 🆓",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Grátis 📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "🔥 <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓</strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
   mostrarParcelamento: false,
