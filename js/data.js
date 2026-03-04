@@ -79,7 +79,322 @@ const produtos = [
       <p>Seja um Practitioner em PNL Programação Neurolinguística</p>
              
        `,
+
+
+accordion: [
+
+    {
+      titulo: "🧠 Para quem é este treinamento Practitioner PNL?",
+      conteudo: `
+       
       
+<br>
+<strong>Este curso é para você que:</strong>
+<br>
+<ul class="lista">
+<li>Quer dominar a sua mente para tomar decisões melhores</li>
+<li>Precisa influenciar e persuadir pessoas com ética e clareza</li>
+<li>Busca maior performance em carreira, relações e comunicação</li>
+<li>Quer romper padrões limitantes que te impedem de evoluir</li>
+<li>Deseja um certificado internacional reconhecido</li>
+<li>Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</li>
+</ul>
+
+<strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
+<br>
+<br>
+
+
+ <p>👉 Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
+ <p>👉 Já viu oportunidades escaparem porque você não foi ouvido?</p>
+ <p>👉 Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
+<br>
+<p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
+<br>
+<ul class="lista">
+<li>Como você percebe o mundo</li>
+<li>Como processa os seus pensamentos</li>
+<li>Como influencia e negocia com as suas palavras</li>
+</ul>
+<br>
+<p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
+
+</div>
+
+
+      
+      `
+    },
+
+
+   
+    {
+      titulo: "🧠 O que você vai aprender?",
+      conteudo: `
+     
+      
+      
+      
+      <ul>
+        <li>Comunicação poderosa</li>
+        <li>Controle emocional</li>
+        <li>Alta performance</li>
+      </ul>
+
+
+
+<ul class="lista">
+<li>Como interpretar e ajustar a sua linguagem interna</li>
+<li>Técnicas de comunicação eficaz e persuasiva</li>
+<li>Como reconhecer e modificar padrões limitantes</li>
+<li>Como construir confiança instantânea em si mesmo</li>
+<li>Estratégias de influência sem manipulação</li>
+<li>Ferramentas práticas para situações reais</li>
+<li>Comportamento emocional estável sob pressão</li>
+</ul>
+
+<p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
+
+
+
+
+      
+      `
+    },
+
+    {
+      titulo: "💡Benefícios",
+      conteudo: `
+      
+      
+      
+    <em>Imagine daqui a 30 dias:</em>
+<br>
+<br>
+✨ Sua comunicação mais clara, precisa e assertiva
+<br>
+✨ Você entendendo as motivações de quem está à sua frente
+<br>
+✨ Liderar com impacto — não apenas autoridade
+<br>
+✨ Resolver conflitos com precisão e equilíbrio emocional
+<br>
+✨ Conseguir conexões que antes pareciam impossíveis
+<br>
+<br>
+
+
+<b>Isso não é motivação passageira...</b>
+<br>
+<strong>É método aplicado com base em ciência comportamental.</strong>
+<br>  
+      
+      
+  
+      
+     
+      `
+    },
+
+
+
+
+
+
+
+{
+      titulo: "🫶 Por que essa Formação é poderosa?",
+      conteudo: `
+      
+      
+ 
+    
+    
+<ul class="lista">
+<li>Três dias intensivos de imersão prática em PNL</li>
+<li>Certificação Internacional com carga horária oficial de 20h</li> 
+<li>Metodologia apoiada nas bases da PNL moderna</li>
+<li>Conteúdo aplicável desde o primeiro módulo</li>
+<li>Ferramentas práticas, não apenas teoria</li>
+<li>Foco em mudança comportamental real</li>
+<li>Resultados visíveis na sua vida e no seu entorno</li>
+<li>Registro IGC-MEC no certificado</li>
+<li>Validação online via QR Code</li>
+<li>Atividades práticas individuais e em grupo com alto impacto transformacional</li>
+</ul>
+
+<p><strong>PNL não muda apenas o que você sabe.</strong>
+<br>
+<strong>PNL muda o que você faz.</strong></p>
+<br>  
+      
+  
+      
+     
+      `
+    },
+
+
+
+
+
+
+
+{
+      titulo: "🫶 Por que essa Formação é poderosa?",
+      conteudo: `
+      
+      
+ 
+    
+    
+<ul class="lista">
+<li>Três dias intensivos de imersão prática em PNL</li>
+<li>Certificação Internacional com carga horária oficial de 20h</li> 
+<li>Metodologia apoiada nas bases da PNL moderna</li>
+<li>Conteúdo aplicável desde o primeiro módulo</li>
+<li>Ferramentas práticas, não apenas teoria</li>
+<li>Foco em mudança comportamental real</li>
+<li>Resultados visíveis na sua vida e no seu entorno</li>
+<li>Registro IGC-MEC no certificado</li>
+<li>Validação online via QR Code</li>
+<li>Atividades práticas individuais e em grupo com alto impacto transformacional</li>
+</ul>
+
+<p><strong>PNL não muda apenas o que você sabe.</strong>
+<br>
+<strong>PNL muda o que você faz.</strong></p>
+<br>  
+      
+  
+      
+     
+      `
+    },
+
+
+
+   
+
+   
+
+   
+
+{
+      titulo: "📍 Como funciona a imersão",
+      conteudo: `
+     
+
+
+<strong>Local:</strong> Curitiba-PR – Del Rey Hotel
+<br>
+<strong>Datas e formato:</strong> Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
+<br>
+Sábado – 11/04/2026 das 09h às 19h (presencial – imersivo)
+<br>
+Domingo – 12/04/2026 das 09h às 19h (presencial – imersivo)
+<br><br>
+
+<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
+<br>
+Após o preenchimento das vagas, as inscrições serão encerradas.
+<br>
+
+     
+      `
+    },
+
+   
+
+
+
+
+
+{
+      titulo: "👨‍🏫 Quem conduz a Formação?",
+      conteudo: `
+     
+
+
+<strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
+com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
+<br>
+Sua metodologia integra PNL, comportamento e comunicação estratégica,
+com aplicação prática e foco em transformação real.
+<br><br>
+<strong>Você não aprende apenas teoria.</strong>
+<strong>Você aprende com quem aplica há décadas.</strong>
+<br>
+
+<strong>As vagas são limitadas.</strong>
+<br><br>
+Se você deseja participar desta turma em Curitiba,
+essa é a sua oportunidade.
+<br>
+<strong>Garanta sua inscrição agora.</strong>
+<br>
+
+     
+      `
+    },
+
+
+
+
+{
+      titulo: "Dúvidas❓?",
+      conteudo: `
+     
+
+
+<strong>Será que eu vou conseguir acompanhar?</strong>
+<br>
+Sim.
+<br>
+A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
+<br>
+<br>
+
+<strong>Isso é apenas motivacional?</strong>
+<br>
+Não.
+<br>
+Motivação passa…
+<br>
+PNL é técnica + aplicação + transformação comportamental real.
+<br>
+<br>
+
+<strong>Preciso de experiência anterior?</strong>
+<br>
+Não.
+<br>
+Você aprende tudo desde as bases até aplicações avançadas.
+<br>
+<br>
+
+<strong>Isso traz resultados práticos?</strong>
+<br>
+Sim.
+<br>
+Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
+<br>
+
+
+     
+      `
+    }
+   
+
+   
+
+
+   
+  ]
+},
+
+   
+       
        oQueE: `
 <div class="layout-pnl">
 
