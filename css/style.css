@@ -2396,11 +2396,6 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 /* CONTENT */
 
-.accordion-content-premium {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.45s ease;
-}
 
 .accordion-inner {
   padding: 10px 0 30px 0;
