@@ -130,25 +130,17 @@ function iniciarAccordion(){
   items.forEach(item => {
 
     const header = item.querySelector(".accordion-header-premium");
-    const content = item.querySelector(".accordion-content-premium");
 
     header.addEventListener("click", () => {
 
       const aberto = item.classList.contains("active");
 
-      items.forEach(i => {
-        const c = i.querySelector(".accordion-content-premium");
-        i.classList.remove("active");
-        c.style.height = "0px";
-      });
+      // fecha todos
+      items.forEach(i => i.classList.remove("active"));
 
+      // abre o clicado se estava fechado
       if(!aberto){
-
         item.classList.add("active");
-
-        const altura = content.scrollHeight;
-        content.style.height = altura + "px";
-
       }
 
     });
@@ -158,7 +150,6 @@ function iniciarAccordion(){
 }
 
 setTimeout(iniciarAccordion,100);
-
   
 
 
