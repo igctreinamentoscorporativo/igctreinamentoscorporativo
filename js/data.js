@@ -374,7 +374,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "<strong>Ou Valor especial para:</strong><br> 1º Lote R$ 497,00 até 28/02<br>2º Lote R$ 797,00 até 07/03<br>3º Lote R$ 997,00 até 14/03<br>4º Lote até 28/03 R$ 1197,00<br><strong>Condições de pagamento facilitado</strong>"
+textoParcelamento: "<strong>Ou Valor especial para:</strong><br><strong><del>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> até 28/03 R$ 1197,00<br><strong>Pagamento facilitado</strong>"
      
     },
 
