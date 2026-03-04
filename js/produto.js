@@ -138,25 +138,24 @@ setTimeout(() => {
 
       const posAntes = header.getBoundingClientRect().top;
 
+      // fecha todos
       items.forEach(i => {
-
         const c = i.querySelector(".accordion-content-premium");
-
         i.classList.remove("active");
         c.style.height = "0px";
-
       });
 
+      // se estava fechado, abre
       if (!aberto) {
 
         item.classList.add("active");
 
         const alturaReal = content.scrollHeight;
-
         content.style.height = alturaReal + "px";
 
       }
 
+      // corrige salto da tela
       requestAnimationFrame(() => {
 
         const posDepois = header.getBoundingClientRect().top;
