@@ -504,7 +504,7 @@ ${config.mostrarParcelamento ? `
 ` : ""}
 
         <div class="oferta-tempo">
-          Válido por: <span id="contador-oferta"></span>
+          ⏱ Oferta expira em: <span id="contador-oferta"></span>
         </div>
 
         <a href="${config.link}" class="btn-oferta">
