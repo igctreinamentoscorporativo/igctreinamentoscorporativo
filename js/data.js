@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p>Seja um Practitioner em PNL Programação Neurolinguística</p>
+      <p> FALE COM UM CONSULTOR E RECEBA ATÉ 70% OFF</p>
              
        `,
 
@@ -354,8 +354,8 @@ Sim.
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: true,
-  mostrarResumo: false,
+  mostrarPreco: false,
+  mostrarResumo: true,
   cta: {
     mostrar: true,
     texto: "COMPRAR 2º LOTE",
@@ -399,10 +399,10 @@ videoPrincipal: {
 ofertaRelampago: {
   mostrar: true,
   delaySegundos: 3,
-  tempoMinutos: 120,
-  diasParaReexibir: 4, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
-  titulo: "💎 PARABÉNS! Você desbloqueou<br> 🚀 Super desconto + Bônus Grátis <br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
-  subtitulo: "🔥 <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓</strong>",            //2º Lote. Exclusivo para esta página!
+  tempoMinutos: 45,
+  diasParaReexibir: 2, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
+  titulo: "💎 PARABÉNS! Você desbloqueou<br> 🔥 70% OFF + Bônus Grátis <br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "🚀  <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓</strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
   mostrarParcelamento: false,
   valorDe: 1997,
@@ -424,7 +424,10 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "<strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
+textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><strong>2º Lote:</strong> restam poucas vagas<br><strong>Pagamento facilitado</strong>"
+
+// <strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
+
      
     },
 
