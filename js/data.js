@@ -76,7 +76,7 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p> FALE COM UM CONSULTOR E RECEBA ATÉ 70% OFF</p>
+      <p> FALE COM UM CONSULTOR E RECEBA ATÉ 55% OFF</p>
              
        `,
 
@@ -358,7 +358,7 @@ Sim.
   mostrarResumo: true,
   cta: {
     mostrar: true,
-    texto: "RESERVAR MEU INGRESSO",
+    texto: "RESERVAR MEU INGRESSO COM ATÉ 55% OFF",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricaopelosite.html"
   }
 },
