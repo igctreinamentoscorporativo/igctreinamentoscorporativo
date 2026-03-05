@@ -358,7 +358,7 @@ Sim.
   mostrarResumo: true,
   cta: {
     mostrar: true,
-    texto: "COMPRAR 2º LOTE",
+    texto: "RESERVAR MINHA VAGA",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-lote.html"
   }
 },
