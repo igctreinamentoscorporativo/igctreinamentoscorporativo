@@ -3,7 +3,7 @@
    ============================================================ */
 
 // Número fixo do WhatsApp da farmácia (formato internacional, sem +)
-const WHATSAPP_NUMERO = "5518991221171";
+const WHATSAPP_NUMERO = "5541996272504";
 
 /* ============================================================
    CATEGORIAS
