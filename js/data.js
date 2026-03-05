@@ -401,8 +401,8 @@ ofertaRelampago: {
   delaySegundos: 3,
   tempoMinutos: 45,
   diasParaReexibir: 2, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
-  titulo: "💎 PARABÉNS! Você desbloqueou<br> 🔥 70% OFF + Bônus Grátis <br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
-  subtitulo: "🚀  <strong>4327 pessoas já se certificaram nesse treinamento 📜🚀🎓</strong>",            //2º Lote. Exclusivo para esta página!
+  titulo: "🎉 PARABÉNS!<br>você desbloqueou<br>🔥 70% OFF + Bônus Grátis<br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "🚀<strong> Mais de 4.327 alunos já se certificaram 📜🚀🎓</strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
   mostrarParcelamento: false,
   valorDe: 1997,
