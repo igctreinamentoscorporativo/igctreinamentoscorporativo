@@ -359,7 +359,7 @@ Sim.
   cta: {
     mostrar: true,
     texto: "RESERVAR MEU INGRESSO",
-    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-lote.html"
+    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricaopelosite.html"
   }
 },
 
