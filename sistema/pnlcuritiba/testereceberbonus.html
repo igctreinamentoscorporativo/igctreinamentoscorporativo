@@ -89,19 +89,21 @@ input.erro {
 button{
 
 background:linear-gradient(135deg,#ff7a00,#ff4d00);
-
 color:#fff;
 border:none;
 font-weight:bold;
-font-size:16px;
-
+font-size:18px;
 box-shadow:
 0 10px 20px rgba(255,100,0,.4);
-
 cursor:pointer;
-
+width:100%;
+padding:18px;
+letter-spacing:.5px;
 }
 
+
+
+  
 button:hover{
 transform:translateY(-2px);
 box-shadow:0 12px 25px rgba(255,100,0,.5);
@@ -148,6 +150,34 @@ font-weight:bold;
 color:#c85000;
 } 
 
+
+
+.desconto-box{
+background:linear-gradient(135deg,#ffe9e9,#ffd6d6);
+border:2px solid #ff2b2b;
+padding:16px;
+border-radius:12px;
+text-align:center;
+margin-bottom:16px;
+box-shadow:0 6px 16px rgba(255,0,0,.15);
+}
+
+.desconto-box strong{
+font-size:34px;
+color:#ff0000;
+display:block;
+font-weight:900;
+}
+
+.desconto-sub{
+font-size:14px;
+font-weight:bold;
+color:#b30000;
+margin-top:4px;
+}
+
+
+  
   
   
 </style>
@@ -162,17 +192,15 @@ color:#c85000;
     🔓 Seu Bônus Privado Foi Liberado
   </h2>
 
-  <p style="font-size:17px; line-height:1.6; margin-bottom:18px;">
-    A <strong>Formação Practitioner em PNL – Edição Curitiba</strong> 
-    (10, 11 e 12 de abril) é uma experiência de transformação real.
-  </p>
+ <p style="font-size:16px; line-height:1.5; margin-bottom:18px;">
+A <strong>Formação Practitioner em PNL – Curitiba</strong> acontece em
+<strong>10, 11 e 12 de abril</strong>.
+</p>
 
-  <p style="font-size:16px; line-height:1.6; margin-bottom:20px;">
-    ⚡Ative sua 
-    <span style="color:#ff4d00; font-weight:bold;">
-      condição especial com 🔥 Super Desconto + Bônus Exclusivo Grátis 📘eBook Reprogramação de Performance Mental,
-    </span>reservada apenas para quem decide avançar agora. 🚀
-  </p>
+<p style="font-size:15px; line-height:1.5;">
+Hoje você recebeu acesso a uma
+<strong style="color:#ff4d00;">condição especial de inscrição.</strong>
+</p>
 
   <p style="font-size:15px; line-height:1.6;">
     <strong>Decisões moldam identidade.</strong>  
@@ -182,10 +210,29 @@ color:#c85000;
 
 </div>
 
+
+  
+
+  <div class="desconto-box">
+<strong>70% OFF</strong>
+<div class="desconto-sub">
+CONDIÇÃO ESPECIAL LIBERADA PARA VOCÊ
+</div>
+</div>
+
+
+
+
+  
+  
   <div class="bonus-box">
 📘 <strong>BÔNUS GRATUITO</strong><br>
 Reprogramação de Performance Mental
 </div>
+
+
+
+
   
   <input id="nome" placeholder="Seu Nome Completo">
   <input id="email" placeholder="Seu Melhor E-mail">
@@ -193,14 +240,20 @@ Reprogramação de Performance Mental
   
 
 
-<button id="btnConfirmar" onclick="finalizar()">🎁 QUERO MEU DESCONTO + BÔNUS 🆓</button>
-</div>
+<button id="btnConfirmar" onclick="finalizar()">
+🔥 QUERO GARANTIR 70% OFF + BÔNUS
+</button>
+
+
+<button ... >
 
 <p style="font-size:12px;text-align:center;opacity:.7;margin-top:8px;">
 🔒 Seus dados estão protegidos. Nenhum spam.
-</p>
+</p>  
+
   
 
+  
 <script src="/js/igc-config.js"></script>  
   
 <script>
