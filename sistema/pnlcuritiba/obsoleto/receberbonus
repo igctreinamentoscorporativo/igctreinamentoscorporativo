@@ -32,11 +32,14 @@ body {
   justify-content: center;
 
 /* 🔥 BACKGROUND RESPONSIVO */
-  background-image: url("/assets/imginscricao/inscricaopnlcuritiba.jpg");
-  background-size: cover;        /* cobre toda a tela */
-  background-position: center;   /* centraliza */
-  background-repeat: no-repeat;  /* não repete */
-  background-attachment: fixed;  /* desktop bonito */
+  background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+url("/assets/imginscricao/inscricaopnlcuritiba.jpg");
+
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
 
 
 
@@ -52,6 +55,7 @@ body {
   width: 100%;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,.1);
+  backdrop-filter: blur(6px);
 }
 
 .loader {
