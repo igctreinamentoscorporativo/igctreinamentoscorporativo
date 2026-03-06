@@ -55,7 +55,7 @@ left:0;
 width:100%;
 height:100%;
 
-background:rgba(0,0,0,0.65);
+background:rgba(0,0,0,0.90);
 
 z-index:0;
 }
@@ -94,7 +94,7 @@ input.erro {
 }
 
 button {
-  background: linear-gradient(135deg, #1f3c88, #2f55d4);
+  background: linear-gradient(135deg,#ff7a00,#ff4d00);
   color: #fff;
   border: none;
   font-weight: bold;
