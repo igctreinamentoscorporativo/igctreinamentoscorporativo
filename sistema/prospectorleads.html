@@ -5,11 +5,121 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>Prospector | Leads</title>
- 
+
+<style>
+
+
+/* ===============================
+   CSS DE TELA DE LOGIN
+================================ */
+
+
+
+.login-screen,
+.loading-screen{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#000428,#004e92);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:9999;
+}
+
+.login-box{
+  width:350px;
+  background:#0b0f2a;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 0 30px rgba(0,0,0,.5);
+  text-align:left;
+}
+
+.login-box h2{
+  margin-top:0;
+}
+
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#111;
+  border:1px solid #333;
+  color:#fff;
+}
+
+.login-box button{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  background:#3b82f6;
+  border:none;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.login-box button:hover{
+  background:#2563eb;
+}
+
+.erro-login{
+  margin-top:10px;
+  color:#ff4d4d;
+  font-size:13px;
+}
+
+.loading-screen{
+  display:none;
+  text-align:center;
+}
+
+
+
+
+
+
+
+
+
+  
+</style>
+
+
+
+
+
+
+
+  
 </head>
   
 <body style="margin:0;padding:0;">
 
+
+<div id="loginScreen" class="login-screen">
+
+  <div class="login-box">
+    <h2>Acesso Restrito</h2>
+    <p>Senha de acesso</p>
+
+    <input type="password" id="senhaLogin">
+    <button onclick="fazerLogin()">Entrar</button>
+
+    <div id="erroLogin" class="erro-login"></div>
+  </div>
+
+</div>
+
+<div id="loadingScreen" class="loading-screen">
+  <h1>IGC Treinamentos Corporativo</h1>
+  <p>Carregando sistema...</p>
+</div>
+
+  
 
 <iframe 
   src="https://script.google.com/macros/s/AKfycbyiFCXms84nqLw4rEiJlwIjCteXA_lXclKTBc1BlzRgHgEyeMwXlO_ed2weCw4aRdRD/exec"
@@ -22,6 +132,60 @@
   ">
 </iframe>
 
+
+
+  <script>
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbywcA-6fHHpCUfHCbCV1N6uqKdMzWMJTQozBktItBNZESUnqBjfJF4IIO1yjSmdBap2fQ/exec";
+
+let SENHA = "";
+
+// ===============================
+// 🔒 SENHA DE LOGIN
+// ===============================
+
+
+function fazerLogin(){
+
+  const senhaDigitada = document.getElementById("senhaLogin").value;
+
+  fetch(ENDPOINT,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"loginCursos",
+      senha:senhaDigitada
+    })
+  })
+  .then(r=>r.json())
+  .then(res=>{
+
+    if(res.ok){
+
+      SENHA = senhaDigitada;
+
+      document.getElementById("loginScreen").style.display="none";
+      document.getElementById("loadingScreen").style.display="flex";
+
+      setTimeout(()=>{
+        document.getElementById("loadingScreen").style.display="none";
+        document.getElementById("crmSistema").style.display="block";
+        listar();
+        iniciarAutoRefresh(); // 🔥 ativa atualização automática
+      },1500);
+
+    }else{
+      document.getElementById("erroLogin").innerText="ACESSO NEGADO";
+    }
+
+  })
+  .catch(()=>{
+    document.getElementById("erroLogin").innerText="Erro de conexão.";
+  });
+
+}
+
+    
+  </script>
 
 </body>
 </html>
