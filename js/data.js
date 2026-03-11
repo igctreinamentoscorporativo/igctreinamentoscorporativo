@@ -367,7 +367,7 @@ Sim.
   mostrarResumo: true,
   cta: {
     mostrar: true,
-    texto: "RESERVAR MINHA VAGA",
+    texto: "Comprar com desconto",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricaopelosite.html"
   }
 },
