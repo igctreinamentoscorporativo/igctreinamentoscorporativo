@@ -66,7 +66,7 @@ const categorias = [
 const produtos = [
   {
     id: "1",
-    nome: "Practitioner em PNL | Ed. Curitiba - 10, 11 e 12 de Abril",
+    nome: "Formação Practitioner em PNL – Curitiba",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
@@ -76,51 +76,45 @@ const produtos = [
     descricao: {
       resumo: `
    
-      <p> FALE COM UM CONSULTOR E RECEBA ATÉ 55% OFF</p>
+      <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>
              
        `,
 
 
 accordion: [
 
+
+{
+      titulo: "🎓 O que está incluso na formação?",
+      conteudo: `
+       
+<p>✔ 20 horas de treinamento intensivo em PNL</p>
+<p>✔ Certificação internacional Practitioner em PNL</p>
+<p>✔ Material didático exclusivo</p>
+<p>✔ Exercícios práticos supervisionados</p>
+<p>✔ Técnicas aplicáveis em comunicação, liderança e negociação</p>
+<p>✔ Networking com participantes da formação</p>
+<p>✔ Acesso a metodologia aplicada há mais de 20 anos</p>
+
+ 
+      `
+    },
+
+
+ 
     {
-      titulo: "🙋 Para quem é este treinamento Practitioner PNL?",
+      titulo: "🙋 Essa formação é para você se:",
       conteudo: `
        
       
-<br>
-<strong>Este curso é para você que:</strong>
-<br>
+<p>🌟 quer melhorar comunicação</p>
+<p>🌟 quer desenvolver inteligência emocional</p>
+<p>🌟 quer aumentar resultados profissionais</p>
+<p>🌟 quer romper padrões limitantes que te impedem de evoluir</p>
+<p>🌟 quer aprender técnicas reais de influência</p>
+<p>🌟 quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
 
-<p>🌟 Quer dominar a sua mente para tomar decisões melhores</p>
-<p>🌟 Precisa influenciar e persuadir pessoas com ética e clareza</p>
-<p>🌟 Busca maior performance em carreira, relações e comunicação</p>
-<p>🌟 Quer romper padrões limitantes que te impedem de evoluir</p>
-<p>🌟 Deseja um certificado internacional reconhecido</p>
-<p>🌟 Quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
-
-
-<strong>Não é apenas mais um curso — é uma mudança de identidade.</strong>
-<br>
-<br>
-
-
-
- <p>👉 Você já se sentiu preso, sem conseguir expressar tudo o que sabe?</p>
- <p>👉 Já viu oportunidades escaparem porque você não foi ouvido?</p>
- <p>👉 Já sentiu que a sua mente poderia produzir resultados muito maiores do que ela tem entregue?</p>
-<br>
-<p><strong>A Programação Neurolinguística (PNL) é a ciência que revela o “manual de instruções” da sua mente, ensinando:</strong></p>
-<br>
-
-<p>✔️ Como você percebe o mundo</p>
-<p>✔️ Como processa os seus pensamentos</p>
-<p>✔️ Como influencia e negocia com as suas palavras</p>
-<br>
-<p>E mais — <strong>como ajustar tudo isso para alcançar resultados reais na vida e no trabalho.</strong></p>
-
-
-      
+     
       `
     },
 
@@ -130,7 +124,6 @@ accordion: [
       titulo: "🧠 O que você vai aprender?",
       conteudo: `
      
-   
       
 <p>✔️ Comunicação poderosa</p>
 <p>✔️ Controle emocional</p>
@@ -146,38 +139,35 @@ accordion: [
 <br>
 <p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
 
-
-
-
-      
+   
       `
     },
 
     {
-      titulo: "💡Benefícios",
+      titulo: "💡Benefícios futuros",
       conteudo: `
       
       
       
-    <em>Imagine daqui a 30 dias:</em>
+    <em>Imagine daqui a algumas semanas:</em>
 <br>
 <br>
-✨ Sua comunicação mais clara, precisa e assertiva
+✨ Você se comunicando com muito mais segurança
 <br>
-✨ Você entendendo as motivações de quem está à sua frente
+✨ Tomando decisões com clareza
 <br>
-✨ Liderar com impacto — não apenas autoridade
+✨ Influenciando pessoas de forma natural
 <br>
-✨ Resolver conflitos com precisão e equilíbrio emocional
+✨ Conduzindo conversas difíceis com equilíbrio emocional
 <br>
-✨ Conseguir conexões que antes pareciam impossíveis
+✨ Percebendo oportunidades que antes passavam despercebidas
 <br>
 <br>
 
 
-<b>Isso não é motivação passageira...</b>
+<b>Isso não é motivação momentânea.</b>
 <br>
-<strong>É método aplicado com base em ciência comportamental.</strong>
+<strong>É uma habilidade que você leva para toda a vida.</strong>
 <br>  
 
      
@@ -186,6 +176,25 @@ accordion: [
 
 
 
+
+  {
+      titulo: "🙋Quem participa desta formação",
+      conteudo: `
+  
+
+✔️ Profissionais de vendas
+<br>
+✔️ Líderes e gestores
+<br>
+✔️ Empreendedores
+<br>
+✔️ Profissionais da área de desenvolvimento humano
+<br>
+✔️ Pessoas que desejam evoluir comunicação e inteligência emocional
+<br>
+     
+      `
+    },  
 
 
 
@@ -354,11 +363,11 @@ Sim.
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: false,
+  mostrarPreco: true,
   mostrarResumo: true,
   cta: {
     mostrar: true,
-    texto: "RESERVAR MEU INGRESSO COM ATÉ 55% OFF",
+    texto: "RESERVAR MINHA VAGA",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricaopelosite.html"
   }
 },
@@ -392,15 +401,15 @@ clientes: {
 },
 
 videoPrincipal: {
-  mostrar: true,
+  mostrar: false,
   youtubeId: "FU66p66t4ag"
 },
 
 ofertaRelampago: {
   mostrar: true,
   delaySegundos: 3,
-  tempoMinutos: 45,
-  diasParaReexibir: 2, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
+  tempoMinutos: 15,
+  diasParaReexibir: 7, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
   titulo: "🎉 PARABÉNS!<br>você desbloqueou<br>🔥 70% OFF + Bônus Grátis<br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
   subtitulo: "🚀<strong> Mais de 4.327 alunos já se certificaram</strong>",            //2º Lote. Exclusivo para esta página!
   mostrarPrecos: false,
