@@ -85,7 +85,7 @@ accordion: [
 
 
 {
-      titulo: "🎓 O que está incluso na formação?",
+      titulo: "🎓 O que está incluso na formação",
       conteudo: `
        
 <p>✔ 20 horas de treinamento intensivo em PNL</p>
@@ -103,7 +103,7 @@ accordion: [
 
  
     {
-      titulo: "🙋 Essa formação é para você se:",
+      titulo: "🙋 Essa formação é para você se",
       conteudo: `
        
       
@@ -121,7 +121,7 @@ accordion: [
 
    
     {
-      titulo: "🧠 O que você vai aprender?",
+      titulo: "🧠 O que você vai aprender",
       conteudo: `
      
       
@@ -200,7 +200,7 @@ accordion: [
 
 
 {
-      titulo: "🫶 Por que essa formação é poderosa?",
+      titulo: "🫶 Por que essa formação é poderosa",
       conteudo: `
       
  
@@ -231,7 +231,7 @@ accordion: [
    
 
 {
-      titulo: "📌 Onde vai aconter o treinamento?",
+      titulo: "📌 Onde vai aconter o treinamento",
       conteudo: `
      
 
@@ -261,7 +261,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
 
 {
-      titulo: "👨 Quem conduz a formação?",
+      titulo: "👨 Quem conduz a formação",
       conteudo: `
      
 
