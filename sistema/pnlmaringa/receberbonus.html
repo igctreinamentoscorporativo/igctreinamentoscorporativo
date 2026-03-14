@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17961730607"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-17961730607');
+</script>
+  
+  
+  
+
+
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Receba seu Bônus</title>
+
+<style>
+* { box-sizing: border-box; }
+
+  body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+
+/* 🔥 BACKGROUND RESPONSIVO */
+  background-image: url("/assets/imginscricao/inscricaopnlmaringa.jpeg");
+  background-size: cover;        /* cobre toda a tela */
+  background-position: center;   /* centraliza */
+  background-repeat: no-repeat;  /* não repete */
+  background-attachment: fixed;  /* desktop bonito */
+   
+}
+
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(
+rgba(0,0,0,0.90),
+rgba(0,0,0,0.70)
+);
+z-index:-1;
+}
+
+
+
+
+  
+
+.card {
+  display: block;
+  background: rgba(255,255,255,0.96);
+  padding: 28px;
+  max-width: 420px;
+  width: 100%;
+  border-radius: 16px;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,.25),
+  0 6px 12px rgba(0,0,0,.15);
+
+  animation: fadeIn .5s ease;
+}
+
+.loader {
+  font-size: 18px;
+  color: #1f3c88;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-bottom:14px;
+border-radius:10px;
+border:2px solid #e2e2e2;
+font-size:15px;
+transition:all .2s;
+}
+
+
+input:focus{
+border-color:#2f55d4;
+box-shadow:0 0 0 3px rgba(47,85,212,.15);
+outline:none;
+}  
+  
+
+input.erro {
+  border-color: red;
+}
+
+
+
+
+  
+button{
+
+background:linear-gradient(135deg,#ff7a00,#ff4d00);
+color:#fff;
+border:none;
+
+font-weight:bold;
+font-size:18px;
+
+width:100%;
+padding:18px;
+
+border-radius:10px;
+
+letter-spacing:.5px;
+
+box-shadow:0 10px 20px rgba(255,100,0,.4);
+
+cursor:pointer;
+
+transition:all .15s ease;
+
+margin-top:18px;
+
+
+  
+position:relative;
+overflow:hidden;
+  
+
+}
+
+
+
+
+  
+button::after{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:60%;
+height:100%;
+
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.6),
+transparent
+);
+
+transform:skewX(-20deg);
+animation:shine 8.5s infinite;
+}
+
+@keyframes shine{
+0%{ left:-120%; }
+100%{ left:130%; }
+}
+
+
+
+  
+  
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 12px 25px rgba(255,100,0,.5);
+}
+
+button,
+.btn {
+  transition: 
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    opacity 0.2s ease;
+}
+
+button:active,
+.btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 6px rgba(0,0,0,.2) inset;
+  opacity: 0.85;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
+.dados-inscricao p {
+    margin: 3px 0;
+    line-height: 1.25;
+    font-size: 15px;
+  }
+
+
+ .bonus-box{
+background:linear-gradient(135deg,#fff5e6,#ffe6cc);
+border:2px dashed #ff7a00;
+padding:14px;
+border-radius:10px;
+text-align:center;
+font-size:15px;
+margin-bottom:18px;
+font-weight:bold;
+color:#c85000;
+} 
+
+
+
+.desconto-box{
+background:linear-gradient(135deg,#ffe9e9,#ffd6d6);
+border:2px solid #ff2b2b;
+padding:16px;
+border-radius:12px;
+text-align:center;
+margin-bottom:16px;
+box-shadow:0 6px 16px rgba(255,0,0,.15);
+}
+
+.desconto-box strong{
+font-size:42px;
+color:#ff0000;
+display:block;
+font-weight:900;
+letter-spacing:1px;
+}
+
+.desconto-sub{
+font-size:14px;
+font-weight:bold;
+color:#b30000;
+margin-top:4px;
+}
+
+
+.seguranca{
+font-size:12px;
+text-align:center;
+opacity:.7;
+margin-top:8px;
+}  
+
+
+
+@keyframes pulseDesconto {
+0% { box-shadow:0 0 0 rgba(255,0,0,0.4); }
+50% { box-shadow:0 0 18px rgba(255,0,0,0.7); }
+100% { box-shadow:0 0 0 rgba(255,0,0,0.4); }
+}
+
+.desconto-box{
+animation:pulseDesconto 2.5s infinite;
+}
+
+
+
+button:disabled{
+opacity:0.7;
+cursor:not-allowed;
+box-shadow:none;
+}
+  
+  
+</style>
+</head>
+<body>
+
+<div class="card" id="formCard">
+ 
+  <div style="text-align:center; max-width:760px; margin:0 auto 30px auto;">
+
+  <h2 id="titulo" style="font-size:21px; margin-bottom:10px;">
+🔓 Isso não é pra todo mundo. <strong style="color:#ff4d00;">Aproveite!</strong>
+  
+</h2>
+  
+</div>
+
+
+  
+
+  <div class="desconto-box">
+<strong>"LEVE UM ACOMPANHANTE"</strong>
+<div class="desconto-sub">
+CONDIÇÃO ESPECIAL LIBERADA PARA VOCÊ
+</div>
+</div>
+
+
+
+
+  
+  
+  <div class="bonus-box">
+📘 <strong>BÔNUS GRATUITO eBook</strong><br>
+Reprogramação de Performance Mental
+</div>
+
+
+<div>
+  <p style="font-size:16px; line-height:1.5; margin-bottom:18px;">
+A <strong>Formação Practitioner em PNL – Maringá</strong> acontece em
+<strong>15, 16 e 17 de maio</strong>.
+</p>
+</div>
+
+<div>
+<p style="font-size:13px; line-height:1.4;">
+Preencha e receba agora seu bônus grátis.
+</p>
+  
+</div>
+
+  
+
+  
+  <input id="nome" placeholder="Seu Nome Completo">
+  <input id="email" placeholder="Seu Melhor E-mail">
+  <input id="telefone" placeholder="Telefone/WhatsApp">
+  
+
+
+<button id="btnConfirmar" onclick="finalizar()">
+🔥 QUERO GARANTIR BENEFÍCIOS
+</button>
+
+
+<p style="font-size:12px;text-align:center;opacity:.7;margin-top:8px;">
+🔒 Seus dados estão protegidos. Nenhum spam.
+</p>  
+
+  
+
+  
+<script src="/js/igc-config.js"></script>  
+  
+<script>
+
+
+const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+
+
+
+  
+
+  
+const CURSO_FIXO = "FORMAÇÃO EM PNL - PROGRAMAÇÃO NEUROLINGUÍSTICA"; // ⬅️ EXATAMENTE como está no Excel
+const TURMA_FIXA = "MAIO MGA-100"; // exatamente como está na planilha
+
+
+  
+/* ===========================
+   🔽 CARREGA CURSOS ATIVOS
+   =========================== */
+
+let CURSOS_MAPA = {};
+
+  
+window.onload = () => {
+  fetch(`${ENDPOINT}?acao=listarCursos`)
+    .then(r => r.json())
+    .then(cursos => {
+
+      cursos
+        .filter(c => c.ativo === true)
+        .forEach(curso => {
+
+          const nome = (curso.nome || "").trim();
+          const turma = (curso.turma || "").trim();
+          const chave = `${nome}__${turma}`;
+
+          CURSOS_MAPA[chave] = curso;
+        });
+
+    })
+    .catch(err => {
+      console.warn("Falha ao carregar cursos:", err);
+    });
+};
+
+
+   
+
+// ===== VALIDAÇÕES =====
+
+const nomeEl = document.getElementById("nome");
+const emailEl = document.getElementById("email");
+const telefoneEl = document.getElementById("telefone");
+const btnConfirmar = document.getElementById("btnConfirmar");  
+
+
+nomeEl.oninput = e => e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
+telefoneEl.oninput = e => e.target.value = e.target.value.replace(/\D/g,'');
+emailEl.oninput = e => { e.target.value = e.target.value.toLowerCase();};
+emailEl.onblur = () => { emailEl.classList.toggle( "erro", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value) );};
+
+
+
+ 
+   
+function finalizar() {
+
+const chaveCurso = `${CURSO_FIXO.trim()}__${TURMA_FIXA.trim()}`;
+
+console.log("🔎 CHAVE ESPERADA:", chaveCurso);
+console.log("📦 CHAVES DISPONÍVEIS:", Object.keys(CURSOS_MAPA));
+
+  
+
+// 🔒 VALIDA CURSO + TURMA
+if (!CURSOS_MAPA[chaveCurso]) {
+  console.error("Curso/turma não encontrada:", chaveCurso);
+  alert("Curso indisponível no momento. Entre em contato com a organização.");
+  return;
+}
+
+const cursoSelecionado = CURSOS_MAPA[chaveCurso];
+
+
+  
+
+// 🔴 VALIDA NOME (OBRIGATÓRIO)
+  
+ if (!nomeEl.value.trim()) {
+  alert("⚠️ Informe o nome do participante.");
+  nomeEl.classList.add("erro");
+  nomeEl.focus();
+  return;
+} else {
+  nomeEl.classList.remove("erro");
+}
+  
+  
+  
+  
+  // 🔴 VALIDA EMAIL (OBRIGATÓRIO)
+if (!emailEl.value.trim()) {
+  alert("⚠️ Informe o e-mail.");
+  emailEl.classList.add("erro");
+  emailEl.focus();
+  return;
+}
+
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+  alert("⚠️ Informe um e-mail válido.");
+  emailEl.classList.add("erro");
+  emailEl.focus();
+  return;
+} else {
+  emailEl.classList.remove("erro");
+}
+  
+     
+  
+  // 🔴 VALIDA TELEFONE (OBRIGATÓRIO)
+if (!telefoneEl.value.trim()) {
+  alert("⚠️ Informe o telefone / WhatsApp.");
+  telefoneEl.classList.add("erro");
+  telefoneEl.focus();
+  return;
+}
+
+// mínimo 10 dígitos (DDD + número)
+if (telefoneEl.value.length < 10) {
+  alert("⚠️ Informe um telefone válido com DDD.");
+  telefoneEl.classList.add("erro");
+  telefoneEl.focus();
+  return;
+} else {
+  telefoneEl.classList.remove("erro");
+} 
+
+ 
+  if (document.querySelector(".erro")) {
+    alert("⚠️ Corrija os campos destacados.");
+    return;
+  }
+
+  // 🔒 INÍCIO DO SALVAMENTO
+btnConfirmar.innerText = "Registrando no sistema...";
+btnConfirmar.disabled = true;
+btnConfirmar.style.opacity = "0.7";
+btnConfirmar.style.cursor = "not-allowed";
+
+
+
+/* 🔽 AGORA SIM O FETCH */
+fetch(ENDPOINT, {
+  method: "POST",
+  body: JSON.stringify({
+  acao: "bonusLead",
+  nome: nomeEl.value.toUpperCase(),
+  email: emailEl.value.toLowerCase(),
+  telefone: telefoneEl.value,
+  nomeCurso: cursoSelecionado.nome,
+  turma: cursoSelecionado.turma
+})
+})
+.then(r => r.text())
+.then(txt => {
+  const res = JSON.parse(txt);
+
+  if (!res.sucesso) {
+
+  if (res.tipo === "JA_CADASTRADO_MESMA_TURMA") {
+    alert(res.mensagem);
+  } else {
+    alert("Erro ao registrar a pré-inscrição.");
+  }
+
+  btnConfirmar.disabled = false;
+  btnConfirmar.innerText = "CONFIRMAR ENVIO";
+  return;
+}
+
+ window.location.href = "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/confirmacaobonus.html"; 
+  
+  
+});
+
+}
+  
+</script>
+
+
+
+
+
+
+<script>
+(function(){
+  var utm = window.location.search;
+  var url = window.location.href;
+
+  var img = new Image();
+  img.src = "https://script.google.com/macros/s/AKfycbywcA-6fHHpCUfHCbCV1N6uqKdMzWMJTQozBktItBNZESUnqBjfJF4IIO1yjSmdBap2fQ/exec?log=landing"
+            + "&url=" + encodeURIComponent(url)
+            + "&utm=" + encodeURIComponent(utm);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+ </body>
+</html>
