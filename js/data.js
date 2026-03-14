@@ -461,237 +461,382 @@ textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><strong>2�
 
 
 
-
-
-
-   
-
-   
-
-
-
-   {
-    id: "2",
-    nome: "Curso de Oratória & Comunicação Avançada",
-    categoria: "oratoria",
-    preco: 798.00,
-    imagem: "assets/img/oroatoriaavancada.png",
+  id: "2",
+    nome: "Formação Practitioner em PNL – Maringá",
+    categoria: "pnl",
+    preco: 997.00,
+    imagem: "assets/img/PNLMARINGA01.jpeg",
     videos: [
-      "assets/videos/5htp.mp4"
+      "assets/videos/PNLIMERSAO.mp4"
     ],
     descricao: {
       resumo: `
    
-       Treinamento em pnl busca...
-       
+      <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>
+             
        `,
-      
-       oQueE: `
-      
-      O treinamento tem como...
-      
-      `,      
-      composicao: `
-      
-      Metodologia validada
-      
-      `,
-      comoUsar: `
-      
-      Para quem é...
-      
-      `,
-      advertencias: `
-      
-      muito bom
-
-      `
-    },
 
 
-configuracoes: {
-  mostrarNome: true,
-  mostrarPreco: false,
-  mostrarResumo: false
-},
-      
-    destaque: false,
-    mostrarlancamento: false,
-    mostrarVideo: false,
-    textoParcelamento: ""
-    },
-   
- 
+accordion: [
 
 
 {
-    id: "3",
-    nome: "Workshop de Programação Neurolinguística (PNL) - Alta Performance",
-    categoria: "workshopepalestas",
-    preco: 90.00,
-    imagem: "assets/img/workshoppnlaltaperformance.png",
-    videos: [
-      "assets/videos/5htp.mp4"
-    ],
-    descricao: {
-      resumo: `
-   
-      <p>Desenvolva clareza mental, comunicação eficaz e domínio emocional por meio de técnicas práticas e aplicáveis da Programação Neurolinguística.</p>
-             
-       `,
-      
-       oQueE: `
-
-      <h2>Sobre o Workshop</h2>
-      <br>
-      <p>
-      O Whorkshop <strong>Programação Neurolinguística (PNL) – Alta Performance</strong>
-      foi desenvolvido para pessoas que desejam compreender como a mente humana
-      funciona e como pensamentos, linguagem e comportamento influenciam
-      diretamente os resultados da vida pessoal e profissional.
-    </p>
-
-    <p>
-      Ao longo da formação, o participante aprenderá técnicas consagradas
-      da PNL para melhorar a comunicação interpessoal, criar conexões mais
-      profundas, desenvolver inteligência emocional, reprogramar padrões
-      mentais limitantes e estabelecer objetivos claros e alcançáveis.
-    </p>
-
-    <p>
-      A proposta do Wokshop é unir <strong>conhecimento, prática e consciência</strong>,
-      permitindo que cada aluno aplique imediatamente as ferramentas aprendidas
-      em seu cotidiano, promovendo maior segurança, clareza, autonomia emocional
-      e produtividade.
-    </p>
-      
-      `,      
+      titulo: "🎓 O que está incluso na formação",
+      conteudo: `
        
-      composicao: `
-      
-     <h2>Conteúdo Programático</h2> 
-     <br>
+<p>✔ 20 horas de treinamento intensivo em PNL</p>
+<p>✔ Certificação internacional Practitioner em PNL</p>
+<p>✔ Material didático exclusivo</p>
+<p>✔ Exercícios práticos supervisionados</p>
+<p>✔ Técnicas aplicáveis em comunicação, liderança e negociação</p>
+<p>✔ Networking com participantes da formação</p>
+<p>✔ Acesso a metodologia aplicada há mais de 20 anos</p>
 
-    <h4>Módulo 1 – Fundamentos da PNL</h4>
-    
-    <ul>
-      <li>O que é Programação Neurolinguística: história, princípios e aplicações</li>
-      <li>A relação entre pensamento, linguagem e comportamento</li>
-      <li>Pressupostos da PNL e seus impactos na percepção da realidade</li>
-      <li>O conceito: o mapa não é o território</li>
-      <li>Os 4 pilares da PNL:
-        <ul>
-          <li>Rapport</li>
-          <li>Acuidade sensorial</li>
-          <li>Flexibilidade comportamental</li>
-          <li>Formulação de objetivos</li>
-        </ul>
-      </li>
-    </ul>
-    <br>
-    <h4>Módulo 2 – Aprimorando a Comunicação</h4>
-    
-    <ul>
-      <li>Rapport: técnicas para criar conexão e sintonia rapidamente</li>
-      <li>Sistemas representacionais: visual, auditivo e cinestésico</li>
-      <li>Como identificar e utilizar o canal de comunicação preferencial</li>
-      <li>Meta Modelagem:
-        <ul>
-          <li>Como fazer perguntas específicas e estratégicas</li>
-          <li>Identificação de generalizações, omissões e distorções</li>
-          <li>Clareza, objetividade e precisão na comunicação</li>
-        </ul>
-      </li>
-      <li>O poder das palavras: impacto da linguagem verbal e não verbal</li>
-    </ul>
-    <br>
-
-    <h4>Módulo 3 – Técnicas de Mudança e Reprogramação Mental</h4>
-    
-    <ul>
-      <li>Círculo de Excelência:
-        <ul>
-          <li>Criação de gatilhos mentais positivos</li>
-          <li>Acesso consciente a estados emocionais desejados</li>
-        </ul>
-      </li>
-      <li>Níveis Neurológicos:
-        <ul>
-          <li>Mudança de significado e percepção</li>
-          <li>Potencialização de recursos internos</li>
-          <li>Transformação da visão sobre situações e desafios</li>
-        </ul>
-      </li>
-      <li>Análise Transacional:
-        <ul>
-          <li>Autonomia emocional</li>
-          <li>Responsabilidade sobre ações, sentimentos e decisões</li>
-          <li>Identificação e substituição de padrões mentais improdutivos</li>
-        </ul>
-      </li>
-    </ul>
-     <br> 
-      `,
-      comoUsar: `
-      
-      <h2>Metodologia</h2>
-      <br>
-    <p>
-      A metodologia do curso é <strong>prática, dinâmica e experiencial</strong>,
-      focada no aprendizado real e aplicável.
-    </p>
-<br>
-    <ul>
-      <li>Exposição clara e objetiva dos conceitos</li>
-      <li>Exercícios práticos individuais e em grupo</li>
-      <li>Dinâmicas de vivência emocional e comportamental</li>
-      <li>Exemplos reais do cotidiano pessoal e profissional</li>
-      <li>Aplicação imediata das técnicas aprendidas</li>
-    </ul>
-<br>
-    <p>
-      O aluno não apenas aprende o conteúdo, mas desenvolve a capacidade
-      de utilizá-lo conscientemente em diferentes contextos da vida.
-    </p>
-      <br>
-      `,
-      advertencias: `
-      
-      <h2>Conheça o Palestrante</h2>
-      <br>
-    <p>
-      <strong>Dr. Paulo Takahashi</strong> atua há mais de duas décadas na área
-      de desenvolvimento humano, comunicação e comportamento.
-    </p>
-
-    <p>
-      Seu trabalho integra Programação Neurolinguística, psicologia aplicada
-      e desenvolvimento pessoal, com uma abordagem ética, prática e
-      orientada a resultados consistentes.
-    </p>
-
-    <p>
-      Com uma didática clara e acessível, Dr. Paulo Takahashi conduz seus cursos e
-      treinamentos criando um ambiente seguro, profissional e estimulante,
-      favorecendo aprendizado profundo, reflexão e transformação real.
-    </p>
-<br>
-<br>
+ 
       `
     },
 
 
-configuracoes: {
-  mostrarNome: true,
-  mostrarPreco: false,
-  mostrarResumo: false
-},
+ 
+    {
+      titulo: "🙋 Essa formação é para você se",
+      conteudo: `
+       
+      
+<p>🌟 quer melhorar comunicação</p>
+<p>🌟 quer desenvolver inteligência emocional</p>
+<p>🌟 quer aumentar resultados profissionais</p>
+<p>🌟 quer romper padrões limitantes que te impedem de evoluir</p>
+<p>🌟 quer aprender técnicas reais de influência</p>
+<p>🌟 quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
+
+     
+      `
+    },
+
 
    
-    destaque: false,
-    mostrarlancamento: false,
-    mostrarVideo: false,
-    textoParcelamento: ""
+    {
+      titulo: "🧠 O que você vai aprender",
+      conteudo: `
+     
+      
+<p>✔️ Comunicação poderosa</p>
+<p>✔️ Controle emocional</p>
+<p>✔️ Alta performance</p>
+<p>✔️ Como interpretar e ajustar a sua linguagem interna</p>
+<p>✔️ Técnicas de comunicação eficaz e persuasiva</p>
+<p>✔️ Como reconhecer e modificar padrões limitantes</p>
+<p>✔️ Como construir confiança instantânea em si mesmo</p>
+<p>✔️ Estratégias de influência sem manipulação</p>
+<p>✔️ Ferramentas práticas para situações reais</p>
+<p>✔️ Comportamento emocional estável sob pressão</p>
+
+<br>
+<p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
+
+   
+      `
+    },
+
+    {
+      titulo: "💡Benefícios futuros",
+      conteudo: `
+      
+      
+      
+    <em>Imagine daqui a algumas semanas:</em>
+<br>
+<br>
+✨ Você se comunicando com muito mais segurança
+<br>
+✨ Tomando decisões com clareza
+<br>
+✨ Influenciando pessoas de forma natural
+<br>
+✨ Conduzindo conversas difíceis com equilíbrio emocional
+<br>
+✨ Percebendo oportunidades que antes passavam despercebidas
+<br>
+<br>
+
+
+<b>Isso não é motivação momentânea.</b>
+<br>
+<strong>É uma habilidade que você leva para toda a vida.</strong>
+<br>  
+
+     
+      `
+    },
+
+
+
+
+  {
+      titulo: "🙋Quem participa desta formação",
+      conteudo: `
+  
+
+✔️ Profissionais de vendas
+<br>
+✔️ Líderes e gestores
+<br>
+✔️ Empreendedores
+<br>
+✔️ Profissionais da área de desenvolvimento humano
+<br>
+✔️ Pessoas que desejam evoluir comunicação e inteligência emocional
+<br>
+     
+      `
+    },  
+
+
+
+
+{
+      titulo: "🫶 Por que essa formação é poderosa",
+      conteudo: `
+      
+ 
+
+<p>✔️ Três dias intensivos de imersão prática em PNL</p>
+<p>✔️ Certificação Internacional com carga horária oficial de 20h</p> 
+<p>✔️ Metodologia apoiada nas bases da PNL moderna</p>
+<p>✔️ Conteúdo aplicável desde o primeiro módulo</p>
+<p>✔️ Ferramentas práticas, não apenas teoria</p>
+<p>✔️ Foco em mudança comportamental real</p>
+<p>✔️ Resultados visíveis na sua vida e no seu entorno</p>
+<p>✔️ Registro IGC-MEC no certificado</p>
+<p>✔️ Validação online via QR Code</p>
+<p>✔️ Atividades práticas individuais e em grupo com alto impacto transformacional</p>
+
+<br>
+<br>
+<p><strong>PNL não muda apenas o que você sabe.</strong>
+<br>
+<strong>PNL muda o que você faz.</strong></p>
+<br>  
+     
+     
+      `
+    },
+
+
+   
+
+{
+      titulo: "📌 Local do evento",
+      conteudo: `
+     
+
+
+<strong>📍 Local:</strong> Maringá-PR – Golden Ingá Hotel
+<br>
+<strong>📅 Datas e formato:</strong> Sexta-feira – 15/05/2026 das 19h às 22h (online – grupo fechado)
+<br>
+Sábado – 16/05/2026 das 09h às 19h (presencial – imersivo)
+<br>
+Domingo – 17/05/2026 das 09h às 19h (presencial – imersivo)
+<br><br>
+
+<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
+<br>
+Após o preenchimento das vagas, as inscrições serão encerradas.
+<br>
+
+     
+      `
+    },
+
+   
+
+
+
+
+
+{
+      titulo: "👨 Quem conduz a formação",
+      conteudo: `
+     
+
+
+<strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
+com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
+<br>
+Sua metodologia integra PNL, comportamento e comunicação estratégica,
+com aplicação prática e foco em transformação real.
+<br><br>
+<strong>Você não aprende apenas teoria.</strong>
+<strong>Você aprende com quem aplica há décadas.</strong>
+<br>
+
+<strong>As vagas são limitadas.</strong>
+<br><br>
+Se você deseja participar desta turma em Curitiba,
+essa é a sua oportunidade.
+<br>
+<strong>Garanta sua inscrição agora.</strong>
+<br>
+
+     
+      `
+    },
+
+
+
+
+{
+      titulo: "💬 Dúvidas frequentes",
+      conteudo: `
+     
+
+
+<strong>Será que eu vou conseguir acompanhar?</strong>
+<br>
+Sim.
+<br>
+👉 A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
+<br>
+<br>
+
+<strong>Isso é apenas motivacional?</strong>
+<br>
+Não.
+<br>
+👉 Motivação passa…
+<br>
+👉 PNL é técnica + aplicação + transformação comportamental real.
+<br>
+<br>
+
+<strong>Preciso de experiência anterior?</strong>
+<br>
+Não.
+<br>
+👉 Você aprende tudo desde as bases até aplicações avançadas.
+<br>
+<br>
+
+<strong>Isso traz resultados práticos?</strong>
+<br>
+Sim.
+<br>
+👉 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
+<br>
+
+
+     
+      `
+    } 
+ 
+  ],
+
+
+          
+       oQueE: `
+
+      
+      `,      
+
+       
+      composicao: `
+
+ 
+      `,
+      
+       comoUsar: `
+
+      
+      `,
+      advertencias: `
+
+
+      `
+    },
+
+
+ configuracoes: {
+  mostrarNome: true,
+  mostrarPreco: true,
+  mostrarResumo: true,
+  cta: {
+    mostrar: true,
+    texto: "Comprar",
+    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/inscricaopelosite.html"
+  }
+},
+
+depoimentos: {
+  mostrar: true,
+  autoplay: false, 
+  videos: [
+    "BEV6upQhPEA",
+    "7uC4pstQS4Y",
+    "Fu-WNt6muDc",
+    "PQn3T-R6BmQ",
+    "nyRvRtNetrA",
+    "DZR50Zx1mGU"
+     
+  ]
+},
+
+clientes: {
+  mostrar: true,
+  logos: [
+    "assets/img/depoimentos/2.jpg",
+    "assets/img/depoimentos/3.jpg",
+    "assets/img/depoimentos/4.jpg",
+    "assets/img/depoimentos/5.jpg",
+    "assets/img/depoimentos/6.jpg",
+    "assets/img/depoimentos/7.jpg",
+    "assets/img/depoimentos/8.jpg",
+    "assets/img/depoimentos/9.jpg"
+  ]
+},
+
+videoPrincipal: {
+  mostrar: false,
+  youtubeId: "FU66p66t4ag"
+},
+
+ofertaRelampago: {
+  mostrar: false,
+  delaySegundos: 3,
+  tempoMinutos: 15,
+  diasParaReexibir: 7, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
+  titulo: "🎉 PARABÉNS!<br>você desbloqueou<br>🔥 70% OFF + Bônus Grátis<br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "🚀<strong> Mais de 4.327 alunos já se certificaram</strong>",            //2º Lote. Exclusivo para esta página!
+  mostrarPrecos: false,
+  mostrarParcelamento: false,
+  valorDe: 1997,
+  valorPor: 697,
+  
+   // 🔥 NOVO BLOCO
+  parcelamento: { 
+  
+     texto: "🔥Super Desconto + 💎Bônus Grátis"                    //Apenas 12x de R$ 61,89
+  },
+   
+  textoBotao: "🎁 LIBERAR MEU DESCONTO DE 70%<br><span class='texto-botao-extra'>Leva menos de 17 segundos</span>",
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/receberbonus.html",           // "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
+
+  
+},
+
+
+destaque: true,
+mostrarlancamento: false,
+mostrarVideo: false,
+textoParcelamento: "<strong>Vagas Limitadas</strong>"
+
+
+//<del><strong>1º Lote: esgotado</strong></del><br><strong>2º Lote:</strong> restam poucas vagas<br><strong>Pagamento facilitado</strong>
+
+// <strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
+
+     
     },
 
 
