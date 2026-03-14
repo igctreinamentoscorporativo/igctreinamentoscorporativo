@@ -460,7 +460,7 @@ textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><strong>2�
 
 
 
-
+{
   id: "2",
     nome: "Formação Practitioner em PNL – Maringá",
     categoria: "pnl",
