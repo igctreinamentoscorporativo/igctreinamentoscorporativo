@@ -763,7 +763,7 @@ Sim.
   mostrarResumo: true,
   cta: {
     mostrar: true,
-    texto: "Comprar",
+    texto: "RESERVAR MINHA VAGA",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/inscricaopelosite.html"
   }
 },
