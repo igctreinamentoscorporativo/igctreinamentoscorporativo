@@ -200,9 +200,9 @@ let senha="";
 
 async function login(){
 
-const senhaDigitada=senhaLogin.value;
+const senhaDigitada = document.getElementById("senhaLogin").value;
 
-const res=await fetch(API,{
+const res = await fetch(API,{
 method:"POST",
 body:JSON.stringify({
 acao:"loginCursos",
@@ -210,36 +210,54 @@ senha:senhaDigitada
 })
 });
 
-const r=await res.json();
+const r = await res.json();
 
 if(!r.ok){
-
-loginErro.innerText="Senha inválida";
+document.getElementById("loginErro").innerText="Senha inválida";
 return;
-
 }
 
-senha=senhaDigitada;
+senha = senhaDigitada;
 
-loginBox.classList.add("hidden");
-appBox.style.display="block";
+/* ESCONDE LOGIN */
+document.getElementById("loginBox").style.display="none";
+
+/* MOSTRA APP */
+document.getElementById("appBox").style.display="block";
 
 carregar();
 
 }
 
+
+
+  
 /* LISTAR */
 
 async function carregar(){
 
-const res=await fetch(API+"?acao=listarPreInscritos");
+/* LIMPA FILTROS */
+document.getElementById("fCpf").value="";
+document.getElementById("fNome").value="";
+document.getElementById("fEmail").value="";
+document.getElementById("fTurma").value="";
 
-dados=await res.json();
+const res = await fetch(API+"?acao=listarPreInscritos");
+
+dados = await res.json();
 
 render(dados);
 
 }
 
+
+
+
+
+
+
+
+  
 /* RENDER */
 
 function render(lista){
