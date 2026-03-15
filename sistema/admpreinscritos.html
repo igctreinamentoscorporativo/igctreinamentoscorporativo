@@ -171,6 +171,12 @@ display:block;
 
 <div class="filtros">
 
+
+<select id="fOrdem" onchange="ordenarLista()">
+<option value="novo">Mais novos primeiro</option>
+<option value="antigo">Mais antigos primeiro</option>
+</select>  
+
 <input id="fCpf" placeholder="CPF" oninput="buscarAuto()">
 <input id="fNome" placeholder="Nome" oninput="buscarAuto()">
 <input id="fEmail" placeholder="Email" oninput="buscarAuto()">
@@ -186,19 +192,12 @@ display:block;
 
 <thead>
 <tr>
-<th>CPF</th>
 <th>Nome</th>
-<th>Email</th>
-<th>Telefone</th>
 <th>Curso</th>
-<th>Cidade</th>
-<th>Estado</th>
 <th>Turma</th>
-<th>Carga</th>
-<th>Local</th>
-<th>Data</th>
 <th>Pagamento</th>
-<th></th>
+<th>Whats</th>
+<th>Telefone</th>
 <th></th>
 </tr>
 </thead>
@@ -317,6 +316,30 @@ render(dados);
 
 
 
+/* ORDENAR LISTAR */
+
+function ordenarLista(){
+
+const ordem=document.getElementById("fOrdem").value;
+
+if(ordem==="antigo"){
+
+dados.sort((a,b)=>a.linha-b.linha);
+
+}else{
+
+dados.sort((a,b)=>b.linha-a.linha);
+
+}
+
+render(dados);
+
+}
+
+
+  
+
+
 
 
   
@@ -337,21 +360,23 @@ lista.forEach(i=>{
 tbody.innerHTML+=`
 <tr>
 
-<td>${i.cpf}</td>
 <td>${i.nome}</td>
-<td>${i.email}</td>
-<td>${i.telefone}</td>
-
 <td>${i.curso}</td>
-<td>${i.cidade}</td>
-<td>${i.estado}</td>
-
 <td>${i.turma}</td>
-<td>${i.carga}</td>
-<td>${i.local}</td>
-<td>${i.data}</td>
 
 <td>${i.pagamento || ""}</td>
+
+<td>
+<a href="https://wa.me/55${i.telefone}" target="_blank">
+📲
+</a>
+</td>
+
+<td>
+<a href="tel:${i.telefone}">
+📞
+</a>
+</td>
 
 <td>
 <button class="btn-editar" onclick="editar(${i.linha})">
@@ -369,17 +394,17 @@ cards.innerHTML+=`
 
 <b>${i.nome}</b>
 
-CPF: ${i.cpf}<br>
-Email: ${i.email}<br>
-Telefone: ${i.telefone}<br>
 Curso: ${i.curso}<br>
-Cidade: ${i.cidade}<br>
-Estado: ${i.estado}<br>
 Turma: ${i.turma}<br>
-Carga: ${i.carga}<br>
-Local: ${i.local}<br>
-Data: ${i.data}<br>
-Pagamento: ${i.pagamento||""}
+Pagamento: ${i.pagamento || ""}
+
+<div style="margin-top:10px">
+
+<a href="https://wa.me/55${i.telefone}" target="_blank">📲 Whats</a>
+<br>
+<a href="tel:${i.telefone}">📞 Ligar</a>
+
+</div>
 
 <button class="btn-editar" onclick="editar(${i.linha})">
 Editar
