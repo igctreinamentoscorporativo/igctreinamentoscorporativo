@@ -83,12 +83,43 @@ display:flex;
 gap:10px;
 }
 
+.hidden{
+display:none;
+}
+
+.login{
+max-width:400px;
+margin:auto;
+margin-top:100px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
 </style>
 
 </head>
 <body>
 
-<div class="container">
+<script src="/js/igc-config.js"></script>
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="login">
+
+<h2>Acesso Restrito</h2>
+
+<input type="password" id="senhaLogin" placeholder="Senha">
+
+<button onclick="login()">Entrar</button>
+
+<p id="loginErro"></p>
+
+</div>
+
+<!-- APP -->
+
+<div id="appBox" class="container hidden">
 
 <h2>Gestor de Pré-Inscritos</h2>
 
@@ -127,6 +158,8 @@ gap:10px;
 
 </div>
 
+<!-- MODAL -->
+
 <div class="modal" id="modal">
 
 <div class="modal-box">
@@ -156,17 +189,47 @@ gap:10px;
 
 </div>
 
-<script src="/js/igc-config.js"></script>
-<script src="app.js"></script>
-
-
-
 <script>
+
 const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
 let dados=[];
 let linhaAtual=null;
 let senha="";
+
+/* LOGIN */
+
+async function login(){
+
+const senhaDigitada=senhaLogin.value;
+
+const res=await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+acao:"loginCursos",
+senha:senhaDigitada
+})
+});
+
+const r=await res.json();
+
+if(!r.ok){
+
+loginErro.innerText="Senha inválida";
+return;
+
+}
+
+senha=senhaDigitada;
+
+loginBox.classList.add("hidden");
+appBox.classList.remove("hidden");
+
+carregar();
+
+}
+
+/* LISTAR */
 
 async function carregar(){
 
@@ -177,6 +240,8 @@ dados=await res.json();
 render(dados);
 
 }
+
+/* RENDER */
 
 function render(lista){
 
@@ -211,6 +276,8 @@ Editar
 
 }
 
+/* BUSCAR */
+
 async function buscar(){
 
 const cpf=fCpf.value;
@@ -232,7 +299,6 @@ turma
 }
 
 })
-
 });
 
 const r=await res.json();
@@ -242,6 +308,8 @@ dados=r;
 render(dados);
 
 }
+
+/* EDITAR */
 
 function editar(linha){
 
@@ -259,11 +327,15 @@ modal.style.display="flex";
 
 }
 
+/* FECHAR MODAL */
+
 function fechar(){
 
 modal.style.display="none";
 
 }
+
+/* SALVAR */
 
 async function salvar(){
 
@@ -284,7 +356,6 @@ telefone:eTelefone.value,
 pagamento:ePagamento.value
 
 })
-
 });
 
 fechar();
@@ -293,14 +364,7 @@ carregar();
 
 }
 
-carregar();
-
-
-
 </script>
 
-
-
-  
 </body>
 </html>
