@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Gestor de Pré-Inscritos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{box-sizing:border-box;}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:linear-gradient(180deg,#020617,#0f172a);
+color:#e5e7eb;
+margin:0;
+padding:16px;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+background:#020617;
+padding:24px;
+border-radius:12px;
+}
+
+input,button,select{
+width:100%;
+padding:10px;
+border-radius:6px;
+border:1px solid #334155;
+background:#020617;
+color:#e5e7eb;
+}
+
+button{
+cursor:pointer;
+background:#2563eb;
+border:none;
+font-weight:bold;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr 1fr 1fr;
+gap:12px;
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+font-size:13px;
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #1e293b;
+}
+
+th{
+color:#94a3b8;
+text-align:left;
+}
+
+.btn-editar{
+background:#eab308;
+color:#000;
+}
+
+.hidden{
+display:none;
+}
+
+/* modal */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-box{
+background:#020617;
+padding:20px;
+border-radius:12px;
+width:100%;
+max-width:420px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:16px;
+}
+
+@media(max-width:700px){
+
+.row{
+grid-template-columns:1fr;
+}
+
+table{
+display:none;
+}
+
+.card{
+border:1px solid #334155;
+border-radius:10px;
+padding:14px;
+margin-bottom:12px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<script src="/js/igc-config.js"></script>
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="container">
+<h2>Acesso Restrito</h2>
+
+<input type="password" id="senhaLogin" placeholder="Senha">
+<button onclick="login()">Entrar</button>
+
+<p id="loginErro"></p>
+</div>
+
+<!-- LOADING -->
+
+<div id="loadingBox" class="container hidden">
+<h2>Carregando sistema...</h2>
+</div>
+
+<!-- APP -->
+
+<div id="appBox" class="container hidden">
+
+<h2>Gestor de Pré-Inscritos</h2>
+
+<div class="row">
+<input id="filtroCpf" placeholder="Filtrar CPF" oninput="aplicarFiltro()">
+<input id="filtroNome" placeholder="Filtrar Nome" oninput="aplicarFiltro()">
+<input id="filtroEmail" placeholder="Filtrar Email" oninput="aplicarFiltro()">
+<input id="filtroTurma" placeholder="Filtrar Turma" oninput="aplicarFiltro()">
+</div>
+
+<table id="tabela">
+<thead>
+<tr>
+<th>CPF</th>
+<th>Nome</th>
+<th>Email</th>
+<th>Telefone</th>
+<th>Curso</th>
+<th>Turma</th>
+<th>Pagamento</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+
+<div id="cards"></div>
+
+</div>
+
+<!-- MODAL -->
+
+<div class="modal" id="modalEditar">
+
+<div class="modal-box">
+
+<h3>Editar inscrição</h3>
+
+<input id="editCpf">
+<input id="editNome">
+<input id="editEmail">
+<input id="editTelefone">
+
+<select id="editPagamento">
+<option value="">---</option>
+<option>SIM</option>
+<option>NÃO</option>
+<option>PROCESSADO</option>
+</select>
+
+<div class="actions">
+<button onclick="salvar()">Salvar</button>
+<button onclick="fecharModal()">Cancelar</button>
+</div>
+
+</div>
+</div>
+
+<script>
+
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+let SENHA="";
+let inscritos=[];
+let linhaAtual=null;
+
+async function login(){
+
+const senha=senhaLogin.value;
+
+const res=await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+acao:"loginCursos",
+senha
+})
+}).then(r=>r.json());
+
+if(!res.ok){
+loginErro.innerText="Acesso negado";
+return;
+}
+
+SENHA=senha;
+
+loginBox.classList.add("hidden");
+loadingBox.classList.remove("hidden");
+
+await carregar();
+
+loadingBox.classList.add("hidden");
+appBox.classList.remove("hidden");
+
+}
+
+async function carregar(){
+
+inscritos=await fetch(API+"?acao=listarPreInscritos")
+.then(r=>r.json());
+
+render();
+
+}
+
+function render(){
+
+const tbody=document.getElementById("tbody");
+const cards=document.getElementById("cards");
+
+tbody.innerHTML="";
+cards.innerHTML="";
+
+inscritos.forEach(i=>{
+
+tbody.innerHTML+=`
+<tr>
+<td>${i.cpf}</td>
+<td>${i.nome}</td>
+<td>${i.email}</td>
+<td>${i.telefone}</td>
+<td>${i.curso}</td>
+<td>${i.turma}</td>
+<td>${i.pagamento||""}</td>
+<td><button class="btn-editar" onclick="editar(${i.linha})">Editar</button></td>
+</tr>
+`;
+
+cards.innerHTML+=`
+<div class="card">
+<b>${i.nome}</b><br>
+CPF: ${i.cpf}<br>
+Email: ${i.email}<br>
+Telefone: ${i.telefone}<br>
+Pagamento: ${i.pagamento||""}<br><br>
+<button class="btn-editar" onclick="editar(${i.linha})">Editar</button>
+</div>
+`;
+
+});
+
+}
+
+function editar(linha){
+
+linhaAtual=linha;
+
+const r=inscritos.find(x=>x.linha===linha);
+
+editCpf.value=r.cpf;
+editNome.value=r.nome;
+editEmail.value=r.email;
+editTelefone.value=r.telefone;
+editPagamento.value=r.pagamento;
+
+modalEditar.style.display="flex";
+
+}
+
+function fecharModal(){
+
+modalEditar.style.display="none";
+
+}
+
+async function salvar(){
+
+await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+acao:"editarPreInscrito",
+senha:SENHA,
+linha:linhaAtual,
+cpf:editCpf.value,
+nome:editNome.value,
+email:editEmail.value,
+telefone:editTelefone.value,
+pagamento:editPagamento.value
+})
+});
+
+fecharModal();
+carregar();
+
+}
+
+</script>
+
+</body>
+</html>
