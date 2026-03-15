@@ -8,215 +8,231 @@
 <style>
 
 body{
-font-family:Arial;
-background:#020617;
-color:#e5e7eb;
-margin:0;
-padding:20px;
+  font-family:Arial;
+  background:#020617;
+  color:#e5e7eb;
+  margin:0;
+  padding:20px;
 }
 
 .container{
-max-width:1400px;
-margin:auto;
+  max-width:1400px;
+  margin:auto;
 }
 
 h2{
-margin-bottom:20px;
+  margin-bottom:20px;
 }
 
-input,select{
-padding:10px;
-border-radius:6px;
-border:1px solid #334155;
-background:#020617;
-color:white;
-width:100%;
-box-sizing:border-box;
+input,
+select,
+button{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #334155;
+  background:#020617;
+  color:white;
+  width:100%;
+  box-sizing:border-box;
 }
 
 button{
-cursor:pointer;
-border:none;
+  background:#2563eb;
+  cursor:pointer;
 }
 
 .filtros{
-display:grid;
-grid-template-columns:200px 1fr 1fr 1fr 1fr 120px;
-gap:10px;
-margin-bottom:20px;
-align-items:center;
+  display:grid;
+  grid-template-columns:200px 1fr 1fr 1fr 1fr 120px;
+  gap:10px;
+  margin-bottom:20px;
+  align-items:center;
 }
 
- .btn-limpar{
-background:#2563eb;
-height:42px;
-} 
-
-  
+.btn-limpar{
+  background:#2563eb;
+  height:42px;
+}
 
 table{
-width:100%;
-border-collapse:collapse;
+  width:100%;
+  border-collapse:collapse;
 }
 
-th,td{
-padding:10px;
-border-bottom:1px solid #1e293b;
+th,
+td{
+  padding:10px;
+  border-bottom:1px solid #1e293b;
 }
 
 
-/* CARDS MOBILE */
+/* =========================
+   CARDS MOBILE
+========================= */
 
 .cards{
-display:none;
+  display:none;
 }
 
 .card{
-background:#020617;
-border:1px solid #1e293b;
-border-radius:10px;
-padding:15px;
-margin-bottom:12px;
+  background:#020617;
+  border:1px solid #1e293b;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:12px;
 }
 
 .card b{
-display:block;
-margin-bottom:6px;
+  display:block;
+  margin-bottom:6px;
 }
 
 .card button{
-margin-top:10px;
+  margin-top:10px;
 }
 
 
-
+/* =========================
+   AÇÕES
+========================= */
 
 .acoes{
-display:flex;
-gap:8px;
-align-items:center;
+  display:flex;
+  gap:8px;
+  align-items:center;
 }
 
 /* WHATS */
 
 .btn-whats{
-background:#16a34a;
-color:white;
+  background:#16a34a;
+  color:white;
 }
 
 /* TELEFONE */
 
 .btn-tel{
-background:#2563eb;
-color:white;
+  background:#2563eb;
+  color:white;
 }
 
 /* EDITAR */
 
 .btn-editar{
-background:#eab308;
-color:black;
+  background:#eab308;
+  color:black;
 }
 
 .btn-whats:hover{
-background:#15803d;
+  background:#15803d;
 }
 
 .btn-tel:hover{
-background:#be123c;
+  background:#be123c;
 }
 
 .btn-editar:hover{
-background:#ca8a04;
+  background:#ca8a04;
 }
 
+
+/* =========================
+   BOTÕES DOS CARDS
+========================= */
 
 .card-acoes{
-display:flex;
-gap:8px;
-margin-top:12px;
-justify-content:space-between;
+  display:flex;
+  gap:8px;
+  margin-top:12px;
 }
- 
 
 .card-acoes a,
 .card-acoes button{
 
-width:33%;
-height:42px;
+  width:33.33%;
+  height:40px;
 
-display:flex;
-align-items:center;
-justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-border-radius:8px;
-font-size:18px;
+  border-radius:8px;
+  border:none;
 
-text-decoration:none;
-border:none;
+  font-size:16px;
+  cursor:pointer;
+  text-decoration:none;
 
 }
 
-  
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.7);
-display:none;
-align-items:center;
-justify-content:center;
-padding:15px;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
 }
 
 .modal-box{
-background:#020617;
-padding:20px;
-border-radius:10px;
-width:100%;
-max-width:400px;
-display:flex;
-flex-direction:column;
-gap:10px;
-max-height:90vh;
-overflow:auto;
+  background:#020617;
+  padding:20px;
+  border-radius:10px;
+  width:100%;
+  max-width:400px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-height:90vh;
+  overflow:auto;
 }
 
 .actions{
-display:flex;
-gap:10px;
+  display:flex;
+  gap:10px;
 }
 
-/* LOGIN */
+
+/* =========================
+   LOGIN
+========================= */
 
 .login{
-max-width:400px;
-margin:auto;
-margin-top:100px;
-display:flex;
-flex-direction:column;
-gap:10px;
+  max-width:400px;
+  margin:auto;
+  margin-top:100px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
-.filtros{
-grid-template-columns:1fr;
+  .filtros{
+    grid-template-columns:1fr;
+  }
+
+  table{
+    display:none;
+  }
+
+  .cards{
+    display:block;
+  }
+
 }
 
-table{
-display:none;
-}
-
-.cards{
-display:block;
-}
-
-}
 </style>
 
 </head>
