@@ -41,10 +41,18 @@ cursor:pointer;
 
 .filtros{
 display:grid;
-grid-template-columns:1fr 1fr 1fr 1fr;
+grid-template-columns:200px 1fr 1fr 1fr 1fr 120px;
 gap:10px;
 margin-bottom:20px;
+align-items:center;
 }
+
+ .btn-limpar{
+background:#2563eb;
+height:42px;
+} 
+
+  
 
 table{
 width:100%;
@@ -56,10 +64,6 @@ padding:10px;
 border-bottom:1px solid #1e293b;
 }
 
-.btn-editar{
-background:#eab308;
-color:black;
-}
 
 /* CARDS MOBILE */
 
@@ -83,6 +87,54 @@ margin-bottom:6px;
 .card button{
 margin-top:10px;
 }
+
+
+
+
+.acoes{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+.btn-whats{
+background:#16a34a;
+padding:6px 10px;
+border-radius:6px;
+text-decoration:none;
+}
+
+.btn-tel{
+background:#e11d48;
+padding:6px 10px;
+border-radius:6px;
+text-decoration:none;
+}
+
+.btn-editar{
+background:#eab308;
+color:black;
+padding:6px 10px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+.btn-whats:hover{
+background:#15803d;
+}
+
+.btn-tel:hover{
+background:#be123c;
+}
+
+.btn-editar:hover{
+background:#ca8a04;
+}
+
+
+
+  
 
 /* MODAL */
 
@@ -184,7 +236,7 @@ display:block;
 
 </div>
 
-<button onclick="carregar()">Limpar</button>
+<button class="btn-limpar" onclick="carregar()">Limpar</button>
 
 <br><br>
 
@@ -196,9 +248,7 @@ display:block;
 <th>Curso</th>
 <th>Turma</th>
 <th>Pagamento</th>
-<th>Whats</th>
-<th>Telefone</th>
-<th></th>
+<th>Ações</th>
 </tr>
 </thead>
 
@@ -363,25 +413,22 @@ tbody.innerHTML+=`
 <td>${i.nome}</td>
 <td>${i.curso}</td>
 <td>${i.turma}</td>
-
 <td>${i.pagamento || ""}</td>
 
-<td>
-<a href="https://wa.me/55${i.telefone}" target="_blank">
+<td class="acoes">
+
+<a class="btn-whats" href="https://wa.me/55${i.telefone}" target="_blank">
 📲
 </a>
-</td>
 
-<td>
-<a href="tel:${i.telefone}">
+<a class="btn-tel" href="tel:${i.telefone}">
 📞
 </a>
-</td>
 
-<td>
 <button class="btn-editar" onclick="editar(${i.linha})">
 Editar
 </button>
+
 </td>
 
 </tr>
