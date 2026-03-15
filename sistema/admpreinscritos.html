@@ -105,7 +105,7 @@ text-decoration:none;
 }
 
 .btn-tel{
-background:#e11d48;
+background:#0000FF;
 padding:6px 10px;
 border-radius:6px;
 text-decoration:none;
@@ -132,7 +132,22 @@ background:#be123c;
 background:#ca8a04;
 }
 
+.card-acoes{
+display:flex;
+gap:10px;
+margin-top:12px;
+}
 
+.card-acoes a,
+.card-acoes button{
+flex:1;
+text-align:center;
+padding:10px;
+border-radius:8px;
+font-size:18px;
+border:none;
+cursor:pointer;
+}
 
   
 
@@ -426,7 +441,7 @@ tbody.innerHTML+=`
 </a>
 
 <button class="btn-editar" onclick="editar(${i.linha})">
-Editar
+✏️
 </button>
 
 </td>
@@ -443,19 +458,23 @@ cards.innerHTML+=`
 
 Curso: ${i.curso}<br>
 Turma: ${i.turma}<br>
-Pagamento: ${i.pagamento || ""}
+Pagamento: ${i.pagamento||""}
 
-<div style="margin-top:10px">
+<div class="card-acoes">
 
-<a href="https://wa.me/55${i.telefone}" target="_blank">📲 Whats</a>
-<br>
-<a href="tel:${i.telefone}">📞 Ligar</a>
+<a class="btn-whats" href="https://wa.me/55${i.telefone}" target="_blank">
+📲
+</a>
 
-</div>
+<a class="btn-tel" href="tel:${i.telefone}">
+📞
+</a>
 
 <button class="btn-editar" onclick="editar(${i.linha})">
-Editar
+✏️
 </button>
+
+</div>
 
 </div>
 `;
