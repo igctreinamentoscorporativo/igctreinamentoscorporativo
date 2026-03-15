@@ -336,19 +336,29 @@ lista.forEach(i=>{
 
 tbody.innerHTML+=`
 <tr>
+
+<td>${i.cpf}</td>
+<td>${i.nome}</td>
+<td>${i.email}</td>
+<td>${i.telefone}</td>
+
 <td>${i.curso}</td>
 <td>${i.cidade}</td>
 <td>${i.estado}</td>
+
 <td>${i.turma}</td>
 <td>${i.carga}</td>
 <td>${i.local}</td>
 <td>${i.data}</td>
-<td>${i.pagamento||""}</td>
+
+<td>${i.pagamento || ""}</td>
+
 <td>
 <button class="btn-editar" onclick="editar(${i.linha})">
 Editar
 </button>
 </td>
+
 </tr>
 `;
 
