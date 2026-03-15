@@ -30,6 +30,8 @@ border-radius:6px;
 border:1px solid #334155;
 background:#020617;
 color:white;
+width:100%;
+box-sizing:border-box;
 }
 
 button{
@@ -59,6 +61,31 @@ background:#eab308;
 color:black;
 }
 
+/* CARDS MOBILE */
+
+.cards{
+display:none;
+}
+
+.card{
+background:#020617;
+border:1px solid #1e293b;
+border-radius:10px;
+padding:15px;
+margin-bottom:12px;
+}
+
+.card b{
+display:block;
+margin-bottom:6px;
+}
+
+.card button{
+margin-top:10px;
+}
+
+/* MODAL */
+
 .modal{
 position:fixed;
 inset:0;
@@ -66,16 +93,20 @@ background:rgba(0,0,0,.7);
 display:none;
 align-items:center;
 justify-content:center;
+padding:15px;
 }
 
 .modal-box{
 background:#020617;
 padding:20px;
 border-radius:10px;
-width:400px;
+width:100%;
+max-width:400px;
 display:flex;
 flex-direction:column;
 gap:10px;
+max-height:90vh;
+overflow:auto;
 }
 
 .actions{
@@ -83,9 +114,7 @@ display:flex;
 gap:10px;
 }
 
-.hidden{
-display:none;
-}
+/* LOGIN */
 
 .login{
 max-width:400px;
@@ -96,6 +125,23 @@ flex-direction:column;
 gap:10px;
 }
 
+/* MOBILE */
+
+@media(max-width:700px){
+
+.filtros{
+grid-template-columns:1fr;
+}
+
+table{
+display:none;
+}
+
+.cards{
+display:block;
+}
+
+}
 </style>
 
 </head>
@@ -155,8 +201,9 @@ gap:10px;
 
 </table>
 
-</div>
+<div id="cards" class="cards"></div>
 
+  
 <!-- MODAL -->
 
 <div class="modal" id="modal">
@@ -263,14 +310,17 @@ render(dados);
 function render(lista){
 
 const tbody=document.getElementById("lista");
+const cards=document.getElementById("cards");
 
 tbody.innerHTML="";
+cards.innerHTML="";
 
 lista.forEach(i=>{
 
+/* TABELA DESKTOP */
+
 tbody.innerHTML+=`
 <tr>
-
 <td>${i.cpf}</td>
 <td>${i.nome}</td>
 <td>${i.email}</td>
@@ -278,20 +328,42 @@ tbody.innerHTML+=`
 <td>${i.curso}</td>
 <td>${i.turma}</td>
 <td>${i.pagamento||""}</td>
-
 <td>
-<button class="btn-editar"
-onclick="editar(${i.linha})">
+<button class="btn-editar" onclick="editar(${i.linha})">
 Editar
 </button>
 </td>
-
 </tr>
+`;
+
+/* CARD MOBILE */
+
+cards.innerHTML+=`
+<div class="card">
+
+<b>${i.nome}</b>
+
+CPF: ${i.cpf}<br>
+Email: ${i.email}<br>
+Telefone: ${i.telefone}<br>
+Curso: ${i.curso}<br>
+Turma: ${i.turma}<br>
+Pagamento: ${i.pagamento||""}
+
+<button class="btn-editar" onclick="editar(${i.linha})">
+Editar
+</button>
+
+</div>
 `;
 
 });
 
 }
+
+
+
+  
 
 /* BUSCAR */
 
