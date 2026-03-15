@@ -125,14 +125,13 @@ gap:10px;
 
 <div class="filtros">
 
-<input id="fCpf" placeholder="CPF">
-<input id="fNome" placeholder="Nome">
-<input id="fEmail" placeholder="Email">
-<input id="fTurma" placeholder="Turma">
+<input id="fCpf" placeholder="CPF" oninput="buscarAuto()">
+<input id="fNome" placeholder="Nome" oninput="buscarAuto()">
+<input id="fEmail" placeholder="Email" oninput="buscarAuto()">
+<input id="fTurma" placeholder="Turma" oninput="buscarAuto()">
 
 </div>
 
-<button onclick="buscar()">Buscar</button>
 <button onclick="carregar()">Limpar</button>
 
 <br><br>
@@ -335,6 +334,55 @@ modal.style.display="none";
 
 }
 
+
+
+
+
+async function buscarAuto(){
+
+const cpf=fCpf.value;
+const nome=fNome.value;
+const email=fEmail.value;
+const turma=fTurma.value;
+
+if(!cpf && !nome && !email && !turma){
+carregar();
+return;
+}
+
+const res=await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+
+acao:"buscarPreInscritos",
+
+filtro:{
+cpf,
+nome,
+email,
+turma
+}
+
+})
+});
+
+const r=await res.json();
+
+dados=r;
+
+render(dados);
+
+}
+  
+
+
+
+
+
+
+
+
+  
 /* SALVAR */
 
 async function salvar(){
