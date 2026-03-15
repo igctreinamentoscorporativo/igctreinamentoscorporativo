@@ -191,8 +191,14 @@ display:block;
 <th>Email</th>
 <th>Telefone</th>
 <th>Curso</th>
+<th>Cidade</th>
+<th>Estado</th>
 <th>Turma</th>
+<th>Carga</th>
+<th>Local</th>
+<th>Data</th>
 <th>Pagamento</th>
+<th></th>
 <th></th>
 </tr>
 </thead>
@@ -216,6 +222,15 @@ display:block;
 <input id="eNome">
 <input id="eEmail">
 <input id="eTelefone">
+
+<input id="eCurso">
+<input id="eCidade">
+<input id="eEstado">
+<input id="eTurma">
+
+<input id="eCarga">
+<input id="eLocal">
+<input id="eData">
 
 <select id="ePagamento">
 <option value="">---</option>
@@ -321,12 +336,13 @@ lista.forEach(i=>{
 
 tbody.innerHTML+=`
 <tr>
-<td>${i.cpf}</td>
-<td>${i.nome}</td>
-<td>${i.email}</td>
-<td>${i.telefone}</td>
 <td>${i.curso}</td>
+<td>${i.cidade}</td>
+<td>${i.estado}</td>
 <td>${i.turma}</td>
+<td>${i.carga}</td>
+<td>${i.local}</td>
+<td>${i.data}</td>
 <td>${i.pagamento||""}</td>
 <td>
 <button class="btn-editar" onclick="editar(${i.linha})">
@@ -347,7 +363,12 @@ CPF: ${i.cpf}<br>
 Email: ${i.email}<br>
 Telefone: ${i.telefone}<br>
 Curso: ${i.curso}<br>
+Cidade: ${i.cidade}<br>
+Estado: ${i.estado}<br>
 Turma: ${i.turma}<br>
+Carga: ${i.carga}<br>
+Local: ${i.local}<br>
+Data: ${i.data}<br>
 Pagamento: ${i.pagamento||""}
 
 <button class="btn-editar" onclick="editar(${i.linha})">
@@ -410,11 +431,24 @@ eCpf.value=r.cpf;
 eNome.value=r.nome;
 eEmail.value=r.email;
 eTelefone.value=r.telefone;
+
+eCurso.value=r.curso;
+eCidade.value=r.cidade;
+eEstado.value=r.estado;
+eTurma.value=r.turma;
+
+eCarga.value=r.carga;
+eLocal.value=r.local;
+eData.value=r.data;
+
 ePagamento.value=r.pagamento;
 
 modal.style.display="flex";
 
 }
+
+
+  
 
 /* FECHAR MODAL */
 
@@ -482,7 +516,6 @@ method:"POST",
 body:JSON.stringify({
 
 acao:"editarPreInscrito",
-
 senha:senha,
 
 linha:linhaAtual,
@@ -491,13 +524,22 @@ cpf:eCpf.value,
 nome:eNome.value,
 email:eEmail.value,
 telefone:eTelefone.value,
+
+curso:eCurso.value,
+cidade:eCidade.value,
+estado:eEstado.value,
+turma:eTurma.value,
+
+carga:eCarga.value,
+local:eLocal.value,
+data:eData.value,
+
 pagamento:ePagamento.value
 
 })
 });
 
 fechar();
-
 carregar();
 
 }
