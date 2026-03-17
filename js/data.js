@@ -464,7 +464,7 @@ textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><strong>2�
   id: "2",
     nome: "Formação Practitioner em PNL – Maringá",
     categoria: "pnl",
-    preco: 997.00,
+    preco: 1997.00,
     imagem: "assets/img/PNLMARINGA01.jpeg",
     videos: [
       "assets/videos/PNLIMERSAO.mp4"
@@ -829,7 +829,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "<strong>Vagas Limitadas</strong>"
+textoParcelamento: "<strong>1º Lote:</strong> R$ 997,00<br><strong>Pagamento facilitado</strong>"
 
 
 //<del><strong>1º Lote: esgotado</strong></del><br><strong>2º Lote:</strong> restam poucas vagas<br><strong>Pagamento facilitado</strong>
