@@ -433,7 +433,7 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><strong><del>2º Lote:</strong> esgotado</del><br><strong>Último Lote:</strong> R$ 997,00<br><strong>Pagamento facilitado</strong>"
+textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><del><strong>2º Lote: esgotado</strong></del><br><strong>3º Lote:</strong> R$ 1.245,00<br><strong>Pagamento facilitado</strong>"
 
 // <strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
 
