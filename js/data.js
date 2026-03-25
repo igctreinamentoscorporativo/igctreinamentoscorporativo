@@ -406,7 +406,7 @@ videoPrincipal: {
 },
 
 ofertaRelampago: {
-  mostrar: true,
+  mostrar: false,
   delaySegundos: 3,
   tempoMinutos: 15,
   diasParaReexibir: 7, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
