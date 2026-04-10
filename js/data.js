@@ -69,7 +69,7 @@ const produtos = [
     nome: "Formação Practitioner em PNL – Curitiba",
     categoria: "pnl",
     preco: 1997.00,
-    imagem: "assets/img/PNLCURITIBA03.jpg",
+    imagem: "assets/img/proximaturmacuritiba.jpg",
     videos: [
       "assets/videos/PNLIMERSAO.mp4"
     ],
