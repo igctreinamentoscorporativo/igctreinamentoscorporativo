@@ -67,7 +67,7 @@ const produtos = [
   {
     id: "1",
     nome: "Formação Practitioner em PNL – Curitiba",
-    categoria: "oratoria",
+    categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLCURITIBA03.jpeg",
     videos: [
@@ -235,7 +235,7 @@ accordion: [
       conteudo: `
      
 
-
+<!--
 <strong>📍 Local:</strong> Curitiba-PR – Del Rey Hotel
 <br>
 <strong>📅 Datas e formato:</strong> Sexta-feira – 10/04/2026 das 19h às 22h (online – grupo fechado)
@@ -249,7 +249,7 @@ Domingo – 12/04/2026 das 09h às 19h (presencial – imersivo)
 <br>
 Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
-
+-->
      
       `
     },
@@ -363,10 +363,10 @@ Sim.
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: true,
+  mostrarPreco: false,
   mostrarResumo: true,
   cta: {
-    mostrar: true,
+    mostrar: false,
     texto: "Comprar com desconto",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricaopelosite.html"
   }
@@ -433,8 +433,10 @@ ofertaRelampago: {
 destaque: true,
 mostrarlancamento: false,
 mostrarVideo: false,
-textoParcelamento: "<del><strong>1º Lote: esgotado</strong></del><br><del><strong>2º Lote: esgotado</strong></del><br><del><strong>3º Lote: esgotado</strong></del><br><strong>4º Lote:</strong> R$ 1.497,00<br><strong>Pagamento facilitado</strong>"
+textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na próxima turma"
 
+     
+//<del><strong>1º Lote: esgotado</strong></del><br><del><strong>2º Lote: esgotado</strong></del><br><del><strong>3º Lote: esgotado</strong></del><br><strong>4º Lote:</strong> R$ 1.497,00<br><strong>Pagamento facilitado</strong>     
 // <strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
 
      
