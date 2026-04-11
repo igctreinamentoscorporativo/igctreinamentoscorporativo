@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Controle de Presença</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  font-family:Arial;
+  background:#020617;
+  color:#e5e7eb;
+  margin:0;
+  padding:20px;
+}
+.container{
+  max-width:1400px;
+  margin:auto;
+}
+h2{
+  margin-bottom:20px;
+}
+input, select, button{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #334155;
+  background:#020617;
+  color:white;
+  width:100%;
+  box-sizing:border-box;
+}
+button{
+  background:#2563eb;
+  cursor:pointer;
+}
+button:hover{
+  opacity:.95;
+}
+.login{
+  max-width:400px;
+  margin:auto;
+  margin-top:100px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.grid-top{
+  display:grid;
+  grid-template-columns: 1.2fr 180px 180px 180px;
+  gap:10px;
+  margin-bottom:20px;
+}
+.resultado-busca{
+  border:1px solid #1e293b;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:20px;
+  background:#0f172a;
+}
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  border:1px solid #334155;
+  margin-top:8px;
+}
+.tabs{
+  display:flex;
+  gap:10px;
+  margin:20px 0;
+  flex-wrap:wrap;
+}
+.tab-btn{
+  width:auto;
+  padding:10px 14px;
+}
+.tab-btn.ativo{
+  background:#1d4ed8;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+th, td{
+  padding:10px;
+  border-bottom:1px solid #1e293b;
+  text-align:left;
+}
+.cards{
+  display:none;
+}
+.card{
+  background:#020617;
+  border:1px solid #1e293b;
+  border-radius:10px;
+  padding:15px;
+  margin-bottom:12px;
+}
+.card b{
+  display:block;
+  margin-bottom:6px;
+}
+.acoes{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.acoes a,
+.acoes button,
+.card-acoes a,
+.card-acoes button{
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+  border:none;
+  text-decoration:none;
+  cursor:pointer;
+  padding:0;
+}
+.card-acoes{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+.card-acoes a,
+.card-acoes button{
+  width:33%;
+  height:40px;
+}
+.btn-whats{ background:#16a34a; color:white; }
+.btn-tel{ background:#2563eb; color:white; }
+.btn-presenca{ background:#22c55e; color:white; }
+.btn-busca{ background:#2563eb; }
+.btn-sec{ background:#334155; }
+.info{
+  color:#93c5fd;
+  margin:8px 0 14px;
+}
+.msg{
+  margin-top:10px;
+  min-height:20px;
+}
+@media(max-width:900px){
+  .grid-top{
+    grid-template-columns:1fr;
+  }
+  table{
+    display:none;
+  }
+  .cards{
+    display:block;
+  }
+}
+</style>
+</head>
+<body>
+
+<script src="/js/igc-config.js"></script>
+
+<div id="loginBox" class="login">
+  <h2>Acesso Restrito</h2>
+  <input type="password" id="senhaLogin" placeholder="Senha">
+  <button onclick="login()">Entrar</button>
+  <p id="loginErro"></p>
+</div>
+
+<div id="appBox" class="container" style="display:none">
+  <h2>Controle de Presença</h2>
+
+  <div class="grid-top">
+    <input id="cpfBusca" placeholder="Digite o CPF do participante">
+    <button class="btn-busca" onclick="buscarCPF()">Buscar</button>
+    <button class="btn-presenca" onclick="confirmarPresenca()">Confirmar Presença</button>
+    <button class="btn-sec" onclick="limparBusca()">Limpar</button>
+  </div>
+
+  <div class="info">
+    Digite o CPF, confira os dados e clique em confirmar presença.
+  </div>
+
+  <div id="resultadoBusca" class="resultado-busca" style="display:none"></div>
+  <div id="mensagem" class="msg"></div>
+
+  <div class="tabs">
+    <button id="btnTabPresentes" class="tab-btn ativo" onclick="trocarAba('presentes')">Presentes</button>
+    <button id="btnTabFaltantes" class="tab-btn" onclick="trocarAba('faltantes')">Faltantes</button>
+    <button class="tab-btn btn-sec" onclick="carregarAbaAtual()">Atualizar Lista</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Curso</th>
+        <th>Turma</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="lista"></tbody>
+  </table>
+
+  <div id="cards" class="cards"></div>
+</div>
+
+<script>
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+let senha = "";
+let inscritoAtual = null;
+let abaAtual = "presentes";
+let dados = [];
+
+function soNumeros(v){
+  return (v || "").replace(/\D/g, "");
+}
+
+function formatarData(data){
+  if(!data) return "";
+  try{
+    return new Date(data).toLocaleString("pt-BR");
+  }catch{
+    return data;
+  }
+}
+
+function setMensagem(txt, erro=false){
+  const el = document.getElementById("mensagem");
+  el.innerText = txt || "";
+  el.style.color = erro ? "#fca5a5" : "#86efac";
+}
+
+async function login(){
+  const senhaDigitada = document.getElementById("senhaLogin").value;
+
+  const res = await fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"loginPresenca",
+      senha:senhaDigitada
+    })
+  });
+
+  const r = await res.json();
+
+  if(!r.ok){
+    document.getElementById("loginErro").innerText = "Senha inválida";
+    return;
+  }
+
+  senha = senhaDigitada;
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("appBox").style.display = "block";
+
+  carregarPresentes();
+}
+
+async function buscarCPF(){
+  const cpf = soNumeros(document.getElementById("cpfBusca").value);
+
+  if(!cpf){
+    setMensagem("Digite um CPF para buscar.", true);
+    return;
+  }
+
+  setMensagem("");
+
+  const res = await fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"buscarInscritoCPF",
+      senha:senha,
+      cpf
+    })
+  });
+
+  const r = await res.json();
+
+  if(!r.ok || !r.dados){
+    inscritoAtual = null;
+    document.getElementById("resultadoBusca").style.display = "none";
+    setMensagem(r.mensagem || "Inscrito não encontrado.", true);
+    return;
+  }
+
+  inscritoAtual = r.dados;
+
+  const box = document.getElementById("resultadoBusca");
+  box.style.display = "block";
+  box.innerHTML = `
+    <b>${inscritoAtual.nome}</b><br>
+    CPF: ${inscritoAtual.cpf}<br>
+    Curso: ${inscritoAtual.curso}<br>
+    Turma: ${inscritoAtual.turma}<br>
+    Telefone: ${inscritoAtual.telefone || ""}<br>
+    <span class="badge">Pronto para confirmar presença</span>
+  `;
+
+  setMensagem("Inscrito localizado com sucesso.");
+}
+
+async function confirmarPresenca(){
+  if(!inscritoAtual || !inscritoAtual.cpf){
+    setMensagem("Busque um inscrito antes de confirmar presença.", true);
+    return;
+  }
+
+  const res = await fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"registrarPresenca",
+      senha:senha,
+      cpf:inscritoAtual.cpf
+    })
+  });
+
+  const r = await res.json();
+
+  if(!r.ok){
+    setMensagem(r.mensagem || "Não foi possível registrar a presença.", true);
+    return;
+  }
+
+  setMensagem(r.mensagem || "Presença registrada com sucesso.");
+  document.getElementById("cpfBusca").value = "";
+  document.getElementById("resultadoBusca").style.display = "none";
+  document.getElementById("resultadoBusca").innerHTML = "";
+  inscritoAtual = null;
+
+  carregarAbaAtual();
+}
+
+function limparBusca(){
+  document.getElementById("cpfBusca").value = "";
+  document.getElementById("resultadoBusca").style.display = "none";
+  document.getElementById("resultadoBusca").innerHTML = "";
+  inscritoAtual = null;
+  setMensagem("");
+}
+
+function trocarAba(aba){
+  abaAtual = aba;
+
+  document.getElementById("btnTabPresentes").classList.toggle("ativo", aba === "presentes");
+  document.getElementById("btnTabFaltantes").classList.toggle("ativo", aba === "faltantes");
+
+  carregarAbaAtual();
+}
+
+async function carregarAbaAtual(){
+  if(abaAtual === "presentes"){
+    await carregarPresentes();
+  }else{
+    await carregarFaltantes();
+  }
+}
+
+async function carregarPresentes(){
+  const res = await fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"listarPresenca",
+      senha:senha
+    })
+  });
+
+  dados = await res.json();
+  render(dados, "presentes");
+}
+
+async function carregarFaltantes(){
+  const res = await fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
+      acao:"listarFaltantes",
+      senha:senha
+    })
+  });
+
+  dados = await res.json();
+  render(dados, "faltantes");
+}
+
+function acoesContato(item){
+  const tel = soNumeros(item.telefone || "");
+  const wa = tel ? `https://wa.me/55${tel}` : "#";
+  const call = tel ? `tel:${tel}` : "#";
+
+  return `
+    <a class="btn-whats" href="${wa}" target="_blank">💬</a>
+    <a class="btn-tel" href="${call}">📞</a>
+  `;
+}
+
+function render(lista, modo){
+  const tbody = document.getElementById("lista");
+  const cards = document.getElementById("cards");
+
+  tbody.innerHTML = "";
+  cards.innerHTML = "";
+
+  lista.forEach(i => {
+    const infoExtra = modo === "presentes"
+      ? `Check-in: ${formatarData(i.dataCheckin)}`
+      : `CPF: ${i.cpf}`;
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${i.nome || ""}</td>
+        <td>${i.curso || ""}</td>
+        <td>${i.turma || ""}</td>
+        <td>${i.telefone || ""}</td>
+        <td class="acoes">
+          ${acoesContato(i)}
+        </td>
+      </tr>
+    `;
+
+    cards.innerHTML += `
+      <div class="card">
+        <b>${i.nome || ""}</b>
+        Curso: ${i.curso || ""}<br>
+        Turma: ${i.turma || ""}<br>
+        Telefone: ${i.telefone || ""}<br>
+        ${infoExtra}
+        <div class="card-acoes">
+          ${acoesContato(i)}
+        </div>
+      </div>
+    `;
+  });
+
+  if(!lista.length){
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5">Nenhum registro encontrado.</td>
+      </tr>
+    `;
+    cards.innerHTML = `
+      <div class="card">
+        <b>Nenhum registro encontrado.</b>
+      </div>
+    `;
+  }
+}
+</script>
+
+</body>
+</html>
