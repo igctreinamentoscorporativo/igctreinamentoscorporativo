@@ -171,7 +171,14 @@ th, td{
 <div id="appBox" class="container" style="display:none">
   <h2>Controle de Presença</h2>
 
+  
+  
   <div class="grid-top">
+
+    <select id="turmaSelect" onchange="trocarTurma()">
+  <option value="">Selecione a turma</option>
+  </select>
+    
     <input id="cpfBusca" placeholder="Digite o CPF do participante">
     <button class="btn-busca" onclick="buscarCPF()">Buscar</button>
     <button class="btn-presenca" onclick="confirmarPresenca()">Confirmar Presença</button>
@@ -214,7 +221,50 @@ let senha = "";
 let inscritoAtual = null;
 let abaAtual = "presentes";
 let dados = [];
+let turmaSelecionada = "";
 
+  
+
+
+function trocarTurma(){
+  turmaSelecionada = document.getElementById("turmaSelect").value;
+
+  if(!turmaSelecionada){
+    setMensagem("Selecione uma turma para continuar.", true);
+    return;
+  }
+
+  setMensagem("Turma selecionada: " + turmaSelecionada);
+
+  carregarAbaAtual();
+}  
+
+
+async function carregarTurmas(){
+
+  const res = await fetch(API + "?acao=listarCursos");
+  const cursos = await res.json();
+
+  const select = document.getElementById("turmaSelect");
+
+  const turmasUnicas = [...new Set(cursos.map(c => c.turma).filter(Boolean))];
+
+  select.innerHTML = '<option value="">Selecione a turma</option>';
+
+  turmasUnicas.forEach(t => {
+    select.innerHTML += `<option value="${t}">${t}</option>`;
+  });
+
+}  
+
+  
+
+
+
+  
+
+
+  
 function soNumeros(v){
   return (v || "").replace(/\D/g, "");
 }
@@ -256,11 +306,18 @@ async function login(){
   document.getElementById("loginBox").style.display = "none";
   document.getElementById("appBox").style.display = "block";
 
+  await carregarTurmas();
   carregarPresentes();
 }
 
 async function buscarCPF(){
+  
   const cpf = soNumeros(document.getElementById("cpfBusca").value);
+
+  if(!turmaSelecionada){
+  setMensagem("Selecione a turma antes de buscar.", true);
+  return;
+}
 
   if(!cpf){
     setMensagem("Digite um CPF para buscar.", true);
@@ -274,7 +331,8 @@ async function buscarCPF(){
     body:JSON.stringify({
       acao:"buscarInscritoCPF",
       senha:senha,
-      cpf
+      cpf,
+      turma: turmaSelecionada
     })
   });
 
@@ -314,7 +372,8 @@ async function confirmarPresenca(){
     body:JSON.stringify({
       acao:"registrarPresenca",
       senha:senha,
-      cpf:inscritoAtual.cpf
+      cpf:inscritoAtual.cpf,
+      turma: turmaSelecionada
     })
   });
 
@@ -364,7 +423,8 @@ async function carregarPresentes(){
     method:"POST",
     body:JSON.stringify({
       acao:"listarPresenca",
-      senha:senha
+      senha:senha,
+      turma: turmaSelecionada
     })
   });
 
@@ -377,7 +437,8 @@ async function carregarFaltantes(){
     method:"POST",
     body:JSON.stringify({
       acao:"listarFaltantes",
-      senha:senha
+      senha:senha,
+      turma: turmaSelecionada
     })
   });
 
