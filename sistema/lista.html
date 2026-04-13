@@ -307,7 +307,8 @@ async function login(){
   document.getElementById("appBox").style.display = "block";
 
   await carregarTurmas();
-  carregarPresentes();
+  await carregarTurmas();
+  setMensagem("Selecione uma turma para começar");
 }
 
 async function buscarCPF(){
@@ -419,6 +420,8 @@ async function carregarAbaAtual(){
 }
 
 async function carregarPresentes(){
+if(!turmaSelecionada) return;
+  
   const res = await fetch(API,{
     method:"POST",
     body:JSON.stringify({
@@ -433,6 +436,9 @@ async function carregarPresentes(){
 }
 
 async function carregarFaltantes(){
+
+  if(!turmaSelecionada) return;
+  
   const res = await fetch(API,{
     method:"POST",
     body:JSON.stringify({
