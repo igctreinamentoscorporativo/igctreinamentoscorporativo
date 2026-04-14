@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Gestor Financeiro - Caixa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+body{
+  font-family:Arial;
+  background:#020617;
+  color:#e5e7eb;
+  margin:0;
+  padding:20px;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+}
+
+input, select, button{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #334155;
+  background:#020617;
+  color:white;
+  width:100%;
+}
+
+button{
+  background:#2563eb;
+  cursor:pointer;
+}
+
+.filtros{
+  display:grid;
+  grid-template-columns: repeat(6,1fr);
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.total{
+  font-size:20px;
+  margin-bottom:20px;
+  color:#22c55e;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:10px;
+  border-bottom:1px solid #1e293b;
+}
+
+.acoes button{
+  width:30px;
+  height:30px;
+}
+
+.login{
+  max-width:400px;
+  margin:auto;
+  margin-top:100px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-box{
+  background:#020617;
+  padding:20px;
+  border-radius:10px;
+  width:300px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+</style>
+
+</head>
+<body>
+
+<script src="/js/igc-config.js"></script>
+
+<!-- LOGIN -->
+<div id="loginBox" class="login">
+<h2>Acesso Caixa</h2>
+<input type="password" id="senhaLogin">
+<button onclick="login()">Entrar</button>
+<p id="erro"></p>
+</div>
+
+<!-- APP -->
+<div id="app" class="container" style="display:none">
+
+<h2>💰 Caixa Financeiro</h2>
+
+<div class="filtros">
+<select id="fTurma"></select>
+<select id="fAno"></select>
+<select id="fMes"></select>
+<input id="fCpf" placeholder="CPF">
+<input id="fNome" placeholder="Nome">
+<button onclick="limpar()">Limpar</button>
+</div>
+
+<div class="total" id="total">Total: R$ 0</div>
+
+<button onclick="novo()">➕ Nova Entrada</button>
+<button onclick="imprimir()">🖨️ Imprimir</button>
+
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Nome</th>
+<th>CPF</th>
+<th>Turma</th>
+<th>Valor</th>
+<th>Ações</th>
+</tr>
+</thead>
+<tbody id="lista"></tbody>
+</table>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-box">
+
+<input id="mNome" placeholder="Nome">
+<input id="mCpf" placeholder="CPF">
+<input id="mTurma" placeholder="Turma">
+<input id="mValor" placeholder="Valor">
+
+<button onclick="salvar()">Salvar</button>
+<button onclick="fechar()">Cancelar</button>
+
+</div>
+</div>
+
+<script>
+
+const API = window.IGC_CONFIG.APPS_SCRIPT_BASE;
+
+let dados=[];
+let senha="";
+let editando=null;
+
+/* LOGIN */
+async function login(){
+const s=document.getElementById("senhaLogin").value;
+
+const r=await fetch(API,{
+method:"POST",
+body:JSON.stringify({acao:"loginCursos",senha:s})
+});
+
+const j=await r.json();
+
+if(!j.ok){
+erro.innerText="Senha inválida";
+return;
+}
+
+senha=s;
+loginBox.style.display="none";
+app.style.display="block";
+
+carregar();
+}
+
+/* CARREGAR */
+async function carregar(){
+
+const res=await fetch(API+"?acao=listarCaixa");
+dados=await res.json();
+
+render(dados);
+filtros();
+}
+
+/* RENDER */
+function render(lista){
+
+let total=0;
+lista.forEach(i=> total+=Number(i.valor||0));
+
+document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
+
+listaHTML.innerHTML="";
+
+lista.forEach(i=>{
+
+listaHTML.innerHTML+=`
+<tr>
+<td>${i.data}</td>
+<td>${i.nome}</td>
+<td>${i.cpf}</td>
+<td>${i.turma}</td>
+<td>R$ ${i.valor}</td>
+
+<td class="acoes">
+<button onclick="editar(${i.linha})">✏️</button>
+<button onclick="excluir(${i.linha})">🗑️</button>
+</td>
+</tr>
+`;
+});
+}
+
+/* FILTROS */
+function filtros(){
+
+const turmas=[...new Set(dados.map(i=>i.turma))];
+fTurma.innerHTML='<option value="">Turma</option>'+turmas.map(t=>`<option>${t}</option>`);
+
+}
+
+/* FILTRAR */
+function aplicarFiltro(){
+
+let lista=[...dados];
+
+if(fCpf.value) lista=lista.filter(i=>i.cpf.includes(fCpf.value));
+if(fNome.value) lista=lista.filter(i=>i.nome.toLowerCase().includes(fNome.value.toLowerCase()));
+if(fTurma.value) lista=lista.filter(i=>i.turma===fTurma.value);
+
+render(lista);
+}
+
+/* LIMPAR */
+function limpar(){
+fCpf.value="";
+fNome.value="";
+fTurma.value="";
+render(dados);
+}
+
+/* NOVO */
+function novo(){
+editando=null;
+modal.style.display="flex";
+}
+
+/* EDITAR */
+function editar(linha){
+const r=dados.find(i=>i.linha===linha);
+editando=linha;
+
+mNome.value=r.nome;
+mCpf.value=r.cpf;
+mTurma.value=r.turma;
+mValor.value=r.valor;
+
+modal.style.display="flex";
+}
+
+/* SALVAR */
+async function salvar(){
+
+await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+acao:"salvarCaixa",
+senha:senha,
+linha:editando,
+nome:mNome.value,
+cpf:mCpf.value,
+turma:mTurma.value,
+valor:mValor.value
+})
+});
+
+fechar();
+carregar();
+}
+
+/* EXCLUIR */
+async function excluir(linha){
+
+if(!confirm("Excluir?")) return;
+
+await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+acao:"excluirCaixa",
+senha:senha,
+linha
+})
+});
+
+carregar();
+}
+
+/* PRINT */
+function imprimir(){
+window.print();
+}
+
+/* FECHAR */
+function fechar(){
+modal.style.display="none";
+}
+
+</script>
+
+</body>
+</html>
