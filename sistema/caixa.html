@@ -35,15 +35,31 @@ button{
 }
 
 .filtros{
-  display:grid;
-  grid-template-columns: 2fr 2fr 1fr 1fr auto;
+  display:flex;
   gap:10px;
   margin-bottom:20px;
   align-items:center;
+  flex-wrap:wrap;
+}
+
+.filtros select,
+.filtros input{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #334155;
+  background:#020617;
+  color:white;
+  min-width:180px;
+  flex:1;
 }
 
 .filtros button{
-  height:42px;
+  padding:10px 20px;
+  background:#2563eb;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  white-space:nowrap;
 }
 
 .total{
