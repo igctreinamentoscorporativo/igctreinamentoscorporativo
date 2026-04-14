@@ -36,9 +36,10 @@ button{
 
 .filtros{
   display:grid;
-  grid-template-columns: repeat(6,1fr);
+  grid-template-columns: 2fr 2fr 1fr 1fr 1fr 1fr;
   gap:10px;
   margin-bottom:20px;
+  align-items:center;
 }
 
 .total{
@@ -119,15 +120,17 @@ th,td{
 
 <div class="total" id="total">Total: R$ 0</div>
 
-<button onclick="novo()">➕ Nova Entrada</button>
-<button onclick="imprimir()">🖨️ Imprimir</button>
+<div style="display:flex; gap:10px; margin-bottom:10px;">
+  <button onclick="novo()">➕ Nova Entrada</button>
+  <button onclick="imprimir()">🖨️ Imprimir</button>
+</div>
 
 <table>
 <thead>
 <tr>
-<th>Data</th>
 <th>Nome</th>
 <th>CPF</th>
+<th>Curso</th>
 <th>Turma</th>
 <th>Valor</th>
 <th>Ações</th>
@@ -144,6 +147,7 @@ th,td{
 
 <input id="mNome" placeholder="Nome">
 <input id="mCpf" placeholder="CPF">
+<input id="mCurso" placeholder="Curso">
 <input id="mTurma" placeholder="Turma">
 <input id="mValor" placeholder="Valor">
 
@@ -209,19 +213,19 @@ function render(lista){
     total += valor;
 
     listaHTML.innerHTML += `
-      <tr>
-        <td>${i.data || ""}</td>
-        <td>${i.nome || ""}</td>
-        <td>${i.cpf || ""}</td>
-        <td>${i.turma || ""}</td>
-        <td>R$ ${valor.toFixed(2)}</td>
+<tr>
+  <td>${i.nome}</td>
+  <td>${i.cpf}</td>
+  <td>${i.curso || ""}</td>
+  <td>${i.turma}</td>
+  <td>R$ ${valor.toFixed(2)}</td>
 
-        <td class="acoes">
-          <button onclick="editar(${i.linha})">✏️</button>
-          <button onclick="excluir(${i.linha})">🗑️</button>
-        </td>
-      </tr>
-    `;
+  <td class="acoes">
+    <button onclick="editar(${i.linha})">✏️</button>
+    <button onclick="excluir(${i.linha})">🗑️</button>
+  </td>
+</tr>
+`;
   });
 
   document.getElementById("total").innerText = "Total: R$ " + total.toFixed(2);
@@ -263,15 +267,17 @@ modal.style.display="flex";
 
 /* EDITAR */
 function editar(linha){
-const r=dados.find(i=>i.linha===linha);
-editando=linha;
 
-mNome.value=r.nome;
-mCpf.value=r.cpf;
-mTurma.value=r.turma;
-mValor.value=r.valor;
+  const r = dados.find(i => i.linha === linha);
+  editando = linha;
 
-modal.style.display="flex";
+  mNome.value = r.nome || "";
+  mCpf.value = r.cpf || "";
+  mCurso.value = r.curso || "";   // ✅ NOVO
+  mTurma.value = r.turma || "";
+  mValor.value = r.valor || "";
+
+  modal.style.display = "flex";
 }
 
 /* SALVAR */
@@ -285,7 +291,7 @@ body:JSON.stringify({
   linha:editando,
   nome:mNome.value,
   cpf:mCpf.value,
-  curso:mCurso ? mCurso.value : "", // 👈 adiciona isso
+  curso:mCurso.value,   // 👈 ADICIONA AQUI
   turma:mTurma.value,
   valor:mValor.value
 })
@@ -322,6 +328,29 @@ function fechar(){
 modal.style.display="none";
 }
 
+
+
+function formatarData(data){
+
+  if(!data) return "";
+
+  const d = new Date(data);
+
+  return d.toLocaleDateString("pt-BR") + " " +
+         d.toLocaleTimeString("pt-BR");
+}
+
+
+
+
+/* 🔥 ATIVAR FILTRO AUTOMÁTICO */
+[fCpf, fNome, fTurma].forEach(el=>{
+  el.addEventListener("input", aplicarFiltro);
+  el.addEventListener("change", aplicarFiltro);
+});  
+
+  
+  
 </script>
 
 </body>
