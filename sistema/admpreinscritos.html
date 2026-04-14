@@ -382,6 +382,10 @@ td{
 <option>SIM</option>
 </select>
 
+
+<input id="eValorPago" placeholder="Valor pago (R$)">  
+  
+  
 <div class="actions">
 
 <button onclick="salvar()">Salvar</button>
@@ -622,7 +626,8 @@ eLocal.value=r.local;
 eData.value=r.data;
 
 ePagamento.value=r.pagamento;
-
+eValorPago.value = r.valorPago || "";
+  
 modal.style.display="flex";
 
 }
@@ -714,7 +719,8 @@ carga:eCarga.value,
 local:eLocal.value,
 data:eData.value,
 
-pagamento:ePagamento.value
+pagamento:ePagamento.value,
+valorPago:eValorPago.value
 
 })
 });
