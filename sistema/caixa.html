@@ -36,7 +36,7 @@ button{
 
 .filtros{
   display:grid;
-  grid-template-columns: repeat(7,1fr);
+  grid-template-columns: 2fr 2fr 1fr 1fr auto;
   gap:10px;
   margin-bottom:20px;
   align-items:center;
@@ -110,9 +110,11 @@ th,td{
 
 <div class="filtros">
 <select id="fTurma"></select>
-<input id="fCurso" placeholder="Curso">
-<select id="fAno"></select>
-<select id="fMes"></select>
+
+  <select id="fCurso">
+  <option value="">Curso</option>
+  </select>
+  
 <input id="fCpf" placeholder="CPF">
 <input id="fNome" placeholder="Nome">
 <button onclick="limpar()">Limpar</button>
@@ -195,7 +197,7 @@ const res=await fetch(API+"?acao=listarCaixa");
 dados=await res.json();
 
 render(dados);
-filtros();
+montarFiltros();
 }
 
 /* RENDER */
@@ -242,22 +244,48 @@ fTurma.innerHTML='<option value="">Turma</option>'+turmas.map(t=>`<option>${t}</
 /* FILTRAR */
 function aplicarFiltro(){
 
-let lista=[...dados];
+  let lista = [...dados];
 
-if(fCpf.value) lista=lista.filter(i=>i.cpf.includes(fCpf.value));
-if(fNome.value) lista=lista.filter(i=>i.nome.toLowerCase().includes(fNome.value.toLowerCase()));
-if(fTurma.value) lista=lista.filter(i=>i.turma===fTurma.value);
-if(fCurso.value) lista=lista.filter(i=> (i.curso||"").toLowerCase().includes(fCurso.value.toLowerCase()));
+  if(fCpf.value) lista = lista.filter(i=>i.cpf.includes(fCpf.value));
 
-render(lista);
+  if(fNome.value)
+    lista = lista.filter(i=>i.nome.toLowerCase().includes(fNome.value.toLowerCase()));
+
+  if(fTurma.value)
+    lista = lista.filter(i=>i.turma === fTurma.value);
+
+  if(fCurso.value)
+    lista = lista.filter(i=>i.curso === fCurso.value);
+
+  render(lista);
 }
 
+
+
+/* MONTAR FILTROS */
+function montarFiltros(){
+
+  // 🔹 TURMAS
+  const turmas = [...new Set(dados.map(i=>i.turma).filter(Boolean))];
+  fTurma.innerHTML = '<option value="">Turma</option>' +
+    turmas.map(t=>`<option>${t}</option>`).join("");
+
+  // 🔹 CURSOS
+  const cursos = [...new Set(dados.map(i=>i.curso).filter(Boolean))];
+  fCurso.innerHTML = '<option value="">Curso</option>' +
+    cursos.map(c=>`<option>${c}</option>`).join("");
+}
+
+
+
+  
 /* LIMPAR */
 function limpar(){
-fCpf.value="";
-fNome.value="";
-fTurma.value="";
-render(dados);
+  fCpf.value="";
+  fNome.value="";
+  fTurma.value="";
+  fCurso.value="";
+  render(dados);
 }
 
 /* NOVO */
@@ -488,7 +516,6 @@ function formatarData(data){
   el.addEventListener("input", aplicarFiltro);
   el.addEventListener("change", aplicarFiltro);
 });
-
   
   
 </script>
