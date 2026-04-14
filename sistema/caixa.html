@@ -20,13 +20,13 @@ body{
   margin:auto;
 }
 
-input, select, button{
-  padding:10px;
-  border-radius:6px;
-  border:1px solid #334155;
-  background:#020617;
-  color:white;
+input, select{
   width:100%;
+}
+
+button{
+  width:auto;
+  padding:10px 20px;
 }
 
 button{
@@ -40,6 +40,10 @@ button{
   gap:10px;
   margin-bottom:20px;
   align-items:center;
+}
+
+.filtros button{
+  height:42px;
 }
 
 .total{
@@ -252,10 +256,14 @@ function aplicarFiltro(){
     lista = lista.filter(i=>i.nome.toLowerCase().includes(fNome.value.toLowerCase()));
 
   if(fTurma.value)
-    lista = lista.filter(i=>i.turma === fTurma.value);
+  lista = lista.filter(i =>
+    (i.turma || "").toLowerCase().trim() === fTurma.value.toLowerCase().trim()
+  );
 
-  if(fCurso.value)
-    lista = lista.filter(i=>i.curso === fCurso.value);
+if(fCurso.value)
+  lista = lista.filter(i =>
+    (i.curso || "").toLowerCase().includes(fCurso.value.toLowerCase().trim())
+  );
 
   render(lista);
 }
@@ -517,6 +525,25 @@ function formatarData(data){
   el.addEventListener("change", aplicarFiltro);
 });
   
+
+/* 🔗 SINCRONIZAR TURMA → CURSO */
+fTurma.addEventListener("change", ()=>{
+
+  const turmaSelecionada = fTurma.value;
+
+  if(!turmaSelecionada) return;
+
+  const registro = dados.find(i =>
+    (i.turma || "").toLowerCase().trim() === turmaSelecionada.toLowerCase().trim()
+  );
+
+  if(registro){
+    fCurso.value = registro.curso || "";
+  }
+
+  aplicarFiltro();
+});
+
   
 </script>
 
