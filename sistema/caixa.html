@@ -196,32 +196,34 @@ filtros();
 /* RENDER */
 function render(lista){
 
-let total=0;
-lista.forEach(i=> total += parseFloat((i.valor || "0").toString().replace(",", ".")) || 0;
+  const listaHTML = document.getElementById("lista");
 
-document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
+  let total = 0;
 
-const listaHTML = document.getElementById("lista");
-listaHTML.innerHTML = "";
+  listaHTML.innerHTML = "";
 
-lista.forEach(i=>{
+  lista.forEach(i => {
 
-const listaHTML = document.getElementById("lista");
-listaHTML.innerHTML = "";
-<tr>
-<td>${i.data}</td>
-<td>${i.nome}</td>
-<td>${i.cpf}</td>
-<td>${i.turma}</td>
-<td>R$ ${i.valor}</td>
+    const valor = parseFloat((i.valor || "0").toString().replace(",", ".")) || 0;
+    total += valor;
 
-<td class="acoes">
-<button onclick="editar(${i.linha})">✏️</button>
-<button onclick="excluir(${i.linha})">🗑️</button>
-</td>
-</tr>
-`;
-});
+    listaHTML.innerHTML += `
+      <tr>
+        <td>${i.data || ""}</td>
+        <td>${i.nome || ""}</td>
+        <td>${i.cpf || ""}</td>
+        <td>${i.turma || ""}</td>
+        <td>R$ ${valor.toFixed(2)}</td>
+
+        <td class="acoes">
+          <button onclick="editar(${i.linha})">✏️</button>
+          <button onclick="excluir(${i.linha})">🗑️</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("total").innerText = "Total: R$ " + total.toFixed(2);
 }
 
 /* FILTROS */
