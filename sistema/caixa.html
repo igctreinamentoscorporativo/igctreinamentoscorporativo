@@ -197,15 +197,17 @@ filtros();
 function render(lista){
 
 let total=0;
-lista.forEach(i=> total+=Number(i.valor||0));
+lista.forEach(i=> total += parseFloat((i.valor || "0").toString().replace(",", ".")) || 0;
 
 document.getElementById("total").innerText="Total: R$ "+total.toFixed(2);
 
-listaHTML.innerHTML="";
+const listaHTML = document.getElementById("lista");
+listaHTML.innerHTML = "";
 
 lista.forEach(i=>{
 
-listaHTML.innerHTML+=`
+const listaHTML = document.getElementById("lista");
+listaHTML.innerHTML = "";
 <tr>
 <td>${i.data}</td>
 <td>${i.nome}</td>
