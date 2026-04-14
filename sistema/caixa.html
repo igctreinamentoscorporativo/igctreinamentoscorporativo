@@ -109,6 +109,7 @@ th,td{
 
 <div class="filtros">
 <select id="fTurma"></select>
+<input id="mCurso" placeholder="Curso">
 <select id="fAno"></select>
 <select id="fMes"></select>
 <input id="fCpf" placeholder="CPF">
@@ -279,13 +280,14 @@ async function salvar(){
 await fetch(API,{
 method:"POST",
 body:JSON.stringify({
-acao:"salvarCaixa",
-senha:senha,
-linha:editando,
-nome:mNome.value,
-cpf:mCpf.value,
-turma:mTurma.value,
-valor:mValor.value
+  acao:"salvarCaixa",
+  senha:senha,
+  linha:editando,
+  nome:mNome.value,
+  cpf:mCpf.value,
+  curso:mCurso ? mCurso.value : "", // 👈 adiciona isso
+  turma:mTurma.value,
+  valor:mValor.value
 })
 });
 
