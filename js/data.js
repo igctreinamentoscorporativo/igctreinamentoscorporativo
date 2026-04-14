@@ -464,7 +464,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
 
 {
   id: "2",
-    nome: "Formação Practitioner em PNL – Maringá",
+    nome: "Você sabe o que precisa fazer… mas não consegue executar? - Formação Practitioner em PNL – Maringá",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLMARINGA01.jpeg",
@@ -474,13 +474,67 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
     descricao: {
       resumo: `
    
-      <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>
+      <p>Você sabe o que precisa fazer.</p>
+
+      <p>Mas na hora… trava, evita ou volta atrás.</p>
+
+      <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria.</p>
+
+      <p><strong>Isso não é falta de conhecimento.</strong></p>
+
+      <p>É como sua mente reage sob pressão.</p>
+
+      <br>
+
+      <p>Em 2 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
              
        `,
 
 
 accordion: [
 
+
+   {
+  titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
+  conteudo: `
+
+<p><strong>💰 VENDAS</strong></p>
+<p>Você sabe explicar. O cliente demonstra interesse.</p>
+<p>Mas na hora de fechar… você recua.</p>
+<p>Evita insistir. Fica com receio. Perde o controle da conversa.</p>
+<p><em>Depois pensa: “eu podia ter fechado”.</em></p>
+<br>
+
+<p><strong>🧠 CRENÇAS LIMITANTES</strong></p>
+<p>Você começa motivado. Decide mudar.</p>
+<p>Mas com o tempo… desacelera e volta pro mesmo padrão.</p>
+<p><em>Algo sempre te puxa pra trás — mesmo você querendo avançar.</em></p>
+<br>
+
+<p><strong>🎤 ORATÓRIA</strong></p>
+<p>Você sabe o que quer dizer.</p>
+<p>Mas quando precisa falar… seu corpo trava.</p>
+<p>Mente acelera. A voz falha. Você evita.</p>
+<p><em>E perde espaço por isso.</em></p>
+<br>
+
+<p><strong>🧩 BLOQUEIOS / TRAUMAS</strong></p>
+<p>Você acha que já superou certas coisas.</p>
+<p>Mas em algumas situações… reage igual.</p>
+<p>Medo. Defesa. Insegurança.</p>
+<p><em>E depois nem entende por que agiu assim.</em></p>
+<br>
+
+<p><strong>👉 Se você se identificou com qualquer um desses pontos:</strong></p>
+<p>O problema não é falta de esforço.</p>
+<p><strong>É padrão mental automático.</strong></p>
+
+  `
+},
+
+
+
+   
 
 {
       titulo: "🎓 O que está incluso na formação",
