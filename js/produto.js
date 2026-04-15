@@ -60,23 +60,25 @@ function montarProduto(produto) {
 
       <div class="produto-acoes">
 
-        ${produto.configuracoes?.mostrarPreco !== false ? `
-          <div class="produto-quantidade">
-            <div class="produto-quantidade-anel">
-              <button onclick="alterarQuantidade(-1)">−</button>
-              <span id="quantidade">1</span>
-              <button onclick="alterarQuantidade(1)">+</button>
-            </div>
-          </div>
-        ` : ``}
-
-        <button class="btn-comprar" onclick="comprarProduto()">
-          ${produto.configuracoes?.mostrarPreco === false
-            ? "Falar com um consultor"
-            : "Reservar vaga"}
-        </button>
-
+  ${produto.configuracoes?.mostrarQuantidade !== false ? `
+    <div class="produto-quantidade">
+      <div class="produto-quantidade-anel">
+        <button onclick="alterarQuantidade(-1)">−</button>
+        <span id="quantidade">1</span>
+        <button onclick="alterarQuantidade(1)">+</button>
       </div>
+    </div>
+  ` : ``}
+
+  ${produto.configuracoes?.mostrarBotaoComprar !== false ? `
+    <button class="btn-comprar" onclick="comprarProduto()">
+      ${produto.configuracoes?.mostrarPreco === false
+        ? "Falar com um consultor"
+        : "Reservar vaga"}
+    </button>
+  ` : ``}
+
+</div>
 
     </div>
 
