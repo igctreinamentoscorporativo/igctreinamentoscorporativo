@@ -99,10 +99,6 @@ function montarProduto(produto) {
     document.body.classList.add("produto-fundo-custom");
   }
 
-}
-
-
-
   
 
   // ----- DESCRIÇÃO COMPLETA -----
