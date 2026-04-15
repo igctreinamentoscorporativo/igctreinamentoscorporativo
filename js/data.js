@@ -483,9 +483,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
        
       resumo: `
    
-      <p>Você sabe, mas na hora… trava, evita ou volta atrás.</p>
-
-      <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria.</p>
+      <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria?</p>
 
       <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
 
