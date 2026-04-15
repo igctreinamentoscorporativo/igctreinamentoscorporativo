@@ -841,7 +841,7 @@ function renderAccordion(itens) {
 
     ${itens.map((item, i) => `
     
-      <div class="accordion-item-premium">
+      <div class="accordion-item-premium ${item.aberto ? 'active' : ''}">
 
         <button class="accordion-header-premium">
           <span>${item.titulo}</span>
