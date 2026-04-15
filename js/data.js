@@ -472,6 +472,15 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
       "assets/videos/PNLIMERSAO.mp4"
     ],
     descricao: {
+      
+       
+      resumoCurto: `
+      
+    <p>Na hora que mais importa... você trava...falta algo.</p>
+    
+  `,
+
+       
       resumo: `
    
       <p>Você sabe o que precisa fazer.</p>
