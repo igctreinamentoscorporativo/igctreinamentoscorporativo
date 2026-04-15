@@ -826,6 +826,10 @@ Sim.
   mostrarNome: true,
   mostrarPreco: true,
   mostrarResumo: true,
+
+  mostrarBotaoComprar: false,   // 🔥 NOVO
+  mostrarQuantidade: false,     // 🔥 NOVO
+    
   cta: {
     mostrar: true,
     texto: "RESERVAR MINHA VAGA",
