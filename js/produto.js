@@ -20,6 +20,15 @@ if (!produto) {
 
 function montarProduto(produto) {
 
+  
+/ 🎨 BACKGROUND DINÂMICO POR PRODUTO
+if (produto.configuracoes?.corFundo) {
+  document.body.style.background = produto.configuracoes.corFundo;
+} else {
+  document.body.style.background = ""; // volta ao padrão
+}
+
+  
   // ----- TOPO DO PRODUTO -----
   document.getElementById("produto-topo").innerHTML = `
   <div class="produto-card">
