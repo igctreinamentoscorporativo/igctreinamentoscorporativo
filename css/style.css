@@ -2700,14 +2700,9 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 
 
-/* =========================================
-   AJUSTE TÍTULO PRODUTO (DESKTOP)
-   ========================================= */
-
-.produto-titulo-full {
-  width: 100%;
-  margin-bottom: 20px;
-}
+/* ================================
+   CORREÇÃO FINAL LAYOUT PRODUTO
+================================ */
 
 .produto-card {
   display: flex;
@@ -2715,12 +2710,22 @@ ACCORDION PRODUTO VERSÃO ANTIGA
   gap: 32px;
 }
 
+/* título ocupa tudo */
+.produto-titulo-full {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* container lateral */
 .produto-imagem {
   width: 300px;
+  flex-shrink: 0;
 }
 
+/* conteúdo ao lado */
 .produto-info {
-  max-width: 360px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
 }
-
 
