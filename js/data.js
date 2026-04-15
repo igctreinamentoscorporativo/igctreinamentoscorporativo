@@ -843,7 +843,7 @@ Sim.
 
 depoimentos: {
   mostrar: true,
-  autoplay: false, 
+  autoplay: true, 
   videos: [
     "BEV6upQhPEA",
     "7uC4pstQS4Y",
