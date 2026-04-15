@@ -133,7 +133,7 @@ function criarCardProduto(produto, isBanner = false) {
 </a>
 
 ${produto.configuracoes?.mostrarResumo !== false
-  ? `<p class="descricao">${produto.descricao.resumo}</p>`
+  ? `<p class="descricao">${produto.descricao.resumoCurto || produto.descricao.resumo}</p>`
   : ``}
 
 ${produto.configuracoes?.mostrarPreco !== false
