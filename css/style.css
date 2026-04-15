@@ -2734,8 +2734,6 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 
 
-
-
 @media (max-width: 768px) {
 
   .produto-card {
@@ -2771,35 +2769,3 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 
 }
 
-
-
-
-
-
-/* =========================================
-   FUNDO PERSONALIZADO PRODUTO (ID)
-========================================= */
-
-body.produto-fundo-custom {
-  background: linear-gradient(135deg, #1c3b52, #0f2027) !important;
-}
-
-/* remove branco só nessa página */
-body.produto-fundo-custom .banner,
-body.produto-fundo-custom .categoria-section,
-body.produto-fundo-custom .container {
-  background: transparent !important;
-}
-
-/* 🔥 FUNDO CUSTOM PRODUTO */
-.produto-fundo-custom .categoria-section {
-  background: transparent !important;
-}
-
-.produto-fundo-custom #produto-descricao {
-  background: transparent !important;
-}
-
-.produto-fundo-custom {
-  min-height: 100vh;
-}
