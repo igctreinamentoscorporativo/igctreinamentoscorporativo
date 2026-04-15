@@ -2731,29 +2731,35 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 }
 
 
-/* =============================
-   LAYOUT PRODUTO MELHORADO
-============================= */
+/* =========================================
+   AJUSTE TÍTULO FULL WIDTH SEM QUEBRAR HTML
+   ========================================= */
 
-.produto-titulo-full {
-  width: 100%;
-  margin-bottom: 16px;
-}
+@media (min-width: 1024px) {
 
-.produto-linha {
-  display: flex;
-  gap: 32px;
-  align-items: flex-start;
-}
-
-/* mantém seu padrão atual */
-.produto-info {
-  max-width: 360px;
-}
-
-/* MOBILE NÃO QUEBRA */
-@media (max-width: 768px) {
-  .produto-linha {
-    flex-direction: row;
+  .produto-card {
+    display: grid;
+    grid-template-columns: 300px 360px;
+    grid-template-areas:
+      "titulo titulo"
+      "imagem info";
+    gap: 32px;
   }
+
+  .produto-imagem {
+    grid-area: imagem;
+  }
+
+  .produto-info {
+    grid-area: info;
+    max-width: 360px;
+  }
+
+  .produto-info h1 {
+    grid-area: titulo;
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
 }
