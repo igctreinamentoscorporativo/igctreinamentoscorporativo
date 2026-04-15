@@ -2729,3 +2729,31 @@ ACCORDION PRODUTO VERSÃO ANTIGA
   }
 
 }
+
+
+/* =============================
+   LAYOUT PRODUTO MELHORADO
+============================= */
+
+.produto-titulo-full {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.produto-linha {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* mantém seu padrão atual */
+.produto-info {
+  max-width: 360px;
+}
+
+/* MOBILE NÃO QUEBRA */
+@media (max-width: 768px) {
+  .produto-linha {
+    flex-direction: row;
+  }
+}
