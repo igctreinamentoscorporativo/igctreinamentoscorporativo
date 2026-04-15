@@ -827,6 +827,7 @@ Sim.
 
 
  configuracoes: {
+  corFundo: "linear-gradient(135deg, #0f2027, #203a43, #2c5364)",   
   mostrarNome: true,
   mostrarPreco: false,
   mostrarResumo: true,
