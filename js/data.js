@@ -464,7 +464,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
 
 {
   id: "2",
-    nome: "Você sabe o que precisa fazer… mas não consegue executar? - Imersão Practitioner PNL – Maringá",
+    nome: "Você sabe o que precisa fazer…<br>mas não consegue executar?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Maringá</span>",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLMARINGA01.jpeg",
