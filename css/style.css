@@ -2772,3 +2772,21 @@ ACCORDION PRODUTO VERSÃO ANTIGA
 }
 
 
+
+
+
+
+/* =========================================
+   FUNDO PERSONALIZADO PRODUTO (ID)
+========================================= */
+
+body.produto-fundo-custom {
+  background: linear-gradient(135deg, #1c3b52, #0f2027) !important;
+}
+
+/* remove branco só nessa página */
+body.produto-fundo-custom .banner,
+body.produto-fundo-custom .categoria-section,
+body.produto-fundo-custom .container {
+  background: transparent !important;
+}
