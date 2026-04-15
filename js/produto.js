@@ -197,7 +197,7 @@ if (produto.videoPrincipal?.mostrar && produto.videoPrincipal.youtubeId) {
 
   section.innerHTML = `
     
-    <h2>Seja um Practitioner em PNL</h2>
+    <h2>Dê o Play no Vídeo</h2>
 
     <div class="slider-estatico">
       <div class="card depoimento-card"
