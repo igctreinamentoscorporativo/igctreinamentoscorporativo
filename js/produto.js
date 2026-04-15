@@ -22,73 +22,66 @@ function montarProduto(produto) {
 
   // ----- TOPO DO PRODUTO -----
   document.getElementById("produto-topo").innerHTML = `
-    <div class="produto-card">
+  <div class="produto-card">
 
-      <div class="produto-imagem">
+    ${produto.configuracoes?.mostrarNome !== false
+      ? `<h1 class="produto-titulo-full">${produto.nome}</h1>`
+      : ``}
+
+    <div class="produto-imagem">
       
       ${produto.mostrarlancamento ? `
-    <span class="badge-lancamento-produto">LANÇAMENTO</span>
-  ` : ""}
-        <img src="${produto.imagem}" alt="${produto.nome}">
-        ${produto.mostrarVideo && produto.videos?.length ? `
-          <button class="produto-video-btn" onclick="abrirVideo('${produto.videos[0]}')">
-  <video
-    src="${produto.videos[0]}"
-    muted
-    autoplay
-    loop
-    playsinline
-  ></video>
-  <span class="play-indicador">▶</span>
-</button>
-        ` : ""}
+        <span class="badge-lancamento-produto">LANÇAMENTO</span>
+      ` : ""}
+
+      <img src="${produto.imagem}" alt="${produto.nome}">
+
+      ${produto.mostrarVideo && produto.videos?.length ? `
+        <button class="produto-video-btn" onclick="abrirVideo('${produto.videos[0]}')">
+          <video src="${produto.videos[0]}" muted autoplay loop playsinline></video>
+          <span class="play-indicador">▶</span>
+        </button>
+      ` : ""}
+    </div>
+
+    <div class="produto-info">
+
+      ${produto.configuracoes?.mostrarResumo !== false
+        ? `<p class="produto-resumo">${produto.descricao.resumo}</p>`
+        : ``}
+
+      ${produto.configuracoes?.mostrarPreco !== false
+        ? `<p class="produto-preco">${formatarPreco(produto.preco)}</p>`
+        : ``}
+
+      <p class="produto-parcelamento">
+        ${produto.textoParcelamento || ""}
+      </p>
+
+      <div class="produto-acoes">
+
+        ${produto.configuracoes?.mostrarPreco !== false ? `
+          <div class="produto-quantidade">
+            <div class="produto-quantidade-anel">
+              <button onclick="alterarQuantidade(-1)">−</button>
+              <span id="quantidade">1</span>
+              <button onclick="alterarQuantidade(1)">+</button>
+            </div>
+          </div>
+        ` : ``}
+
+        <button class="btn-comprar" onclick="comprarProduto()">
+          ${produto.configuracoes?.mostrarPreco === false
+            ? "Falar com um consultor"
+            : "Reservar vaga"}
+        </button>
+
       </div>
 
-     <div class="produto-info">
-
-  ${produto.configuracoes?.mostrarNome !== false
-  ? `<h1>${produto.nome}</h1>`
-  : ``}
-
-  ${produto.configuracoes?.mostrarResumo !== false
-  ? `<p class="produto-resumo">${produto.descricao.resumo}</p>`
-  : ``}
-
-  ${produto.configuracoes?.mostrarPreco !== false
-  ? `<p class="produto-preco">${formatarPreco(produto.preco)}</p>`
-  : ``}
-
-  <p class="produto-parcelamento">
-    ${produto.textoParcelamento || ""}
-  </p>
-
-  <!-- AÇÕES: quantidade + comprar -->
-    <div class="produto-acoes">
-
-    ${produto.configuracoes?.mostrarPreco !== false ? `
-      <div class="produto-quantidade">
-        <div class="produto-quantidade-anel">
-          <button onclick="alterarQuantidade(-1)">−</button>
-          <span id="quantidade">1</span>
-          <button onclick="alterarQuantidade(1)">+</button>
-        </div>
-      </div>
-    ` : ``}
-
-    <button class="btn-comprar" onclick="comprarProduto()">
-      ${produto.configuracoes?.mostrarPreco === false
-        ? "Falar com um consultor"
-        : "Reservar vaga"}
-    </button>
+    </div>
 
   </div>
-
-
-</div>
-
-
-
-  `;
+`;
 
   // ----- DESCRIÇÃO COMPLETA -----
   if (produto.descricao?.accordion) {
