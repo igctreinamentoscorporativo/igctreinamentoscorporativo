@@ -499,6 +499,7 @@ accordion: [
 
    {
   titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
+  aberto: true,
   conteudo: `
 
 <p><strong>💰 VENDAS</strong></p>
@@ -541,6 +542,7 @@ accordion: [
 
 {
       titulo: "🎓 O que está incluso na formação",
+      aberto: false,
       conteudo: `
        
 <p>✔ 20 horas de treinamento intensivo em PNL</p>
@@ -559,6 +561,7 @@ accordion: [
  
     {
       titulo: "🙋 Essa formação é para você se",
+      aberto: false,
       conteudo: `
        
       
@@ -577,6 +580,7 @@ accordion: [
    
     {
       titulo: "🧠 O que você vai aprender",
+      aberto: false,
       conteudo: `
      
       
@@ -600,6 +604,7 @@ accordion: [
 
     {
       titulo: "💡Benefícios futuros",
+      aberto: false,
       conteudo: `
       
       
@@ -634,6 +639,7 @@ accordion: [
 
   {
       titulo: "🙋Quem participa desta formação",
+      aberto: false,
       conteudo: `
   
 
@@ -656,6 +662,7 @@ accordion: [
 
 {
       titulo: "🫶 Por que essa formação é poderosa",
+      aberto: false,
       conteudo: `
       
  
@@ -687,6 +694,7 @@ accordion: [
 
 {
       titulo: "📌 Local do evento",
+      aberto: false,
       conteudo: `
      
 
@@ -717,6 +725,7 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
 {
       titulo: "👨 Quem conduz a formação",
+      aberto: false,
       conteudo: `
      
 
@@ -748,6 +757,7 @@ essa é a sua oportunidade.
 
 {
       titulo: "💬 Dúvidas frequentes",
+      aberto: false,
       conteudo: `
      
 
