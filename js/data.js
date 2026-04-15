@@ -827,7 +827,7 @@ Sim.
 
 
  configuracoes: {
-  corFundo: "linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)) padding-box,",   
+
   mostrarNome: true,
   mostrarPreco: false,
   mostrarResumo: true,
