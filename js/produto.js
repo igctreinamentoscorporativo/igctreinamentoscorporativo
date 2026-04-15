@@ -21,7 +21,7 @@ if (!produto) {
 function montarProduto(produto) {
 
   
-/ 🎨 BACKGROUND DINÂMICO POR PRODUTO
+// 🎨 BACKGROUND DINÂMICO POR PRODUTO
 if (produto.configuracoes?.corFundo) {
   document.body.style.background = produto.configuracoes.corFundo;
 } else {
