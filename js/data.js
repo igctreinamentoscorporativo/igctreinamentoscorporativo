@@ -836,7 +836,7 @@ Sim.
     
   cta: {
     mostrar: true,
-    texto: "Eu quero participar",
+    texto: "Eu quero participar da seleção",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/inscricaopelosite.html"
   }
 },
