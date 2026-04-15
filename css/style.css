@@ -2704,62 +2704,23 @@ ACCORDION PRODUTO VERSÃO ANTIGA
    AJUSTE TÍTULO PRODUTO (DESKTOP)
    ========================================= */
 
-@media (min-width: 1024px) {
+.produto-titulo-full {
+  width: 100%;
+  margin-bottom: 20px;
+}
 
-  .produto-card {
-    flex-wrap: wrap;
-  }
+.produto-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
 
-  .produto-info {
-    max-width: 100%;
-    width: 100%;
-  }
+.produto-imagem {
+  width: 300px;
+}
 
-  .produto-info h1 {
-    width: 100%;
-  }
-
-  /* faz imagem e conteúdo voltarem lado a lado abaixo do título */
-  .produto-imagem {
-    order: 2;
-  }
-
-  .produto-info > *:not(h1) {
-    max-width: 360px;
-  }
-
+.produto-info {
+  max-width: 360px;
 }
 
 
-/* =========================================
-   AJUSTE TÍTULO FULL WIDTH SEM QUEBRAR HTML
-   ========================================= */
-
-@media (min-width: 1024px) {
-
-  .produto-card {
-    display: grid;
-    grid-template-columns: 300px 360px;
-    grid-template-areas:
-      "titulo titulo"
-      "imagem info";
-    gap: 32px;
-  }
-
-  .produto-imagem {
-    grid-area: imagem;
-  }
-
-  .produto-info {
-    grid-area: info;
-    max-width: 360px;
-  }
-
-  .produto-info h1 {
-    grid-area: titulo;
-    grid-column: 1 / -1;
-    width: 100%;
-    margin-bottom: 16px;
-  }
-
-}
