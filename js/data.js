@@ -826,7 +826,7 @@ Sim.
     
   cta: {
     mostrar: true,
-    texto: "RESERVA DE VAGA",
+    texto: "Eu quero participar",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/inscricaopelosite.html"
   }
 },
