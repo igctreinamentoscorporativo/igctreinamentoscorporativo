@@ -476,7 +476,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
        
       resumoCurto: `
       
-    <p>Na hora que mais importa... você trava...falta algo.</p>
+    <p>Seja em vendas, decisões, comunicação...</p>
     
   `,
 
