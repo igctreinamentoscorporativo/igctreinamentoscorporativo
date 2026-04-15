@@ -464,7 +464,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
 
 {
   id: "2",
-    nome: "Você sabe o que precisa fazer… mas não consegue executar? - Formação Practitioner em PNL – Maringá",
+    nome: "Você sabe o que precisa fazer… mas não consegue executar? - Imersão Practitioner PNL – Maringá",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLMARINGA01.jpeg",
@@ -483,19 +483,15 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
        
       resumo: `
    
-      <p>Você sabe o que precisa fazer.</p>
-
-      <p>Mas na hora… trava, evita ou volta atrás.</p>
+      <p>Você sabe, mas na hora… trava, evita ou volta atrás.</p>
 
       <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria.</p>
 
-      <p><strong>Isso não é falta de conhecimento.</strong></p>
-
-      <p>É como sua mente reage sob pressão.</p>
+      <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
 
       <br>
 
-      <p>Em 2 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
+      <p>Em 3 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
              
        `,
 
@@ -824,7 +820,7 @@ Sim.
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: true,
+  mostrarPreco: false,
   mostrarResumo: true,
 
   mostrarBotaoComprar: false,   // 🔥 NOVO
@@ -832,7 +828,7 @@ Sim.
     
   cta: {
     mostrar: true,
-    texto: "RESERVAR MINHA VAGA",
+    texto: "RESERVA DE VAGA",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/inscricaopelosite.html"
   }
 },
