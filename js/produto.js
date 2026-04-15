@@ -86,6 +86,25 @@ function montarProduto(produto) {
   </div>
 `;
 
+
+// 🔥🔥🔥 AGORA COLE ISSO EXATAMENTE AQUI 🔥🔥🔥
+
+  // limpa fundo anterior (IMPORTANTE)
+  document.body.style.background = "";
+  document.body.classList.remove("produto-fundo-custom");
+
+  // aplica fundo se existir no produto
+  if (produto.configuracoes?.fundoPagina) {
+    document.body.style.background = produto.configuracoes.fundoPagina;
+    document.body.classList.add("produto-fundo-custom");
+  }
+
+}
+
+
+
+  
+
   // ----- DESCRIÇÃO COMPLETA -----
   if (produto.descricao?.accordion) {
 
