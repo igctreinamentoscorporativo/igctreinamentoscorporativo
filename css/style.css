@@ -2790,3 +2790,16 @@ body.produto-fundo-custom .categoria-section,
 body.produto-fundo-custom .container {
   background: transparent !important;
 }
+
+/* 🔥 FUNDO CUSTOM PRODUTO */
+.produto-fundo-custom .categoria-section {
+  background: transparent !important;
+}
+
+.produto-fundo-custom #produto-descricao {
+  background: transparent !important;
+}
+
+.produto-fundo-custom {
+  min-height: 100vh;
+}
