@@ -2696,3 +2696,36 @@ ACCORDION PRODUTO VERSÃO ANTIGA
  
 
 }
+
+
+
+
+/* =========================================
+   AJUSTE TÍTULO PRODUTO (DESKTOP)
+   ========================================= */
+
+@media (min-width: 1024px) {
+
+  .produto-card {
+    flex-wrap: wrap;
+  }
+
+  .produto-info {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .produto-info h1 {
+    width: 100%;
+  }
+
+  /* faz imagem e conteúdo voltarem lado a lado abaixo do título */
+  .produto-imagem {
+    order: 2;
+  }
+
+  .produto-info > *:not(h1) {
+    max-width: 360px;
+  }
+
+}
