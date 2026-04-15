@@ -843,7 +843,7 @@ Sim.
 
 depoimentos: {
   mostrar: true,
-  autoplay: true, 
+  autoplay: false, 
   videos: [
     "BEV6upQhPEA",
     "7uC4pstQS4Y",
@@ -871,6 +871,7 @@ clientes: {
 
 videoPrincipal: {
   mostrar: true,
+  autoplay: true,
   youtubeId: "pHoZ_VKjkaU"
 },
 
