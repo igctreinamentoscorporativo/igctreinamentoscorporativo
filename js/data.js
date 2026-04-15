@@ -88,7 +88,7 @@ accordion: [
       titulo: "🎓 O que está incluso na formação",
       conteudo: `
        
-<p>✔ 20 horas de treinamento intensivo em PNL</p>
+<p>✔ 24 horas de treinamento intensivo em PNL</p>
 <p>✔ Certificação internacional Practitioner em PNL</p>
 <p>✔ Material didático exclusivo</p>
 <p>✔ Exercícios práticos supervisionados</p>
