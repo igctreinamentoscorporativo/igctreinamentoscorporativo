@@ -46,11 +46,18 @@ body {
 
 .card {
   display: block;
-  background: rgba(255, 255, 255, 0.65);  /* 👈 5% de transparência background: #fff;*/
+
+  background: 
+    linear-gradient(rgba(255,255,255,0.65), rgba(255,255,255,0.65)) padding-box,
+    linear-gradient(135deg, #F9D423, #FF4E50) border-box;
+
+  border: 2px solid transparent;
+
   padding: 25px;
   max-width: 420px;
   width: 100%;
   border-radius: 12px;
+
   box-shadow: 0 8px 20px rgba(0,0,0,.1);
 }
 
@@ -163,7 +170,7 @@ button:active,
 <button id="btnConfirmar" onclick="finalizar()">Eu quero ser Selecionado</button>
 <br>
 
-<p style="font-size:12px; text-align:center;"><strong></strong>*O investimento desta formação é de R$ 997,00 e pode ser parcelado em até 12x com juros</strong></p>
+<p style="font-size:15px; text-align:center;"><strong></strong>*O investimento desta formação é de R$ 997,00 e pode ser parcelado em até 12x com juros</strong></p>
 
 </div>
 
