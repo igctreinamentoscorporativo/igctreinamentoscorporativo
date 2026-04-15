@@ -505,6 +505,11 @@ lista.forEach(i=>{
 
 /* TABELA DESKTOP */
 
+
+// 🔥 AQUI É O FILTRO LIMPO
+if(i.pagamento === "PROCESSADO") return;  
+
+  
 tbody.innerHTML+=`
 <tr>
 
