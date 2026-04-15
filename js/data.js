@@ -827,7 +827,7 @@ Sim.
 
 
  configuracoes: {
-  fundoPagina: "linear-gradient(135deg, #f5d7a1, #f2c27b, #f7e3b5)",
+  //fundoPagina: "linear-gradient(135deg, #f5d7a1, #f2c27b, #f7e3b5)",
   mostrarNome: true,
   mostrarPreco: false,
   mostrarResumo: true,
