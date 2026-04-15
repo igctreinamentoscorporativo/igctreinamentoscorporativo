@@ -845,7 +845,6 @@ depoimentos: {
   mostrar: true,
   autoplay: false, 
   videos: [
-    "pHoZ_VKjkaU"
     "BEV6upQhPEA",
     "7uC4pstQS4Y",
     "Fu-WNt6muDc",
