@@ -464,7 +464,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
 
 {
   id: "2",
-    nome: "Você sabe o que precisa fazer…<br>mas não consegue executar?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Maringá</span>",
+    nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Maringá-PR</span>",
     categoria: "pnl",
     preco: 1997.00,
     imagem: "assets/img/PNLMARINGA01.jpeg",
@@ -545,7 +545,7 @@ accordion: [
       aberto: false,
       conteudo: `
        
-<p>✔ 20 horas de treinamento intensivo em PNL</p>
+<p>✔ 24 horas de treinamento intensivo em PNL</p>
 <p>✔ Certificação internacional Practitioner em PNL</p>
 <p>✔ Material didático exclusivo</p>
 <p>✔ Exercícios práticos supervisionados</p>
