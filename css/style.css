@@ -2016,6 +2016,11 @@ a.btn-comprar {
 }
 
 
+/* =========================
+   CTA CONVERSÃO
+========================= */
+
+
 .cta-escassez {
   display: block;
   font-size: 0.75rem;
@@ -2023,6 +2028,17 @@ a.btn-comprar {
   opacity: 0.9;
   margin-top: 4px;
 }
+
+
+.cta-beneficio {
+  display: block;
+  text-align: center;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #065f46;
+  font-weight: 600;
+}
+
 
 
 
