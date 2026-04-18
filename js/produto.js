@@ -159,6 +159,11 @@ if (produto.configuracoes?.cta?.mostrar) {
       <a href="${produto.configuracoes.cta.link}" class="btn-pre-inscricao">
         ${produto.configuracoes.cta.texto}
       </a>
+
+    <span class="cta-beneficio">
+      🎁 Participe da Seleção e concorra a 50% OFF + levar 1 convidado
+    </span>
+      
     </div>
   `;
 
