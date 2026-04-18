@@ -167,7 +167,7 @@ if (produto.configuracoes?.cta?.mostrar) {
 
 -->
     <span class="cta-beneficio">
-      🎁 Participe da Seleção e concorra a 50% OFF + levar 1 convidado
+      🎁 Participe e concorra a 50% OFF + levar 1 convidado
     </span>
       
     </div>
