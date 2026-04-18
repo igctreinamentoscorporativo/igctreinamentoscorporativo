@@ -836,7 +836,7 @@ Sim.
     
   cta: {
     mostrar: true,
-    texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Vagas Limitadas para esta turma.</span>",
+    texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma.</span>",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/inscricaopelosite.html"
   }
 },
