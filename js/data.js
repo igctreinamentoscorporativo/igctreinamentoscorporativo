@@ -529,9 +529,6 @@ accordion: [
 <p><em>E depois nem entende por que agiu assim.</em></p>
 <br>
 
-<p><strong>👉 Se você se identificou com qualquer um desses pontos:</strong></p>
-<p>O problema não é falta de esforço.</p>
-<p><strong>É padrão mental automático.</strong></p>
 
   `
 },
