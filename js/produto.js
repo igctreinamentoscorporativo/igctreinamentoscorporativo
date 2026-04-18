@@ -160,6 +160,12 @@ if (produto.configuracoes?.cta?.mostrar) {
         ${produto.configuracoes.cta.texto}
       </a>
 
+<!--
+     <span class="cta-escassez">
+      ⚠️ Vagas limitadas para esta turma
+    </span>
+
+-->
     <span class="cta-beneficio">
       🎁 Participe da Seleção e concorra a 50% OFF + levar 1 convidado
     </span>
