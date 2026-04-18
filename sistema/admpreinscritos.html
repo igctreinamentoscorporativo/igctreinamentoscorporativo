@@ -701,37 +701,49 @@ render(dados);
 
 async function salvar(){
 
-await fetch(API,{
-method:"POST",
-body:JSON.stringify({
+  // 🔒 VALIDAÇÃO DE VALOR (ANTES DO ENVIO)
+  if(!eValorPago.value){
 
-acao:"editarPreInscrito",
-senha:senha,
+    const confirmar = confirm("Você não inseriu valor. Deseja registrar como R$ 0?");
 
-linha:linhaAtual,
+    if(!confirmar){
+      return; // ❌ cancela o salvamento
+    }
 
-cpf:eCpf.value,
-nome:eNome.value,
-email:eEmail.value,
-telefone:eTelefone.value,
+    eValorPago.value = "0"; // ✅ define como zero
+  }
 
-curso:eCurso.value,
-cidade:eCidade.value,
-estado:eEstado.value,
-turma:eTurma.value,
+  await fetch(API,{
+    method:"POST",
+    body:JSON.stringify({
 
-carga:eCarga.value,
-local:eLocal.value,
-data:eData.value,
+      acao:"editarPreInscrito",
+      senha:senha,
 
-pagamento:ePagamento.value,
-valorPago:eValorPago.value
+      linha:linhaAtual,
 
-})
-});
+      cpf:eCpf.value,
+      nome:eNome.value,
+      email:eEmail.value,
+      telefone:eTelefone.value,
 
-fechar();
-carregar();
+      curso:eCurso.value,
+      cidade:eCidade.value,
+      estado:eEstado.value,
+      turma:eTurma.value,
+
+      carga:eCarga.value,
+      local:eLocal.value,
+      data:eData.value,
+
+      pagamento:ePagamento.value,
+      valorPago:eValorPago.value
+
+    })
+  });
+
+  fechar();
+  carregar();
 
 }
 
