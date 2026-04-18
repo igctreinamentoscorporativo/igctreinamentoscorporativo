@@ -2035,7 +2035,7 @@ a.btn-comprar {
   display: block;
   text-align: center;
   margin-top: 4px;
-  font-size: 0.6rem;
+  font-size: 0.65rem;
   /*color: #065f46;*/
   font-weight: 600;
 }
@@ -2044,7 +2044,7 @@ a.btn-comprar {
 /*  CTA dentro BOTÃO */
 .cta-escassez {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
   opacity: 0.9;
   margin-top: 4px;
