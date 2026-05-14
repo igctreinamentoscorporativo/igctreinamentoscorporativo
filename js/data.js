@@ -828,11 +828,11 @@ Sim.
   mostrarPreco: false,
   mostrarResumo: true,
 
-  mostrarBotaoComprar: false,   // 🔥 NOVO
+  mostrarBotaoComprar: true,   // 🔥 NOVO
   mostrarQuantidade: false,     // 🔥 NOVO
     
   cta: {
-    mostrar: true,
+    mostrar: false,
     texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlmaringa/reservapelosite.html"
   }
@@ -868,7 +868,7 @@ clientes: {
 
 videoPrincipal: {
   mostrar: true,
-  autoplay: true,
+  autoplay: false,
   youtubeId: "pHoZ_VKjkaU"
 },
 
