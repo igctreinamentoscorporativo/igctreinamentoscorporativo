@@ -27,10 +27,10 @@ const categorias = [
 
    {
     id: "pnlon",
-    nome: "Treinamentos em PNL",
+    nome: "Treinamentos em PNL Online",
     nomeMenu: " Formação em PNL",
     mostrarNoMenu: false,
-    visivel: true
+    visivel: false
   },
    
   {
@@ -1300,7 +1300,7 @@ Sim.
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: false,
+  mostrarPreco: true,
   mostrarResumo: true,
 
   mostrarBotaoComprar: false,   // 🔥 NOVO
@@ -1372,7 +1372,7 @@ ofertaRelampago: {
 },
 
 
-destaque: false,
+destaque: true,
 mostrarlancamento: true,
 mostrarVideo: false,
 textoParcelamento: ""
@@ -1760,7 +1760,7 @@ Sim.
 
   configuracoes: {
   mostrarNome: true,
-  mostrarPreco: false,
+  mostrarPreco: true,
   mostrarResumo: true,
 
   mostrarBotaoComprar: false,   // 🔥 NOVO
