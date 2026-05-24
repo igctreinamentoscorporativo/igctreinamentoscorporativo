@@ -24,6 +24,15 @@ const categorias = [
     mostrarNoMenu: true,
     visivel: true
   },
+
+   {
+    id: "pnlon",
+    nome: "Treinamentos em PNL",
+    nomeMenu: " Formação em PNL",
+    mostrarNoMenu: false,
+    visivel: true
+  },
+   
   {
     id: "oratoria",
     nome: "Treinamentos em Oratória",
@@ -696,7 +705,9 @@ accordion: [
      
 
 
-<strong>📍 Local:</strong> Maringá-PR – Golden Ingá Hotel
+<strong>📍 Local:</strong> Maringá-PR 
+
+<!-- – Golden Ingá Hotel
 <br>
 <strong>📅 Datas e formato:</strong> Sexta-feira – 15/05/2026 das 19h às 22h (online – grupo fechado)
 <br>
@@ -709,7 +720,7 @@ Domingo – 17/05/2026 das 09h às 19h (presencial – imersivo)
 <br>
 Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
-
+-->
      
       `
     },
@@ -739,7 +750,7 @@ com aplicação prática e foco em transformação real.
 
 <strong>As vagas são limitadas.</strong>
 <br><br>
-Se você deseja participar desta turma em Curitiba,
+Se você deseja participar desta turma em Maringá,
 essa é a sua oportunidade.
 <br>
 <strong>Garanta sua inscrição agora.</strong>
@@ -913,6 +924,938 @@ textoParcelamento: ""
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  id: "3",
+    nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Londrina-PR</span>",
+    categoria: "pnl",
+    preco: 991.50,
+    imagem: "assets/img/PNLLONDRINA01.png",
+    videos: [
+      "assets/videos/PNLIMERSAO.mp4"
+    ],
+    descricao: {
+      
+       
+      resumoCurto: `
+      
+    <p>Seja em vendas, decisões, comunicação...</p>
+    
+  `,
+
+       
+      resumo: `
+   
+      <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria?</p>
+
+      <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
+
+      <br>
+
+      <p>Em 3 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
+             
+       `,
+
+
+accordion: [
+
+
+   {
+  titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
+  aberto: true,
+  conteudo: `
+
+<p><strong>💰 VENDAS</strong></p>
+<p>Você sabe explicar. O cliente demonstra interesse.</p>
+<p>Mas na hora de fechar… você recua.</p>
+<p>Evita insistir. Fica com receio. Perde o controle da conversa.</p>
+<p><em>Depois pensa: “eu podia ter fechado”.</em></p>
+<br>
+
+<p><strong>🧠 CRENÇAS LIMITANTES</strong></p>
+<p>Você começa motivado. Decide mudar.</p>
+<p>Mas com o tempo… desacelera e volta pro mesmo padrão.</p>
+<p><em>Algo sempre te puxa pra trás — mesmo você querendo avançar.</em></p>
+<br>
+
+<p><strong>🎤 ORATÓRIA</strong></p>
+<p>Você sabe o que quer dizer.</p>
+<p>Mas quando precisa falar… seu corpo trava.</p>
+<p>Mente acelera. A voz falha. Você evita.</p>
+<p><em>E perde espaço por isso.</em></p>
+<br>
+
+<p><strong>🧩 BLOQUEIOS / TRAUMAS</strong></p>
+<p>Você acha que já superou certas coisas.</p>
+<p>Mas em algumas situações… reage igual.</p>
+<p>Medo. Defesa. Insegurança.</p>
+<p><em>E depois nem entende por que agiu assim.</em></p>
+<br>
+
+
+  `
+},
+
+
+
+   
+
+{
+      titulo: "🎓 O que está incluso na formação",
+      aberto: false,
+      conteudo: `
+       
+<p>✔ 24 horas de treinamento intensivo em PNL</p>
+<p>✔ Certificação internacional Practitioner em PNL</p>
+<p>✔ Material didático exclusivo</p>
+<p>✔ Exercícios práticos supervisionados</p>
+<p>✔ Técnicas aplicáveis em comunicação, liderança e negociação</p>
+<p>✔ Networking com participantes da formação</p>
+<p>✔ Acesso a metodologia aplicada há mais de 20 anos</p>
+
+ 
+      `
+    },
+
+
+ 
+    {
+      titulo: "🙋 Essa formação é para você se",
+      aberto: false,
+      conteudo: `
+       
+      
+<p>🌟 quer melhorar comunicação</p>
+<p>🌟 quer desenvolver inteligência emocional</p>
+<p>🌟 quer aumentar resultados profissionais</p>
+<p>🌟 quer romper padrões limitantes que te impedem de evoluir</p>
+<p>🌟 quer aprender técnicas reais de influência</p>
+<p>🌟 quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
+
+     
+      `
+    },
+
+
+   
+    {
+      titulo: "🧠 O que você vai aprender",
+      aberto: false,
+      conteudo: `
+     
+      
+<p>✔️ Comunicação poderosa</p>
+<p>✔️ Controle emocional</p>
+<p>✔️ Alta performance</p>
+<p>✔️ Como interpretar e ajustar a sua linguagem interna</p>
+<p>✔️ Técnicas de comunicação eficaz e persuasiva</p>
+<p>✔️ Como reconhecer e modificar padrões limitantes</p>
+<p>✔️ Como construir confiança instantânea em si mesmo</p>
+<p>✔️ Estratégias de influência sem manipulação</p>
+<p>✔️ Ferramentas práticas para situações reais</p>
+<p>✔️ Comportamento emocional estável sob pressão</p>
+
+<br>
+<p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
+
+   
+      `
+    },
+
+    {
+      titulo: "💡Benefícios futuros",
+      aberto: false,
+      conteudo: `
+      
+      
+      
+    <em>Imagine daqui a algumas semanas:</em>
+<br>
+<br>
+✨ Você se comunicando com muito mais segurança
+<br>
+✨ Tomando decisões com clareza
+<br>
+✨ Influenciando pessoas de forma natural
+<br>
+✨ Conduzindo conversas difíceis com equilíbrio emocional
+<br>
+✨ Percebendo oportunidades que antes passavam despercebidas
+<br>
+<br>
+
+
+<b>Isso não é motivação momentânea.</b>
+<br>
+<strong>É uma habilidade que você leva para toda a vida.</strong>
+<br>  
+
+     
+      `
+    },
+
+
+
+
+  {
+      titulo: "🙋Quem participa desta formação",
+      aberto: false,
+      conteudo: `
+  
+
+✔️ Profissionais de vendas
+<br>
+✔️ Líderes e gestores
+<br>
+✔️ Empreendedores
+<br>
+✔️ Profissionais da área de desenvolvimento humano
+<br>
+✔️ Pessoas que desejam evoluir comunicação e inteligência emocional
+<br>
+     
+      `
+    },  
+
+
+
+
+{
+      titulo: "🫶 Por que essa formação é poderosa",
+      aberto: false,
+      conteudo: `
+      
+ 
+
+<p>✔️ Três dias intensivos de imersão prática em PNL</p>
+<p>✔️ Certificação Internacional com carga horária oficial de 24h</p> 
+<p>✔️ Metodologia apoiada nas bases da PNL moderna</p>
+<p>✔️ Conteúdo aplicável desde o primeiro módulo</p>
+<p>✔️ Ferramentas práticas, não apenas teoria</p>
+<p>✔️ Foco em mudança comportamental real</p>
+<p>✔️ Resultados visíveis na sua vida e no seu entorno</p>
+<p>✔️ Registro IGC-MEC no certificado</p>
+<p>✔️ Validação online via QR Code</p>
+<p>✔️ Atividades práticas individuais e em grupo com alto impacto transformacional</p>
+
+    
+     
+      `
+    },
+
+
+   
+
+{
+      titulo: "📌 Local do evento",
+      aberto: false,
+      conteudo: `
+     
+
+
+<strong>📍 Local:</strong> Londrina-PR
+
+<!-- – Golden Ingá Hotel
+<br>
+<strong>📅 Datas e formato:</strong> Sexta-feira – 15/05/2026 das 19h às 22h (online – grupo fechado)
+<br>
+Sábado – 16/05/2026 das 09h às 19h (presencial – imersivo)
+<br>
+Domingo – 17/05/2026 das 09h às 19h (presencial – imersivo)
+<br><br>
+
+<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
+<br>
+Após o preenchimento das vagas, as inscrições serão encerradas.
+<br>
+-->
+     
+      `
+    },
+
+   
+
+
+
+
+
+{
+      titulo: "👨 Quem conduz a formação",
+      aberto: false,
+      conteudo: `
+     
+
+
+<strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
+com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
+<br>
+Sua metodologia integra PNL, comportamento e comunicação estratégica,
+com aplicação prática e foco em transformação real.
+<br><br>
+<strong>Você não aprende apenas teoria.</strong>
+<strong>Você aprende com quem aplica há décadas.</strong>
+<br>
+
+<strong>As vagas são limitadas.</strong>
+<br><br>
+Se você deseja participar desta turma em Londrina,
+essa é a sua oportunidade.
+<br>
+<strong>Reserve sua vaga agora.</strong>
+<br>
+
+     
+      `
+    },
+
+
+
+
+{
+      titulo: "💬 Dúvidas frequentes",
+      aberto: false,
+      conteudo: `
+     
+
+
+<strong>Será que eu vou conseguir acompanhar?</strong>
+<br>
+Sim.
+<br>
+👉 A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
+<br>
+<br>
+
+<strong>Isso é apenas motivacional?</strong>
+<br>
+Não.
+<br>
+👉 Motivação passa…
+<br>
+👉 PNL é técnica + aplicação + transformação comportamental real.
+<br>
+<br>
+
+<strong>Preciso de experiência anterior?</strong>
+<br>
+Não.
+<br>
+👉 Você aprende tudo desde as bases até aplicações avançadas.
+<br>
+<br>
+
+<strong>Isso traz resultados práticos?</strong>
+<br>
+Sim.
+<br>
+👉 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
+<br>
+
+
+     
+      `
+    } 
+ 
+  ],
+
+
+          
+       oQueE: `
+
+      
+      `,      
+
+       
+      composicao: `
+
+ 
+      `,
+      
+       comoUsar: `
+
+      
+      `,
+      advertencias: `
+
+
+      `
+    },
+
+
+ configuracoes: {
+  mostrarNome: true,
+  mostrarPreco: false,
+  mostrarResumo: true,
+
+  mostrarBotaoComprar: true,   // 🔥 NOVO
+  mostrarQuantidade: false,     // 🔥 NOVO
+    
+  cta: {
+    mostrar: false,
+    texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
+    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlllondrina/reservapelosite.html"
+  }
+},
+
+depoimentos: {
+  mostrar: true,
+  autoplay: false, 
+  videos: [
+    "BEV6upQhPEA",
+    "7uC4pstQS4Y",
+    "Fu-WNt6muDc",
+    "PQn3T-R6BmQ",
+    "nyRvRtNetrA",
+    "DZR50Zx1mGU"
+     
+  ]
+},
+
+clientes: {
+  mostrar: true,
+  logos: [
+    "assets/img/depoimentos/2.jpg",
+    "assets/img/depoimentos/3.jpg",
+    "assets/img/depoimentos/4.jpg",
+    "assets/img/depoimentos/5.jpg",
+    "assets/img/depoimentos/6.jpg",
+    "assets/img/depoimentos/7.jpg",
+    "assets/img/depoimentos/8.jpg",
+    "assets/img/depoimentos/9.jpg"
+  ]
+},
+
+videoPrincipal: {
+  mostrar: true,
+  autoplay: false,
+  youtubeId: "pHoZ_VKjkaU"
+},
+
+ofertaRelampago: {
+  mostrar: false,
+  delaySegundos: 3,
+  tempoMinutos: 15,
+  diasParaReexibir: 7, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
+  titulo: "🎉 PARABÉNS!<br>você desbloqueou<br>🔥 70% OFF + Bônus Grátis<br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "🚀<strong> Mais de 4.327 alunos já se certificaram</strong>",            //2º Lote. Exclusivo para esta página!
+  mostrarPrecos: false,
+  mostrarParcelamento: false,
+  valorDe: 1997,
+  valorPor: 697,
+  
+   // 🔥 NOVO BLOCO
+  parcelamento: { 
+  
+     texto: "🔥Super Desconto + 💎Bônus Grátis"                    //Apenas 12x de R$ 61,89
+  },
+   
+  textoBotao: "🎁 LIBERAR MEU DESCONTO DE 70%<br><span class='texto-botao-extra'>Leva menos de 17 segundos</span>",
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/receberbonus.html",           // "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
+
+  
+},
+
+
+destaque: false,
+mostrarlancamento: true,
+mostrarVideo: false,
+textoParcelamento: ""
+
+//<strong>1º Lote:</strong> R$ 997,00<br><strong>Pagamento facilitado</strong>
+//<del><strong>1º Lote: esgotado</strong></del><br><strong>2º Lote:</strong> restam poucas vagas<br><strong>Pagamento facilitado</strong>
+
+// <strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
+
+     
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  id: "4",
+    nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Ed. Online</span>",
+    categoria: "pnlon",
+    preco: 991.50,
+    imagem: "assets/img/PNLLONDRINA01.png",
+    videos: [
+      "assets/videos/PNLIMERSAO.mp4"
+    ],
+    descricao: {
+      
+       
+      resumoCurto: `
+      
+    <p>Seja em vendas, decisões, comunicação...</p>
+    
+  `,
+
+       
+      resumo: `
+   
+      <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria?</p>
+
+      <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
+
+      <br>
+
+      <p>Em 3 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
+             
+       `,
+
+
+accordion: [
+
+
+   {
+  titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
+  aberto: true,
+  conteudo: `
+
+<p><strong>💰 VENDAS</strong></p>
+<p>Você sabe explicar. O cliente demonstra interesse.</p>
+<p>Mas na hora de fechar… você recua.</p>
+<p>Evita insistir. Fica com receio. Perde o controle da conversa.</p>
+<p><em>Depois pensa: “eu podia ter fechado”.</em></p>
+<br>
+
+<p><strong>🧠 CRENÇAS LIMITANTES</strong></p>
+<p>Você começa motivado. Decide mudar.</p>
+<p>Mas com o tempo… desacelera e volta pro mesmo padrão.</p>
+<p><em>Algo sempre te puxa pra trás — mesmo você querendo avançar.</em></p>
+<br>
+
+<p><strong>🎤 ORATÓRIA</strong></p>
+<p>Você sabe o que quer dizer.</p>
+<p>Mas quando precisa falar… seu corpo trava.</p>
+<p>Mente acelera. A voz falha. Você evita.</p>
+<p><em>E perde espaço por isso.</em></p>
+<br>
+
+<p><strong>🧩 BLOQUEIOS / TRAUMAS</strong></p>
+<p>Você acha que já superou certas coisas.</p>
+<p>Mas em algumas situações… reage igual.</p>
+<p>Medo. Defesa. Insegurança.</p>
+<p><em>E depois nem entende por que agiu assim.</em></p>
+<br>
+
+
+  `
+},
+
+
+
+   
+
+{
+      titulo: "🎓 O que está incluso na formação",
+      aberto: false,
+      conteudo: `
+       
+<p>✔ 24 horas de treinamento intensivo em PNL</p>
+<p>✔ Certificação internacional Practitioner em PNL</p>
+<p>✔ Material didático exclusivo</p>
+<p>✔ Exercícios práticos</p>
+<p>✔ Técnicas aplicáveis em comunicação, liderança e negociação</p>
+<p>✔ Networking com participantes da formação</p>
+<p>✔ Acesso a metodologia aplicada há mais de 20 anos</p>
+
+ 
+      `
+    },
+
+
+ 
+    {
+      titulo: "🙋 Essa formação é para você se",
+      aberto: false,
+      conteudo: `
+       
+      
+<p>🌟 quer melhorar comunicação</p>
+<p>🌟 quer desenvolver inteligência emocional</p>
+<p>🌟 quer aumentar resultados profissionais</p>
+<p>🌟 quer romper padrões limitantes que te impedem de evoluir</p>
+<p>🌟 quer aprender técnicas reais de influência</p>
+<p>🌟 quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
+
+     
+      `
+    },
+
+
+   
+    {
+      titulo: "🧠 O que você vai aprender",
+      aberto: false,
+      conteudo: `
+     
+      
+<p>✔️ Comunicação poderosa</p>
+<p>✔️ Controle emocional</p>
+<p>✔️ Alta performance</p>
+<p>✔️ Como interpretar e ajustar a sua linguagem interna</p>
+<p>✔️ Técnicas de comunicação eficaz e persuasiva</p>
+<p>✔️ Como reconhecer e modificar padrões limitantes</p>
+<p>✔️ Como construir confiança instantânea em si mesmo</p>
+<p>✔️ Estratégias de influência sem manipulação</p>
+<p>✔️ Ferramentas práticas para situações reais</p>
+<p>✔️ Comportamento emocional estável sob pressão</p>
+
+<br>
+<p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
+
+   
+      `
+    },
+
+    {
+      titulo: "💡Benefícios futuros",
+      aberto: false,
+      conteudo: `
+      
+      
+      
+    <em>Imagine daqui a algumas semanas:</em>
+<br>
+<br>
+✨ Você se comunicando com muito mais segurança
+<br>
+✨ Tomando decisões com clareza
+<br>
+✨ Influenciando pessoas de forma natural
+<br>
+✨ Conduzindo conversas difíceis com equilíbrio emocional
+<br>
+✨ Percebendo oportunidades que antes passavam despercebidas
+<br>
+<br>
+
+
+<b>Isso não é motivação momentânea.</b>
+<br>
+<strong>É uma habilidade que você leva para toda a vida.</strong>
+<br>  
+
+     
+      `
+    },
+
+
+
+
+  {
+      titulo: "🙋Quem participa desta formação",
+      aberto: false,
+      conteudo: `
+  
+
+✔️ Profissionais de vendas
+<br>
+✔️ Líderes e gestores
+<br>
+✔️ Empreendedores
+<br>
+✔️ Profissionais da área de desenvolvimento humano
+<br>
+✔️ Pessoas que desejam evoluir comunicação e inteligência emocional
+<br>
+     
+      `
+    },  
+
+
+
+
+{
+      titulo: "🫶 Por que essa formação é poderosa",
+      aberto: false,
+      conteudo: `
+      
+ 
+
+<p>✔️ Três dias intensivos de imersão prática em PNL</p>
+<p>✔️ Certificação Internacional com carga horária oficial de 24h</p> 
+<p>✔️ Metodologia apoiada nas bases da PNL moderna</p>
+<p>✔️ Conteúdo aplicável desde o primeiro módulo</p>
+<p>✔️ Ferramentas práticas, não apenas teoria</p>
+<p>✔️ Foco em mudança comportamental real</p>
+<p>✔️ Resultados visíveis na sua vida e no seu entorno</p>
+<p>✔️ Registro IGC-MEC no certificado</p>
+<p>✔️ Validação online via QR Code</p>
+
+
+    
+     
+      `
+    },
+
+
+   
+
+{
+      titulo: "📌 Local do evento",
+      aberto: false,
+      conteudo: `
+     
+
+
+<strong>📍 Local:</strong> Londrina-PR com transmissão ao vivo e particiação online.
+
+<!-- – Golden Ingá Hotel
+<br>
+<strong>📅 Datas e formato:</strong> Sexta-feira – 15/05/2026 das 19h às 22h (online – grupo fechado)
+<br>
+Sábado – 16/05/2026 das 09h às 19h (presencial – imersivo)
+<br>
+Domingo – 17/05/2026 das 09h às 19h (presencial – imersivo)
+<br><br>
+
+<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
+<br>
+Após o preenchimento das vagas, as inscrições serão encerradas.
+<br>
+-->
+     
+      `
+    },
+
+   
+
+
+
+
+
+{
+      titulo: "👨 Quem conduz a formação",
+      aberto: false,
+      conteudo: `
+     
+
+
+<strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
+com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
+<br>
+Sua metodologia integra PNL, comportamento e comunicação estratégica,
+com aplicação prática e foco em transformação real.
+<br><br>
+<strong>Você não aprende apenas teoria.</strong>
+<strong>Você aprende com quem aplica há décadas.</strong>
+<br>
+
+<strong>As vagas são limitadas.</strong>
+<br><br>
+Se você deseja participar desta turma em Londrina,
+essa é a sua oportunidade.
+<br>
+<strong>Reserve sua vaga agora.</strong>
+<br>
+
+     
+      `
+    },
+
+
+
+
+{
+      titulo: "💬 Dúvidas frequentes",
+      aberto: false,
+      conteudo: `
+     
+
+
+<strong>Será que eu vou conseguir acompanhar?</strong>
+<br>
+Sim.
+<br>
+👉 A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
+<br>
+<br>
+
+<strong>Isso é apenas motivacional?</strong>
+<br>
+Não.
+<br>
+👉 Motivação passa…
+<br>
+👉 PNL é técnica + aplicação + transformação comportamental real.
+<br>
+<br>
+
+<strong>Preciso de experiência anterior?</strong>
+<br>
+Não.
+<br>
+👉 Você aprende tudo desde as bases até aplicações avançadas.
+<br>
+<br>
+
+<strong>Isso traz resultados práticos?</strong>
+<br>
+Sim.
+<br>
+👉 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
+<br>
+
+
+     
+      `
+    } 
+ 
+  ],
+
+
+          
+       oQueE: `
+
+      
+      `,      
+
+       
+      composicao: `
+
+ 
+      `,
+      
+       comoUsar: `
+
+      
+      `,
+      advertencias: `
+
+
+      `
+    },
+
+
+ configuracoes: {
+  mostrarNome: true,
+  mostrarPreco: false,
+  mostrarResumo: true,
+
+  mostrarBotaoComprar: true,   // 🔥 NOVO
+  mostrarQuantidade: false,     // 🔥 NOVO
+    
+  cta: {
+    mostrar: false,
+    texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
+    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlllondrina/reservapelositeon.html"
+  }
+},
+
+depoimentos: {
+  mostrar: true,
+  autoplay: false, 
+  videos: [
+    "BEV6upQhPEA",
+    "7uC4pstQS4Y",
+    "Fu-WNt6muDc",
+    "PQn3T-R6BmQ",
+    "nyRvRtNetrA",
+    "DZR50Zx1mGU"
+     
+  ]
+},
+
+clientes: {
+  mostrar: true,
+  logos: [
+    "assets/img/depoimentos/2.jpg",
+    "assets/img/depoimentos/3.jpg",
+    "assets/img/depoimentos/4.jpg",
+    "assets/img/depoimentos/5.jpg",
+    "assets/img/depoimentos/6.jpg",
+    "assets/img/depoimentos/7.jpg",
+    "assets/img/depoimentos/8.jpg",
+    "assets/img/depoimentos/9.jpg"
+  ]
+},
+
+videoPrincipal: {
+  mostrar: true,
+  autoplay: false,
+  youtubeId: "pHoZ_VKjkaU"
+},
+
+ofertaRelampago: {
+  mostrar: false,
+  delaySegundos: 3,
+  tempoMinutos: 15,
+  diasParaReexibir: 7, // depois de 7 dias pode aparecer de novo se 0 então sempre mostra 
+  titulo: "🎉 PARABÉNS!<br>você desbloqueou<br>🔥 70% OFF + Bônus Grátis<br>📘 eBook Reprogramação de Performance Mental",         // "🎉 Parabéns! Oferta Única!<br>Seja um Practitioner em Programação Neurolinguística",
+  subtitulo: "🚀<strong> Mais de 4.327 alunos já se certificaram</strong>",            //2º Lote. Exclusivo para esta página!
+  mostrarPrecos: false,
+  mostrarParcelamento: false,
+  valorDe: 1997,
+  valorPor: 697,
+  
+   // 🔥 NOVO BLOCO
+  parcelamento: { 
+  
+     texto: "🔥Super Desconto + 💎Bônus Grátis"                    //Apenas 12x de R$ 61,89
+  },
+   
+  textoBotao: "🎁 LIBERAR MEU DESCONTO DE 70%<br><span class='texto-botao-extra'>Leva menos de 17 segundos</span>",
+  link: "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/receberbonus.html",           // "https://www.igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricao-ads-oferta-unica.html",
+
+  
+},
+
+
+destaque: false,
+mostrarlancamento: true,
+mostrarVideo: false,
+textoParcelamento: ""
+
+//<strong>1º Lote:</strong> R$ 997,00<br><strong>Pagamento facilitado</strong>
+//<del><strong>1º Lote: esgotado</strong></del><br><strong>2º Lote:</strong> restam poucas vagas<br><strong>Pagamento facilitado</strong>
+
+// <strong>Ou Valor especial para:</strong><br><del><strong>1º Lote:</strong> R$ 497,00 até 28/02</del><br><strong>2º Lote:</strong> R$ 797,00 até 07/03<br><strong>3º Lote:</strong> R$ 997,00 até 14/03<br><strong>4º Lote:</strong> R$ 1197,00 até 28/03<br><strong>Pagamento facilitado</strong>"
+
+     
+    },
+
+
+
+
+
+
+
+
+
+
+
+   
    
    
 
