@@ -28,7 +28,7 @@ const categorias = [
    {
     id: "pnlon",
     nome: "Treinamentos em PNL Online",
-    nomeMenu: " Formação em PNL",
+    nomeMenu: "Formação em PNL",
     mostrarNoMenu: false,
     visivel: false
   },
@@ -74,7 +74,7 @@ const categorias = [
 
 const produtos = [
   {
-    id: "1",
+    id: "4",
     nome: "Formação Practitioner em PNL – Curitiba",
     categoria: "pnl",
     preco: 1997.00,
@@ -472,7 +472,7 @@ textoParcelamento: "<strong> Fale com um consultor agora. Garanta sua vaga na pr
 
 
 {
-  id: "2",
+  id: "3",
     nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Maringá-PR</span>",
     categoria: "pnl",
     preco: 1997.00,
@@ -942,7 +942,7 @@ textoParcelamento: ""
 
 
 {
-  id: "3",
+  id: "2",
     nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Londrina-PR</span>",
     categoria: "pnl",
     preco: 991.50,
@@ -1402,7 +1402,7 @@ textoParcelamento: ""
 
 
 {
-  id: "4",
+  id: "1",
     nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Ed. Online</span>",
     categoria: "pnlon",
     preco: 991.50,
