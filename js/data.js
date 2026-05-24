@@ -1303,7 +1303,7 @@ Sim.
   mostrarPreco: false,
   mostrarResumo: true,
 
-  mostrarBotaoComprar: true,   // 🔥 NOVO
+  mostrarBotaoComprar: false,   // 🔥 NOVO
   mostrarQuantidade: false,     // 🔥 NOVO
     
   cta: {
@@ -1758,12 +1758,12 @@ Sim.
     },
 
 
- configuracoes: {
+  configuracoes: {
   mostrarNome: true,
   mostrarPreco: false,
   mostrarResumo: true,
 
-  mostrarBotaoComprar: true,   // 🔥 NOVO
+  mostrarBotaoComprar: false,   // 🔥 NOVO
   mostrarQuantidade: false,     // 🔥 NOVO
     
   cta: {
