@@ -77,7 +77,7 @@ const produtos = [
    
    {
   id: "4",
-    nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Ed. Online</span>",
+    nome: "<span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner PNL – Edição Online</span>",
     categoria: "pnlon",
     preco: 991.50,
     imagem: "assets/img/PNLLONDRINA01.png",
@@ -89,13 +89,13 @@ const produtos = [
        
       resumoCurto: `
       
-    <p>Seja em vendas, decisões, comunicação...</p>
+    <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>
     
   `,
 
        
       resumo: `
-   
+      <p>Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?</p><br>
       <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria?</p>
 
       <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
@@ -533,7 +533,7 @@ textoParcelamento: ""
 
 {
   id: "3",
-    nome: "Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?<br><span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner em PNL – Londrina-PR</span>",
+    nome: "<span style='font-size:0.9em;font-weight:normal'>Imersão Presencial Practitioner em PNL – Londrina-PR</span>",
     categoria: "pnl",
     preco: 991.50,
     imagem: "assets/img/PNLLONDRINA01.png",
@@ -545,13 +545,13 @@ textoParcelamento: ""
        
       resumoCurto: `
       
-    <p>Seja em vendas, decisões, comunicação...</p>
+    <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>
     
   `,
 
        
       resumo: `
-   
+      <p>Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?</p><br>
       <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria?</p>
 
       <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
