@@ -1300,7 +1300,7 @@ Sim.
 
  configuracoes: {
   mostrarNome: true,
-  mostrarPreco: true,
+  mostrarPreco: false,
   mostrarResumo: true,
 
   mostrarBotaoComprar: false,   // 🔥 NOVO
@@ -1760,7 +1760,7 @@ Sim.
 
   configuracoes: {
   mostrarNome: true,
-  mostrarPreco: true,
+  mostrarPreco: false,
   mostrarResumo: true,
 
   mostrarBotaoComprar: false,   // 🔥 NOVO
