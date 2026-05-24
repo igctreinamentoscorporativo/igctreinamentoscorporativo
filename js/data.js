@@ -1307,7 +1307,7 @@ Sim.
   mostrarQuantidade: false,     // 🔥 NOVO
     
   cta: {
-    mostrar: false,
+    mostrar: true,
     texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlllondrina/reservapelosite.html"
   }
@@ -1767,7 +1767,7 @@ Sim.
   mostrarQuantidade: false,     // 🔥 NOVO
     
   cta: {
-    mostrar: false,
+    mostrar: true,
     texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnlllondrina/reservapelositeon.html"
   }
