@@ -80,7 +80,7 @@ const produtos = [
     nome: "<span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner PNL – Edição Online</span>",
     categoria: "pnlon",
     preco: 991.50,
-    imagem: "assets/img/PNLLONDRINA01.png",
+    imagem: "assets/img/PNLLONDRINA01ON.png",
     videos: [
       "assets/videos/PNLIMERSAO.mp4"
     ],
