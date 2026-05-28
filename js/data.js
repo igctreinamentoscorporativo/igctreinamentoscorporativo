@@ -759,22 +759,22 @@ accordion: [
      
 
 
-<strong>📍 Local:</strong> Londrina-PR
-
-<!-- – Golden Ingá Hotel
+<strong>📍 Local:</strong> Cedro Hotel - Av. Juscelino Kubitscheck, 200 - Centro, Londrina - PR, 86020-000, Brasil
 <br>
-<strong>📅 Datas e formato:</strong> Sexta-feira – 15/05/2026 das 19h às 22h (online – grupo fechado)
+<strong>📅 Datas e formato:</strong>
+<br> 
+Sexta-feira – 14/08/2026 das 19h às 22h (online – grupo fechado)
 <br>
-Sábado – 16/05/2026 das 09h às 19h (presencial – imersivo)
+Sábado – 15/08/2026 das 09h às 19h (presencial – imersivo)
 <br>
-Domingo – 17/05/2026 das 09h às 19h (presencial – imersivo)
+Domingo – 16/08/2026 das 09h às 19h (presencial – imersivo)
 <br><br>
 
 <strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
 <br>
 Após o preenchimento das vagas, as inscrições serão encerradas.
 <br>
--->
+
      
       `
     },
