@@ -112,7 +112,7 @@ accordion: [
 
    {
   titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
-  aberto: true,
+  aberto: false,
   conteudo: `
 
 <p><strong>💰 VENDAS</strong></p>
@@ -568,7 +568,7 @@ accordion: [
 
    {
   titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
-  aberto: true,
+  aberto: false,
   conteudo: `
 
 <p><strong>💰 VENDAS</strong></p>
