@@ -451,6 +451,7 @@ depoimentos: {
   mostrar: true,
   autoplay: false, 
   videos: [
+    "pHoZ_VKjkaU"
     "BEV6upQhPEA",
     "7uC4pstQS4Y",
     "Fu-WNt6muDc",
@@ -478,7 +479,7 @@ clientes: {
 videoPrincipal: {
   mostrar: true,
   autoplay: false,
-  youtubeId: "pHoZ_VKjkaU"
+  youtubeId: "Q042OdFhO44"
 },
 
 ofertaRelampago: {
@@ -907,6 +908,7 @@ depoimentos: {
   mostrar: true,
   autoplay: false, 
   videos: [
+    "pHoZ_VKjkaU"
     "BEV6upQhPEA",
     "7uC4pstQS4Y",
     "Fu-WNt6muDc",
@@ -934,7 +936,7 @@ clientes: {
 videoPrincipal: {
   mostrar: true,
   autoplay: false,
-  youtubeId: "pHoZ_VKjkaU"
+  youtubeId: "Q042OdFhO44"
 },
 
 ofertaRelampago: {
