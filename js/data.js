@@ -935,7 +935,7 @@ clientes: {
 
 videoPrincipal: {
   mostrar: true,
-  autoplay: false,
+  autoplay: true,
   youtubeId: "Q042OdFhO44"
 },
 
