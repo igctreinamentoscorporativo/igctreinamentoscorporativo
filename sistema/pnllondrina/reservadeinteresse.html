@@ -339,32 +339,23 @@ btnConfirmar.style.cursor = "not-allowed";
   method: "POST",
   body: JSON.stringify({
   acao: "PNLlead",
-
-
   nome: nomeEl.value.toUpperCase(),
   email: emailEl.value.toLowerCase(),
   telefone: telefoneEl.value,
-  profissao: profissaoEl.value,
-  objetivo: objetivoEl.value,
   nomeCurso: cursoSelecionado.nome,
   turma: cursoSelecionado.turma
-  })
-  })
-    
+})
+})
 .then(r => r.text())
 .then(txt => {
-
-console.log("RETORNO DO APPSCRIPT:");
-console.log(txt);
-  
-const res = JSON.parse(txt);
+  const res = JSON.parse(txt);
 
   if (!res.sucesso) {
 
   if (res.tipo === "JA_CADASTRADO_MESMA_TURMA") {
     alert(res.mensagem);
   } else {
-    alert("Erro ao registrar a interesse.");
+    alert("Erro ao registrar a pré-inscrição.");
   }
 
   btnConfirmar.disabled = false;
