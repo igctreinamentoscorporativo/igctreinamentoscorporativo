@@ -337,14 +337,18 @@ btnConfirmar.style.cursor = "not-allowed";
 fetch(ENDPOINT, {
   method: "POST",
   body: JSON.stringify({
-    acao: "leadPNL",
+  acao: "leadPNL",
 
-    nome: nomeEl.value.trim(),
-    email: emailEl.value.trim().toLowerCase(),
-    telefone: telefoneEl.value.trim(),
+  nome: nomeEl.value.trim(),
+  email: emailEl.value.trim().toLowerCase(),
+  telefone: telefoneEl.value.trim(),
 
-    profissao: profissaoEl.value,
-    objetivo: objetivoEl.value
+  profissao: profissaoEl.value,
+  objetivo: objetivoEl.value,
+
+  nomeCurso: cursoSelecionado.nome,
+  turma: cursoSelecionado.turma,
+  token: cursoSelecionado.token || ""
   })
 })
     
