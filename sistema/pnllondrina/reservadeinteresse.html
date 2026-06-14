@@ -363,6 +363,13 @@ fetch(ENDPOINT, {
     
 .then(r => r.text())
 .then(txt => {
+
+
+
+  console.log("RESPOSTA:", txt);
+  alert(txt); 
+  
+  
   const res = JSON.parse(txt);
 
   if (!res.sucesso) {
