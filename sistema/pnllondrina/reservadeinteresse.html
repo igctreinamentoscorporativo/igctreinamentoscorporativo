@@ -134,17 +134,17 @@ button:active,
   
  <select id="objetivo">
   <option value="">Selecione seu objetivo</option>
-  <option>Desenvolvimento pessoal</option>
-  <option>Melhorar comunicação</option>
-  <option>Liderança</option>
-  <option>Aplicar profissionalmente</option>
-  <option>Inteligência emocional</option>
-  <option>Conhecer a PNL</option>
-  <option>Outro</option>
+  <option value="DESENVOLVIMENTO PESSOAL">Desenvolvimento pessoal</option>
+  <option value="MELHORAR COMUNICACAO">Melhorar comunicação</option>
+  <option value="LIDERANCA">Liderança</option>
+  <option value="APLICAR PROFISSIONALMENTE">Aplicar profissionalmente</option>
+  <option value="INTELIGENCIA EMOCIONAL">Inteligência emocional</option>
+  <option value="CONHECER PNL">Conhecer a PNL</option>
+  <option value="OUTRO">Outro</option>
 </select>
 
 
-<button id="btnConfirmar" onclick="finalizar()">Eu quero ser Selecionado</button>
+<button id="btnConfirmar" onclick="finalizar()">Confirmar Envio</button>
 <br>
 
 <p style="font-size:15px; text-align:center;"><strong></strong></strong></p>
@@ -347,8 +347,41 @@ fetch(ENDPOINT, {
     objetivo: objetivoEl.value
   })
 })
+    
+.then(r => r.text())
+.then(txt => {
+  const res = JSON.parse(txt);
 
- window.location.href = "https://igctreinamentoscorporativo.com.br/sistema/pnllondrina/pagamentopelosite.html";
+  if (!res.sucesso) {
+
+  if (res.tipo === "JA_CADASTRADO_MESMA_TURMA") {
+    alert(res.mensagem);
+  } else {
+    alert("Erro ao registrar a pré-inscrição.");
+  }
+
+  btnConfirmar.disabled = false;
+  btnConfirmar.innerText = "CONFIRMAR ENVIO";
+  return;
+}
+
+ window.location.href =
+`https://wa.me/554196272504?text=${encodeURIComponent(
+`Olá!
+
+Meu nome é ${nomeEl.value} e acabei de preencher o formulário de interesse da Formação Practitioner em PNL.
+
+📚 Curso: ${cursoSelecionado.nome}
+🎓 Turma: ${cursoSelecionado.turma}
+
+📌 Profissão: ${profissaoEl.options[profissaoEl.selectedIndex].text}
+📌 Objetivo principal: ${objetivoEl.options[objetivoEl.selectedIndex].text}
+
+📧 E-mail: ${emailEl.value}
+📱 WhatsApp: ${telefoneEl.value}
+
+Gostaria de entender melhor como a formação pode me ajudar e tirar algumas dúvidas sobre o treinamento.`
+)}`;
   
   
 });
