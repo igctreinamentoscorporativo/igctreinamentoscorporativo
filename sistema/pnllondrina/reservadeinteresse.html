@@ -353,6 +353,10 @@ btnConfirmar.style.cursor = "not-allowed";
     
 .then(r => r.text())
 .then(txt => {
+
+console.log("RETORNO DO APPSCRIPT:");
+console.log(txt);
+  
 const res = JSON.parse(txt);
 
   if (!res.sucesso) {
