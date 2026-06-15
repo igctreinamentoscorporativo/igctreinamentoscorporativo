@@ -116,52 +116,31 @@ button:active,
 
   
   
+  <div class="card" id="formCard">
+  <h2 id="titulo" style="text-align:center;">📝 Inscrição Gratuita</h2>
+  
+  <p style="font-size:15px; text-align:center;">AULA SECRETA: PNL EM VENDAS - DOBRO DE PERFORMANCE - 100% ONLINE | 100% GRATUITO</p>
+
+
+  
+  
   <input id="nome" placeholder="Seu Nome Completo">
   <input id="email" placeholder="Seu Melhor E-mail">
   <input id="telefone" placeholder="Telefone/WhatsApp">
-  <select id="profissao">
-  <option value="">Selecione sua profissão</option>
-
-  <option value="PSICOLOGO">Psicólogo</option>
-  <option value="PSICANALISTA">Psicanalista</option>
-  <option value="TERAPEUTA">Terapeuta</option>
-  <option value="EMPRESARIO">Empresário</option>
-  <option value="GESTOR">Gestor</option>
-  <option value="VENDEDOR">Vendedor</option>
-  <option value="ESTUDANTE">Estudante</option>
-  <option value="OUTRO">Outro</option>
-</select> 
   
- <select id="objetivo">
-  <option value="">Selecione seu objetivo</option>
-  <option value="DESENVOLVIMENTO PESSOAL">Desenvolvimento pessoal</option>
-  <option value="MELHORAR COMUNICACAO">Melhorar comunicação</option>
-  <option value="LIDERANCA">Liderança</option>
-  <option value="APLICAR PROFISSIONALMENTE">Aplicar profissionalmente</option>
-  <option value="INTELIGENCIA EMOCIONAL">Inteligência emocional</option>
-  <option value="CONHECER PNL">Conhecer a PNL</option>
-  <option value="OUTRO">Outro</option>
-</select>
 
 
-<button id="btnConfirmar" onclick="finalizar()">Confirmar Envio</button>
-<br>
-
-<p style="font-size:15px; text-align:center;"><strong></strong></strong></p>
-
+<button id="btnConfirmar" onclick="finalizar()">CONFIRMAR ENVIO</button>
 </div>
+
 
 <script src="/js/igc-config.js"></script>  
   
 <script>
 
-const LINK_PAGAMENTO = "";
+
 const ENDPOINT = window.IGC_CONFIG.APPS_SCRIPT_BASE;
 
-
-
-
-  
 
   
 const CURSO_FIXO = "FORMAÇÃO EM PNL - PROGRAMAÇÃO NEUROLINGUÍSTICA"; // ⬅️ EXATAMENTE como está no Excel
@@ -206,25 +185,16 @@ window.onload = () => {
 const nomeEl = document.getElementById("nome");
 const emailEl = document.getElementById("email");
 const telefoneEl = document.getElementById("telefone");
-const profissaoEl = document.getElementById("profissao");
-const objetivoEl = document.getElementById("objetivo");
 const btnConfirmar = document.getElementById("btnConfirmar");  
 
-
+  
 nomeEl.oninput = e => e.target.value = e.target.value.replace(/[^A-Za-zÀ-ÿ ]/g,'').toUpperCase();
 telefoneEl.oninput = e => e.target.value = e.target.value.replace(/\D/g,'');
-emailEl.oninput = e => {
-e.target.value = e.target.value.toLowerCase();
-};
+emailEl.oninput = e => { e.target.value = e.target.value.toLowerCase();};
+emailEl.onblur = () => { emailEl.classList.toggle( "erro", !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value) );};
 
-emailEl.onblur = () => {
-  emailEl.classList.toggle(
-    "erro",
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)
-  );
-};
-
-
+ 
+  
    
 function finalizar() {
 
@@ -299,27 +269,7 @@ if (telefoneEl.value.length < 10) {
   telefoneEl.classList.remove("erro");
 } 
 
-
   
-// 🔴 VALIDA PROFISSÃO (OBRIGATÓRIO)
-
-if (!profissaoEl.value) {
-  alert("⚠️ Selecione sua profissão.");
-  profissaoEl.focus();
-  return;
-}
-
-
-// 🔴 VALIDA OBJETIVO (OBRIGATÓRIO)
-  
-if (!objetivoEl.value) {
-  alert("⚠️ Selecione seu objetivo.");
-  objetivoEl.focus();
-  return;
-}
-  
-  
- 
   if (document.querySelector(".erro")) {
     alert("⚠️ Corrija os campos destacados.");
     return;
@@ -334,26 +284,16 @@ btnConfirmar.style.cursor = "not-allowed";
 
 
 /* 🔽 AGORA SIM O FETCH */
-
- fetch(ENDPOINT, {
+fetch(ENDPOINT, {
   method: "POST",
   body: JSON.stringify({
-    cpf: "",
-    nome: nomeEl.value.toUpperCase(),
-    email: emailEl.value.toLowerCase(),
-    telefone: telefoneEl.value,
-    nomeCurso: cursoSelecionado.nome,
-    turma: cursoSelecionado.turma || "",
-
-    cargaHoraria: cursoSelecionado.carga || "",
-    localCurso: cursoSelecionado.local || "",
-    dataHorarioCurso: cursoSelecionado.data || "",
-
-    cidade: "",
-    estado: "",
-
-    token: cursoSelecionado.token || ""
-  })
+  acao: "aulasecreta",
+  nome: nomeEl.value.toUpperCase(),
+  email: emailEl.value.toLowerCase(),
+  telefone: telefoneEl.value,
+  nomeCurso: cursoSelecionado.nome,
+  turma: cursoSelecionado.turma
+})
 })
 .then(r => r.text())
 .then(txt => {
@@ -371,6 +311,9 @@ btnConfirmar.style.cursor = "not-allowed";
   btnConfirmar.innerText = "CONFIRMAR ENVIO";
   return;
 }
+
+
+  
  window.location.href =
 `https://wa.me/554196272504?text=${encodeURIComponent(
 `Olá!
