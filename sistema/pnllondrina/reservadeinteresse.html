@@ -338,13 +338,22 @@ btnConfirmar.style.cursor = "not-allowed";
  fetch(ENDPOINT, {
   method: "POST",
   body: JSON.stringify({
-  acao: "PNLlead",
-  nome: nomeEl.value.toUpperCase(),
-  email: emailEl.value.toLowerCase(),
-  telefone: telefoneEl.value,
-  nomeCurso: cursoSelecionado.nome,
-  turma: cursoSelecionado.turma
-})
+    cpf: "",
+    nome: nomeEl.value.toUpperCase(),
+    email: emailEl.value.toLowerCase(),
+    telefone: telefoneEl.value,
+    nomeCurso: cursoSelecionado.nome,
+    turma: cursoSelecionado.turma || "",
+
+    cargaHoraria: cursoSelecionado.carga || "",
+    localCurso: cursoSelecionado.local || "",
+    dataHorarioCurso: cursoSelecionado.data || "",
+
+    cidade: "",
+    estado: "",
+
+    token: cursoSelecionado.token || ""
+  })
 })
 .then(r => r.text())
 .then(txt => {
@@ -362,7 +371,6 @@ btnConfirmar.style.cursor = "not-allowed";
   btnConfirmar.innerText = "CONFIRMAR ENVIO";
   return;
 }
-
  window.location.href =
 `https://wa.me/554196272504?text=${encodeURIComponent(
 `Olá!
