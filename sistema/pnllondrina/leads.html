@@ -106,6 +106,13 @@ input.valido{
 }    
 
 
+.option.selecionada{
+    border:2px solid #28a745;
+    background:#f0fff4;
+}
+
+    
+
 </style>
 </head>
 <body>
@@ -128,7 +135,7 @@ input.valido{
 <label class="option"><input type="radio" name="objetivo" value="Vendas e negociação">Vendas e negociação</label>
 <label class="option"><input type="radio" name="objetivo" value="Atuar profissionalmente com PNL">Atuar profissionalmente com PNL</label>
 
-<button onclick="nextStep(2)">Continuar</button>
+<button onclick="validarStep1()">Continuar</button>
 </div>
 
 <div class="step" id="step2">
@@ -139,7 +146,7 @@ input.valido{
 <label class="option"><input type="radio" name="prazo" value="90 dias">Nos próximos 90 dias</label>
 <label class="option"><input type="radio" name="prazo" value="Pesquisando">Apenas pesquisando</label>
 
-<button onclick="nextStep(3)">Continuar</button>
+<button onclick="validarStep2()">Continuar</button>
 </div>
 
 <div class="step" id="step3">
@@ -149,7 +156,7 @@ input.valido{
 <label class="option"><input type="radio" name="disp" value="Nao">Não</label>
 <label class="option"><input type="radio" name="disp" value="Verificando">Ainda estou verificando</label>
 
-<button onclick="nextStep(4)">Continuar</button>
+<button onclick="validarStep3()">Continuar</button>
 </div>
 
 <div class="step" id="step4">
@@ -275,6 +282,95 @@ function validarWhatsapp(whats){
 
     
 
+
+
+
+document.querySelectorAll('.option input').forEach(input=>{
+
+    input.addEventListener('change',()=>{
+
+        const grupo = input.name;
+
+        document
+        .querySelectorAll(`input[name="${grupo}"]`)
+        .forEach(i=>{
+
+            i.closest('.option')
+            .classList.remove('selecionada');
+
+        });
+
+        input.closest('.option')
+        .classList.add('selecionada');
+
+    });
+
+});
+
+
+
+    
+    
+
+
+
+
+function validarStep1(){
+
+    const objetivo =
+    document.querySelector('input[name="objetivo"]:checked');
+
+    if(!objetivo){
+
+        alert("Selecione uma opção para continuar.");
+
+        return;
+    }
+
+    nextStep(2);
+
+}
+
+function validarStep2(){
+
+    const prazo =
+    document.querySelector('input[name="prazo"]:checked');
+
+    if(!prazo){
+
+        alert("Selecione uma opção para continuar.");
+
+        return;
+    }
+
+    nextStep(3);
+
+}
+
+function validarStep3(){
+
+    const disp =
+    document.querySelector('input[name="disp"]:checked');
+
+    if(!disp){
+
+        alert("Selecione uma opção para continuar.");
+
+        return;
+    }
+
+    nextStep(4);
+
+}
+
+
+    
+
+
+
+
+
+    
 
 
 
