@@ -560,7 +560,8 @@ textoParcelamento: ""
       <br>
 
       <p>Em 3 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
-             
+      <br>
+      <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>       
        `,
 
 
@@ -568,193 +569,162 @@ accordion: [
 
 
    {
-  titulo: "⚠️ Se você se identifica com isso, essa formação é pra você",
-  aberto: false,
-  conteudo: `
-
-<p><strong>💰 VENDAS</strong></p>
-<p>Você sabe explicar. O cliente demonstra interesse.</p>
-<p>Mas na hora de fechar… você recua.</p>
-<p>Evita insistir. Fica com receio. Perde o controle da conversa.</p>
-<p><em>Depois pensa: “eu podia ter fechado”.</em></p>
-<br>
-
-<p><strong>🧠 CRENÇAS LIMITANTES</strong></p>
-<p>Você começa motivado. Decide mudar.</p>
-<p>Mas com o tempo… desacelera e volta pro mesmo padrão.</p>
-<p><em>Algo sempre te puxa pra trás — mesmo você querendo avançar.</em></p>
-<br>
-
-<p><strong>🎤 ORATÓRIA</strong></p>
-<p>Você sabe o que quer dizer.</p>
-<p>Mas quando precisa falar… seu corpo trava.</p>
-<p>Mente acelera. A voz falha. Você evita.</p>
-<p><em>E perde espaço por isso.</em></p>
-<br>
-
-<p><strong>🧩 BLOQUEIOS / TRAUMAS</strong></p>
-<p>Você acha que já superou certas coisas.</p>
-<p>Mas em algumas situações… reage igual.</p>
-<p>Medo. Defesa. Insegurança.</p>
-<p><em>E depois nem entende por que agiu assim.</em></p>
-<br>
-
-
-  `
-},
-
-
-
-   
-
-{
-      titulo: "🎓 O que está incluso na formação",
-      aberto: false,
-      conteudo: `
-       
-<p>✔ 24 horas de treinamento intensivo em PNL</p>
-<p>✔ Certificação internacional Practitioner em PNL</p>
-<p>✔ Material didático exclusivo</p>
-<p>✔ Exercícios práticos supervisionados</p>
-<p>✔ Técnicas aplicáveis em comunicação, liderança e negociação</p>
-<p>✔ Networking com participantes da formação</p>
-<p>✔ Acesso a metodologia aplicada há mais de 20 anos</p>
-
  
-      `
-    },
-
-
- 
-    {
-      titulo: "🙋 Essa formação é para você se",
+      
+ {
+      titulo: "🙋 Essa formação é para você se...",
       aberto: false,
       conteudo: `
        
       
-<p>🌟 quer melhorar comunicação</p>
-<p>🌟 quer desenvolver inteligência emocional</p>
-<p>🌟 quer aumentar resultados profissionais</p>
-<p>🌟 quer romper padrões limitantes que te impedem de evoluir</p>
-<p>🌟 quer aprender técnicas reais de influência</p>
-<p>🌟 quer aplicar PNL no seu trabalho, na liderança ou nos relacionamentos pessoais</p>
+<p>🌟 sente que poderia alcançar resultados maiores, mas algo ainda te bloqueia</p>
+
+<p>🌟 quer se comunicar com mais segurança e influência</p>
+
+<p>🌟 deseja desenvolver inteligência emocional para lidar melhor com pressão e desafios</p>
+
+<p>🌟 quer romper padrões que se repetem e limitam seu crescimento</p>
+
+<p>🌟 busca mais confiança para liderar, vender ou negociar</p>
+
+<p>🌟 deseja acelerar seu desenvolvimento pessoal e profissional</p>
 
      
       `
     },
-
-
-   
-    {
-      titulo: "🧠 O que você vai aprender",
-      aberto: false,
-      conteudo: `
-     
-      
-<p>✔️ Comunicação poderosa</p>
-<p>✔️ Controle emocional</p>
-<p>✔️ Alta performance</p>
-<p>✔️ Como interpretar e ajustar a sua linguagem interna</p>
-<p>✔️ Técnicas de comunicação eficaz e persuasiva</p>
-<p>✔️ Como reconhecer e modificar padrões limitantes</p>
-<p>✔️ Como construir confiança instantânea em si mesmo</p>
-<p>✔️ Estratégias de influência sem manipulação</p>
-<p>✔️ Ferramentas práticas para situações reais</p>
-<p>✔️ Comportamento emocional estável sob pressão</p>
-
-<br>
-<p><strong>É uma formação completa, aplicada e orientada à ação.</strong></p>
-
-   
-      `
-    },
-
-    {
-      titulo: "💡Benefícios futuros",
-      aberto: false,
-      conteudo: `
-      
-      
-      
-    <em>Imagine daqui a algumas semanas:</em>
-<br>
-<br>
-✨ Você se comunicando com muito mais segurança
-<br>
-✨ Tomando decisões com clareza
-<br>
-✨ Influenciando pessoas de forma natural
-<br>
-✨ Conduzindo conversas difíceis com equilíbrio emocional
-<br>
-✨ Percebendo oportunidades que antes passavam despercebidas
-<br>
-<br>
-
-
-<b>Isso não é motivação momentânea.</b>
-<br>
-<strong>É uma habilidade que você leva para toda a vida.</strong>
-<br>  
-
-     
-      `
-    },
-
-
-
-
-  {
-      titulo: "🙋Quem participa desta formação",
-      aberto: false,
-      conteudo: `
-  
-
-✔️ Profissionais de vendas
-<br>
-✔️ Líderes e gestores
-<br>
-✔️ Empreendedores
-<br>
-✔️ Profissionais da área de desenvolvimento humano
-<br>
-✔️ Pessoas que desejam evoluir comunicação e inteligência emocional
-<br>
-     
-      `
-    },  
 
 
 
 
 {
-      titulo: "🫶 Por que essa formação é poderosa",
+      titulo: "🚀 O que muda após a formação",
       aberto: false,
       conteudo: `
       
  
-
-<p>✔️ Três dias intensivos de imersão prática em PNL</p>
-<p>✔️ Certificação Internacional com carga horária oficial de 24h</p> 
-<p>✔️ Metodologia apoiada nas bases da PNL moderna</p>
-<p>✔️ Conteúdo aplicável desde o primeiro módulo</p>
-<p>✔️ Ferramentas práticas, não apenas teoria</p>
-<p>✔️ Foco em mudança comportamental real</p>
-<p>✔️ Resultados visíveis na sua vida e no seu entorno</p>
-<p>✔️ Registro IGC-MEC no certificado</p>
-<p>✔️ Validação online via QR Code</p>
-<p>✔️ Atividades práticas individuais e em grupo com alto impacto transformacional</p>
+<p>✔️ Comunicação mais segura e persuasiva</p>
+<p>✔️ Mais confiança para liderar e negociar</p>
+<p>✔️ Controle emocional em situações de pressão</p>
+<p>✔️ Clareza para tomar decisões importantes</p>
+<p>✔️ Capacidade de influenciar sem manipular</p>
+<p>✔️ Maior inteligência emocional</p>
+<p>✔️ Mais foco e direcionamento para objetivos</p>
+<p>✔️ Melhor desempenho profissional e pessoal</p>
 
     
      
       `
-    },
+    },   
 
+
+  
+    {
+  titulo: "🧠 O que você vai aprender",
+  aberto: false,
+  conteudo: `
+
+<p>✔️ Como criar conexão e gerar confiança rapidamente (Rapport)</p>
+
+<p>✔️ Técnicas para melhorar comunicação, persuasão e influência</p>
+
+<p>✔️ Como identificar e modificar crenças limitantes</p>
+
+<p>✔️ Controle emocional para situações de pressão</p>
+
+<p>✔️ Estratégias de linguagem para comunicação de alto impacto</p>
+
+<p>✔️ Ferramentas para fortalecer autoconfiança e autoestima</p>
+
+<p>✔️ Aplicações da PNL em vendas, liderança e negociações</p>
+
+<p>✔️ Exercícios práticos para aplicação imediata</p>
+<br>
+
+<p><strong>Durante os 3 dias de imersão você aprende conceitos, pratica exercícios e aplica as técnicas em situações reais para gerar mudanças concretas na comunicação, nos relacionamentos e nos resultados.</strong></p>
+
+`
+},
 
    
 
 {
-      titulo: "📌 Local do evento",
+      titulo: "🎁 O que está incluso",
+      aberto: false,
+      conteudo: `
+      
+ 
+<p>✔️ 24 horas de treinamento intensivo</p>
+<p>✔️ Certificação Internacional Practitioner em PNL</p>
+<p>✔️ Material didático exclusivo</p>
+<p>✔️ Exercícios práticos supervisionados</p>
+<p>✔️ Técnicas aplicáveis em comunicação, liderança e negociação</p>
+<p>✔️ Networking com participantes da formação</p>
+<p>✔️ Acesso à metodologia aplicada há mais de 20 anos</p>
+
+ <br>
+
+<p><strong>⚠️ As atividades são realizadas em grupo e as vagas são limitadas para garantir acompanhamento e profundidade na experiência.</strong></p>   
+<br>     
+      `
+    },     
+
+
+
+   {
+      titulo: "👨 Quem conduz a formação",
+      aberto: false,
+      conteudo: `
+     
+
+
+<p><strong>Dr. Paulo Takahashi</strong> atua há mais de 20 anos no desenvolvimento humano, comunicação e Programação Neurolinguística.</p>
+
+<p>Já treinou milhares de profissionais no Brasil e exterior, aplicando metodologias voltadas para liderança, vendas, comportamento e alta performance.</p>
+
+<p>Você aprenderá diretamente com quem utiliza essas ferramentas diariamente em treinamentos, consultorias e processos de transformação humana.</p>
+
+<p><strong>Não é conteúdo retirado de livros. É experiência prática aplicada há décadas.</strong></p>
+
+     
+      `
+    },
+
+
+
+{
+      titulo: "❓ Dúvidas frequentes",
+      aberto: false,
+      conteudo: `
+     
+
+
+<p><strong>Preciso ter experiência anterior?</strong></p>
+<p>Não. A formação foi estruturada para iniciantes e profissionais experientes.</p>
+
+<br>
+
+<p><strong>Recebo certificado?</strong></p>
+<p>Sim. Você recebe Certificação Internacional Practitioner em PNL.</p>
+
+<br>
+
+<p><strong>A formação é prática?</strong></p>
+<p>Sim. O foco é aplicação real, exercícios e vivências supervisionadas.</p>
+
+<br>
+
+<p><strong>Posso aplicar no meu trabalho?</strong></p>
+<p>Sim. As técnicas são utilizadas em liderança, vendas, negociações, comunicação e desenvolvimento humano.</p>
+
+     
+      `
+    },
+   
+
+   
+
+{
+      titulo: "📌 Local, data e formato do evento",
       aberto: false,
       conteudo: `
      
@@ -778,90 +748,10 @@ Após o preenchimento das vagas, as inscrições serão encerradas.
 
      
       `
-    },
+    }
 
    
 
-
-
-
-
-{
-      titulo: "👨 Quem conduz a formação",
-      aberto: false,
-      conteudo: `
-     
-
-
-<strong>Dr. Paulo Takahashi</strong> é perito em Programação Neurolinguística
-com mais de 20 anos de experiência em desenvolvimento humano no Brasil, Japão e Paraguai.
-<br>
-Sua metodologia integra PNL, comportamento e comunicação estratégica,
-com aplicação prática e foco em transformação real.
-<br><br>
-<strong>Você não aprende apenas teoria.</strong>
-<strong>Você aprende com quem aplica há décadas.</strong>
-<br>
-
-<strong>As vagas são limitadas.</strong>
-<br><br>
-Se você deseja participar desta turma em Londrina,
-essa é a sua oportunidade.
-<br>
-<strong>Reserve sua vaga agora.</strong>
-<br>
-
-     
-      `
-    },
-
-
-
-
-{
-      titulo: "💬 Dúvidas frequentes",
-      aberto: false,
-      conteudo: `
-     
-
-
-<strong>Será que eu vou conseguir acompanhar?</strong>
-<br>
-Sim.
-<br>
-👉 A formação é estruturada para dar suporte passo a passo, para todos os níveis — iniciantes ou experientes.
-<br>
-<br>
-
-<strong>Isso é apenas motivacional?</strong>
-<br>
-Não.
-<br>
-👉 Motivação passa…
-<br>
-👉 PNL é técnica + aplicação + transformação comportamental real.
-<br>
-<br>
-
-<strong>Preciso de experiência anterior?</strong>
-<br>
-Não.
-<br>
-👉 Você aprende tudo desde as bases até aplicações avançadas.
-<br>
-<br>
-
-<strong>Isso traz resultados práticos?</strong>
-<br>
-Sim.
-<br>
-👉 Todas as ferramentas podem ser usadas imediatamente no seu dia-a-dia — trabalho, carreira, relações e liderança.
-<br>
-
-
-     
-      `
-    } 
  
   ],
 
@@ -899,7 +789,7 @@ Sim.
     
   cta: {
     mostrar: true,
-    texto: "Eu quero ser Selecionado<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
+    texto: "Garantir Minha Vaga<br><span class='cta-escassez'>⚠️ Restam poucas vagas para esta turma</span>",
     link: "https://igctreinamentoscorporativo.com.br/sistema/pnllondrina/reservapelosite.html"
   }
 },
