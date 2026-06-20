@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pré-Qualificação PNL</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background-image:url("/assets/imginscricao/inscricaopnllondrina.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+.card{
+    background:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)) padding-box,
+    linear-gradient(135deg,#F9D423,#FF4E50) border-box;
+    border:2px solid transparent;
+    border-radius:16px;
+    max-width:550px;
+    width:100%;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.progress{
+    width:100%;
+    height:10px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:25px;
+}
+.progress-bar{
+    height:100%;
+    width:20%;
+    background:linear-gradient(135deg,#F9D423,#FF4E50);
+    transition:.4s;
+}
+h1{
+    font-size:24px;
+    margin-bottom:10px;
+    text-align:center;
+}
+.sub{
+    text-align:center;
+    margin-bottom:20px;
+    color:#555;
+}
+.step{display:none;}
+.step.active{display:block;}
+.option{
+    display:block;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+.option input{margin-right:8px;}
+input[type=text],input[type=email]{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#F9D423,#FF4E50);
+    font-weight:bold;
+    cursor:pointer;
+}
+.loader{text-align:center;padding:20px;display:none;}
+.spinner{
+    width:60px;height:60px;border:6px solid #ddd;
+    border-top:6px solid #FF4E50;border-radius:50%;
+    margin:0 auto 15px;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
+}
+.result{text-align:center;display:none;}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="step active" id="step1">
+<h1>Verifique seu Perfil</h1>
+<p class="sub">Menos de 1 minuto</p>
+
+<p><strong>Qual seu principal objetivo com a Formação em PNL?</strong></p>
+
+<label class="option"><input type="radio" name="objetivo" value="Desenvolvimento pessoal">Desenvolvimento pessoal</label>
+<label class="option"><input type="radio" name="objetivo" value="Crescimento profissional">Crescimento profissional</label>
+<label class="option"><input type="radio" name="objetivo" value="Liderança e gestão">Liderança e gestão</label>
+<label class="option"><input type="radio" name="objetivo" value="Vendas e negociação">Vendas e negociação</label>
+<label class="option"><input type="radio" name="objetivo" value="Atuar profissionalmente com PNL">Atuar profissionalmente com PNL</label>
+
+<button onclick="nextStep(2)">Continuar</button>
+</div>
+
+<div class="step" id="step2">
+<p><strong>Quando pretende iniciar sua formação?</strong></p>
+
+<label class="option"><input type="radio" name="prazo" value="Imediatamente">Imediatamente</label>
+<label class="option"><input type="radio" name="prazo" value="30 dias">Nos próximos 30 dias</label>
+<label class="option"><input type="radio" name="prazo" value="90 dias">Nos próximos 90 dias</label>
+<label class="option"><input type="radio" name="prazo" value="Pesquisando">Apenas pesquisando</label>
+
+<button onclick="nextStep(3)">Continuar</button>
+</div>
+
+<div class="step" id="step3">
+<p><strong>Você possui disponibilidade para participar presencialmente na data da formação?</strong></p>
+
+<label class="option"><input type="radio" name="disp" value="Sim">Sim</label>
+<label class="option"><input type="radio" name="disp" value="Nao">Não</label>
+<label class="option"><input type="radio" name="disp" value="Verificando">Ainda estou verificando</label>
+
+<button onclick="nextStep(4)">Continuar</button>
+</div>
+
+<div class="step" id="step4">
+<h1>Quase pronto...</h1>
+
+<input type="text" id="nome" placeholder="Nome completo">
+<input type="text" id="whats" placeholder="WhatsApp">
+<input type="email" id="email" placeholder="E-mail">
+
+<button onclick="enviar()">Verificar Elegibilidade</button>
+</div>
+
+<div class="loader" id="loader">
+<div class="spinner"></div>
+<p>Analisando perfil...</p>
+<p>Objetivos avaliados ✓</p>
+<p>Disponibilidade verificada ✓</p>
+<p>Compatibilidade analisada ✓</p>
+</div>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+const WEBAPP_URL = "COLE_AQUI_A_URL_DO_SEU_WEBAPP";
+
+function nextStep(step){
+    document.querySelectorAll('.step').forEach(el=>el.classList.remove('active'));
+    document.getElementById('step'+step).classList.add('active');
+    document.getElementById('progressBar').style.width=(step*20)+'%';
+}
+
+function calcularScore(obj,prazo,disp){
+    let score=0;
+
+    const objetivos={
+        "Atuar profissionalmente com PNL":10,
+        "Liderança e gestão":8,
+        "Vendas e negociação":8,
+        "Crescimento profissional":7,
+        "Desenvolvimento pessoal":5
+    };
+
+    const prazos={
+        "Imediatamente":10,
+        "30 dias":8,
+        "90 dias":3,
+        "Pesquisando":0
+    };
+
+    const disponibilidade={
+        "Sim":10,
+        "Verificando":5,
+        "Nao":0
+    };
+
+    score += objetivos[obj] || 0;
+    score += prazos[prazo] || 0;
+    score += disponibilidade[disp] || 0;
+
+    return score;
+}
+
+function enviar(){
+
+    const objetivo=document.querySelector('input[name="objetivo"]:checked')?.value;
+    const prazo=document.querySelector('input[name="prazo"]:checked')?.value;
+    const disp=document.querySelector('input[name="disp"]:checked')?.value;
+
+    const nome=document.getElementById('nome').value.trim();
+    const whats=document.getElementById('whats').value.trim();
+    const email=document.getElementById('email').value.trim();
+
+    if(!objetivo || !prazo || !disp || !nome || !whats || !email){
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    document.querySelectorAll('.step').forEach(el=>el.style.display='none');
+    document.getElementById('loader').style.display='block';
+
+    const score=calcularScore(objetivo,prazo,disp);
+    const status = score >= 18 ? "QUALIFICADO" : "NUTRICAO";
+
+    const payload={
+        nome,whats,email,
+        objetivo,prazo,disp,
+        score,status
+    };
+
+    fetch(WEBAPP_URL,{
+        method:"POST",
+        body:JSON.stringify(payload)
+    })
+    .catch(()=>{})
+    .finally(()=>{
+
+        setTimeout(()=>{
+
+            if(status==="QUALIFICADO"){
+                window.location.href="https://www.igctreinamentoscorporativo.com.br/produto.html?id=3";
+            }else{
+                window.location.href="https://www.igctreinamentoscorporativo.com.br/lista-interesse-pnl.html";
+            }
+
+        },3000);
+
+    });
+
+}
+</script>
+
+</body>
+</html>
