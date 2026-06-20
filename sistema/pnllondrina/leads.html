@@ -93,6 +93,19 @@ button{
     to{transform:rotate(360deg)}
 }
 .result{text-align:center;display:none;}
+
+
+
+input.erro{
+    border:2px solid #ff4e50 !important;
+    background:#fff5f5;
+}
+
+input.valido{
+    border:2px solid #28a745 !important;
+}    
+
+
 </style>
 </head>
 <body>
@@ -142,9 +155,17 @@ button{
 <div class="step" id="step4">
 <h1>Quase pronto...</h1>
 
-<input type="text" id="nome" placeholder="Nome completo">
-<input type="text" id="whats" placeholder="WhatsApp">
-<input type="email" id="email" placeholder="E-mail">
+<input type="text" id="nome" placeholder="Nome completo" maxlength="120">
+
+<input type="text"
+       id="whats"
+       placeholder="WhatsApp"
+       maxlength="15">
+
+<input type="email"
+       id="email"
+       placeholder="E-mail"
+       maxlength="120">
 
 <button onclick="enviar()">Verificar Elegibilidade</button>
 </div>
@@ -202,6 +223,62 @@ function calcularScore(obj,prazo,disp){
     return score;
 }
 
+
+
+
+// NOME SEMPRE MAIÚSCULO
+document.getElementById("nome").addEventListener("input", function(){
+    this.value = this.value.toUpperCase();
+});
+
+// EMAIL SEMPRE MINÚSCULO
+document.getElementById("email").addEventListener("input", function(){
+    this.value = this.value.toLowerCase();
+});
+
+// MÁSCARA WHATSAPP
+document.getElementById("whats").addEventListener("input", function(e){
+
+    let v = e.target.value.replace(/\D/g,'');
+
+    if(v.length > 11){
+        v = v.substring(0,11);
+    }
+
+    if(v.length > 10){
+        v = v.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    }else if(v.length > 6){
+        v = v.replace(/^(\d{2})(\d{4})(\d+).*/, '($1) $2-$3');
+    }else if(v.length > 2){
+        v = v.replace(/^(\d{2})(\d+).*/, '($1) $2');
+    }else{
+        v = v.replace(/^(\d*)/, '($1');
+    }
+
+    e.target.value = v;
+});
+
+function validarEmail(email){
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+}
+
+function validarWhatsapp(whats){
+
+    const numeros = whats.replace(/\D/g,'');
+
+    return numeros.length === 10 || numeros.length === 11;
+
+}
+
+
+    
+
+
+
+
+    
 function enviar(){
 
     const objetivo=document.querySelector('input[name="objetivo"]:checked')?.value;
@@ -212,11 +289,46 @@ function enviar(){
     const whats=document.getElementById('whats').value.trim();
     const email=document.getElementById('email').value.trim();
 
-    if(!objetivo || !prazo || !disp || !nome || !whats || !email){
-        alert("Preencha todos os campos.");
-        return;
-    }
+    const campoNome  = document.getElementById('nome');
+const campoWhats = document.getElementById('whats');
+const campoEmail = document.getElementById('email');
 
+campoNome.classList.remove('erro','valido');
+campoWhats.classList.remove('erro','valido');
+campoEmail.classList.remove('erro','valido');
+
+let erro = false;
+
+if(!nome || nome.length < 5){
+    campoNome.classList.add('erro');
+    erro = true;
+}else{
+    campoNome.classList.add('valido');
+}
+
+if(!validarWhatsapp(whats)){
+    campoWhats.classList.add('erro');
+    erro = true;
+}else{
+    campoWhats.classList.add('valido');
+}
+
+if(!validarEmail(email)){
+    campoEmail.classList.add('erro');
+    erro = true;
+}else{
+    campoEmail.classList.add('valido');
+}
+
+if(!objetivo || !prazo || !disp){
+    alert("Responda todas as perguntas.");
+    return;
+}
+
+if(erro){
+    alert("Verifique os dados informados.");
+    return;
+}
     document.querySelectorAll('.step').forEach(el=>el.style.display='none');
     document.getElementById('loader').style.display='block';
 
