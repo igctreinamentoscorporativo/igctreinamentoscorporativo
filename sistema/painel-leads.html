@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Painel de Leads PNL</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f6fa;
+    padding:15px;
+}
+
+.topo{
+    background:#fff;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+h1{
+    margin-bottom:10px;
+    color:#1f3c88;
+}
+
+#busca{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    margin-bottom:10px;
+}
+
+.filtros{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.filtros button{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    background:#1f3c88;
+    color:#fff;
+}
+
+#lista{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.card{
+    background:#fff;
+    border-radius:12px;
+    padding:15px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.qualificado{
+    border-left:6px solid #28a745;
+}
+
+.nutricao{
+    border-left:6px solid #ff9800;
+}
+
+.nome{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:10px;
+    color:#1f3c88;
+}
+
+.info{
+    margin-bottom:5px;
+    line-height:1.4;
+}
+
+.btn-whats{
+    width:100%;
+    margin-top:12px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#25D366;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.loader{
+    text-align:center;
+    padding:40px;
+}
+
+@media(min-width:900px){
+
+    #lista{
+        display:grid;
+        grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
+        gap:15px;
+    }
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="topo">
+
+    <h1>Leads PNL</h1>
+
+    <input
+        type="text"
+        id="busca"
+        placeholder="Buscar nome ou telefone..."
+    >
+
+    <div class="filtros">
+
+        <button onclick="filtroAtual='TODOS';renderizar()">
+            TODOS
+        </button>
+
+        <button onclick="filtroAtual='QUALIFICADO';renderizar()">
+            QUALIFICADOS
+        </button>
+
+        <button onclick="filtroAtual='NUTRICAO';renderizar()">
+            NUTRIÇÃO
+        </button>
+
+    </div>
+
+</div>
+
+<div id="lista">
+
+    <div class="loader">
+        Carregando leads...
+    </div>
+
+</div>
+
+<script>
+
+const WEBAPP =
+"https://SUA_URL_DO_APPS_SCRIPT/exec";
+
+let leads = [];
+let filtroAtual = "TODOS";
+
+async function carregar(){
+
+    try{
+
+        const resposta = await fetch(
+            WEBAPP + "?action=listar"
+        );
+
+        leads = await resposta.json();
+
+        renderizar();
+
+    }catch(erro){
+
+        document.getElementById("lista").innerHTML = `
+            <div class="loader">
+                Erro ao carregar os leads.
+            </div>
+        `;
+
+        console.error(erro);
+
+    }
+
+}
+
+function renderizar(){
+
+    const busca = document
+        .getElementById("busca")
+        .value
+        .toLowerCase();
+
+    let filtrados = [...leads];
+
+    if(filtroAtual !== "TODOS"){
+
+        filtrados = filtrados.filter(lead =>
+
+            String(lead.status || "")
+            .toUpperCase()
+            .includes(filtroAtual)
+
+        );
+
+    }
+
+    if(busca){
+
+        filtrados = filtrados.filter(lead =>
+
+            String(lead.nome || "")
+            .toLowerCase()
+            .includes(busca)
+
+            ||
+
+            String(lead.whatsapp || "")
+            .includes(busca)
+
+        );
+
+    }
+
+    if(filtrados.length === 0){
+
+        document.getElementById("lista").innerHTML = `
+            <div class="loader">
+                Nenhum lead encontrado.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    let html = "";
+
+    filtrados.forEach(lead => {
+
+        const telefone =
+        String(lead.whatsapp || "")
+        .replace(/\D/g,'');
+
+        const classe =
+        String(lead.status || "")
+        .toUpperCase()
+        .includes("QUALIFICADO")
+        ? "qualificado"
+        : "nutricao";
+
+        html += `
+
+        <div class="card ${classe}">
+
+            <div class="nome">
+                ${lead.nome}
+            </div>
+
+            <div class="info">
+                📅 <strong>Data:</strong> ${lead.data}
+            </div>
+
+            <div class="info">
+                📱 <strong>WhatsApp:</strong> ${lead.whatsapp}
+            </div>
+
+            <div class="info">
+                📧 <strong>E-mail:</strong> ${lead.email}
+            </div>
+
+            <div class="info">
+                🎯 <strong>Objetivo:</strong> ${lead.objetivo}
+            </div>
+
+            <div class="info">
+                ⏳ <strong>Prazo:</strong> ${lead.prazo}
+            </div>
+
+            <div class="info">
+                📍 <strong>Disponibilidade:</strong> ${lead.disponibilidade}
+            </div>
+
+            <div class="info">
+                ⭐ <strong>Score:</strong> ${lead.score}
+            </div>
+
+            <div class="info">
+                🏆 <strong>Status:</strong> ${lead.status}
+            </div>
+
+            <button
+                class="btn-whats"
+                onclick="abrirWhats('${telefone}')">
+
+                Conversar no WhatsApp
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("lista").innerHTML = html;
+
+}
+
+function abrirWhats(telefone){
+
+    window.open(
+        "https://wa.me/55" + telefone,
+        "_blank"
+    );
+
+}
+
+document
+.getElementById("busca")
+.addEventListener("keyup",renderizar);
+
+carregar();
+
+</script>
+
+</body>
+</html>
