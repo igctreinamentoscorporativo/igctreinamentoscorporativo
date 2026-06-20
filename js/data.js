@@ -561,17 +561,17 @@ textoParcelamento: ""
 
       <p>Em 3 dias, você aprende a identificar e ajustar esses padrões na prática — com aplicação real no seu dia a dia.</p>
       <br>
-      <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>       
+      <p>Aprenda técnicas de comunicação, influência e controle emocional usadas por líderes e negociadores de alto desempenho.</p>  
+
+      
        `,
 
 
 accordion: [
 
 
-   {
+   {      
  
-      
- {
       titulo: "🙋 Essa formação é para você se...",
       aberto: false,
       conteudo: `
