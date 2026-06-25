@@ -10,23 +10,25 @@
 body{
     font-family:Arial,sans-serif;
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     padding:20px;
     background-image:url("/assets/imginscricao/inscricaopnllondrina.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-attachment:fixed;
+    background-attachment:scroll;
+
+    overflow-y:auto;
+    display:block;
 }
 .card{
     background:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)) padding-box,
     linear-gradient(135deg,#F9D423,#FF4E50) border-box;
+
     border:2px solid transparent;
     border-radius:16px;
     max-width:550px;
     width:100%;
+    margin:40px auto;
     padding:30px;
     box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
