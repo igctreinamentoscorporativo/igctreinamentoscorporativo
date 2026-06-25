@@ -461,6 +461,33 @@ if(erro){
     });
 
 }
+
+
+
+
+    
+
+["nome","whats","email"].forEach(id=>{
+
+    const campo = document.getElementById(id);
+
+    campo.addEventListener("focus", ()=>{
+
+        setTimeout(()=>{
+
+            campo.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },300);
+
+    });
+
+});
+
+
+    
 </script>
 
 </body>
