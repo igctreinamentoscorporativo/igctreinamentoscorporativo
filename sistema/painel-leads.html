@@ -180,6 +180,19 @@ h1{
         placeholder="Buscar nome ou telefone..."
     >
 
+<div style="margin-bottom:15px;">
+
+    <label><strong>Cidade / Turma</strong></label>
+
+    <select id="filtroAba"
+            style="width:100%;padding:10px;border-radius:8px;margin-top:6px;">
+
+        <option value="TODAS">TODAS</option>
+
+    </select>
+
+</div>
+    
     <div class="filtros">
 
         <button onclick="filtroAtual='TODOS';renderizar()">
@@ -268,13 +281,41 @@ const WEBAPP =
 let leads = [];
 let filtroAtual = "TODOS";
 
+async function carregarAbas(){
+
+    const resposta = await fetch(
+        WEBAPP + "?action=listarAbas"
+    );
+
+    const abas = await resposta.json();
+
+    const select =
+    document.getElementById("filtroAba");
+
+    select.innerHTML =
+        '<option value="TODAS">TODAS</option>';
+
+    abas.forEach(function(nome){
+
+        select.innerHTML +=
+        `<option value="${nome}">${nome}</option>`;
+
+    });
+
+}    
+
+
+    
 async function carregar(){
 
     try{
 
-        const resposta = await fetch(
-            WEBAPP + "?action=listar"
-        );
+       const aba =
+document.getElementById("filtroAba").value;
+
+const resposta = await fetch(
+    WEBAPP + "?action=listar&aba=" + encodeURIComponent(aba)
+);
 
         leads = await resposta.json();
 
@@ -430,8 +471,19 @@ document
 .getElementById("busca")
 .addEventListener("keyup",renderizar);
 
-carregar();
+document
+.getElementById("filtroAba")
+.addEventListener("change",carregar);    
 
+    (async()=>{
+
+    await carregarAbas();
+
+    carregar();
+
+})();
+
+    
 </script>
 
 </body>
