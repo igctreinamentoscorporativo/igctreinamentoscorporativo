@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Espera PNL - CURITIBA</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:Arial,sans-serif;
+    min-height:100vh;
+    padding:20px;
+    background-image:url("/assets/imginscricao/inscricaopnllondrina.png");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:scroll;
+
+    overflow-y:auto;
+    display:block;
+}
+.card{
+    background:linear-gradient(rgba(255,255,255,.92),rgba(255,255,255,.92)) padding-box,
+    linear-gradient(135deg,#F9D423,#FF4E50) border-box;
+
+    border:2px solid transparent;
+    border-radius:16px;
+    max-width:550px;
+    width:100%;
+    margin:40px auto;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+.progress{
+    width:100%;
+    height:10px;
+    background:#ddd;
+    border-radius:20px;
+    overflow:hidden;
+    margin-bottom:25px;
+}
+.progress-bar{
+    height:100%;
+    width:20%;
+    background:linear-gradient(135deg,#F9D423,#FF4E50);
+    transition:.4s;
+}
+h1{
+    font-size:20px;
+    margin-bottom:10px;
+    text-align:center;
+}
+.sub{
+    text-align:center;
+    margin-bottom:20px;
+    color:#555;
+    font-size:15px;
+}
+.step{display:none;}
+.step.active{display:block;}
+.option{
+    display:block;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+}
+.option input{margin-right:8px;}
+input[type=text],input[type=email]{
+    width:100%;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(135deg,#F9D423,#FF4E50);
+    font-weight:bold;
+    cursor:pointer;
+}
+.loader{text-align:center;padding:20px;display:none;}
+.spinner{
+    width:60px;height:60px;border:6px solid #ddd;
+    border-top:6px solid #FF4E50;border-radius:50%;
+    margin:0 auto 15px;
+    animation:spin 1s linear infinite;
+}
+@keyframes spin{
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
+}
+.result{text-align:center;display:none;}
+
+
+
+input.erro{
+    border:2px solid #ff4e50 !important;
+    background:#fff5f5;
+}
+
+input.valido{
+    border:2px solid #28a745 !important;
+}    
+
+
+.option.selecionada{
+    border:2px solid #28a745;
+    background:#f0fff4;
+}
+
+    
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<div class="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="step active" id="step1">
+<!--
+    <h1>Conte para nós:</h1>
+<p class="sub">Leva menos de 1 minuto.</p>
+-->
+<p><strong>Qual seu principal objetivo com a Formação em PNL?</strong></p>
+<br>
+<label class="option"><input type="radio" name="objetivo" value="Desenvolvimento pessoal">Desenvolvimento pessoal</label>
+<label class="option"><input type="radio" name="objetivo" value="Crescimento profissional">Crescimento profissional</label>
+<label class="option"><input type="radio" name="objetivo" value="Liderança e gestão">Liderança e gestão</label>
+<label class="option"><input type="radio" name="objetivo" value="Vendas e negociação">Vendas e negociação</label>
+<label class="option"><input type="radio" name="objetivo" value="Atuar profissionalmente com PNL">Atuar profissionalmente com PNL</label>
+
+<button onclick="validarStep1()">Continuar</button>
+</div>
+
+<div class="step" id="step2">
+<p><strong>Quando pretende iniciar sua formação?</strong></p>
+<br>
+<label class="option"><input type="radio" name="prazo" value="Imediatamente">Imediatamente</label>
+<label class="option"><input type="radio" name="prazo" value="30 dias">Nos próximos 30 dias</label>
+<label class="option"><input type="radio" name="prazo" value="90 dias">Nos próximos 90 dias</label>
+<label class="option"><input type="radio" name="prazo" value="Pesquisando">Apenas pesquisando</label>
+
+<button onclick="validarStep2()">Continuar</button>
+</div>
+
+<div class="step" id="step3">
+<p><strong>Você possui disponibilidade para participar presencialmente?</strong></p>
+<br>
+<label class="option"><input type="radio" name="disp" value="Sim">Sim</label>
+<label class="option"><input type="radio" name="disp" value="Nao">Não</label>
+
+<button onclick="validarStep3()">Continuar</button>
+</div>
+
+<div class="step" id="step4">
+<h1>Quase pronto...</h1>
+
+<input type="text" id="nome" placeholder="Nome completo" maxlength="120">
+
+<input type="text"
+       id="whats"
+       placeholder="WhatsApp"
+       maxlength="15">
+
+<input type="email"
+       id="email"
+       placeholder="E-mail"
+       maxlength="120">
+
+<button onclick="enviar()">Entrar para lista de espera</button>
+</div>
+
+<div class="loader" id="loader">
+<div class="spinner"></div>
+<p>Analisando perfil...</p>
+<p>Objetivos avaliados ✓</p>
+<p>Disponibilidade verificada ✓</p>
+<p>Compatibilidade analisada ✓</p>
+</div>
+
+<div class="result" id="result"></div>
+
+</div>
+
+<script>
+
+const WEBAPP_URL = "https://script.google.com/macros/s/AKfycby7XpMGmGIXttwduz13yp9qBZrrHlUSh7GZ7YV9cdL0n-Ko8Y_kJaEqlJzKPoS1MPQK/exec";
+
+const ABA = "CURITIBA";
+
+  
+function nextStep(step){
+    document.querySelectorAll('.step').forEach(el=>el.classList.remove('active'));
+    document.getElementById('step'+step).classList.add('active');
+    document.getElementById('progressBar').style.width=(step*20)+'%';
+}
+
+function calcularScore(obj,prazo,disp){
+    let score=0;
+
+    const objetivos={
+        "Atuar profissionalmente com PNL":10,
+        "Liderança e gestão":8,
+        "Vendas e negociação":8,
+        "Crescimento profissional":7,
+        "Desenvolvimento pessoal":5
+    };
+
+    const prazos={
+        "Imediatamente":10,
+        "30 dias":8,
+        "90 dias":3,
+        "Pesquisando":0
+    };
+
+    const disponibilidade={
+        "Sim":10,
+        "Verificando":5,
+        "Nao":0
+    };
+
+    score += objetivos[obj] || 0;
+    score += prazos[prazo] || 0;
+    score += disponibilidade[disp] || 0;
+
+    return score;
+}
+
+
+
+
+// NOME SEMPRE MAIÚSCULO
+document.getElementById("nome").addEventListener("input", function(){
+    this.value = this.value.toUpperCase();
+});
+
+// EMAIL SEMPRE MINÚSCULO
+document.getElementById("email").addEventListener("input", function(){
+    this.value = this.value.toLowerCase();
+});
+
+// MÁSCARA WHATSAPP
+document.getElementById("whats").addEventListener("input", function(e){
+
+    let v = e.target.value.replace(/\D/g,'');
+
+    if(v.length > 11){
+        v = v.substring(0,11);
+    }
+
+    if(v.length > 10){
+        v = v.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    }else if(v.length > 6){
+        v = v.replace(/^(\d{2})(\d{4})(\d+).*/, '($1) $2-$3');
+    }else if(v.length > 2){
+        v = v.replace(/^(\d{2})(\d+).*/, '($1) $2');
+    }else{
+        v = v.replace(/^(\d*)/, '($1');
+    }
+
+    e.target.value = v;
+});
+
+function validarEmail(email){
+
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+}
+
+function validarWhatsapp(whats){
+
+    const numeros = whats.replace(/\D/g,'');
+
+    return numeros.length === 10 || numeros.length === 11;
+
+}
+
+
+    
+
+
+
+
+document.querySelectorAll('.option input').forEach(input=>{
+
+    input.addEventListener('change',()=>{
+
+        const grupo = input.name;
+
+        document
+        .querySelectorAll(`input[name="${grupo}"]`)
+        .forEach(i=>{
+
+            i.closest('.option')
+            .classList.remove('selecionada');
+
+        });
+
+        input.closest('.option')
+        .classList.add('selecionada');
+
+    });
+
+});
+
+
+
+    
+    
+
+
+
+
+function validarStep1(){
+
+    const objetivo =
+    document.querySelector('input[name="objetivo"]:checked');
+
+    if(!objetivo){
+
+        alert("Selecione uma opção para continuar.");
+
+        return;
+    }
+
+    nextStep(2);
+
+}
+
+function validarStep2(){
+
+    const prazo =
+    document.querySelector('input[name="prazo"]:checked');
+
+    if(!prazo){
+
+        alert("Selecione uma opção para continuar.");
+
+        return;
+    }
+
+    nextStep(3);
+
+}
+
+function validarStep3(){
+
+    const disp =
+    document.querySelector('input[name="disp"]:checked');
+
+    if(!disp){
+
+        alert("Selecione uma opção para continuar.");
+
+        return;
+    }
+
+    nextStep(4);
+
+}
+
+
+    
+
+
+
+
+
+    
+
+
+
+    
+function enviar(){
+
+    const objetivo=document.querySelector('input[name="objetivo"]:checked')?.value;
+    const prazo=document.querySelector('input[name="prazo"]:checked')?.value;
+    const disp=document.querySelector('input[name="disp"]:checked')?.value;
+
+    const nome=document.getElementById('nome').value.trim();
+    const whats=document.getElementById('whats').value.trim();
+    const email=document.getElementById('email').value.trim();
+
+    const campoNome  = document.getElementById('nome');
+const campoWhats = document.getElementById('whats');
+const campoEmail = document.getElementById('email');
+
+campoNome.classList.remove('erro','valido');
+campoWhats.classList.remove('erro','valido');
+campoEmail.classList.remove('erro','valido');
+
+let erro = false;
+
+if(!nome || nome.length < 5){
+    campoNome.classList.add('erro');
+    erro = true;
+}else{
+    campoNome.classList.add('valido');
+}
+
+if(!validarWhatsapp(whats)){
+    campoWhats.classList.add('erro');
+    erro = true;
+}else{
+    campoWhats.classList.add('valido');
+}
+
+if(!validarEmail(email)){
+    campoEmail.classList.add('erro');
+    erro = true;
+}else{
+    campoEmail.classList.add('valido');
+}
+
+if(!objetivo || !prazo || !disp){
+    alert("Responda todas as perguntas.");
+    return;
+}
+
+if(erro){
+    alert("Verifique os dados informados.");
+    return;
+}
+    document.querySelectorAll('.step').forEach(el=>el.style.display='none');
+    document.getElementById('loader').style.display='block';
+
+    const score=calcularScore(objetivo,prazo,disp);
+    const status = score >= 18 ? "QUALIFICADO" : "NUTRICAO";
+
+    const payload={
+        aba: ABA,
+        nome,whats,email,
+        objetivo,prazo,disp,
+        score,status
+    };
+
+    fetch(WEBAPP_URL,{
+        method:"POST",
+        body:JSON.stringify(payload)
+    })
+    .catch(()=>{})
+    .finally(()=>{
+
+        setTimeout(()=>{
+
+            if(status==="QUALIFICADO"){
+                window.location.href="https://www.igctreinamentoscorporativo.com.br/produto.html?id=3";
+            }else{
+                window.location.href="https://www.igctreinamentoscorporativo.com.br/sistema/leadsinteresse.html";
+            }
+
+        },1000);
+
+    });
+
+}
+
+
+
+
+    
+
+["nome","whats","email"].forEach(id=>{
+
+    const campo = document.getElementById(id);
+
+    campo.addEventListener("focus", ()=>{
+
+        setTimeout(()=>{
+
+            campo.scrollIntoView({
+                behavior:"smooth",
+                block:"center"
+            });
+
+        },300);
+
+    });
+
+});
+
+
+    
+</script>
+
+</body>
+</html>
