@@ -197,6 +197,8 @@ input.valido{
 
 const WEBAPP_URL = "https://script.google.com/macros/s/AKfycby7XpMGmGIXttwduz13yp9qBZrrHlUSh7GZ7YV9cdL0n-Ko8Y_kJaEqlJzKPoS1MPQK/exec";
 
+const ABA = "LONDRINA";
+    
 function nextStep(step){
     document.querySelectorAll('.step').forEach(el=>el.classList.remove('active'));
     document.getElementById('step'+step).classList.add('active');
@@ -436,6 +438,7 @@ if(erro){
     const status = score >= 18 ? "QUALIFICADO" : "NUTRICAO";
 
     const payload={
+        aba: ABA,
         nome,whats,email,
         objetivo,prazo,disp,
         score,status
