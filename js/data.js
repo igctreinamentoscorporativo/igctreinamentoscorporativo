@@ -1652,9 +1652,9 @@ Sim.
   mostrarPreco: false,
   mostrarResumo: true,
   cta: {
-    mostrar: false,
-    texto: "Comprar com desconto",
-    link: "https://igctreinamentoscorporativo.com.br/sistema/pnlcuritiba/inscricaopelosite.html"
+    mostrar: true,
+    texto: "Entrar - Lista de Espera",
+    link: "https://igctreinamentoscorporativo.com.br/sistema/lead/esperacuritiba.html"
   }
 },
 
