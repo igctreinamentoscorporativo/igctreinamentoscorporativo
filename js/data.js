@@ -1691,8 +1691,9 @@ clientes: {
 },
 
 videoPrincipal: {
-  mostrar: false,
-  youtubeId: "FU66p66t4ag"
+  mostrar: true,
+  autoplay: false, 
+  youtubeId: "pHoZ_VKjkaU"
 },
 
 ofertaRelampago: {
