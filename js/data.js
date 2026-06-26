@@ -1651,6 +1651,10 @@ Sim.
   mostrarNome: true,
   mostrarPreco: false,
   mostrarResumo: true,
+
+  mostrarBotaoComprar: false,   // 🔥 NOVO
+  mostrarQuantidade: false,     // 🔥 NOVO
+    
   cta: {
     mostrar: true,
     texto: "Entrar - Lista de Espera",
