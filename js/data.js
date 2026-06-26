@@ -855,7 +855,7 @@ ofertaRelampago: {
 
 
 destaque: true,
-mostrarlancamento: true,
+mostrarlancamento: false,
 mostrarVideo: false,
 textoParcelamento: ""
 
