@@ -534,7 +534,7 @@ textoParcelamento: ""
 
 {
   id: "3",
-    nome: "<span style='font-size:0.9em;font-weight:normal'>Imersão Presencial Practitioner em PNL – Londrina-PR</span>",
+    nome: "<span style='font-size:0.9em;font-weight:normal'>Formação Practitioner em PNL – Londrina-PR</span>",
     categoria: "pnl",
     preco: 991.50,
     imagem: "assets/img/inscricaopnllondrina",
