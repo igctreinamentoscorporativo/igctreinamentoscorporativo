@@ -167,7 +167,7 @@ if (produto.configuracoes?.cta?.mostrar) {
 
 -->
     <span class="cta-beneficio">
-      🎁 Participe e concorra
+      🎁 Esteja no próximo nível
     </span>
       
     </div>
