@@ -113,7 +113,7 @@ accordion: [
    {      
  
       titulo: "🙋 Essa formação é para você se...",
-      aberto: false,
+      aberto: true,
       conteudo: `
        
       
