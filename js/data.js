@@ -77,7 +77,7 @@ const produtos = [
    
    {
   id: "4",
-    nome: "<span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner PNL – Edição Online</span>",
+    nome: "<span style='font-size:0.9em;font-weight:normal'>Imersão Practitioner PNL – Edição Ao Vivo</span>",
     categoria: "pnlon",
     preco: 197.00,
     imagem: "assets/img/PNLLONDRINA01ON.png",
@@ -95,10 +95,19 @@ const produtos = [
 
        
       resumo: `
-      <p>Você sabe o que precisa fazer…<br>sente que pode mais... e não avança?</p><br>
-      <p>Seja em vendas, decisões, comunicação ou situações importantes — algo te impede de agir como deveria?</p>
-
-      <p><strong>Isso não é falta de conhecimento.</strong> É como sua mente reage sob pressão.</p>
+      
+<strong>📅 Datas e formato:</strong>
+<br> 
+Sexta-feira – 14/08/2026 das 19h às 22h - Ao Vivo
+<br>
+Sábado – 15/08/2026 das 13h às 19h - Ao Vivo
+<br>
+Domingo – 16/08/2026 das 09h às 17h - Ao Vivo
+<br> <br>
+<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
+<br>
+Após o preenchimento das vagas, as inscrições serão encerradas.
+<br>
 
       <br>
 
@@ -256,37 +265,11 @@ accordion: [
 
      
       `
-    },
-   
-
-   
-
-{
-      titulo: "📌 Local, data e formato do evento",
-      aberto: false,
-      conteudo: `
-     
-
-
-<strong>📍 Local: 100% online e Ao Vivo em grupo fechado pelo zoom.
-<br>
-<strong>📅 Datas e formato:</strong>
-<br> 
-Sexta-feira – 14/08/2026 das 19h às 22h (online – grupo fechado)
-<br>
-Sábado – 15/08/2026 das 09h às 19h (online – grupo fechado)
-<br>
-Domingo – 16/08/2026 das 09h às 19h (online – grupo fechado)
-<br><br>
-
-<strong>Vagas limitadas para garantir profundidade e acompanhamento real.</strong>
-<br>
-Após o preenchimento das vagas, as inscrições serão encerradas.
-<br>
-
-     
-      `
     }
+   
+  
+
+
  
   ],
 
