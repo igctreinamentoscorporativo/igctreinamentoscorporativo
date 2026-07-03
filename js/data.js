@@ -9,6 +9,7 @@ const WHATSAPP_NUMERO = "5541996272504";
    CATEGORIAS
    ============================================================ */
 
+
 const categorias = [
 
    {
